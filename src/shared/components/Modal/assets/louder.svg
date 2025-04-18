@@ -1,0 +1,21 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="blueGradient" x1="24" y1="8.25" x2="24" y2="39.75" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="rgb(22,238,246)" stop-opacity="0"/>
+      <stop offset="50%" stop-color="rgb(22,238,246)" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="rgb(22,238,246)" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="48" height="48" fill="none"/>
+  
+  <path
+    d="M39.75 24C39.75 32.44 33.1 39.34 24.74 39.73C24.33 39.75 24 39.41 24 39C24 38.58 24.33 38.25 24.74 38.23C32.27 37.84 38.25 31.61 38.25 24C38.25 16.12 31.87 9.75 24 9.75L24 8.25C32.69 8.25 39.75 15.3 39.75 24Z"
+    fill="url(#blueGradient)"
+  />
+  
+  <path
+    d="M8.25 24C8.25 32.44 14.89 39.34 23.25 39.73C23.66 39.75 24 39.41 24 39C24 38.58 23.66 38.25 23.25 38.23C15.72 37.84 9.75 31.61 9.75 24C9.75 16.12 16.12 9.75 24 9.75L24 8.25C15.3 8.25 8.25 15.3 8.25 24Z"
+    fill="url(#blueGradient)"
+  />
+</svg>
