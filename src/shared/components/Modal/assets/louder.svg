@@ -1,0 +1,29 @@
+<svg width="48.000000" height="48.000000" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<linearGradient x1="24.000000" y1="8.250000" x2="24.000000" y2="39.750000" id="paint_linear_3280_15166_0" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#FFFFFF" stop-opacity="0.000000"/>
+			<stop stop-color="#FFFFFF"/>
+			<stop offset="1.000000" stop-color="#FFFFFF"/>
+			<stop offset="1.000000" stop-color="#FFFFFF"/>
+		</linearGradient>
+		<linearGradient x1="31.874987" y1="8.250008" x2="31.876005" y2="8.250976" id="paint_linear_3280_15168_0" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#B6F09C"/>
+			<stop offset="1.000000" stop-color="#FFFFFF"/>
+			<stop offset="1.000000" stop-color="#FFFFFF"/>
+			<stop offset="1.000000" stop-color="#B6F09C"/>
+		</linearGradient>
+		<linearGradient x1="24.000000" y1="39.750000" x2="24.000000" y2="8.250000" id="paint_linear_3280_15169_0" gradientUnits="userSpaceOnUse">
+			<stop offset="0.047683" stop-color="#2ABE3F" stop-opacity="0.000000"/>
+			<stop offset="0.300739" stop-color="#B6F09C" stop-opacity="0.082353"/>
+			<stop offset="0.515687" stop-color="#B6F09C"/>
+			<stop offset="0.730492" stop-color="#B6F09C"/>
+			<stop offset="1.000000" stop-color="#B6F09C"/>
+		</linearGradient>
+	</defs>
+	<rect width="48.000000" height="48.000000" fill="#FFFFFF" fill-opacity="0"/>
+	<path d="M39.75 24C39.75 32.44 33.1 39.34 24.74 39.73C24.33 39.75 24 39.41 24 39C24 38.58 24.33 38.25 24.74 38.23C32.27 37.84 38.25 31.61 38.25 24C38.25 16.12 31.87 9.75 24 9.75L24 8.25C32.69 8.25 39.75 15.3 39.75 24Z" fill="url(#paint_linear_3280_15168_0)" fill-opacity="1.000000" fill-rule="evenodd"/>
+	<path d="M8.25 24C8.25 32.44 14.89 39.34 23.25 39.73C23.66 39.75 24 39.41 24 39C24 38.58 23.66 38.25 23.25 38.23C15.72 37.84 9.75 31.61 9.75 24C9.75 16.12 16.12 9.75 24 9.75L24 8.25C15.3 8.25 8.25 15.3 8.25 24Z" fill="url(#paint_linear_3280_15169_0)" fill-opacity="1.000000" fill-rule="evenodd"/>
+</svg>

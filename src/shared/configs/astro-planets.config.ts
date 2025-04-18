@@ -1,0 +1,45 @@
+import { ASTRO_PLANETS } from '../types/astro-planets'
+
+export const ASTRO_PLANET_NAME = {
+  [ASTRO_PLANETS.SUN]: 'Солнце',
+  [ASTRO_PLANETS.MOON]: 'Луна',
+  [ASTRO_PLANETS.MERCURY]: 'Меркурий',
+  [ASTRO_PLANETS.VENUS]: 'Венера',
+  [ASTRO_PLANETS.MARS]: 'Марс',
+  [ASTRO_PLANETS.JUPITER]: 'Юпитер',
+  [ASTRO_PLANETS.SATURN]: 'Сатурн',
+  [ASTRO_PLANETS.URANUS]: 'Уран',
+  [ASTRO_PLANETS.NEPTUNE]: 'Нептун',
+  [ASTRO_PLANETS.PLUTO]: 'Плутон',
+
+  [ASTRO_PLANETS.PROSERPINA]: 'Прозерпина',
+  [ASTRO_PLANETS.CHIRON]: 'Хирон',
+  [ASTRO_PLANETS.LILITH]: 'Лилит',
+
+  [ASTRO_PLANETS.RAHU]: 'Раху',
+  [ASTRO_PLANETS.KETU]: 'Кету',
+  [ASTRO_PLANETS.FORTUNA]: 'Фортуна',
+  [ASTRO_PLANETS.SELENA]: 'Селена',
+}
+
+export const ASTRO_PLANET_SYMBOL = {
+  [ASTRO_PLANETS.SUN]: '☉',
+  [ASTRO_PLANETS.MOON]: '☽',
+  [ASTRO_PLANETS.MERCURY]: '☿',
+  [ASTRO_PLANETS.VENUS]: '♀',
+  [ASTRO_PLANETS.MARS]: '♂',
+  [ASTRO_PLANETS.JUPITER]: '♃',
+  [ASTRO_PLANETS.SATURN]: '♄',
+  [ASTRO_PLANETS.URANUS]: '♅',
+  [ASTRO_PLANETS.NEPTUNE]: '♆',
+  [ASTRO_PLANETS.PLUTO]: '♇',
+
+  [ASTRO_PLANETS.PROSERPINA]: '⯘',
+  [ASTRO_PLANETS.CHIRON]: '⚷',
+  [ASTRO_PLANETS.LILITH]: '⚸',
+
+  [ASTRO_PLANETS.RAHU]: 'Раху',
+  [ASTRO_PLANETS.KETU]: 'Кету',
+  [ASTRO_PLANETS.FORTUNA]: '♁',
+  [ASTRO_PLANETS.SELENA]: '⯝',
+}
