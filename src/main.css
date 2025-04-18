@@ -1,0 +1,108 @@
+@font-face {
+  font-family: 'Open Sans';
+  src: url('shared/assets/fonts/OpenSansRegular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('shared/assets/fonts/OpenSansLight.ttf');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('shared/assets/fonts/OpenSansLightItalic.ttf');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('shared/assets/fonts/OpenSansSemiBold.ttf');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('shared/assets/fonts/OpenSansSemiBoldItalic.ttf');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('shared/assets/fonts/OpenSansBold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('shared/assets/fonts/OpenSansExtraBoldItalic.ttf');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('shared/assets/fonts/OpenSansExtraBold.ttf');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('shared/assets/fonts/OpenSansExtraBoldItalic.ttf');
+  font-weight: 800;
+  font-style: italic;
+}
+
+
+* {
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.15px;
+  box-sizing: border-box;
+}
+
+html,
+body,
+div#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+body {
+  position: relative;
+}
+
+div#root {
+  background-color: rgb(19, 22, 25);
+  display: flex;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+
+::-webkit-scrollbar-thumb {
+  border: 1px solid transparent;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
