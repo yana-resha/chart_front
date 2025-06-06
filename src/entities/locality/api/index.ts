@@ -1,11 +1,11 @@
 import { GetLocalitiesRequest, GetLocalitiesResponse } from '../types'
 import { SERVER_PATH } from '@/shared/constants/host'
-import { BasicResponse } from '@/shared/types/api'
+import { IBasicResponse } from '@/shared/types/api'
 
 export const getLocalities = async ({
   value,
   language,
-}: GetLocalitiesRequest): Promise<BasicResponse<GetLocalitiesResponse>> => {
+}: GetLocalitiesRequest): Promise<IBasicResponse<GetLocalitiesResponse>> => {
   const logTitle = '[locality api call]'
   const response = await fetch(
     `${SERVER_PATH}/locality?value=${value}` + `${language ? `&language=${language}` : ''}`,

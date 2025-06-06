@@ -1,19 +1,21 @@
 import { useState } from 'react'
 
 import { FormikHelpers } from 'formik'
+import { nanoid } from 'nanoid'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { ChartFormFieldValues } from '../types'
 import { astroChartMappers } from '../utils/mapValuesToRequest'
-import { ASTRO_CHART_VARIABLE, IFullNatalChart } from '@/entities/astro-charts/types/astro-chart'
+import { IFullNatalChartResult } from '@/entities/astro-charts/types/calculator-response.types'
 import { ROUTER_PATHES } from '@/shared/constants/router-paths'
 import { sleep } from '@/shared/helpers/sleep'
-import { usePostNatalChartMutation } from '@/store/api/astro.api'
-import { addChartValue } from '@/store/slices/astro-decoding'
+import { ASTRO_CHART_VARIABLE } from '@/shared/types/astro/astro-commom.types'
+import { usePostCalculateNatalMutation } from '@/store/api/astro-calculate.api'
+import { addNatalChart } from '@/store/slices/natal-decoding'
 
 export const useFormOutside = () => {
-  const [postNatalChart] = usePostNatalChartMutation()
+  const [postNatalChart] = usePostCalculateNatalMutation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [formIsLoading, setFormIsLoading] = useState(false)
@@ -22,8 +24,16 @@ export const useFormOutside = () => {
   const onSuccess = (chartType: ASTRO_CHART_VARIABLE, data: unknown) => {
     switch (chartType) {
       case ASTRO_CHART_VARIABLE.NATAL_CHART:
-        navigate(ROUTER_PATHES.ASTRO_DECODING_PATH)
-        dispatch(addChartValue({ chart_type: chartType, ...(data as IFullNatalChart) }))
+        const { sourceData, result } = data as IFullNatalChartResult
+        const chartId = nanoid()
+        navigate(`${ROUTER_PATHES.NATAL_DECODING_PATH}?chartId=${chartId}`)
+        dispatch(
+          addNatalChart({
+            id: chartId,
+            sourceValue: sourceData,
+            calculation: result,
+          }),
+        )
         break
       default:
         console.warn('Навигация для этого типа карты не реализована')

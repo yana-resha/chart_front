@@ -7,7 +7,8 @@ import { escapeSpacesInTheEnd } from '@/shared/helpers/string.helper'
 // Define a service using a base URL and expected endpoints
 export const localityApi = createApi({
   reducerPath: 'localityApi',
-  baseQuery: fetchBaseQuery({ baseUrl: `${SERVER_PATH}/locality/search` }),
+  keepUnusedDataFor: Infinity, // 🔒 вечный кэш
+  baseQuery: fetchBaseQuery({ baseUrl: `${SERVER_PATH}/api/locality/search` }),
   endpoints: (build) => ({
     getLocalitiesByName: build.query<GetLocalitiesResponse['data'], GetLocalitiesRequest>({
       query: ({ language, name }) =>

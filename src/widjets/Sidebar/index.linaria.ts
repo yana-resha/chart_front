@@ -2,6 +2,7 @@ import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
 
 import { BACKGROUND_COLORS_VARIABLES, ICONS_STROKES } from '@/shared/assets/styles/colors'
+import { addAlpha } from '@/shared/helpers/addAlpha'
 
 export const Container = styled.div`
   height: 100%;
@@ -56,7 +57,7 @@ export const navlinkCSS = css`
 
     & svg,
     & svg path {
-      stroke: ${ICONS_STROKES.PRIMARY_HOVER_COLOR};
+      stroke: ${addAlpha(ICONS_STROKES.PRIMARY_DEFAULT_COLOR, 1)};
     }
   }
 

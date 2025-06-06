@@ -36,7 +36,7 @@ export const TooltipContainer = styled.div`
   font-weight: 500;
   line-height: 18px;
   letter-spacing: 0.15px;
-  color: rgb(155, 156, 158);
+  color: rgb(255, 255, 255, 0.8);
   z-index: 999;
 `
 
