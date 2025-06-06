@@ -7,7 +7,7 @@ export enum ASTRO_ZODIAC {
   VIRGO = 'Virgo',
   LIBRA = 'Libra',
   SCORPIO = 'Scorpio',
-  SAGITTARIUS = 'Saggitarius',
+  SAGITTARIUS = 'Sagittarius',
   CAPRICORN = 'Capricorn',
   AQUARIUS = 'Aquarius',
   PISCES = 'Pisces',
@@ -21,7 +21,7 @@ export enum ASTRO_ZODIAC_ELEMENT {
 }
 
 export enum ASTRO_ZODIAC_MODALITY {
-  CARDINAL = 'сardinanal',
+  CARDINAL = 'cardinal',
   FIXED = 'fixed',
   MUTABLE = 'mutable',
 }
