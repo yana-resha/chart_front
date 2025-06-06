@@ -4,8 +4,9 @@ import { EmptyPage } from '../index.linaria'
 import DefaultLayout from '@/app/layout/DefaultLayout'
 import { AuthPage } from '@/pages/AuthPage'
 import { CalculatorPage } from '@/pages/CalculatorPage'
+import { NatalDecodingPage } from '@/pages/NatalDecodingPage'
 import { ROUTER_PATHES } from '@/shared/constants/router-paths'
-import { AstroDecodingPage } from '@/pages/AstroDecodingPage'
+import Components from '@/pages/Components'
 
 export const MainRouter = () => (
   <Routes>
@@ -40,15 +41,19 @@ export const MainRouter = () => (
     <Route element={<DefaultLayout />}>
       <Route
         path={ROUTER_PATHES.DEFAULT_PATH}
-        element={<AstroDecodingPage />}
+        element={<NatalDecodingPage />}
       />
       <Route
         path={ROUTER_PATHES.CALCULATOR_PATH}
         element={<CalculatorPage />}
       />
       <Route
-        path={ROUTER_PATHES.ASTRO_DECODING_PATH}
-        element={<AstroDecodingPage />}
+        path={ROUTER_PATHES.NATAL_DECODING_PATH}
+        element={<NatalDecodingPage />}
+      />
+      <Route
+        path={'components'}
+        element={<Components />}
       />
     </Route>
     {/*  */}

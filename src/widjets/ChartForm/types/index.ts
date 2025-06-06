@@ -1,7 +1,7 @@
-import { ASTRO_CHART_VARIABLE } from '@/entities/astro-charts/types/astro-chart'
-import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator'
+import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator-request.types'
 import { IFullLocality } from '@/entities/locality/types'
 import { IDropdownItem } from '@/shared/components/SearchInput/types'
+import { ASTRO_CHART_VARIABLE } from '@/shared/types/astro/astro-commom.types'
 
 export type IInputLocality = IFullLocality & IDropdownItem
 

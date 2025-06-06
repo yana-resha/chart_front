@@ -1,4 +1,4 @@
-import { ASTRO_ASPECT } from '../types/astro-aspects'
+import { ASTRO_ASPECT } from '../types/astro/astro-aspects.types'
 
 export const ASTRO_ASPECT_NAME: Record<ASTRO_ASPECT, string> = {
   [ASTRO_ASPECT.CONJUCTION]: 'Соединение',

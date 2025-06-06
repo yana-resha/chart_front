@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useFormikContext } from 'formik'
 
 import { ChartFormFieldValues, IInputLocality } from '../types'
-import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator'
+import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator-request.types'
 import { useLazyGetLocalitiesByNameQuery } from '@/store/api/locality.api'
 
 export const useFormInside = () => {

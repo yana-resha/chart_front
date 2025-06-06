@@ -1,6 +1,12 @@
 import { ASTRO_CHART_VARIABLE_DESCRIPTION } from '../configs/astro-chart.config'
-import { ASTRO_CHART_VARIABLE } from '../types/astro-chart'
-import { ICalculatorTypes } from '../types/calculator'
+import { ASTRO_CHART_VARIABLE } from '@/shared/types/astro/astro-commom.types'
+
+export interface ICalculatorTypes {
+  id: string | number
+  value: ASTRO_CHART_VARIABLE
+  content: string
+  default?: boolean
+}
 
 export interface ICalculatorTypesSelectList extends ICalculatorTypes {
   content: string

@@ -1,7 +1,10 @@
 import { ChartFormFieldValues } from '../types'
-import { ASTRO_CHART_VARIABLE } from '@/entities/astro-charts/types/astro-chart'
-import { IBasicCalculatorRequest, CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator'
+import {
+  IBasicCalculatorRequest,
+  CalculatorRequestKeys,
+} from '@/entities/astro-charts/types/calculator-request.types'
 import { getTimezone } from '@/shared/helpers/date.helper'
+import { ASTRO_CHART_VARIABLE } from '@/shared/types/astro/astro-commom.types'
 
 export type ChartRequestMapper<T extends ASTRO_CHART_VARIABLE> = (
   values: Extract<ChartFormFieldValues, { chart_type: T }>,
