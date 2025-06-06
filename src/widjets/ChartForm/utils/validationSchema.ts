@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
 
-import { ASTRO_CHART_VARIABLE } from '@/entities/astro-charts/types/astro-chart'
-import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator'
+import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator-request.types'
+import { ASTRO_CHART_VARIABLE } from '@/shared/types/astro/astro-commom.types'
 
 export const chartFormSchema = Yup.object().shape({
   ['locality']: Yup.object()

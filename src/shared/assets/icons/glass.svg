@@ -1,0 +1,22 @@
+<svg id="lens-map">
+    <!-- These gradients will define the displacement directions -->
+    <linearGradient id="red">
+        <!--Some gradient here-->
+    </linearGradient>
+    <linearGradient id="blue">
+        <!--Some gradient here-->
+    </linearGradient>
+</svg>
+
+<!-- This filter uses the pixel colors of the map image to distort the content -->
+<svg>
+    <defs>
+        <filter id="my-filter" color-interpolation-filters="sRGB">
+            <!-- feImage loads the gradient-based displacement map -->
+            <feImage href="#lens-map" result="map" />
+            <!-- feDisplacementMap shifts pixels of SourceGraphic (what we want to distort)
+             based on (R)ed (x) and (B)lue (y) pixel values of the map -->
+            <feDisplacementMap in="SourceGraphic" in2="map" scale="50" xChannelSelector="R" yChannelSelector="B" result="displaced" />
+        </filter>
+    </defs>
+</svg>

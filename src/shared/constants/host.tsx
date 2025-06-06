@@ -8,4 +8,4 @@
 //export const SERVER_PATH = ''
 
 // SERVER PRODUCTION ABSOLUTLY PATH
-export const SERVER_PATH = 'http://localhost:3000'
+export const SERVER_PATH = 'http://localhost:3000/api'

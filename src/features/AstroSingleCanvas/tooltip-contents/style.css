@@ -1,0 +1,23 @@
+.tooltip {
+  color: white;
+  letter-spacing: 0.15px;
+  color: rgb(255, 255, 255, 0.8);
+}
+
+.astro-symbol {
+  font-family: 'Hamburg';
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.mb-1 {
+  margin-bottom: 10px;
+}
+
+.text {
+  font-size: 12px;
+  font-weight: 400;
+}

@@ -3,8 +3,10 @@ import { styled } from '@linaria/react'
 export const DefaultContainer = styled.div`
   display: grid;
   grid-template-columns: 312px 1fr;
+  height: 100vh;
   padding: 12px;
   gap: 12px;
+  overflow: hidden; /* не даём скроллиться контейнеру */
 `
 
 export const SidebarContainer = styled.div`
@@ -16,5 +18,6 @@ export const SidebarContainer = styled.div`
 export const PagesContainer = styled.div`
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: hidden; /* не скроллится сам */
+  position: relative;
 `

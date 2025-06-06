@@ -1,12 +1,16 @@
 export enum ICONS_STROKES {
-  PRIMARY_DEFAULT_COLOR = 'rgb(22,238,246)',
-  PRIMARY_HOVER_COLOR = 'rgb(4,187,209)',
+  PRIMARY_DEFAULT_COLOR = 'rgb(22, 238, 246)',
 }
 
 export enum BTN_BACKGROUND_VARIABLES {
   PRIMARY = 'rgb(22,238,246)',
   PRIMARY_GRADIENT_BUTTON = 'linear-gradient(45deg, rgb(4,187,209) 0%,rgb(22,238,246) 45.313%, rgb(4,253,255) 100%)',
   PRIMARY_GRADIENT_DISABLED_BUTTON = 'linear-gradient(145.32deg, rgba(215, 237, 237, 0.16) -29.161%, rgba(204, 235, 235, 0) 100%)',
+}
+
+export enum BUTTON_COLOR_VARIABLES {
+  DARK_COLOR = 'rgb(12, 17, 50)',
+  LIGHT_COLOR = 'rgb(255, 255, 255)',
 }
 
 export enum TEXT_COLOR_VARIABLES {
@@ -28,9 +32,9 @@ export enum BACKGROUND_COLORS_VARIABLES {
 
 export enum SHARED_COLORS_VARIABLES {
   SUCCESS_COLOR = 'rgb(3, 255, 160)',
+  ERROR_COLOR = 'rgb(208, 48, 47)',
   LINK_LIGHT_COLOR = 'rgb(22,238,246)',
   LINK_BRIGHT_COLOR = 'rgb(4,187,209)',
-  ERROR_COLOR = 'rgb(208, 48, 47)',
 }
 
 export enum BADGE_BACKGROUND_VARIABLES {

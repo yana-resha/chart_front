@@ -1,4 +1,4 @@
-import { ASTRO_CHART_VARIABLE } from '../types/astro-chart'
+import { ASTRO_CHART_VARIABLE } from '@/shared/types/astro/astro-commom.types'
 
 export const ASTRO_CHART_VARIABLE_DESCRIPTION = {
   [ASTRO_CHART_VARIABLE.CHOROSCOPE]: 'Гороскоп',

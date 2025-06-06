@@ -17,7 +17,7 @@ export const ModalVeil = styled.div`
 `
 
 export const ModalWindow = styled.div`
-  background: rgba(26, 29, 33, 0.96);
+  background: rgba(26, 29, 33, 0.9);
   border-radius: 15px;
   position: relative;
   z-index: 1001;

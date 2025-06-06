@@ -1,5 +1,5 @@
 import { ASTRO_ZODIAC_INDEX } from '../configs/astro-zodiac.config'
-import { ASTRO_ZODIAC } from '../types/astro-zodiac'
+import { ASTRO_ZODIAC } from '../types/astro/astro-zodiac.types'
 
 // вернет номер индекса дома в котором находится координата (Например найти в каком доме находится планета)
 export function getHouseIndexBySmth(long: number, houseCusps: number[]): number | undefined {

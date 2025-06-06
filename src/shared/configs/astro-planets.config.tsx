@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 
-import { ASTRO_PLANET } from '../types/astro-planets'
+import { ASTRO_PLANET } from '../types/astro/astro-planets.types'
 import Chiron from '@/shared/assets/icons/planet-icons/Chiron.svg?react'
 import Fortuna from '@/shared/assets/icons/planet-icons/Fortuna.svg?react'
 import Jupiter from '@/shared/assets/icons/planet-icons/Jupiter.svg?react'
@@ -40,6 +40,28 @@ export const ASTRO_PLANET_NAME: Record<ASTRO_PLANET, string> = {
   [ASTRO_PLANET.FORTUNA]: 'Парс Фортуны',
   [ASTRO_PLANET.SELENA]: 'Селена',
 }
+
+export const PLANET_PRIORITY: ASTRO_PLANET[] = [
+  ASTRO_PLANET.SUN,
+  ASTRO_PLANET.MOON,
+  ASTRO_PLANET.MERCURY,
+  ASTRO_PLANET.VENUS,
+  ASTRO_PLANET.MARS,
+  ASTRO_PLANET.JUPITER,
+  ASTRO_PLANET.SATURN,
+  ASTRO_PLANET.URANUS,
+  ASTRO_PLANET.NEPTUNE,
+  ASTRO_PLANET.PLUTO,
+
+  ASTRO_PLANET.RAHU,
+  ASTRO_PLANET.KETU,
+
+  ASTRO_PLANET.PROSERPINA,
+  ASTRO_PLANET.CHIRON,
+  ASTRO_PLANET.LILITH,
+  ASTRO_PLANET.FORTUNA,
+  ASTRO_PLANET.SELENA,
+]
 
 export const ASTRO_PLANET_SYMBOL: Record<ASTRO_PLANET, string> = {
   [ASTRO_PLANET.SUN]: 'Q',
@@ -91,4 +113,24 @@ export const ASTRO_PLANET_SVG: Record<
   [ASTRO_PLANET.SATURN]: Saturn,
   [ASTRO_PLANET.URANUS]: Uranus,
   [ASTRO_PLANET.SELENA]: Selena,
+}
+
+export const PLANET_WEIGHTS: Record<ASTRO_PLANET, number> = {
+  [ASTRO_PLANET.SUN]: 4,
+  [ASTRO_PLANET.MOON]: 4,
+  [ASTRO_PLANET.MERCURY]: 3,
+  [ASTRO_PLANET.VENUS]: 3,
+  [ASTRO_PLANET.MARS]: 3,
+  [ASTRO_PLANET.JUPITER]: 2,
+  [ASTRO_PLANET.SATURN]: 2,
+  [ASTRO_PLANET.URANUS]: 1,
+  [ASTRO_PLANET.NEPTUNE]: 1,
+  [ASTRO_PLANET.PLUTO]: 1,
+  [ASTRO_PLANET.CHIRON]: 0,
+  [ASTRO_PLANET.PROSERPINA]: 0,
+  [ASTRO_PLANET.LILITH]: 0,
+  [ASTRO_PLANET.RAHU]: 0,
+  [ASTRO_PLANET.KETU]: 0,
+  [ASTRO_PLANET.FORTUNA]: 0,
+  [ASTRO_PLANET.SELENA]: 0,
 }

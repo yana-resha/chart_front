@@ -1,22 +1,27 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 
-import { astroApi } from './api/astro.api'
+import { astroCalculateApi } from './api/astro-calculate.api'
+import { astroDictionaryApi } from './api/astro-dictionary.api'
 import { localityApi } from './api/locality.api'
-import { astroDecodingReducer } from './slices/astro-decoding'
+import { natalDecodingReducer } from './slices/natal-decoding'
 import { testReducer } from './slices/test'
 
 const rootReducer = combineReducers({
   test: testReducer,
-  astroDecoding: astroDecodingReducer,
+  natalDecoding: natalDecodingReducer,
   [localityApi.reducerPath]: localityApi.reducer,
-  [astroApi.reducerPath]: astroApi.reducer,
+  [astroCalculateApi.reducerPath]: astroCalculateApi.reducer,
+  [astroDictionaryApi.reducerPath]: astroDictionaryApi.reducer,
 })
 export const setupStore = () =>
   configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(localityApi.middleware).concat(astroApi.middleware), // Добавь middleware для astroApi
+      getDefaultMiddleware()
+        .concat(localityApi.middleware)
+        .concat(astroCalculateApi.middleware)
+        .concat(astroDictionaryApi.middleware),
   })
 
 export const store = setupStore()

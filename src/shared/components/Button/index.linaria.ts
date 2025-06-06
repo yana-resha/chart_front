@@ -1,7 +1,7 @@
 import { styled } from '@linaria/react'
 
 import LoaderIMG from '@/shared/assets/icons/btn-loader.svg'
-import { BTN_BACKGROUND_VARIABLES } from '@/shared/assets/styles/colors'
+import { BTN_BACKGROUND_VARIABLES, BUTTON_COLOR_VARIABLES } from '@/shared/assets/styles/colors'
 
 export const ChildrenContainer = styled.div`
   font-weight: 500;
@@ -26,7 +26,7 @@ export const Loader = styled.div`
 export const ButtonComponent = styled.button`
   position: relative;
   cursor: pointer;
-  color: rgb(12, 17, 50);
+  color: ${BUTTON_COLOR_VARIABLES.DARK_COLOR};
   font-weight: 500 !important;
   border-radius: ${(props) => (props.roundedCorner ? '12' : '4')}px;
   padding: 9px 24px 9px 24px;
@@ -91,14 +91,14 @@ export const ButtonComponent = styled.button`
     }
 
     &.secondary {
-      border-color: rgb(104, 107, 110);
-      color: rgb(104, 107, 110);
+      border-color: rgb(255, 255, 255, 0.8);
+      color: rgb(255, 255, 255, 0.8);
       &:hover {
-        color: rgb(155, 156, 158);
+        color: rgb(255, 255, 255, 0.6);
       }
 
       &:active {
-        color: rgb(155, 156, 158);
+        color: rgb(255, 255, 255, 0.8);
       }
     }
 
@@ -107,13 +107,14 @@ export const ButtonComponent = styled.button`
     }
   }
 
+  &.small {
+    font-size: 12px;
+    padding: 0px 12px 0px 12px;
+  }
+
   &.text {
     padding: 0;
     transition: all 0.2s;
-
-    &.small {
-      font-size: 12px;
-    }
 
     &.primary {
       background: linear-gradient(45deg, rgb(28, 247, 164), rgb(17, 240, 40));

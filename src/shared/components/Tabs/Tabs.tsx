@@ -1,6 +1,6 @@
-import { FC, useMemo, useRef, useState } from 'react'
+import React, { FC, useMemo, useRef, useState } from 'react'
 
-import { TabPanelContainer } from './index.linaria'
+import { ContentContainer, TabPanelContainer } from './index.linaria'
 import { TabPanel } from './TabPanel/TabPanel'
 
 export interface Tab {
@@ -48,7 +48,7 @@ export const Tabs: FC<TabsProps> = ({ items, className }) => {
   }
 
   return (
-    <>
+    <div style={{ position: 'relative' }}>
       <TabPanelContainer
         className={className}
         onWheel={scrollTabs}
@@ -69,7 +69,7 @@ export const Tabs: FC<TabsProps> = ({ items, className }) => {
           )
         })}
       </TabPanelContainer>
-      <div>{currentContent}</div>
-    </>
+      <ContentContainer>{currentContent}</ContentContainer>
+    </div>
   )
 }

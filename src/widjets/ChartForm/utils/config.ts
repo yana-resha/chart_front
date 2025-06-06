@@ -1,6 +1,6 @@
 import { ChartFormFieldValues } from '../types'
-import { ASTRO_CHART_VARIABLE } from '@/entities/astro-charts/types/astro-chart'
-import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator'
+import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator-request.types'
+import { ASTRO_CHART_VARIABLE } from '@/shared/types/astro/astro-commom.types'
 
 export const formInitialValues: ChartFormFieldValues = {
   [CalculatorRequestKeys.date]: new Date().toISOString().substring(0, 10),

@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 import { Button } from '../../Button'
 import { CrossIcon, ModalVeil, ModalWindow } from '../index.linaria'
 import { Check, ContentContainer, CrossContainer, Loader, LoaderContainer, modalFlex } from './index.linaria'
+import { LiquidGlass } from '@liquidglass/react'
 
 interface ModalProps {
   content: string | ReactNode

@@ -1,8 +1,7 @@
 import { forwardRef } from 'react'
-import classNames from 'classnames'
 
 import { Tab } from '../Tabs'
-import { ActiveIndicator, activeIndicatorStyle, TabContainer } from './index.linaria'
+import { Label, TabContainer } from './index.linaria'
 
 interface TabPanelProps {
   item: Tab
@@ -21,10 +20,10 @@ export const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
         className={className}
         ref={ref}
         data-node-key={item.key}
+        $active={active}
         tabIndex={0}
       >
-        <ActiveIndicator className={classNames(active && activeIndicatorStyle)} />
-        <p>{item.label}</p>
+        <Label>{item.label}</Label>
       </TabContainer>
     )
   },

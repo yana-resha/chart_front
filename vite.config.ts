@@ -57,8 +57,8 @@ export default ({ command }: { command: string }) => {
     ],
     resolve: commonResolve,
     build: {
-      outDir: '../server/libs/templates',
-      emptyOutDir: false,
+      /* outDir: '../server/libs/templates',
+      emptyOutDir: false, */
     },
   })
 }

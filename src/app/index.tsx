@@ -11,6 +11,7 @@ export function App() {
       <AppContainer>
         <BrowserRouter basename="/">
           <Router />
+          {/* Это можно вставить прямо в App.tsx, под конец */}
         </BrowserRouter>
       </AppContainer>
     </Provider>

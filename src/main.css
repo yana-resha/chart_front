@@ -83,15 +83,23 @@ div#root {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  height: auto;
 }
+
 
 body {
   position: relative;
+  background-color: rgb(19, 22, 25);
 }
 
 div#root {
-  background-color: rgb(19, 22, 25);
   display: flex;
+}
+
+/* 🔧 Убираем отступы у заголовков и параграфов */
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
 }
 
 ::-webkit-scrollbar {
