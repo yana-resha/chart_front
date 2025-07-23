@@ -1,10 +1,16 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 
 import { useDispatch } from 'react-redux'
 
+import { ZODIAC_IN_PROPOSITIONAL } from '../../configs'
 import { IHouseInSignProps } from '../../types'
-import { Layout } from '../index.linaria'
+import { PostSkeleton } from '../../ui/PostSkeleton'
+import { Layout, Title } from '../index.linaria'
 import { DICTIONARY_ITEMS_CATEGORY } from '@/entities/astro-dictionary/types/dictionary-common.types'
+import { HamburgSymbol } from '@/shared/components/HamburgSymbol'
+import { ASTRO_HOUSE_SUBNAME, ASTRO_HOUSE_SYMBOL } from '@/shared/configs/astro-houses.config'
+import { ASTRO_ZODIAC_COLOR, ASTRO_ZODIAC_SYMBOL } from '@/shared/configs/astro-zodiac.config'
+import { formattedDegree, getDegreeInSign } from '@/shared/helpers/astro.helper'
 import { ASTRO_CHART_VARIABLE } from '@/shared/types/astro/astro-commom.types'
 import { useAppSelector } from '@/store'
 import { useLazyGetHouseInSignQuery } from '@/store/api/astro-dictionary.api'
@@ -19,7 +25,7 @@ export const HouseInSign = ({ chartId, items }: IHouseInSignProps) => {
       store.natalDecoding.chartsById[chartId]?.dictionaries[DICTIONARY_ITEMS_CATEGORY.HOUSE_IN_SIGN] ?? [],
   )
 
-  const [fetch, { isFetching, error }] = useLazyGetHouseInSignQuery()
+  const [fetch, { isLoading, isError }] = useLazyGetHouseInSignQuery()
 
   const handleFetch = useCallback(async () => {
     try {
@@ -48,17 +54,63 @@ export const HouseInSign = ({ chartId, items }: IHouseInSignProps) => {
     }
   }, [chartId, dictionary.length, handleFetch])
 
+  const renderItems = useMemo(
+    () =>
+      items
+        .map((item) => {
+          const dictMatch = dictionary.find((d) => d.house === item.house && d.sign === item.sign)
+
+          if (!dictMatch) return null
+
+          return {
+            ...item,
+            ...dictMatch, // добавим text и id и что там ещё
+          }
+        })
+        .filter((i): i is NonNullable<typeof i> => i !== null) // удаляем null
+        .sort((a, b) => {
+          if (a.house < b.house) {
+            return -1
+          }
+
+          return 1
+        }),
+    [dictionary, items],
+  )
+
   return (
     <Layout>
       <div>
-        {dictionary.map((el) => (
-          <div
-            key={el.sign + el.house}
-            style={{ border: '1px solid red', padding: '1rem', marginBottom: '15px' }}
-          >
-            <div style={{ color: 'whitesmoke', whiteSpace: 'pre-wrap' }}>{el.text}</div>
-          </div>
-        ))}
+        {renderItems.length > 0 &&
+          !isLoading &&
+          !isError &&
+          renderItems.map((el) => {
+            const houseSymbol = ASTRO_HOUSE_SYMBOL[el.house]
+            const houseAltername = ASTRO_HOUSE_SUBNAME[el.house]
+
+            const zodiacName = ZODIAC_IN_PROPOSITIONAL[el.sign]
+            const zodiacSymbol = ASTRO_ZODIAC_SYMBOL[el.sign]
+            const zodiacColor = ASTRO_ZODIAC_COLOR[el.sign]
+            const { degree, minutes, seconds } = getDegreeInSign(el.houseLongitude)
+
+            return (
+              <div key={el.house + el.sign}>
+                <div style={{ border: '1px solid red', padding: '1rem', marginBottom: '15px' }}>
+                  <div style={{ color: 'whitesmoke', whiteSpace: 'pre-wrap', textAlign: 'left' }}>
+                    <Title>
+                      {houseAltername ? houseAltername + ` (${houseSymbol} дом) ` : `${houseSymbol} дом `}
+                      {zodiacName} {formattedDegree(degree)}{' '}
+                      <HamburgSymbol style={{ color: zodiacColor }}>{zodiacSymbol}</HamburgSymbol>{' '}
+                      {formattedDegree(minutes) + "''"} {formattedDegree(seconds) + "'"}
+                    </Title>
+                    <p>{el.text}</p>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+
+        {isLoading && <PostSkeleton />}
       </div>
     </Layout>
   )

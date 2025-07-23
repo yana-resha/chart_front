@@ -4,9 +4,15 @@ export const DefaultContainer = styled.div`
   display: grid;
   grid-template-columns: 312px 1fr;
   height: 100vh;
+  max-height: fit-content;
   padding: 12px;
   gap: 12px;
-  overflow: hidden; /* не даём скроллиться контейнеру */
+`
+
+export const SidebarStaticWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
 `
 
 export const SidebarContainer = styled.div`
@@ -18,6 +24,5 @@ export const SidebarContainer = styled.div`
 export const PagesContainer = styled.div`
   height: 100%;
   width: 100%;
-  overflow: hidden; /* не скроллится сам */
   position: relative;
 `

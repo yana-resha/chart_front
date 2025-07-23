@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 import Konva from 'konva'
 import { Stage, Layer, Circle, Group } from 'react-konva'
@@ -24,7 +24,7 @@ function Chart() {
 
   const zodiacGroupRef = useRef<Konva.Group | null>(null)
   const houseGroupRef = useRef<Konva.Group | null>(null)
-  const [isReady, setIsReady] = useState(false)
+  const aspectGroupRef = useRef<Konva.Group | null>(null)
 
   /* первичная анимация зодиакального круга и куспидов домов */
   useEffect(() => {
@@ -34,6 +34,8 @@ function Chart() {
     const interval = setInterval(() => {
       const zodiacNode = zodiacGroupRef.current
       const houseNode = houseGroupRef.current
+      const aspectNode = aspectGroupRef.current
+
       if (zodiacNode) {
         clearInterval(interval)
         zodiacNode.rotation(40)
@@ -46,7 +48,7 @@ function Chart() {
 
         if (houseNode) {
           houseNode.rotation(-60)
-          // 2. Анимация вращения к 0
+          // // 2. Анимация вращения к 0
           new Konva.Tween({
             node: houseNode,
             rotation: 0,
@@ -54,7 +56,17 @@ function Chart() {
             easing: Konva.Easings.BackEaseOut,
           }).play()
         }
-        setIsReady(true)
+
+        if (aspectNode) {
+          aspectNode.opacity(0)
+          // // 2. Анимация вращения к 0
+          new Konva.Tween({
+            node: aspectNode,
+            opacity: 1,
+            duration: GENERAL_FIRST_RENDER_ANIMATION * 5,
+            easing: Konva.Easings.BackEaseOut,
+          }).play()
+        }
       }
       attempts += 1
       if (attempts > maxAttempts) {
@@ -64,7 +76,7 @@ function Chart() {
     }, 100)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [GENERAL_FIRST_RENDER_ANIMATION])
 
   return (
     <div
@@ -123,7 +135,19 @@ function Chart() {
             </Group>
 
             <PlanetMarkers />
-            {isReady && <AspectLines />}
+            <Group
+              ref={aspectGroupRef}
+              x={CENTER}
+              y={CENTER}
+              opacity={0}
+            >
+              <Group
+                offsetX={CENTER}
+                offsetY={CENTER}
+              >
+                <AspectLines />
+              </Group>
+            </Group>
             <DegreeTicks />
           </Layer>
         </Stage>

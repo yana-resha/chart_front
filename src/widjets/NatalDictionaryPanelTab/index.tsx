@@ -7,7 +7,7 @@ import { PlanetInHouse } from './tabs-content/PlanetInHouse'
 import { PlanetInSign } from './tabs-content/PlanetInSign'
 import { IProps } from './types'
 import { Tabs } from '@/shared/components/Tabs/Tabs'
-import { getDegreeInSign, getHouseIndexBySmth, getSignNameByLongitude } from '@/shared/helpers/astro.helper'
+import { getHouseIndexBySmth, getSignNameByLongitude } from '@/shared/helpers/astro.helper'
 import { useAppSelector } from '@/store'
 
 export const NatalDictionaryPanelTab = ({ chartId }: IProps) => {
@@ -33,6 +33,7 @@ export const NatalDictionaryPanelTab = ({ chartId }: IProps) => {
       houses.map((longitude, index) => ({
         house: index + 1,
         sign: getSignNameByLongitude(longitude),
+        houseLongitude: longitude,
       })),
     [houses],
   )
@@ -43,6 +44,8 @@ export const NatalDictionaryPanelTab = ({ chartId }: IProps) => {
         planetA: aspect.planetA,
         planetB: aspect.planetB,
         aspect: aspect.aspectType,
+        angle: aspect.angle,
+        orb: aspect.orb,
       })),
     [aspects],
   )
@@ -76,7 +79,7 @@ export const NatalDictionaryPanelTab = ({ chartId }: IProps) => {
           children: (
             <HouseInSign
               chartId={chartId}
-              items={housesMapped.filter((house) => house.house !== 1)}
+              items={housesMapped}
             />
           ),
         },

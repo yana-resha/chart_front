@@ -16,9 +16,9 @@ export interface IPlanetsInHouseProps extends IProps {
   items: IPlanetInHouseDictionaryItem[]
 }
 export interface IHouseInSignProps extends IProps {
-  items: IHouseInSignDictionaryItem[]
+  items: (IHouseInSignDictionaryItem & { houseLongitude: number })[]
 }
 
 export interface IAspectsProps extends IProps {
-  items: IAspectDictionaryItem[]
+  items: (IAspectDictionaryItem & { orb: number; angle: number })[]
 }

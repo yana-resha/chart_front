@@ -4,11 +4,15 @@ import { useDispatch } from 'react-redux'
 
 import { ZODIAC_IN_PROPOSITIONAL } from '../../configs'
 import { IPlanetsInSignProps } from '../../types'
-import { Layout, Title } from '../index.linaria'
+import { PostSkeleton } from '../../ui/PostSkeleton'
+import { Layout, RotatingImage, Title } from '../index.linaria'
 import { DICTIONARY_ITEMS_CATEGORY } from '@/entities/astro-dictionary/types/dictionary-common.types'
-import sunPng from '@/shared/assets/images/planets/sun.png'
 import { HamburgSymbol } from '@/shared/components/HamburgSymbol'
-import { ASTRO_PLANET_NAME, ASTRO_PLANET_SVG } from '@/shared/configs/astro-planets.config'
+import {
+  ASTRO_PLANET_IMAGE,
+  ASTRO_PLANET_NAME,
+  ASTRO_PLANET_SVG,
+} from '@/shared/configs/astro-planets.config'
 import { ASTRO_ZODIAC_COLOR, ASTRO_ZODIAC_SYMBOL } from '@/shared/configs/astro-zodiac.config'
 import { formattedDegree, getDegreeInSign } from '@/shared/helpers/astro.helper'
 import { ASTRO_CHART_VARIABLE } from '@/shared/types/astro/astro-commom.types'
@@ -21,8 +25,7 @@ export const PlanetInSign = ({ chartId, items }: IPlanetsInSignProps) => {
   const dictionary = useAppSelector(
     (store) => store.natalDecoding.chartsById[chartId].dictionaries[DICTIONARY_ITEMS_CATEGORY.PLANET_IN_SIGN],
   )
-  const [fetch, { data, isFetching, error }] = useLazyGetPlanetInSignQuery()
-
+  const [fetch, { isLoading, isError }] = useLazyGetPlanetInSignQuery()
   const handleFetch = useCallback(async () => {
     try {
       const result = await fetch({
@@ -70,37 +73,41 @@ export const PlanetInSign = ({ chartId, items }: IPlanetsInSignProps) => {
   return (
     <Layout>
       <div>
-        {renderItems.map((el) => {
-          const planetName = ASTRO_PLANET_NAME[el.planet]
-          const PlanetSymbol = ASTRO_PLANET_SVG[el.planet]
-          const zodiacName = ZODIAC_IN_PROPOSITIONAL[el.sign]
-          const zodiacSymbol = ASTRO_ZODIAC_SYMBOL[el.sign]
-          const zodiacColor = ASTRO_ZODIAC_COLOR[el.sign]
-          const { degree, minutes, seconds } = getDegreeInSign(el.planetLongitude)
+        {renderItems.length > 0 &&
+          !isLoading &&
+          !isError &&
+          renderItems.map((el) => {
+            const planetName = ASTRO_PLANET_NAME[el.planet]
+            const PlanetSymbol = ASTRO_PLANET_SVG[el.planet]
+            const planetImage = ASTRO_PLANET_IMAGE[el.planet]
+            const zodiacName = ZODIAC_IN_PROPOSITIONAL[el.sign]
+            const zodiacSymbol = ASTRO_ZODIAC_SYMBOL[el.sign]
+            const zodiacColor = ASTRO_ZODIAC_COLOR[el.sign]
+            const { degree, minutes, seconds } = getDegreeInSign(el.planetLongitude)
 
-          return (
-            <div key={el.planet + el.sign}>
-              <Title>
-                <PlanetSymbol
-                  width={'30px'}
-                  height={'30px'}
-                />
-                {planetName} {zodiacName} {formattedDegree(degree)}
-                <HamburgSymbol style={{ color: zodiacColor }}>{zodiacSymbol}</HamburgSymbol>{' '}
-                {formattedDegree(minutes) + "''"} {formattedDegree(seconds) + "'"}
-              </Title>
-              <div style={{ border: '1px solid red', padding: '1rem', marginBottom: '15px' }}>
-                <div style={{ color: 'whitesmoke', whiteSpace: 'pre-wrap' }}>
-                  <img
-                    src={sunPng}
-                    width={'200px'}
-                  />
-                  {el.text}
+            return (
+              <div key={el.planet + el.sign}>
+                <div style={{ border: '1px solid red', padding: '1rem', marginBottom: '15px' }}>
+                  <div style={{ color: 'whitesmoke', whiteSpace: 'pre-wrap', textAlign: 'left' }}>
+                    <Title>
+                      <PlanetSymbol
+                        width={'30px'}
+                        height={'30px'}
+                      />
+                      {planetName} {zodiacName} {formattedDegree(degree)}{' '}
+                      <HamburgSymbol style={{ color: zodiacColor }}>{zodiacSymbol}</HamburgSymbol>{' '}
+                      {formattedDegree(minutes) + "''"} {formattedDegree(seconds) + "'"}
+                    </Title>
+                    <RotatingImage src={planetImage} />
+
+                    <p>{el.text}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
+
+        {isLoading && <PostSkeleton />}
       </div>
     </Layout>
   )

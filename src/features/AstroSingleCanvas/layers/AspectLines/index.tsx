@@ -1,16 +1,10 @@
-import { Fragment, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { Fragment, useMemo, useRef, useState } from 'react'
 
 import Konva from 'konva'
 import { Ellipse, Line, Text } from 'react-konva'
 
 import { useAstroCanvasContext } from '../../AstroChartContext'
-import {
-  ellipseRenderAnimation,
-  lineHoverAnimation,
-  lineRenderAnimation,
-  textHoverAnimation,
-  textRenderAnimation,
-} from './helpers/animate.helper'
+import { lineHoverAnimation, textHoverAnimation } from './helpers/animate.helper'
 import { ASPECT_COLOR } from '../../configs/aspect.config'
 import { getAspectTooltipHTML } from '../../tooltip-contents/getAspectTooltipHTML'
 import { getVisualAngleFromAsc, polarToCartesian } from '../../utils/astro-helpers'
@@ -41,7 +35,6 @@ export const AspectLines = () => {
     showTooltip,
     changeTooltipPosition,
     hideTooltip,
-    GENERAL_FIRST_RENDER_ANIMATION,
   } = useAstroCanvasContext()
 
   const ascendant = houseCusps[0] ?? FAKE_ASCENDANT
@@ -133,44 +126,6 @@ export const AspectLines = () => {
       }),
     [CENTER, PLANET_INSIDE_RADIUS, PLANET_OUTSIDE_RADIUS, ascendant, aspects, fs, planets],
   )
-
-  const hasAnimatedRef = useRef(false)
-
-  useLayoutEffect(() => {
-    if (hasAnimatedRef.current) return
-    hasAnimatedRef.current = true
-
-    // твоя анимация
-    aspectData
-      .filter((el) => el?.aspectType !== ASTRO_ASPECT.CONJUCTION)
-      .forEach((aspect, i) => {
-        if (!aspect) return
-        const line1 = aspect1Refs.current[i]
-        const line2 = aspect2Refs.current[i]
-        const symbol = symbolRefs.current[i]
-        line1?.opacity(0)
-        line2?.opacity(0)
-        symbol?.opacity(0)
-
-        const delay = (GENERAL_FIRST_RENDER_ANIMATION + i * 0.2) * 100
-        if (line1 && line2) {
-          lineRenderAnimation({ line: line1, pos: aspect.posA, linePart: aspect.linePart1, delay })
-          lineRenderAnimation({ line: line2, pos: aspect.posB, linePart: aspect.linePart2, delay })
-        }
-        if (symbol) {
-          textRenderAnimation(symbol, TEXT_DEFAULT_OPACITY, delay)
-        }
-      })
-
-    aspectData
-      .filter((el) => el?.aspectType === ASTRO_ASPECT.CONJUCTION)
-      .forEach((aspect, i) => {
-        const conjuction = conjuctionRefs.current[i]
-        if (conjuction) {
-          ellipseRenderAnimation(conjuction, LINE_DEFAULT_OPACITY, 1500)
-        }
-      })
-  }, [])
 
   return (
     <>

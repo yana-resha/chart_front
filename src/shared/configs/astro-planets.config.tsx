@@ -19,6 +19,15 @@ import Sun from '@/shared/assets/icons/planet-icons/Sun.svg?react'
 import Uranus from '@/shared/assets/icons/planet-icons/Uranus.svg?react'
 import Venus from '@/shared/assets/icons/planet-icons/Venus.svg?react'
 
+import sunPng from '@/shared/assets/images/planets/sun.png'
+import moonPng from '@/shared/assets/images/planets/moon.png'
+import mercuryPng from '@/shared/assets/images/planets/mercury.png'
+import venusPng from '@/shared/assets/images/planets/venus.png'
+import marsPng from '@/shared/assets/images/planets/mars.png'
+import jupiterPng from '@/shared/assets/images/planets/jupiter.png'
+import saturnPng from '@/shared/assets/images/planets/saturn.png'
+import uranusPng from '@/shared/assets/images/planets/uranus.png'
+
 export const ASTRO_PLANET_NAME: Record<ASTRO_PLANET, string> = {
   [ASTRO_PLANET.SUN]: 'Солнце',
   [ASTRO_PLANET.MOON]: 'Луна',
@@ -53,8 +62,8 @@ export const PLANET_PRIORITY: ASTRO_PLANET[] = [
   ASTRO_PLANET.NEPTUNE,
   ASTRO_PLANET.PLUTO,
 
-  ASTRO_PLANET.RAHU,
-  ASTRO_PLANET.KETU,
+  ASTRO_PLANET.KETU, // кету в прошлой жизни
+  ASTRO_PLANET.RAHU, // в текущей жизни
 
   ASTRO_PLANET.PROSERPINA,
   ASTRO_PLANET.CHIRON,
@@ -113,6 +122,28 @@ export const ASTRO_PLANET_SVG: Record<
   [ASTRO_PLANET.SATURN]: Saturn,
   [ASTRO_PLANET.URANUS]: Uranus,
   [ASTRO_PLANET.SELENA]: Selena,
+}
+
+export const ASTRO_PLANET_IMAGE: Record<ASTRO_PLANET, string> = {
+  [ASTRO_PLANET.SUN]: sunPng,
+  [ASTRO_PLANET.MOON]: moonPng,
+  [ASTRO_PLANET.MERCURY]: mercuryPng,
+  [ASTRO_PLANET.VENUS]: venusPng,
+  [ASTRO_PLANET.MARS]: marsPng,
+  [ASTRO_PLANET.JUPITER]: jupiterPng,
+  [ASTRO_PLANET.SATURN]: saturnPng,
+  [ASTRO_PLANET.URANUS]: uranusPng,
+  [ASTRO_PLANET.NEPTUNE]: moonPng,
+  [ASTRO_PLANET.PLUTO]: moonPng,
+
+  [ASTRO_PLANET.CHIRON]: mercuryPng,
+  [ASTRO_PLANET.FORTUNA]: moonPng,
+  [ASTRO_PLANET.KETU]: moonPng,
+  [ASTRO_PLANET.RAHU]: moonPng,
+  [ASTRO_PLANET.PROSERPINA]: moonPng,
+  [ASTRO_PLANET.LILITH]: moonPng,
+
+  [ASTRO_PLANET.SELENA]: moonPng,
 }
 
 export const PLANET_WEIGHTS: Record<ASTRO_PLANET, number> = {

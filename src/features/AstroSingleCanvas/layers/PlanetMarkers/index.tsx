@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import Konva from 'konva'
 import { GroupConfig } from 'konva/lib/Group'
@@ -14,6 +14,7 @@ import { PlanetData } from '../../types'
 import { ChartIcon } from '../../ui/ChartIcon'
 import { getVisualAngleFromAsc, polarToCartesian } from '../../utils/astro-helpers'
 import { getMouseCoords } from '../../utils/helpers'
+import { ASTRO_PLANET_IMAGE } from '@/shared/configs/astro-planets.config'
 import { getHouseIndexBySmth } from '@/shared/helpers/astro.helper'
 import { ASTRO_PLANET } from '@/shared/types/astro/astro-planets.types'
 
@@ -47,7 +48,27 @@ export const PlanetMarkers = () => {
   const MAX_RADIUS = ZODIAC_INSIDE_RADIUS - MAX_MARGIN
   const MIN_RADIUS = PLANET_OUTSIDE_RADIUS + BASE_RADIUS_OFFSET
 
-  const fs = (ZODIAC_INSIDE_RADIUS - PLANET_INSIDE_RADIUS) * 0.23
+  const fs = (ZODIAC_INSIDE_RADIUS - PLANET_INSIDE_RADIUS) * 0.18
+
+  const [planetImages, setPlanetImages] = useState<Record<string, HTMLImageElement>>({})
+
+  useEffect(() => {
+    const loadImages = async () => {
+      const entries = await Promise.all(
+        Object.entries(ASTRO_PLANET_IMAGE).map(
+          async ([planet, src]) =>
+            new Promise<[string, HTMLImageElement]>((resolve) => {
+              const img = new Image()
+              img.src = src
+              img.onload = () => resolve([planet, img])
+            }),
+        ),
+      )
+      setPlanetImages(Object.fromEntries(entries))
+    }
+
+    loadImages()
+  }, [])
 
   const handleHover = (name: string, enter: boolean) => {
     const scale = enter ? HOVER_SCALE : BASE_SCALE
@@ -86,6 +107,9 @@ export const PlanetMarkers = () => {
   return (
     <>
       {planets.map((planet) => {
+        const img = planetImages[planet.name]
+        if (!img) return null // изображение ещё не загрузилось
+
         const angle = getVisualAngleFromAsc(planet.longitude, ascendant)
         const radius = (PLANET_OUTSIDE_RADIUS + PLANET_INSIDE_RADIUS) / 2
         const pos = polarToCartesian(angle, radius, CENTER)
@@ -99,11 +123,11 @@ export const PlanetMarkers = () => {
             x={pos.x}
             y={pos.y}
             radius={(PLANET_OUTSIDE_RADIUS - PLANET_INSIDE_RADIUS) / 2}
-            fill="#E6E6FA"
-            scale={{ x: 1, y: 1 }}
+            fillPatternImage={img}
+            fillPatternScale={{ x: 0.1, y: 0.1 }}
+            fillPatternOffset={{ x: img.width / 2, y: img.height / 2 }}
             onMouseEnter={(evt) => {
-              const planetName = planet.name
-              handleHover(planetName, true)
+              handleHover(planet.name, true)
               setTooltip(evt, planet)
             }}
             onMouseMove={(evt) => changeTooltip(evt)}

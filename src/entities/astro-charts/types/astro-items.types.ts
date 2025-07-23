@@ -21,7 +21,6 @@ export interface IPlanetsAspect {
   aspectType: ASTRO_ASPECT
   orb: number
   isExact: boolean
-  ange: number
   isVeryExact: boolean
   strength: number
   angle: number

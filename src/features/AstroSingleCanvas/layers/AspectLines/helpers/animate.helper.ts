@@ -33,50 +33,34 @@ interface ILineRenderProps {
     x: number
     y: number
   }
-
-  linePart: {
-    x1: number
-    y1: number
-    x2: number
-    y2: number
-  }
   delay?: number
 }
 
-export const lineRenderAnimation = ({ line, linePart, delay = 0 }: ILineRenderProps) => {
-  line.points([linePart.x1, linePart.y1, linePart.x2, linePart.y2])
+export const lineRenderAnimation = ({ line, delay = 0 }: ILineRenderProps) => {
   line.opacity(0)
   line.shadowBlur(20)
   line.shadowOpacity(0.8)
-  // первая фаза — мягкая подсветка
-  const glowTween = new Konva.Tween({
-    node: line,
-    opacity: 1,
-    shadowBlur: 30,
-    duration: 0.8,
-    easing: Konva.Easings.EaseInOut,
-  })
 
-  // вторая фаза — плавное растворение свечения
   const settleTween = new Konva.Tween({
     node: line,
     shadowBlur: 0,
     shadowOpacity: 0,
     duration: 1.2,
     easing: Konva.Easings.EaseInOut,
+  })
+
+  const glowTween = new Konva.Tween({
+    node: line,
+    opacity: 1,
+    shadowBlur: 30,
+    duration: 0.8,
+    easing: Konva.Easings.EaseInOut,
     onFinish: () => {
-      line.opacity(1)
-      line.shadowBlur(0)
-      line.shadowOpacity(0)
+      settleTween.play()
     },
   })
 
-  const startAnimation = () => {
-    glowTween.play()
-    setTimeout(() => {
-      settleTween.play()
-    }, 800) // чуть дольше чем первая фаза
-  }
+  const startAnimation = () => glowTween.play()
 
   if (delay > 0) {
     setTimeout(() => startAnimation(), delay)

@@ -70,8 +70,8 @@ export const NatalDecodingPage = () => {
       </HeaderContainer>
       {chartValue && (
         <>
-          {/* <NatalCanvasPanel chartId={chartId} />
-          <NatalSummaryPanelTab chartId={chartId} /> */}
+          <NatalCanvasPanel chartId={chartId} />
+          <NatalSummaryPanelTab chartId={chartId} />
           <NatalDictionaryPanelTab chartId={chartId} />
         </>
       )}

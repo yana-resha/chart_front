@@ -50,9 +50,11 @@ export const Icon = styled.span`
 
 export const Title = styled.h3`
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 500;
   color: #ffffff;
   letter-spacing: 0.6px;
+  line-height: 100%;
+  margin-bottom: 10px;
 `
 
 export const Content = styled.div`
@@ -71,5 +73,21 @@ export const Paragraph = styled.p`
     font-size: 120%;
     font-weight: 500;
     color: #ffffff;
+  }
+`
+
+export const RotatingImage = styled.img`
+  width: 200px;
+  animation: spin 120s linear infinite;
+  transform-style: preserve-3d;
+  float: left;
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 `

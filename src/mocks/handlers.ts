@@ -32,7 +32,7 @@ export const handlers = [
     return HttpResponse.json(mockPlanetInHouse)
   }),
   http.post(SERVER_PATH + '/astro/dictionary/house-in-sign', async () => {
-    await delay(1000)
+    await delay(10000)
 
     return HttpResponse.json(mockHouseInSign)
   }),
