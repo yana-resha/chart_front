@@ -17,6 +17,7 @@ const natalChartMapper: ChartRequestMapper<ASTRO_CHART_VARIABLE.NATAL_CHART> = (
       : values.timezone
 
   const time = values.time.length > 0 ? values.time : '12:00:00'
+  const place = values.searchLocality
 
   return {
     [CalculatorRequestKeys.latitude]: Number(values.latitude),
@@ -24,6 +25,7 @@ const natalChartMapper: ChartRequestMapper<ASTRO_CHART_VARIABLE.NATAL_CHART> = (
     [CalculatorRequestKeys.date]: values.date,
     [CalculatorRequestKeys.time]: time,
     [CalculatorRequestKeys.timezone]: timezone,
+    [CalculatorRequestKeys.place]: place,
   }
 }
 

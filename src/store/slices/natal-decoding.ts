@@ -15,7 +15,7 @@ interface INatalDictionaries {
 }
 
 interface NatalChartEntry {
-  sourceValue: ISingleChartSourceData & { locality?: string }
+  sourceValue: ISingleChartSourceData
   calculation: IFullNatalСalculations
   dictionaries: INatalDictionaries
 }

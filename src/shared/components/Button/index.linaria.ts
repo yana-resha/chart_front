@@ -117,7 +117,7 @@ export const ButtonComponent = styled.button`
     transition: all 0.2s;
 
     &.primary {
-      background: linear-gradient(45deg, rgb(28, 247, 164), rgb(17, 240, 40));
+      background: linear-gradient(45deg, rgb(22, 238, 246), rgb(4, 187, 209));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -129,7 +129,7 @@ export const ButtonComponent = styled.button`
     }
 
     &:active {
-      filter: none;
+      filter: brightness(0.95);
     }
 
     &:disabled {

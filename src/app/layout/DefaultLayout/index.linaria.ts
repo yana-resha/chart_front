@@ -3,7 +3,7 @@ import { styled } from '@linaria/react'
 export const DefaultContainer = styled.div`
   display: grid;
   grid-template-columns: 312px 1fr;
-  height: 100vh;
+  min-height: 100vh;
   max-height: fit-content;
   padding: 12px;
   gap: 12px;
@@ -24,5 +24,7 @@ export const SidebarContainer = styled.div`
 export const PagesContainer = styled.div`
   height: 100%;
   width: 100%;
+  max-width: 100%;
+  overflow: hidden;
   position: relative;
 `

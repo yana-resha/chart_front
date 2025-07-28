@@ -6,6 +6,8 @@ export const mockMyNatalCalculations = {
       timezone: 5,
       latitude: 52.7667,
       longitude: 55.7833,
+      place: 'Кумертау, Республика Башкортостан, Россия',
+      jd: 2449729.079861111,
     },
     result: {
       planets: [

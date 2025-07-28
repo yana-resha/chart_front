@@ -9,6 +9,7 @@ import { mockPlanetInHouse } from './data/astro-dictionary/planet-in-house'
 import { mockPlanetInSign } from './data/astro-dictionary/planet-in-sign'
 import { mockLocalityList } from './data/locality'
 import { SERVER_PATH } from '@/shared/constants/host'
+import { error } from 'console'
 
 export const handlers = [
   /* интерпретации */
@@ -16,9 +17,10 @@ export const handlers = [
     // можно получить body:
     const body = await request.json()
 
-    await delay(1000)
+    await delay(0)
 
     return HttpResponse.json(mockPlanetInSign)
+    /* return HttpResponse.json({ success: true, data: { chart: 'natal', items: [] } }) */
   }),
 
   http.post(SERVER_PATH + '/astro/dictionary/aspect', async () => {
@@ -27,17 +29,17 @@ export const handlers = [
     return HttpResponse.json(mockAspectInterpretation)
   }),
   http.post(SERVER_PATH + '/astro/dictionary/planet-in-house', async () => {
-    await delay(1000)
+    await delay(3000)
 
     return HttpResponse.json(mockPlanetInHouse)
   }),
   http.post(SERVER_PATH + '/astro/dictionary/house-in-sign', async () => {
-    await delay(10000)
+    await delay(0)
 
     return HttpResponse.json(mockHouseInSign)
   }),
   http.post(SERVER_PATH + '/astro/dictionary/configuration', async () => {
-    await delay(1000)
+    await delay(3000)
 
     return HttpResponse.json(mockConfiguratuion)
   }),
@@ -46,6 +48,8 @@ export const handlers = [
 
   http.post(SERVER_PATH + '/astro/natal-chart', async () => {
     await delay(3000)
+
+    throw new Error()
 
     return HttpResponse.json(mockSergNatalCalculations)
   }),

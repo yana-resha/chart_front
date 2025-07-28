@@ -1,10 +1,23 @@
 import { useCallback, useEffect, useMemo } from 'react'
 
+import ReactMarkdown from 'react-markdown'
 import { useDispatch } from 'react-redux'
 
+import { AspectTag } from './index.linaria'
 import { IAspectsProps } from '../../types'
+import {
+  Card,
+  ContentWrapper,
+  EmptyErrorCard,
+  EmptyListCard,
+  Header,
+  Icon,
+  InterpritationBlock,
+  Layout,
+  Subtitle,
+  Title,
+} from '../../ui/PostCard'
 import { PostSkeleton } from '../../ui/PostSkeleton'
-import { Layout, Title } from '../index.linaria'
 import { DICTIONARY_ITEMS_CATEGORY } from '@/entities/astro-dictionary/types/dictionary-common.types'
 import { HamburgSymbol } from '@/shared/components/HamburgSymbol'
 import {
@@ -14,6 +27,7 @@ import {
 } from '@/shared/configs/astro-aspects.config'
 import { ASTRO_PLANET_NAME } from '@/shared/configs/astro-planets.config'
 import { sortAspectsByPlanetAndAspectPriority } from '@/shared/helpers/astro/sortAspects'
+import { formatText } from '@/shared/helpers/formatText'
 import { ASTRO_CHART_VARIABLE } from '@/shared/types/astro/astro-commom.types'
 import { useAppSelector } from '@/store'
 import { useLazyGetAspectQuery } from '@/store/api/astro-dictionary.api'
@@ -57,13 +71,19 @@ export const Aspects = ({ chartId, items }: IAspectsProps) => {
     () => {
       const arr = items
         .map((item) => {
-          const dictMatch = dictionary.find((d) => d.planetA === item.planetA && d.planetB === item.planetB)
+          const dictMatch = dictionary.find(
+            (d) =>
+              d.aspect === item.aspect &&
+              ((d.planetA === item.planetA && d.planetB === item.planetB) ||
+                (d.planetA === item.planetB && d.planetB === item.planetA)),
+          )
+
           if (!dictMatch) return null
 
           return {
+            ...dictMatch,
             ...item,
-            ...dictMatch, // добавим text и id и что там ещё
-            aspectType: item.aspect, // это для функции которая сортирует
+            aspectType: item.aspect, // это для функции сортировки
           }
         })
         .filter((i): i is NonNullable<typeof i> => i !== null)
@@ -76,37 +96,51 @@ export const Aspects = ({ chartId, items }: IAspectsProps) => {
 
   return (
     <Layout>
-      <div>
-        {renderItems.length > 0 &&
-          !isLoading &&
-          !isError &&
-          renderItems.map((el) => {
-            const aspectSymbol = ASTRO_ASPECT_SYMBOL[el.aspect]
-            const aspectName = ASTRO_ASPECT_NAME[el.aspect].toLocaleLowerCase()
-            const aspectColor = ASTRO_ASPECT_COLOR[el.aspect]
-            const planetAName = ASTRO_PLANET_NAME[el.planetA]
-            const planetBName = ASTRO_PLANET_NAME[el.planetB]
+      {renderItems.length > 0 &&
+        !isLoading &&
+        !isError &&
+        renderItems.map((el) => {
+          const aspectSymbol = ASTRO_ASPECT_SYMBOL[el.aspect]
+          const aspectName = ASTRO_ASPECT_NAME[el.aspect].toLocaleLowerCase()
+          const aspectColor = ASTRO_ASPECT_COLOR[el.aspect]
+          const planetAName = ASTRO_PLANET_NAME[el.planetA]
+          const planetBName = ASTRO_PLANET_NAME[el.planetB]
 
-            const degree = (el.angle + el.orb).toFixed(2) + ''
+          const degree = (el.angle + el.orb).toFixed(2) + ''
 
-            return (
-              <div key={el.aspect + el.planetA + el.planetB}>
-                <div style={{ border: '1px solid red', padding: '1rem', marginBottom: '15px' }}>
-                  <div style={{ color: 'whitesmoke', whiteSpace: 'pre-wrap', textAlign: 'left' }}>
+          return (
+            <Card
+              key={el.aspect + el.planetA + el.planetB}
+              glowColor={aspectColor}
+            >
+              <ContentWrapper>
+                <Header>
+                  <Icon>
+                    <HamburgSymbol style={{ color: aspectColor }}>{aspectSymbol}</HamburgSymbol>
+                  </Icon>
+
+                  <div>
                     <Title>
-                      {planetAName}-{aspectName}
-                      <HamburgSymbol style={{ color: aspectColor }}>{aspectSymbol}</HamburgSymbol>-
-                      {planetBName} {degree + '°'}
+                      {planetAName} <AspectTag color={aspectColor}>{aspectName}</AspectTag> {planetBName}
                     </Title>
-                    <p>{el.text}</p>
-                  </div>
-                </div>
-              </div>
-            )
-          })}
 
-        {isLoading && <PostSkeleton />}
-      </div>
+                    <Subtitle>{degree + '°'}</Subtitle>
+                  </div>
+                </Header>
+                <InterpritationBlock>
+                  {formatText(el.text ?? '').map((el, index) => (
+                    <ReactMarkdown key={index}>{el}</ReactMarkdown>
+                  ))}
+                </InterpritationBlock>
+              </ContentWrapper>
+            </Card>
+          )
+        })}
+
+      {isLoading && <PostSkeleton count={items.length} />}
+      {renderItems.length === 0 && !isLoading && !isError && <EmptyListCard />}
+
+      {isError && !isLoading && <EmptyErrorCard />}
     </Layout>
   )
 }

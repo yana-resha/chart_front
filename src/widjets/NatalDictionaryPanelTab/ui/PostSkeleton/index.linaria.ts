@@ -1,32 +1,23 @@
 import { styled } from '@linaria/react'
 
 export const Card = styled.div`
-  background: #111;
-  padding: 24px;
-  border-radius: 12px;
-  color: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow:
+    inset 0 0 60px rgba(19, 22, 25, 0.1),
+    0 0 10px rgba(0, 0, 0, 0.1);
+  background: rgba(13, 15, 16, 0.5);
+  transition: box-shadow 0.3s ease;
+  backdrop-filter: blur(1px) contrast(1.1) brightness(1.1);
   display: flex;
   flex-direction: column;
-  gap: 20px;
-`
-
-export const Content = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-`
-export const PlanetImage = styled.span`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  overflow: hidden;
-  flex-shrink: 0;
+  gap: 24px;
 `
 export const Title = styled.div`
   font-size: 22px;
   font-weight: bold;
 `
 export const Paragraph = styled.div`
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.75;
 `

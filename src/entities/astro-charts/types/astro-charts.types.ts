@@ -12,6 +12,8 @@ export interface ISingleChartSourceData {
   timezone: number
   latitude: number
   longitude: number
+  place?: string
+  jd: number
 }
 
 export interface IFullNatalСalculations {

@@ -2,39 +2,28 @@ import { FC } from 'react'
 
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
-import { Card, PlanetImage, Content, Title, Paragraph } from './index.linaria'
+import { Card, Title, Paragraph } from './index.linaria'
 import { skeletonTheme } from './theme'
 
-export const PostSkeleton: FC = () => (
+type PostSkeletonProps = {
+  count?: number
+}
+
+export const PostSkeleton: FC<PostSkeletonProps> = ({ count = 1 }) => (
   <SkeletonTheme {...skeletonTheme}>
-    <Card>
-      <Title>
-        <Skeleton width={180} />
-      </Title>
-
-      <Content>
-        <PlanetImage>
+    {Array.from({ length: count }).map((_, i) => (
+      <Card key={i}>
+        <Title>
           <Skeleton
-            circle
-            height="100%"
-            width="100%"
+            width="60%"
+            height={28}
           />
-        </PlanetImage>
+        </Title>
 
         <Paragraph>
-          <Skeleton count={3} />
+          <Skeleton height={250} />
         </Paragraph>
-
-        <Paragraph>
-          <Skeleton
-            count={2}
-            width="90%"
-          />
-        </Paragraph>
-        <Paragraph>
-          <Skeleton count={5} />
-        </Paragraph>
-      </Content>
-    </Card>
+      </Card>
+    ))}
   </SkeletonTheme>
 )

@@ -1,14 +1,30 @@
 import { useCallback, useEffect, useMemo } from 'react'
 
+import ReactMarkdown from 'react-markdown'
 import { useDispatch } from 'react-redux'
 
+import { HighlightPlanet, PlanetInHouseTitleLine } from './index.linaria'
 import { IPlanetsInHouseProps } from '../../types'
+import {
+  Card,
+  ContentWrapper,
+  EmptyErrorCard,
+  EmptyListCard,
+  Header,
+  ImageOverlay,
+  InterpritationBlock,
+  Layout,
+  Title,
+} from '../../ui/PostCard'
 import { PostSkeleton } from '../../ui/PostSkeleton'
-import { Layout, Title } from '../index.linaria'
 import { DICTIONARY_ITEMS_CATEGORY } from '@/entities/astro-dictionary/types/dictionary-common.types'
-import sunPng from '@/shared/assets/images/planets/sun.png'
 import { ASTRO_HOUSE_SYMBOL } from '@/shared/configs/astro-houses.config'
-import { ASTRO_PLANET_NAME, ASTRO_PLANET_SVG } from '@/shared/configs/astro-planets.config'
+import {
+  ASTRO_PLANET_IMAGE,
+  ASTRO_PLANET_NAME,
+  ASTRO_PLANET_SVG,
+} from '@/shared/configs/astro-planets.config'
+import { formatText } from '@/shared/helpers/formatText'
 import { ASTRO_CHART_VARIABLE } from '@/shared/types/astro/astro-commom.types'
 import { useAppSelector } from '@/store'
 import { useLazyGetPlanetInHouseQuery } from '@/store/api/astro-dictionary.api'
@@ -68,39 +84,44 @@ export const PlanetInHouse = ({ chartId, items }: IPlanetsInHouseProps) => {
 
   return (
     <Layout>
-      <div>
-        {renderItems.length > 0 &&
-          !isLoading &&
-          !isError &&
-          renderItems.map((el) => {
-            const planetName = ASTRO_PLANET_NAME[el.planet]
-            const PlanetSymbol = ASTRO_PLANET_SVG[el.planet]
-            const houseSymbol = ASTRO_HOUSE_SYMBOL[el.house]
+      {renderItems.length > 0 &&
+        !isLoading &&
+        !isError &&
+        renderItems.map((el) => {
+          const planetName = ASTRO_PLANET_NAME[el.planet]
+          const PlanetSVG = ASTRO_PLANET_SVG[el.planet]
+          const planetImage = ASTRO_PLANET_IMAGE[el.planet]
+          const houseSymbol = ASTRO_HOUSE_SYMBOL[el.house]
 
-            return (
-              <div key={el.planet + el.house}>
-                <div style={{ border: '1px solid red', padding: '1rem', marginBottom: '15px' }}>
-                  <div style={{ color: 'whitesmoke', whiteSpace: 'pre-wrap', textAlign: 'left' }}>
-                    <Title>
-                      <PlanetSymbol
-                        width={'30px'}
-                        height={'30px'}
-                      />
-                      {planetName} в {houseSymbol} доме
-                    </Title>
-                    <img
-                      style={{ float: 'left' }}
-                      src={sunPng}
-                      width={'200px'}
-                    />
-                    <p>{el.text}</p>
+          return (
+            <Card key={el.planet + el.house}>
+              <ContentWrapper>
+                <ImageOverlay src={planetImage} />
+                <Header>
+                  <div>
+                    <PlanetInHouseTitleLine>
+                      <HighlightPlanet style={{ fontSize: '25px' }}>
+                        <PlanetSVG />
+                      </HighlightPlanet>{' '}
+                      <Title>
+                        {planetName} в {houseSymbol} доме
+                      </Title>
+                    </PlanetInHouseTitleLine>
                   </div>
-                </div>
-              </div>
-            )
-          })}
-        {isLoading && <PostSkeleton />}
-      </div>
+                </Header>
+                <InterpritationBlock>
+                  {formatText(el.text ?? '').map((el, index) => (
+                    <ReactMarkdown key={index}>{el}</ReactMarkdown>
+                  ))}
+                </InterpritationBlock>
+              </ContentWrapper>
+            </Card>
+          )
+        })}
+      {isLoading && <PostSkeleton count={items.length} />}
+      {renderItems.length === 0 && !isLoading && !isError && <EmptyListCard />}
+
+      {isError && !isLoading && <EmptyErrorCard />}
     </Layout>
   )
 }

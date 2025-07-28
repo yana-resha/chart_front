@@ -5,6 +5,7 @@ export enum CalculatorRequestKeys {
   date = 'date',
   time = 'time',
   timezone = 'timezone',
+  place = 'place',
 }
 
 export interface IBasicCalculatorRequest {
@@ -13,4 +14,5 @@ export interface IBasicCalculatorRequest {
   [CalculatorRequestKeys.date]: string // дата
   [CalculatorRequestKeys.time]: string //  время
   [CalculatorRequestKeys.timezone]: number
+  [CalculatorRequestKeys.place]?: string
 }

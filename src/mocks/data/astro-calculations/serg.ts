@@ -6,6 +6,8 @@ export const mockSergNatalCalculations = {
       timezone: 6,
       latitude: 53.63793,
       longitude: 55.9533,
+      place: 'Стерлитамак, Республика Башкортостан, Россия',
+      jd: 2449729.07986111,
     },
     result: {
       planets: [

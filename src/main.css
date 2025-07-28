@@ -21,6 +21,13 @@
 
 @font-face {
   font-family: 'Open Sans';
+  src: url('shared/assets/fonts/OpenSansItalic.ttf');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Open Sans';
   src: url('shared/assets/fonts/OpenSansSemiBold.ttf');
   font-weight: 500;
   font-style: normal;
@@ -83,9 +90,8 @@ div#root {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  height: auto;
+  height: fit-content;
 }
-
 
 body {
   position: relative;
@@ -93,6 +99,7 @@ body {
 }
 
 div#root {
+  position: relative;
   display: flex;
 }
 

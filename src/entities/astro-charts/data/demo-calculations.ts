@@ -1,3 +1,12 @@
+export const DEMO_NATAL_SOURCE_VALUE = {
+  datetime: '1995-01-11T13:55:00.000Z',
+  timezone: 5,
+  latitude: 52.7667,
+  longitude: 55.7833,
+  place: 'Стерлитамак, Республика Башкортостан, Россия',
+  jd: 2449729.07986111,
+}
+
 export const DEMO_NATAL_CALCULATION = {
   planets: [
     {
