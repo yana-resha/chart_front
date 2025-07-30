@@ -9,7 +9,6 @@ import { mockPlanetInHouse } from './data/astro-dictionary/planet-in-house'
 import { mockPlanetInSign } from './data/astro-dictionary/planet-in-sign'
 import { mockLocalityList } from './data/locality'
 import { SERVER_PATH } from '@/shared/constants/host'
-import { error } from 'console'
 
 export const handlers = [
   /* интерпретации */
@@ -17,7 +16,7 @@ export const handlers = [
     // можно получить body:
     const body = await request.json()
 
-    await delay(0)
+    await delay(10000)
 
     return HttpResponse.json(mockPlanetInSign)
     /* return HttpResponse.json({ success: true, data: { chart: 'natal', items: [] } }) */
@@ -34,7 +33,7 @@ export const handlers = [
     return HttpResponse.json(mockPlanetInHouse)
   }),
   http.post(SERVER_PATH + '/astro/dictionary/house-in-sign', async () => {
-    await delay(0)
+    await delay(3000)
 
     return HttpResponse.json(mockHouseInSign)
   }),
@@ -48,8 +47,6 @@ export const handlers = [
 
   http.post(SERVER_PATH + '/astro/natal-chart', async () => {
     await delay(3000)
-
-    throw new Error()
 
     return HttpResponse.json(mockSergNatalCalculations)
   }),

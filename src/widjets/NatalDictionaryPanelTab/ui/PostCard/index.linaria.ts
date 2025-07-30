@@ -8,6 +8,9 @@ export const Layout = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+  width: 100%;
+  min-width: 0;
+  contain: layout paint;
 `
 
 export const Card = styled.div<{ glowColor?: string }>`

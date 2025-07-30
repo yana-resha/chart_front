@@ -27,24 +27,23 @@ export const TabContainer = styled.div<TabContainerProps>`
   &::before {
     content: '';
     position: absolute;
-    bottom: -2px;
+    bottom: -10px;
     left: 50%;
     transform: translateX(-50%) scaleX(${({ $active }) => ($active ? 1 : 0.6)});
     width: 60%;
     height: 6px;
+    pointer-events: none;
     background: radial-gradient(circle, rgba(22, 238, 246, 0.4) 0%, transparent 80%);
     opacity: ${({ $active }) => ($active ? 1 : 0)};
     transition:
       opacity 0.3s,
       transform 0.4s ease;
-    pointer-events: none;
-    z-index: 0;
   }
 
   &::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -5px;
     left: 50%;
     transform: translateX(-50%) scaleX(${({ $active }) => ($active ? 1 : 0.5)});
     width: 50%;
@@ -54,7 +53,6 @@ export const TabContainer = styled.div<TabContainerProps>`
     transition:
       opacity 0.3s,
       transform 0.4s ease;
-    z-index: 1;
   }
 
   &:hover::after {
@@ -63,7 +61,7 @@ export const TabContainer = styled.div<TabContainerProps>`
 
   & ${Label} {
     color: ${({ $active }) => ($active ? 'rgb(22,238,246)' : '#fff')};
-    font-size: ${({ $active }) => ($active ? '1.05rem' : '1rem')};
+    font-size: 1rem;
     text-shadow: ${({ $active }) => ($active ? '0 0 2px rgba(22,238,246,0.7)' : 'none')};
     transition:
       color 0.3s,

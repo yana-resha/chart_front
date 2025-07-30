@@ -20,6 +20,12 @@ export const ExpandableWrapper = ({
   const contentRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
 
+  const isInViewport = (elem: HTMLElement) => {
+    const rect = elem.getBoundingClientRect()
+
+    return rect.top >= 0 && rect.top <= window.innerHeight
+  }
+
   // Подсчёт нужен ли toggle
   useLayoutEffect(() => {
     if (contentRef.current) {
@@ -62,6 +68,15 @@ export const ExpandableWrapper = ({
     } else {
       el.style.height = `${availableHeight}px`
     }
+
+    setTimeout(() => {
+      if (!isInViewport(el)) {
+        const topOffset = el.getBoundingClientRect().top + window.scrollY
+        window.scrollTo({
+          top: topOffset - 30,
+        })
+      }
+    }, 10)
   }, [availableHeight, expanded, children])
 
   return (

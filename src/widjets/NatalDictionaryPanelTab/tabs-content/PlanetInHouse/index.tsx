@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useLayoutEffect, useMemo } from 'react'
 
 import ReactMarkdown from 'react-markdown'
 import { useDispatch } from 'react-redux'
@@ -59,7 +59,7 @@ export const PlanetInHouse = ({ chartId, items }: IPlanetsInHouseProps) => {
     }
   }, [fetch, items, dispatch, chartId])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (dictionary.length <= 0) {
       handleFetch()
     }

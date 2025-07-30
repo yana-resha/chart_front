@@ -21,10 +21,11 @@ export const Button = ({
   roundedCorner = false,
   children,
   isLoading,
+  className,
   ...props
 }: ButtonProps) => (
   <ButtonComponent
-    className={classNames([kind, theme, size], { isLoading })}
+    className={classNames([kind, theme, size, className], { isLoading })}
     roundedCorner={roundedCorner}
     content={children}
     {...props}

@@ -89,13 +89,13 @@ body,
 div#root {
   margin: 0;
   padding: 0;
-  min-height: 100vh;
-  height: fit-content;
 }
 
 body {
   position: relative;
   background-color: rgb(19, 22, 25);
+  min-height: 100dvh;
+  height: fit-content;
 }
 
 div#root {

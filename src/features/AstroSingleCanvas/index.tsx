@@ -59,12 +59,14 @@ function Chart() {
 
         if (aspectNode) {
           aspectNode.opacity(0)
-          // // 2. Анимация вращения к 0
           new Konva.Tween({
             node: aspectNode,
             opacity: 1,
             duration: GENERAL_FIRST_RENDER_ANIMATION * 5,
             easing: Konva.Easings.BackEaseOut,
+            onFinish: () => {
+              aspectNode.opacity(1)
+            },
           }).play()
         }
       }
@@ -81,7 +83,7 @@ function Chart() {
   return (
     <div
       ref={containerRef}
-      style={{ width: '100%', height: '100%', position: 'relative' }}
+      style={{ width: '100%', minWidth: 0, height: '100%', position: 'relative', contain: 'layout paint' }}
     >
       {CANVAS_SIZE === 0 ? undefined : (
         <Stage

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useLayoutEffect, useMemo } from 'react'
 
 import ReactMarkdown from 'react-markdown'
 import { useDispatch } from 'react-redux'
@@ -61,7 +61,7 @@ export const Aspects = ({ chartId, items }: IAspectsProps) => {
     }
   }, [fetch, items, dispatch, chartId])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (dictionary.length <= 0) {
       handleFetch()
     }

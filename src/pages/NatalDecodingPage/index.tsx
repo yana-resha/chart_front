@@ -3,7 +3,7 @@ import { useEffect, useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 
-import { HeaderContainer, Layout, PageTitle, SectionTitle } from './index.linaria'
+import { HeaderContainer, Layout, PageTitle, SectionTitle, WidjetsWrapper } from './index.linaria'
 import { DEFAULT_NATAL_CHART_ID } from '@/entities/astro-charts/constants'
 import {
   DEMO_NATAL_CALCULATION,
@@ -15,9 +15,9 @@ import { ROUTER_PATHES } from '@/shared/constants/router-paths'
 import { useAppSelector, store } from '@/store'
 import { addNatalChart, removeNatalChart } from '@/store/slices/natal-decoding'
 import { NatalCanvasPanel } from '@/widjets/NatalCanvasPanel'
+import { NatalChartSourceData } from '@/widjets/NatalChartSourceData'
 import { NatalDictionaryPanelTab } from '@/widjets/NatalDictionaryPanelTab'
 import { NatalSummaryPanelTab } from '@/widjets/NatalSummaryPanelTab'
-import { NatalChartSourceData } from '@/widjets/NatalChartSourceData'
 
 export const NatalDecodingPage = () => {
   const location = useLocation()
@@ -71,25 +71,28 @@ export const NatalDecodingPage = () => {
         />
       </HeaderContainer>
       {chartValue && (
-        <>
-          <PageTitle>Расшифровка натальной карты{' '}💫</PageTitle>
-
-          <SectionTitle>Исходные данные</SectionTitle>
-          <div style={{ marginBottom: '30px' }}>
+        <WidjetsWrapper>
+          <div>
+            <PageTitle>Расшифровка натальной карты 💫</PageTitle>
+            <SectionTitle>Исходные данные</SectionTitle>
             <NatalChartSourceData chartId={chartId} />
           </div>
 
-          <SectionTitle>Интерактивная натальная карта</SectionTitle>
-          <div style={{ marginBottom: '30px' }}>
+          <div>
+            <SectionTitle>Интерактивная натальная карта</SectionTitle>
             <NatalCanvasPanel chartId={chartId} />
           </div>
 
-          <SectionTitle>Основные значения карты</SectionTitle>
-          <NatalSummaryPanelTab chartId={chartId} />
+          <div>
+            <SectionTitle>Основные значения карты</SectionTitle>
+            <NatalSummaryPanelTab chartId={chartId} />
+          </div>
 
-          <SectionTitle>Интерпретации</SectionTitle>
-          <NatalDictionaryPanelTab chartId={chartId} />
-        </>
+          <div>
+            <SectionTitle>Интерпретации</SectionTitle>
+            <NatalDictionaryPanelTab chartId={chartId} />
+          </div>
+        </WidjetsWrapper>
       )}
     </Layout>
   )

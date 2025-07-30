@@ -21,7 +21,7 @@ export const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
         ref={ref}
         data-node-key={item.key}
         $active={active}
-        tabIndex={0}
+        // tabIndex={0}
       >
         <Label>{item.label}</Label>
       </TabContainer>
