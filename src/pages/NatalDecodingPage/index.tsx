@@ -3,14 +3,15 @@ import { useEffect, useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 
-import { HeaderContainer, Layout, PageTitle, SectionTitle, WidjetsWrapper } from './index.linaria'
+import { HeaderContainer, Layout, PageContent, WidjetsWrapper } from './index.linaria'
 import { DEFAULT_NATAL_CHART_ID } from '@/entities/astro-charts/constants'
 import {
   DEMO_NATAL_CALCULATION,
   DEMO_NATAL_SOURCE_VALUE,
 } from '@/entities/astro-charts/data/demo-calculations'
 import { IFullNatalСalculations } from '@/entities/astro-charts/types/astro-charts.types'
-import { Header } from '@/shared/components/Header'
+import { PageTitle, SectionTitle } from '@/shared/assets/styles/titles.linaria'
+import { HeaderBackButton } from '@/shared/components/HeaderBackButton'
 import { ROUTER_PATHES } from '@/shared/constants/router-paths'
 import { useAppSelector, store } from '@/store'
 import { addNatalChart, removeNatalChart } from '@/store/slices/natal-decoding'
@@ -64,36 +65,34 @@ export const NatalDecodingPage = () => {
   return (
     <Layout>
       <HeaderContainer>
-        <Header
-          text="Калькулятор"
-          showBackButton
-          onClick={() => navigate(ROUTER_PATHES.CALCULATOR_PATH)}
-        />
+        <HeaderBackButton />
       </HeaderContainer>
-      {chartValue && (
-        <WidjetsWrapper>
-          <div>
-            <PageTitle>Расшифровка натальной карты 💫</PageTitle>
-            <SectionTitle>Исходные данные</SectionTitle>
-            <NatalChartSourceData chartId={chartId} />
-          </div>
+      <PageContent>
+        <PageTitle>Расшифровка натальной карты 💫</PageTitle>
+        {chartValue && (
+          <WidjetsWrapper>
+            <section>
+              <SectionTitle>Исходные данные</SectionTitle>
+              <NatalChartSourceData chartId={chartId} />
+            </section>
 
-          <div>
-            <SectionTitle>Интерактивная натальная карта</SectionTitle>
-            <NatalCanvasPanel chartId={chartId} />
-          </div>
+            <section>
+              <SectionTitle>Интерактивная натальная карта</SectionTitle>
+              <NatalCanvasPanel chartId={chartId} />
+            </section>
 
-          <div>
-            <SectionTitle>Основные значения карты</SectionTitle>
-            <NatalSummaryPanelTab chartId={chartId} />
-          </div>
+            <section>
+              <SectionTitle>Основные значения карты</SectionTitle>
+              <NatalSummaryPanelTab chartId={chartId} />
+            </section>
 
-          <div>
-            <SectionTitle>Интерпретации</SectionTitle>
-            <NatalDictionaryPanelTab chartId={chartId} />
-          </div>
-        </WidjetsWrapper>
-      )}
+            <section>
+              <SectionTitle>Интерпретации</SectionTitle>
+              <NatalDictionaryPanelTab chartId={chartId} />
+            </section>
+          </WidjetsWrapper>
+        )}
+      </PageContent>
     </Layout>
   )
 }

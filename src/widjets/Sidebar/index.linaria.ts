@@ -4,7 +4,7 @@ import { styled } from '@linaria/react'
 import { BACKGROUND_COLORS_VARIABLES, ICONS_STROKES } from '@/shared/assets/styles/colors'
 import { addAlpha } from '@/shared/helpers/addAlpha'
 
-export const Container = styled.div`
+export const Container = styled.aside`
   height: 100%;
   background-color: ${BACKGROUND_COLORS_VARIABLES.SIDEBAR_BACK};
   border-radius: 20px;

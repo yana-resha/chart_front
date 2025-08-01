@@ -4,3 +4,11 @@ export enum ROUTER_PATHES {
   CALCULATOR_PATH = '/calculator',
   NATAL_DECODING_PATH = '/natal-decoding',
 }
+
+export const PATH_TITLE_MAP: Record<string, string> = {
+  [ROUTER_PATHES.DEFAULT_PATH]: 'Главная',
+  [ROUTER_PATHES.DEFAULT_AUTH_PATH]: 'Авторизация',
+  [ROUTER_PATHES.CALCULATOR_PATH]: 'Калькулятор',
+  [ROUTER_PATHES.NATAL_DECODING_PATH]: 'Натальная карта',
+  '/components': 'Компоненты',
+}

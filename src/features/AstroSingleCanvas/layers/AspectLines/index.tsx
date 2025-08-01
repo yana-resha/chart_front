@@ -29,6 +29,7 @@ export const AspectLines = () => {
     CENTER,
     PLANET_INSIDE_RADIUS,
     PLANET_OUTSIDE_RADIUS,
+    ASPECT_INSIDE_RADIUS,
     FAKE_ASCENDANT,
     aspects,
     planets,
@@ -48,40 +49,70 @@ export const AspectLines = () => {
   const [hoveredAspect, setHoveredAspect] = useState<string | null>(null)
   const fs = PLANET_INSIDE_RADIUS * 0.1
 
-  const aspectData = useMemo(
+  const lineAspects = useMemo(
     () =>
-      aspects.map((aspect) => {
-        const planetA = planets.find((el) => el.name === aspect.planetA)
-        const planetB = planets.find((el) => el.name === aspect.planetB)
-        if (!planetA || !planetB) return null
+      aspects
+        .filter((aspect) => aspect.aspectType !== ASTRO_ASPECT.CONJUCTION)
+        .map((aspect) => {
+          const planetA = planets.find((el) => el.name === aspect.planetA)
+          const planetB = planets.find((el) => el.name === aspect.planetB)
+          if (!planetA || !planetB) return null
 
-        const angleA = getVisualAngleFromAsc(planetA.longitude, ascendant)
-        const angleB = getVisualAngleFromAsc(planetB.longitude, ascendant)
+          const angleA = getVisualAngleFromAsc(planetA.longitude, ascendant)
+          const angleB = getVisualAngleFromAsc(planetB.longitude, ascendant)
 
-        const posA = polarToCartesian(angleA, PLANET_INSIDE_RADIUS, CENTER)
-        const posB = polarToCartesian(angleB, PLANET_INSIDE_RADIUS, CENTER)
+          const posA = polarToCartesian(angleA, ASPECT_INSIDE_RADIUS, CENTER)
+          const posB = polarToCartesian(angleB, ASPECT_INSIDE_RADIUS, CENTER)
 
-        const dx = posB.x - posA.x
-        const dy = posB.y - posA.y
-        const length = Math.sqrt(dx * dx + dy * dy)
-        const ux = dx / length
-        const uy = dy / length
-        const gap = fs * 0.4
+          const dx = posB.x - posA.x
+          const dy = posB.y - posA.y
+          const length = Math.sqrt(dx * dx + dy * dy)
+          const ux = dx / length
+          const uy = dy / length
+          const gap = fs * 0.4
 
-        const centerX = (posA.x + posB.x) / 2
-        const centerY = (posA.y + posB.y) / 2
-        const beforeX = centerX - ux * gap
-        const beforeY = centerY - uy * gap
-        const afterX = centerX + ux * gap
-        const afterY = centerY + uy * gap
-        const conjuction: IConjuctionValues = {
-          rotation: 0,
-          radiusX: 0,
-          radiusY: 0,
-          centerX: 0,
-          centerY: 0,
-        }
-        if (aspect.aspectType === ASTRO_ASPECT.CONJUCTION) {
+          const centerX = (posA.x + posB.x) / 2
+          const centerY = (posA.y + posB.y) / 2
+          const beforeX = centerX - ux * gap
+          const beforeY = centerY - uy * gap
+          const afterX = centerX + ux * gap
+          const afterY = centerY + uy * gap
+
+          return {
+            ...aspect,
+            aspectSymbol: ASTRO_ASPECT_SYMBOL[aspect.aspectType],
+            nameA: planetA.label ?? planetA.name,
+            nameB: planetB.label ?? planetB.name,
+            symbolA: planetA.symbol,
+            symbolB: planetB.symbol,
+            centerX,
+            centerY,
+            angleA,
+            angleB,
+            posA,
+            posB,
+            color: ASPECT_COLOR[aspect.aspectType],
+            name: ASTRO_ASPECT_NAME[aspect.aspectType],
+            linePart1: { x1: posA.x, y1: posA.y, x2: beforeX, y2: beforeY },
+            linePart2: { x1: afterX, y1: afterY, x2: posB.x, y2: posB.y },
+          }
+        }),
+    [CENTER, ascendant, aspects, fs, planets],
+  )
+
+  const conjuctionAspects = useMemo(
+    () =>
+      aspects
+        .filter((aspect) => aspect.aspectType === ASTRO_ASPECT.CONJUCTION)
+        .map((aspect) => {
+          const planetA = planets.find((el) => el.name === aspect.planetA)
+          const planetB = planets.find((el) => el.name === aspect.planetB)
+          if (!planetA || !planetB) return null
+
+          const angleA = getVisualAngleFromAsc(planetA.longitude, ascendant)
+          const angleB = getVisualAngleFromAsc(planetB.longitude, ascendant)
+          const posA = polarToCartesian(angleA, PLANET_INSIDE_RADIUS, CENTER)
+          const posB = polarToCartesian(angleB, PLANET_INSIDE_RADIUS, CENTER)
           const dx = posB.x - posA.x
           const dy = posB.y - posA.y
 
@@ -97,40 +128,33 @@ export const AspectLines = () => {
           // Угол поворота в градусах
           const rotation = (Math.atan2(dy, dx) * 180) / Math.PI
 
-          conjuction.rotation = rotation
-          conjuction.radiusX = radiusX
-          conjuction.radiusY = radiusY
-          conjuction.centerX = centerX
-          conjuction.centerY = centerY
-        }
-
-        return {
-          ...aspect,
-          aspectSymbol: ASTRO_ASPECT_SYMBOL[aspect.aspectType],
-          nameA: planetA.label ?? planetA.name,
-          nameB: planetB.label ?? planetB.name,
-          symbolA: planetA.symbol,
-          symbolB: planetB.symbol,
-          centerX,
-          centerY,
-          angleA,
-          angleB,
-          posA,
-          posB,
-          color: ASPECT_COLOR[aspect.aspectType],
-          name: ASTRO_ASPECT_NAME[aspect.aspectType],
-          linePart1: { x1: posA.x, y1: posA.y, x2: beforeX, y2: beforeY },
-          linePart2: { x1: afterX, y1: afterY, x2: posB.x, y2: posB.y },
-          conjuction,
-        }
-      }),
-    [CENTER, PLANET_INSIDE_RADIUS, PLANET_OUTSIDE_RADIUS, ascendant, aspects, fs, planets],
+          return {
+            ...aspect,
+            aspectSymbol: ASTRO_ASPECT_SYMBOL[aspect.aspectType],
+            nameA: planetA.label ?? planetA.name,
+            nameB: planetB.label ?? planetB.name,
+            symbolA: planetA.symbol,
+            symbolB: planetB.symbol,
+            centerX,
+            centerY,
+            angleA,
+            angleB,
+            posA,
+            posB,
+            color: ASPECT_COLOR[aspect.aspectType],
+            name: ASTRO_ASPECT_NAME[aspect.aspectType],
+            rotation,
+            radiusX,
+            radiusY,
+          }
+        }),
+    [CENTER, PLANET_INSIDE_RADIUS, PLANET_OUTSIDE_RADIUS, ascendant, aspects, planets],
   )
 
   return (
     <>
       {/* Аспекты кроме соединений */}
-      {aspectData
+      {lineAspects
         .filter((aspect) => aspect?.aspectType !== ASTRO_ASPECT.CONJUCTION)
         .map((aspect, i) => {
           if (aspect === null) return null
@@ -198,7 +222,7 @@ export const AspectLines = () => {
         })}
 
       {/* Наведение на всю линию, кроме соединений */}
-      {aspectData
+      {lineAspects
         .filter((aspect) => aspect?.aspectType !== ASTRO_ASPECT.CONJUCTION)
         .map((aspect, i) => {
           if (aspect === null) return null
@@ -233,14 +257,11 @@ export const AspectLines = () => {
         })}
 
       {/* Соединения */}
-      {aspectData
+      {conjuctionAspects
         .filter((aspect) => aspect?.aspectType === ASTRO_ASPECT.CONJUCTION)
         .map((aspect, i) => {
           if (aspect === null) return null
-          const {
-            color,
-            conjuction: { centerX, centerY, radiusX, radiusY, rotation },
-          } = aspect
+          const { color, centerX, centerY, radiusX, radiusY, rotation } = aspect
 
           return (
             <Ellipse
@@ -254,7 +275,7 @@ export const AspectLines = () => {
               radiusY={radiusY}
               rotation={rotation}
               stroke={color}
-              strokeWidth={3}
+              strokeWidth={2}
               opacity={LINE_DEFAULT_OPACITY}
               shadowColor={color}
               shadowBlur={0}
@@ -263,13 +284,11 @@ export const AspectLines = () => {
           )
         })}
       {/* Соединения для наведения */}
-      {aspectData
+      {conjuctionAspects
         .filter((aspect) => aspect?.aspectType === ASTRO_ASPECT.CONJUCTION)
         .map((aspect, i) => {
           if (aspect === null) return null
-          const {
-            conjuction: { centerX, centerY, radiusX, radiusY, rotation },
-          } = aspect
+          const { centerX, centerY, radiusX, radiusY, rotation } = aspect
 
           return (
             <Ellipse

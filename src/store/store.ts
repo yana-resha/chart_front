@@ -5,11 +5,13 @@ import { astroCalculateApi } from './api/astro-calculate.api'
 import { astroDictionaryApi } from './api/astro-dictionary.api'
 import { localityApi } from './api/locality.api'
 import { natalDecodingReducer } from './slices/natal-decoding'
+import { sharedReducer } from './slices/shared'
 import { testReducer } from './slices/test'
 
 const rootReducer = combineReducers({
   test: testReducer,
   natalDecoding: natalDecodingReducer,
+  shared: sharedReducer,
   [localityApi.reducerPath]: localityApi.reducer,
   [astroCalculateApi.reducerPath]: astroCalculateApi.reducer,
   [astroDictionaryApi.reducerPath]: astroDictionaryApi.reducer,

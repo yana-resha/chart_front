@@ -3,6 +3,7 @@
   src: url('shared/assets/fonts/OpenSansRegular.ttf');
   font-weight: 400;
   font-style: normal;
+  font-display: swap; /* вот сюда нужно! */
 }
 
 @font-face {
@@ -10,6 +11,7 @@
   src: url('shared/assets/fonts/OpenSansLight.ttf');
   font-weight: 300;
   font-style: normal;
+  font-display: swap; /* вот сюда нужно! */
 }
 
 @font-face {
@@ -17,6 +19,7 @@
   src: url('shared/assets/fonts/OpenSansLightItalic.ttf');
   font-weight: 300;
   font-style: italic;
+  font-display: swap; /* вот сюда нужно! */
 }
 
 @font-face {
@@ -24,6 +27,7 @@
   src: url('shared/assets/fonts/OpenSansItalic.ttf');
   font-weight: 400;
   font-style: italic;
+  font-display: swap; /* вот сюда нужно! */
 }
 
 @font-face {
@@ -31,6 +35,7 @@
   src: url('shared/assets/fonts/OpenSansSemiBold.ttf');
   font-weight: 500;
   font-style: normal;
+  font-display: swap; /* вот сюда нужно! */
 }
 
 @font-face {
@@ -38,6 +43,7 @@
   src: url('shared/assets/fonts/OpenSansSemiBoldItalic.ttf');
   font-weight: 500;
   font-style: italic;
+  font-display: swap; /* вот сюда нужно! */
 }
 
 @font-face {
@@ -45,6 +51,7 @@
   src: url('shared/assets/fonts/OpenSansBold.ttf');
   font-weight: 700;
   font-style: normal;
+  font-display: swap; /* вот сюда нужно! */
 }
 
 @font-face {
@@ -52,6 +59,7 @@
   src: url('shared/assets/fonts/OpenSansExtraBoldItalic.ttf');
   font-weight: 700;
   font-style: italic;
+  font-display: swap; /* вот сюда нужно! */
 }
 
 @font-face {
@@ -59,6 +67,7 @@
   src: url('shared/assets/fonts/OpenSansExtraBold.ttf');
   font-weight: 800;
   font-style: normal;
+  font-display: swap; /* вот сюда нужно! */
 }
 
 @font-face {
@@ -66,6 +75,7 @@
   src: url('shared/assets/fonts/OpenSansExtraBoldItalic.ttf');
   font-weight: 800;
   font-style: italic;
+  font-display: swap; /* вот сюда нужно! */
 }
 
 @font-face {
@@ -73,11 +83,12 @@
   src: url('shared/assets/fonts/HamburgSymbols_v2.ttf');
   font-weight: 500;
   font-style: normal;
+  font-display: swap; /* вот сюда нужно! */
 }
 
 
 * {
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-weight: 400;
   font-style: normal;
   letter-spacing: 0.15px;

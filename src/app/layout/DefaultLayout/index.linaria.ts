@@ -103,7 +103,7 @@ export const SidebarContainer = styled.div`
   top: 12px;
 `
 
-export const PagesContainer = styled.div`
+export const PagesContainer = styled.main`
   height: 100%;
   min-width: 0;
   width: 100%;

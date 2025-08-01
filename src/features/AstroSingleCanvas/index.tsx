@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import Konva from 'konva'
 import { Stage, Layer, Circle, Group } from 'react-konva'
@@ -19,12 +19,14 @@ function Chart() {
     PLANET_INSIDE_RADIUS,
     CENTER,
     PLANET_OUTSIDE_RADIUS,
+    ASPECT_INSIDE_RADIUS,
     GENERAL_FIRST_RENDER_ANIMATION,
   } = useAstroCanvasContext()
 
   const zodiacGroupRef = useRef<Konva.Group | null>(null)
   const houseGroupRef = useRef<Konva.Group | null>(null)
   const aspectGroupRef = useRef<Konva.Group | null>(null)
+  const [isFirstRender, setIsFirstRender] = useState(true)
 
   /* первичная анимация зодиакального круга и куспидов домов */
   useEffect(() => {
@@ -66,6 +68,7 @@ function Chart() {
             easing: Konva.Easings.BackEaseOut,
             onFinish: () => {
               aspectNode.opacity(1)
+              setIsFirstRender(false)
             },
           }).play()
         }
@@ -106,6 +109,14 @@ function Chart() {
               strokeWidth={1}
             />
 
+            <Circle
+              x={CENTER}
+              y={CENTER}
+              radius={ASPECT_INSIDE_RADIUS}
+              stroke="rgba(255, 255, 255, 0.5)"
+              strokeWidth={1}
+            />
+
             {/* HouseLines – вращение против часовой */}
             {houseCusps && (
               <Group
@@ -141,7 +152,7 @@ function Chart() {
               ref={aspectGroupRef}
               x={CENTER}
               y={CENTER}
-              opacity={0}
+              opacity={isFirstRender ? 0 : 1}
             >
               <Group
                 offsetX={CENTER}

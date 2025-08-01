@@ -4,7 +4,7 @@ import { NAVIGATION_DATA } from './data'
 import { Container, navlinkCSS, NavList, PublicAccountBlock, TopBlock } from './index.linaria'
 
 const Sidebar = () => (
-  <Container>
+  <Container aria-label="Навигация по сайту">
     <TopBlock>
       <PublicAccountBlock />
     </TopBlock>

@@ -11,7 +11,6 @@ import {
   InputContainer,
   inputCSS,
   Label,
-  passwordIconCSS,
 } from './index.linaria'
 import CalendarDay from '@/shared/assets/icons/calendar-day.svg?react'
 import Clock from '@/shared/assets/icons/clock.svg?react'

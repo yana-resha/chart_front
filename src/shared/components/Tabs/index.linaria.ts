@@ -5,6 +5,7 @@ export const ScrollWrapper = styled.div<{ $fadeLeft?: boolean; $fadeRight?: bool
   position: relative;
   display: flex;
   align-items: center;
+  min-height: 54px;
 `
 
 export const FadeMask = styled.div<{ $fadeLeft?: boolean; $fadeRight?: boolean }>`

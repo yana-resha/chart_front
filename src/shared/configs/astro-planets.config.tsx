@@ -18,15 +18,18 @@ import Selena from '@/shared/assets/icons/planet-icons/Selena.svg?react'
 import Sun from '@/shared/assets/icons/planet-icons/Sun.svg?react'
 import Uranus from '@/shared/assets/icons/planet-icons/Uranus.svg?react'
 import Venus from '@/shared/assets/icons/planet-icons/Venus.svg?react'
-
-import sunPng from '@/shared/assets/images/planets/sun.png'
-import moonPng from '@/shared/assets/images/planets/moon.png'
-import mercuryPng from '@/shared/assets/images/planets/mercury.png'
-import venusPng from '@/shared/assets/images/planets/venus.png'
-import marsPng from '@/shared/assets/images/planets/mars.png'
 import jupiterPng from '@/shared/assets/images/planets/jupiter.png'
+import lilithPng from '@/shared/assets/images/planets/lilith.png'
+import marsPng from '@/shared/assets/images/planets/mars.png'
+import mercuryPng from '@/shared/assets/images/planets/mercury.png'
+import moonPng from '@/shared/assets/images/planets/moon.png'
 import saturnPng from '@/shared/assets/images/planets/saturn.png'
+import selenaPng from '@/shared/assets/images/planets/selena.png'
+import sunPng from '@/shared/assets/images/planets/sun.png'
 import uranusPng from '@/shared/assets/images/planets/uranus.png'
+import venusPng from '@/shared/assets/images/planets/venus.png'
+import plutoPng from '@/shared/assets/images/planets/pluto.png'
+import neptunePng from '@/shared/assets/images/planets/neptune.png'
 
 export const ASTRO_PLANET_NAME: Record<ASTRO_PLANET, string> = {
   [ASTRO_PLANET.SUN]: 'Солнце',
@@ -133,17 +136,17 @@ export const ASTRO_PLANET_IMAGE: Record<ASTRO_PLANET, string> = {
   [ASTRO_PLANET.JUPITER]: jupiterPng,
   [ASTRO_PLANET.SATURN]: saturnPng,
   [ASTRO_PLANET.URANUS]: uranusPng,
-  [ASTRO_PLANET.NEPTUNE]: moonPng,
-  [ASTRO_PLANET.PLUTO]: moonPng,
+  [ASTRO_PLANET.NEPTUNE]: neptunePng,
+  [ASTRO_PLANET.PLUTO]: plutoPng,
 
   [ASTRO_PLANET.CHIRON]: mercuryPng,
   [ASTRO_PLANET.FORTUNA]: moonPng,
   [ASTRO_PLANET.KETU]: moonPng,
   [ASTRO_PLANET.RAHU]: moonPng,
   [ASTRO_PLANET.PROSERPINA]: moonPng,
-  [ASTRO_PLANET.LILITH]: moonPng,
+  [ASTRO_PLANET.LILITH]: lilithPng,
 
-  [ASTRO_PLANET.SELENA]: moonPng,
+  [ASTRO_PLANET.SELENA]: selenaPng,
 }
 
 export const PLANET_WEIGHTS: Record<ASTRO_PLANET, number> = {

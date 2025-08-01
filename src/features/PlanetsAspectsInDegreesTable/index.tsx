@@ -6,6 +6,7 @@ import { Row } from './ui/Row'
 import { InfoTooltip } from '@/shared/components/InfoTooltip'
 import { SimpleDataTable } from '@/shared/components/SimpleDataTable'
 import { sortAspectsByPlanetAndAspectPriority } from '@/shared/helpers/astro/sortAspects'
+import React from 'react'
 
 export const PlanetsAspectsInDegreesTable = ({ planetsAspects }: Props) => {
   const duplicatedAspects = useMemo(() => {
@@ -44,18 +45,10 @@ export const PlanetsAspectsInDegreesTable = ({ planetsAspects }: Props) => {
             sortedAspects[index + 1] && sortedAspects[index + 1].planetA !== aspect.planetA
 
           return (
-            <>
-              <Row
-                key={aspect.aspectType + aspect.planetA + aspect.planetB}
-                {...aspect}
-              />
-              {isLastInGroup && (
-                <SimpleDataTable.SeparatorRow
-                  colSpan={4}
-                  key={aspect.aspectType + aspect.planetA + aspect.planetB + 'last'}
-                />
-              )}
-            </>
+            <React.Fragment key={aspect.aspectType + aspect.planetA + aspect.planetB + aspect.orb}>
+              <Row {...aspect} />
+              {isLastInGroup && <SimpleDataTable.SeparatorRow colSpan={4} />}
+            </React.Fragment>
           )
         })}
       </SimpleDataTable.TBody>

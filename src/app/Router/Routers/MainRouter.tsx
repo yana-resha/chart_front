@@ -1,12 +1,11 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 import { EmptyPage } from '../index.linaria'
 import DefaultLayout from '@/app/layout/DefaultLayout'
-import { AuthPage } from '@/pages/AuthPage'
 import { CalculatorPage } from '@/pages/CalculatorPage'
+import Components from '@/pages/Components'
 import { NatalDecodingPage } from '@/pages/NatalDecodingPage'
 import { ROUTER_PATHES } from '@/shared/constants/router-paths'
-import Components from '@/pages/Components'
 
 export const MainRouter = () => (
   <Routes>
@@ -18,25 +17,6 @@ export const MainRouter = () => (
     {/* Пока что дефолтную страницу авторизации тут тоже делаю без переадресаций,
     для удобной демонстрации
      */}
-    <Route
-      path={ROUTER_PATHES.DEFAULT_AUTH_PATH}
-      element={<AuthPage />}
-    />
-    {/* */}
-
-    {/* Если url на страницу авторизации, редиректим ее на главную страницу авторизованного пользователя */}
-    {/* так как user уже авторизован, и чтобы сбросить авторизацию он должен явно выйти из профиля */}
-    <Route
-      path="/admin-auth"
-      element={
-        <Navigate
-          to={ROUTER_PATHES.DEFAULT_PATH}
-          replace
-        />
-      }
-    />
-    {/*  */}
-
     {/* Дефолтная разметка авторизованного пользователя, слева Sidebar справа контент */}
     <Route element={<DefaultLayout />}>
       <Route

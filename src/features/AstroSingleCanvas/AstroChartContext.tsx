@@ -20,9 +20,12 @@ interface AstroChartContextType extends TooltipMethods, AstroSingleCanvasProps {
   ZODIAC_INSIDE_RADIUS: number
   PLANET_INSIDE_RADIUS: number
   PLANET_OUTSIDE_RADIUS: number
+  ASPECT_INSIDE_RADIUS: number
   FAKE_ASCENDANT: number
   GENERAL_FIRST_RENDER_ANIMATION: number
 }
+
+/* const ASPECT_RADIUS = PLANET_INSIDE_RADIUS - 20 */
 
 const AstroChartContext = createContext<AstroChartContextType | null>(null)
 
@@ -49,6 +52,7 @@ export const AstroCanvasProvider = ({ children, planets, aspects, houseCusps }: 
   const ZODIAC_INSIDE_RADIUS = HOUSES_INSIDE_RADIUS - ZODIAC_ARC_WEIGHT
   const PLANET_INSIDE_RADIUS = ZODIAC_INSIDE_RADIUS - ZODIAC_INSIDE_RADIUS * 0.4
   const PLANET_OUTSIDE_RADIUS = PLANET_INSIDE_RADIUS + PLANET_INSIDE_RADIUS * 0.07
+  const ASPECT_INSIDE_RADIUS = PLANET_INSIDE_RADIUS * 0.87
 
   const GENERAL_FIRST_RENDER_ANIMATION = 1.5
 
@@ -95,6 +99,7 @@ export const AstroCanvasProvider = ({ children, planets, aspects, houseCusps }: 
       planets,
       FAKE_ASCENDANT,
       GENERAL_FIRST_RENDER_ANIMATION,
+      ASPECT_INSIDE_RADIUS,
     }),
     [CANVAS_SIZE],
   )
