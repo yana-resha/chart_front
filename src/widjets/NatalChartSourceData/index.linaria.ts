@@ -29,15 +29,19 @@ export const Row = styled.div`
   gap: 6px;
 `
 
+export const LabelBlock = styled.div`
+  display: flex;
+  min-width: 160px;
+  gap: 6px;
+`
+
 export const Label = styled.span`
   color: rgba(255, 255, 255, 0.7);
-  min-width: 160px;
 `
 
 export const Icon = styled.span`
-  font-size: 16px;
-  margin-right: 4px;
-  width: 18px;
+  font-size: 14px;
+  line-height: 1.6;
 `
 
 export const Divider = styled.div`

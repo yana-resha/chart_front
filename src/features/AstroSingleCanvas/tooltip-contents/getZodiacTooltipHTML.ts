@@ -22,8 +22,8 @@ export function getZodiacTooltipHTML(zodiacIndex: number): string {
   return `
     <div class="tooltip">
       <div class="title mb-1">
-        ${zodiacName} 
         <span class="astro-symbol" style="color: ${color};">${zodiacSymbol}</span>  
+        ${zodiacName} 
       </div>
       <div class="text">
         <div class="text">Стихия: ${zodiacElement}</div>

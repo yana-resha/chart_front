@@ -4,6 +4,7 @@ export const Tooltip = styled.div`
   --x: 0px;
   --y: 0px;
   position: fixed;
+  z-index: 1;
   display: none;
   left: 0px;
   top: 0px;

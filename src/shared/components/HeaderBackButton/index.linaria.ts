@@ -8,8 +8,6 @@ export const HeaderBackButtonContainer = styled.button`
   display: flex;
   align-items: center;
   gap: 12px;
-  inline-size: 100%;
-  min-block-size: 70px;
   cursor: pointer;
   transition: all 0.2s;
 
@@ -28,10 +26,13 @@ export const HeaderBackButtonContainer = styled.button`
 
 export const HeaderBackIcon = styled(LeftChevron)`
   margin: 5px 0;
+  width: 12px;
+  height: fit-content;
 `
 
 export const HeaderBackText = styled.span`
   color: ${TEXT_COLOR_VARIABLES.PRIMARY_TEXT};
-  font-size: 1.125rem;
+  font-size: 16px;
+  line-height: 100%;
   font-weight: 500;
 `

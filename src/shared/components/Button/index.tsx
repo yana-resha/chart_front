@@ -4,6 +4,7 @@ import classNames from 'classnames'
 
 import { ButtonComponent, ChildrenContainer, Loader } from './index.linaria'
 import { TKind, TSize, TTheme } from './types'
+import LoaderIMG from '@/shared/assets/icons/btn-loader.svg?react'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   kind?: TKind
@@ -32,7 +33,11 @@ export const Button = ({
   >
     <>
       <ChildrenContainer>{children}</ChildrenContainer>
-      {isLoading && <Loader />}
+      {isLoading && (
+        <Loader>
+          <LoaderIMG />
+        </Loader>
+      )}
     </>
   </ButtonComponent>
 )

@@ -46,8 +46,8 @@ export const handlers = [
   /* рассчет натальной карты */
 
   http.post(SERVER_PATH + '/astro/natal-chart', async () => {
-    await delay(3000)
-
+    await delay(1000)
+    
     return HttpResponse.json(mockSergNatalCalculations)
   }),
 

@@ -8,8 +8,8 @@ export const IconContainer = styled.div`
 
 export const ModalIcon = css`
   svg {
-    width: 88px;
-    height: 88px;
+    width: 80px;
+    height: 80px;
   }
 `
 
@@ -26,18 +26,18 @@ export const ModalHeader = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 32px;
+  margin-bottom: 30px;
 `
 
 export const ModalTitle = styled.div`
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
   margin-top: 16px;
   color: white;
 `
 
 export const ModalSubtitle = styled.div`
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.15px;
   color: rgb(155, 156, 158);

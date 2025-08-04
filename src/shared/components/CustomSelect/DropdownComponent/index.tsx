@@ -47,7 +47,6 @@ export const DropdownComponent = <IValue extends IOption>({
 
   const handlerClick = (item: IValue) => {
     setValues(item)
-    console.log('dldlddl')
     closeFunc()
   }
 

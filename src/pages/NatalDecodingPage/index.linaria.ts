@@ -1,15 +1,20 @@
+import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
 
-export const Layout = styled.section`
+interface LayoutProps {
+  isLoading?: boolean
+}
+
+export const Layout = styled.section<LayoutProps>`
   height: 100%;
   width: 100%;
   max-width: 100%;
   position: relative;
 `
 
-export const HeaderContainer = styled.div`
-  padding-left: 16px;
-  padding-right: 16px;
+export const layoutLoading = css`
+  max-height: calc(100dvh - 25px);
+  overflow: hidden;
 `
 
 export const PageContent = styled.div`

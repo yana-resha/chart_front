@@ -1,4 +1,3 @@
-import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
 
 export const Container = styled.div`
@@ -34,8 +33,3 @@ export const CoordsGridRow = styled.div`
 `
 
 export const LoaderContent = styled.div``
-
-export const modalWrapper = css`
-  position: absolute;
-  z-index: 0;
-`

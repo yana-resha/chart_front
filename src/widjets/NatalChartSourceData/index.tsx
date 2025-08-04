@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { Card, Label, Row, Icon, Divider } from './index.linaria'
+import { Card, Label, Row, Icon, Divider, LabelBlock } from './index.linaria'
 import { useAppSelector } from '@/store'
 
 interface ChartSourceDataProps {
@@ -14,11 +14,9 @@ export const NatalChartSourceData: FC<ChartSourceDataProps> = ({ chartId }) => {
 
   const { datetime, timezone, latitude, longitude, place, jd } = sourceData
 
-  const utcDate = new Date(datetime)
-  const timezoneOffsetMs = timezone * 60 * 60 * 1000
-  const localDate = new Date(utcDate.getTime() + timezoneOffsetMs)
+  const toStr = (d: Date | null) => {
+    if (!d || isNaN(d.getTime())) return 'не указано'
 
-  const toStr = (d: Date) => {
     const dd = String(d.getUTCDate()).padStart(2, '0')
     const mm = String(d.getUTCMonth() + 1).padStart(2, '0')
     const yyyy = d.getUTCFullYear()
@@ -28,46 +26,69 @@ export const NatalChartSourceData: FC<ChartSourceDataProps> = ({ chartId }) => {
     return `${dd}.${mm}.${yyyy} ${hh}:${min}`
   }
 
+  const utcDate = datetime ? new Date(datetime) : null
+  const timezoneOffsetMs = typeof timezone === 'number' ? timezone * 60 * 60 * 1000 : 0
+  const localDate = utcDate ? new Date(utcDate.getTime() + timezoneOffsetMs) : null
+
+  const formatTimezone =
+    typeof timezone === 'number' ? `GMT${timezone >= 0 ? `+${timezone}` : timezone}` : 'не указано'
+  const formatCoordinates =
+    typeof latitude === 'number' && typeof longitude === 'number'
+      ? `широта ${latitude}°, долгота ${longitude}°`
+      : 'не указано'
+
   return (
     <Card>
       <Row>
-        <Icon>🕓</Icon>
-        <Label>Местная дата и время:</Label>
-        {toStr(localDate)} (GMT{timezone >= 0 ? `+${timezone}` : timezone})
+        <LabelBlock>
+          <Icon>🕓</Icon>
+          <Label>Местная дата и время:</Label>
+        </LabelBlock>
+        {toStr(localDate)} {formatTimezone !== 'не указано' ? `(${formatTimezone})` : ''}
       </Row>
 
       <Row>
-        <Icon>🕘</Icon>
-        <Label>Дата и время (UTC):</Label>
+        <LabelBlock>
+          <Icon>🕘</Icon>
+          <Label>Дата и время (UTC):</Label>
+        </LabelBlock>
         {toStr(utcDate)}
       </Row>
 
       <Row>
-        <Icon>🌐</Icon>
-        <Label>Часовой пояс:</Label>
-        GMT{timezone >= 0 ? `+${timezone}` : timezone}
+        <LabelBlock>
+          <Icon>🌐</Icon>
+          <Label>Часовой пояс:</Label>
+        </LabelBlock>
+        {formatTimezone}
       </Row>
 
       <Divider />
 
       <Row>
-        <Icon>📍</Icon>
-        <Label>Координаты:</Label>
-        широта {latitude}°, долгота {longitude}°
+        <LabelBlock>
+          <Icon>📍</Icon>
+          <Label>Координаты:</Label>
+        </LabelBlock>
+        {formatCoordinates}
       </Row>
 
       <Row>
-        <Icon>🌍</Icon>
-        <Label>Место:</Label>
-        {place}
+        <LabelBlock>
+          <Icon>🌍</Icon>
+          <Label>Место:</Label>
+        </LabelBlock>
+        {place || 'не указано'}
       </Row>
 
       <Divider />
 
       <Row>
-        <Icon>📅</Icon>
-        <Label>Юлианская дата (JD):</Label>
-        {jd}
+        <LabelBlock>
+          <Icon>📅</Icon>
+          <Label>Юлианская дата (JD):</Label>
+        </LabelBlock>
+        {typeof jd === 'number' ? jd : 'не указано'}
       </Row>
     </Card>
   )

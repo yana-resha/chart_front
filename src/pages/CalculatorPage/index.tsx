@@ -1,12 +1,13 @@
-import { Container, ContentContainer, FormBlock, HeaderContainer } from './index.linaria'
+import { Container, ContentContainer, FormBlock } from './index.linaria'
 import { HeaderBackButton } from '@/shared/components/HeaderBackButton'
+import { PageHeader } from '@/shared/components/PageHeader'
 import ChartForm from '@/widjets/ChartForm'
 
 export const CalculatorPage = () => (
   <Container>
-    <HeaderContainer>
+    <PageHeader>
       <HeaderBackButton />
-    </HeaderContainer>
+    </PageHeader>
     <ContentContainer>
       <FormBlock>
         <ChartForm />

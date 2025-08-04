@@ -3,7 +3,8 @@ export enum ICONS_STROKES {
 }
 
 export enum BTN_BACKGROUND_VARIABLES {
-  PRIMARY = 'rgb(22,238,246)',
+  NORM_PRIMARY = 'rgb(4, 187, 209)',
+  BRIGHT_PRIMARY = 'rgb(22,238,246)',
   PRIMARY_GRADIENT_BUTTON = 'linear-gradient(45deg, rgb(4,187,209) 0%,rgb(22,238,246) 45.313%, rgb(4,253,255) 100%)',
   PRIMARY_GRADIENT_DISABLED_BUTTON = 'linear-gradient(145.32deg, rgba(215, 237, 237, 0.16) -29.161%, rgba(204, 235, 235, 0) 100%)',
 }

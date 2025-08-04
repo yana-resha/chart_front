@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
 
 import { Button } from '../../Button'
-import { CrossIcon, ModalVeil, ModalWindow } from '../index.linaria'
+import { CrossIcon } from '../index.linaria'
 import { Check, ContentContainer, CrossContainer, Loader, LoaderContainer, modalFlex } from './index.linaria'
-import { LiquidGlass } from '@liquidglass/react'
+import { Modal } from '../Modal'
 
 interface ModalProps {
   content: string | ReactNode
@@ -12,11 +12,12 @@ interface ModalProps {
   icon?: 'loader' | 'check'
 }
 export const LoaderModal = ({ content, onClose, showExitCross = true, icon = 'loader' }: ModalProps) => (
-  <ModalVeil onClick={onClose}>
-    <ModalWindow
-      className={modalFlex}
-      onClick={(e: MouseEvent) => e.stopPropagation()}
-    >
+  <Modal
+    onClose={onClose}
+    className={modalFlex}
+    onClick={(e) => e.stopPropagation()}
+  >
+    <>
       {showExitCross && (
         <CrossContainer>
           <Button
@@ -30,6 +31,6 @@ export const LoaderModal = ({ content, onClose, showExitCross = true, icon = 'lo
 
       <LoaderContainer>{icon === 'loader' ? <Loader /> : <Check />}</LoaderContainer>
       <ContentContainer>{content}</ContentContainer>
-    </ModalWindow>
-  </ModalVeil>
+    </>
+  </Modal>
 )

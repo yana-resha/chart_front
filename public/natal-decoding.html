@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- 🔮 Open Graph -->
+    <meta property="og:title" content="Моя натальная карта — расчёт онлайн ✨" />
+    <meta property="og:description" content="Смотри мою натальную карту! А свою хочешь? Рассчитай за 30 секунд ✨" />
+    <meta property="og:image" content="https://myastro.app/images/natal-preview.png" />
+    <meta property="og:url" content="https://myastro.app/natal-decoding" />
+    <meta property="og:type" content="website" />
+
+    <title>Натальная карта — онлайн</title>
+  </head>
+  <body>
+    <script>
+      // Перенаправим пользователя с параметрами, если они есть
+      const redirectUrl = '/natal-decoding' + window.location.search + window.location.hash;
+      window.location.replace(redirectUrl);
+    </script>
+  </body>
+</html>

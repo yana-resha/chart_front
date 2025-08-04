@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import { useFormInside } from './hooks/useFormInside'
-import { TimeGridRow, FormContainer, CoordsGridRow, modalWrapper } from './index.linaria'
+import { TimeGridRow, FormContainer, CoordsGridRow } from './index.linaria'
 import { CALCULATOR_TYPES } from '@/entities/astro-charts/data/calculator'
 import { TIMEZONE_LIST } from '@/entities/astro-charts/data/calculator'
 import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator-request.types'
@@ -13,7 +13,6 @@ import { formIconCSS } from '@/shared/assets/styles/icons.linaria'
 import { Button } from '@/shared/components/Button'
 import { Checkbox } from '@/shared/components/Checkbox'
 import { CustomSelect } from '@/shared/components/CustomSelect'
-import { FadeWrapper } from '@/shared/components/FadeWrapper/FadeWrapper'
 import Input from '@/shared/components/Input'
 import { AlertModal } from '@/shared/components/Modal'
 import { SearchInput } from '@/shared/components/SearchInput'
@@ -211,10 +210,7 @@ export const Form = () => {
       >
         Рассчитать
       </Button>
-      <FadeWrapper
-        show={showErrorToast}
-        className={modalWrapper}
-      >
+      {showErrorToast && (
         <AlertModal
           showExitCross={true}
           title={'Ошибка сервера'}
@@ -225,7 +221,7 @@ export const Form = () => {
           icon={<InfoIcon stroke={SHARED_COLORS_VARIABLES.ERROR_COLOR} />}
           onClose={closeErrorToast}
         />
-      </FadeWrapper>
+      )}
     </FormContainer>
   )
 }

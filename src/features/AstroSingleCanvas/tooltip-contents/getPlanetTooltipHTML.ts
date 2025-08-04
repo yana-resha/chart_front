@@ -24,15 +24,15 @@ export function getPlanetTooltipHTML(planet: PlanetData, houseIndex?: number): s
   return `
     <div class="tooltip">
       <div class="title mb-1">
-        ${planetName} 
         <span class="astro-symbol">${planetSymbol}</span>  
+        ${planetName} ${planet.isRetrograde ? 'R' : ''}
       </div>
       <div>
         <div class="text">
           ${formattedDegree(degree)} 
           <span class="astro-symbol" style="color: ${color}">${signSymbol}</span> 
           ${formattedDegree(minutes)}' ${formattedDegree(seconds)}'' 
-          ${planet.isRetrograde ? '℞' : ''}
+          
           ${house && `— ${house} дом`}
         </div>
       </div>

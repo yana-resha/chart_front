@@ -157,7 +157,7 @@ export const PlanetMarkers = () => {
           const radius = MIN_RADIUS + Math.abs(offsetIndex) * radiusStep
           const pos = polarToCartesian(angle, radius, CENTER)
           const degree = Math.floor(planet.longitude % 30)
-          const retrograde = planet.isRetrograde ? '℞' : ''
+          const retrograde = planet.isRetrograde ? 'R' : ''
           const iconPath = PLANET_SIGNS[planet.name as ASTRO_PLANET]
 
           return (

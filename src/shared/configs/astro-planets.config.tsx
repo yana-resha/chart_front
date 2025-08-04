@@ -18,18 +18,19 @@ import Selena from '@/shared/assets/icons/planet-icons/Selena.svg?react'
 import Sun from '@/shared/assets/icons/planet-icons/Sun.svg?react'
 import Uranus from '@/shared/assets/icons/planet-icons/Uranus.svg?react'
 import Venus from '@/shared/assets/icons/planet-icons/Venus.svg?react'
+import chironPng from '@/shared/assets/images/planets/chiron.png'
 import jupiterPng from '@/shared/assets/images/planets/jupiter.png'
 import lilithPng from '@/shared/assets/images/planets/lilith.png'
 import marsPng from '@/shared/assets/images/planets/mars.png'
 import mercuryPng from '@/shared/assets/images/planets/mercury.png'
 import moonPng from '@/shared/assets/images/planets/moon.png'
+import neptunePng from '@/shared/assets/images/planets/neptune.png'
+import plutoPng from '@/shared/assets/images/planets/pluto.png'
 import saturnPng from '@/shared/assets/images/planets/saturn.png'
 import selenaPng from '@/shared/assets/images/planets/selena.png'
 import sunPng from '@/shared/assets/images/planets/sun.png'
 import uranusPng from '@/shared/assets/images/planets/uranus.png'
 import venusPng from '@/shared/assets/images/planets/venus.png'
-import plutoPng from '@/shared/assets/images/planets/pluto.png'
-import neptunePng from '@/shared/assets/images/planets/neptune.png'
 
 export const ASTRO_PLANET_NAME: Record<ASTRO_PLANET, string> = {
   [ASTRO_PLANET.SUN]: 'Солнце',
@@ -68,11 +69,11 @@ export const PLANET_PRIORITY: ASTRO_PLANET[] = [
   ASTRO_PLANET.KETU, // кету в прошлой жизни
   ASTRO_PLANET.RAHU, // в текущей жизни
 
-  ASTRO_PLANET.PROSERPINA,
   ASTRO_PLANET.CHIRON,
   ASTRO_PLANET.LILITH,
-  ASTRO_PLANET.FORTUNA,
   ASTRO_PLANET.SELENA,
+  ASTRO_PLANET.PROSERPINA,
+  ASTRO_PLANET.FORTUNA,
 ]
 
 export const ASTRO_PLANET_SYMBOL: Record<ASTRO_PLANET, string> = {
@@ -139,7 +140,7 @@ export const ASTRO_PLANET_IMAGE: Record<ASTRO_PLANET, string> = {
   [ASTRO_PLANET.NEPTUNE]: neptunePng,
   [ASTRO_PLANET.PLUTO]: plutoPng,
 
-  [ASTRO_PLANET.CHIRON]: mercuryPng,
+  [ASTRO_PLANET.CHIRON]: chironPng,
   [ASTRO_PLANET.FORTUNA]: moonPng,
   [ASTRO_PLANET.KETU]: moonPng,
   [ASTRO_PLANET.RAHU]: moonPng,

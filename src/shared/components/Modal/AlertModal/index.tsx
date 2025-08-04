@@ -9,13 +9,14 @@ import {
   ButtonsContainer,
   CrossContainer,
 } from './index.linaria'
-import { CrossIcon, ModalVeil, ModalWindow } from '../index.linaria'
+import { CrossIcon } from '../index.linaria'
+import { Modal } from '../Modal'
 import { Button } from '@/shared/components/Button'
 
 interface ModalProps {
   icon?: ReactNode
   title?: string
-  subtitle?: string
+  subtitle?: string | ReactNode
   primaryButtonText?: string
   secondaryButtonText?: string
   onPrimaryClick?: () => void
@@ -35,55 +36,56 @@ export const AlertModal = ({
   onClose,
   showExitCross,
 }: ModalProps) => (
-  <ModalVeil onClick={onClose}>
-    <ModalWindow onClick={(e: MouseEvent) => e.stopPropagation()}>
-      {showExitCross && (
-        <CrossContainer>
-          <Button
-            kind="text"
-            onClick={onClose}
-          >
-            <CrossIcon />
-          </Button>
-        </CrossContainer>
+  <Modal
+    onClose={onClose}
+    onClick={(e) => e.stopPropagation()}
+  >
+    {showExitCross && (
+      <CrossContainer>
+        <Button
+          kind="text"
+          onClick={onClose}
+        >
+          <CrossIcon />
+        </Button>
+      </CrossContainer>
+    )}
+    <ModalHeader>
+      {icon && <IconContainer className={ModalIcon}>{icon}</IconContainer>}
+      {title && <ModalTitle>{title}</ModalTitle>}
+      {subtitle && <ModalSubtitle>{subtitle}</ModalSubtitle>}
+    </ModalHeader>
+    <ButtonsContainer>
+      {secondaryButtonText && (
+        <Button
+          kind="outline"
+          theme="secondary"
+          roundedCorner
+          onClick={() => {
+            if (onSecondaryClick) {
+              onSecondaryClick()
+            }
+            onClose()
+          }}
+        >
+          {secondaryButtonText}
+        </Button>
       )}
-      <ModalHeader>
-        {icon && <IconContainer className={ModalIcon}>{icon}</IconContainer>}
-        {title && <ModalTitle>{title}</ModalTitle>}
-        {subtitle && <ModalSubtitle>{subtitle}</ModalSubtitle>}
-      </ModalHeader>
-      <ButtonsContainer>
-        {secondaryButtonText && (
-          <Button
-            kind="outline"
-            theme="secondary"
-            roundedCorner
-            onClick={() => {
-              if (onSecondaryClick) {
-                onSecondaryClick()
-              }
-              onClose()
-            }}
-          >
-            {secondaryButtonText}
-          </Button>
-        )}
-        {primaryButtonText && (
-          <Button
-            kind="gradient"
-            theme="primary"
-            roundedCorner
-            onClick={() => {
-              if (onPrimaryClick) {
-                onPrimaryClick()
-              }
-              onClose()
-            }}
-          >
-            {primaryButtonText}
-          </Button>
-        )}
-      </ButtonsContainer>
-    </ModalWindow>
-  </ModalVeil>
+      {primaryButtonText && (
+        <Button
+          kind="gradient"
+          theme="primary"
+          roundedCorner
+          onClick={() => {
+            if (onPrimaryClick) {
+              onPrimaryClick()
+            }
+            onClose()
+          }}
+        >
+          {primaryButtonText}
+        </Button>
+      )}
+    </ButtonsContainer>
+  </Modal>
 )

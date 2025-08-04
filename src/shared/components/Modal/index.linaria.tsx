@@ -14,6 +14,17 @@ export const ModalVeil = styled.div`
   align-items: center;
   z-index: 1000;
   flex-direction: column;
+
+  animation: veilFadeIn 0.25s ease-out;
+
+  @keyframes veilFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 
 export const ModalWindow = styled.div`
@@ -30,8 +41,25 @@ export const ModalWindow = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 40px;
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 0 12px rgba(255, 255, 255, 0.06),
+    0 0 24px rgba(255, 255, 255, 0.05),
+    0 0 48px rgba(255, 255, 255, 0.04);
+
+  animation: modalFadeIn 0.25s ease-out;
+
+  @keyframes modalFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
+
 export const CrossIcon = styled(ExitCross)`
   width: 20px;
   height: 20px;

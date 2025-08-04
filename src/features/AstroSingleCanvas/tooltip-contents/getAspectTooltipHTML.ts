@@ -7,19 +7,34 @@ interface Props extends AspectData {
   nameB: string
   symbolA: string
   symbolB: string
+  aspectSymbol: string
+  color: string
 }
 
 export function getAspectTooltipHTML(aspect: Props): string {
-  const { aspectType, angle, orb, isExact, isVeryExact, nameA, nameB, symbolA, symbolB, strength } = aspect
+  const {
+    aspectType,
+    angle,
+    orb,
+    isExact,
+    isVeryExact,
+    nameA,
+    nameB,
+    symbolA,
+    symbolB,
+    strength,
+    aspectSymbol,
+    color,
+  } = aspect
   const name = ASTRO_ASPECT_NAME[aspectType]
 
   return `
     <div class="tooltip">
       <div class="title mb-1">
-        ${name} ${angle}°
+        <span class="astro-symbol" style="color: ${color};">${aspectSymbol}</span> ${name} ${angle}°
       </div>
       <div>
-        <div class="text">${nameA} <span class="astro-symbol">${symbolA}</span> — ${nameB} <span class="astro-symbol">${symbolB}</span></div>
+        <div class="text"><span class="astro-symbol">${symbolA}</span> ${nameA} — <span class="astro-symbol">${symbolB}</span> ${nameB}</div>
         <div class="text mb-1">
           Орбис: ${orb}°
         </div>

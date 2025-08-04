@@ -4,11 +4,10 @@ import { Formik, FormikProps } from 'formik'
 
 import { Form } from './Form'
 import { useFormOutside } from './hooks/useFormOutside'
-import { Container, LoaderContent, modalWrapper } from './index.linaria'
+import { Container, LoaderContent } from './index.linaria'
 import { ChartFormFieldValues } from './types'
 import { formInitialValues } from './utils/config'
 import { chartFormSchema } from './utils/validationSchema'
-import { FadeWrapper } from '@/shared/components/FadeWrapper/FadeWrapper'
 import { LoaderModal } from '@/shared/components/Modal'
 
 const ChartForm = () => {
@@ -25,10 +24,8 @@ const ChartForm = () => {
       >
         <Form />
       </Formik>
-      <FadeWrapper
-        className={modalWrapper}
-        show={isRedirecting || formIsLoading ? true : false}
-      >
+
+      {(isRedirecting || formIsLoading) && (
         <LoaderModal
           showExitCross={false}
           icon={isRedirecting ? 'check' : 'loader'}
@@ -47,7 +44,7 @@ const ChartForm = () => {
           }
           onClose={() => {}}
         />
-      </FadeWrapper>
+      )}
     </Container>
   )
 }

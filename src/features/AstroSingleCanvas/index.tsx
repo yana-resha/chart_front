@@ -10,6 +10,7 @@ import { HouseLines } from './layers/HouseLines'
 import { PlanetMarkers } from './layers/PlanetMarkers'
 import { ZodiacRing } from './layers/ZodiacRing'
 import { AstroSingleCanvasProps } from './types'
+import { ConjuctionArcLines } from './layers/ConjuctionArcLines'
 
 function Chart() {
   const {
@@ -159,6 +160,7 @@ function Chart() {
                 offsetY={CENTER}
               >
                 <AspectLines />
+                <ConjuctionArcLines />
               </Group>
             </Group>
             <DegreeTicks />

@@ -1,6 +1,7 @@
 import { PlanetData } from '../types'
 import { HamburgSymbol } from '@/shared/components/HamburgSymbol'
 import { SimpleDataTable } from '@/shared/components/SimpleDataTable'
+import { Tooltip } from '@/shared/components/Tooltip'
 import { ASTRO_HOUSE_SYMBOL } from '@/shared/configs/astro-houses.config'
 import { ASTRO_PLANET_NAME, ASTRO_PLANET_SYMBOL } from '@/shared/configs/astro-planets.config'
 import {
@@ -16,7 +17,7 @@ interface Props {
 }
 
 export const PlanetItem = ({ planet, houseIndex = undefined }: Props) => {
-  const { name, longitude } = planet
+  const { name, longitude, isRetrograde } = planet
   const fullDegrees = longitude
   const signIndex = getSignIndexByLongitude(fullDegrees)
   const { degree, minutes, seconds } = getDegreeInSign(fullDegrees)
@@ -33,7 +34,16 @@ export const PlanetItem = ({ planet, houseIndex = undefined }: Props) => {
     <SimpleDataTable.RowHovered>
       <SimpleDataTable.Cell>
         <HamburgSymbol>{symbol} &emsp;</HamburgSymbol>
-        {label ?? name}
+        {label ?? name}{' '}
+        {isRetrograde && (
+          <Tooltip
+            style={{ display: 'inline-block', verticalAlign: 'middle' }}
+            placement="top"
+            tooltipContent={'Ретроградная планета'}
+          >
+            <span style={{ color: '#D46A6A', fontWeight: 500 }}>R</span>
+          </Tooltip>
+        )}
         &emsp;
       </SimpleDataTable.Cell>
       <SimpleDataTable.Cell>

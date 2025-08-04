@@ -1,9 +1,9 @@
 import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
 
-import LoaderSVG from '../assets/Louder.svg?react'
+import LoaderSVG from '../assets/louder.svg?react'
 import CheckSVG from '@/shared/assets/icons/check.svg?react'
-import { SHARED_COLORS_VARIABLES } from '@/shared/assets/styles/colors'
+import { BTN_BACKGROUND_VARIABLES, SHARED_COLORS_VARIABLES } from '@/shared/assets/styles/colors'
 
 export const CrossContainer = styled.div`
   position: absolute;
@@ -17,23 +17,15 @@ export const CrossContainer = styled.div`
 export const modalFlex = css`
   display: flex;
   flex-direction: row;
-  width: 540px;
-  align-items: start;
+  align-items: center;
+  width: 500px;
 `
 
 export const LoaderContainer = styled.div``
 export const Loader = styled(LoaderSVG)`
-  width: 48px;
-  height: 48px;
-  animation: 1s rotate infinite linear;
-  @keyframes rotate {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
+  color: ${BTN_BACKGROUND_VARIABLES.NORM_PRIMARY};
+  width: 40px;
+  height: 40px;
 `
 
 export const Check = styled(CheckSVG)`
@@ -45,9 +37,9 @@ export const Check = styled(CheckSVG)`
 export const ContentContainer = styled.div`
   text-align: center;
   font-weight: 500;
-  color: rgba(155, 156, 158, 1);
-  font-size: 16px;
-  line-height: 25px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  line-height: 23px;
   letter-spacing: 0.15px;
   flex-grow: 1;
 `

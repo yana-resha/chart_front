@@ -7,12 +7,6 @@ export const Container = styled.div`
   grid-template-rows: auto 1fr;
   min-width: 0;
 `
-
-export const HeaderContainer = styled.div`
-  padding-left: 16px;
-  padding-right: 16px;
-`
-
 export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;

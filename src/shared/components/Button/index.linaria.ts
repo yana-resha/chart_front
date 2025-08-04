@@ -1,6 +1,5 @@
 import { styled } from '@linaria/react'
 
-import LoaderIMG from '@/shared/assets/icons/btn-loader.svg'
 import { BTN_BACKGROUND_VARIABLES, BUTTON_COLOR_VARIABLES } from '@/shared/assets/styles/colors'
 
 export const ChildrenContainer = styled.div`
@@ -9,17 +8,13 @@ export const ChildrenContainer = styled.div`
 
 export const Loader = styled.div`
   position: absolute;
-  width: 28px;
-  height: 28px;
-  background: url('${LoaderIMG}');
-  animation: 1s rotate infinite linear;
-  @keyframes rotate {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+  width: 18px;
+  height: 18px;
+
+  & svg {
+    width: 100%;
+    height: 100%;
+    color: white;
   }
 `
 
@@ -29,10 +24,10 @@ export const ButtonComponent = styled.button`
   color: ${BUTTON_COLOR_VARIABLES.DARK_COLOR};
   font-weight: 500 !important;
   border-radius: ${(props) => (props.roundedCorner ? '12' : '4')}px;
-  padding: 9px 24px 9px 24px;
+  padding: 14px 24px 14px 24px;
   text-align: center;
   font-size: 16px;
-  line-height: 28px;
+  line-height: 1;
   letter-spacing: 0.15px;
   text-align: center;
   outline: none;
@@ -56,11 +51,11 @@ export const ButtonComponent = styled.button`
     }
 
     &:hover {
-      box-shadow: 0 0 5px 5px rgba(22, 238, 246, 0.2);
+      box-shadow: 0 0 5px 5px rgba(22, 238, 246, 0.15);
     }
 
     &:active {
-      box-shadow: 0 0 5px 5px rgba(22, 238, 246, 0);
+      box-shadow: 0 0 5px 5px rgba(22, 238, 246, 0.08);
     }
 
     &:disabled {
@@ -71,6 +66,10 @@ export const ButtonComponent = styled.button`
         0px 24px 24px -16px rgba(0, 0, 0, 0.12),
         inset 16px 24px 64px -24px rgba(255, 255, 255, 0.08);
     }
+
+    &.isLoading ${Loader} svg {
+      color: ${BUTTON_COLOR_VARIABLES.DARK_COLOR};
+    }
   }
 
   &.outline {
@@ -79,25 +78,38 @@ export const ButtonComponent = styled.button`
     border-width: 1px;
 
     &.primary {
-      border-color: rgb(17, 240, 40);
-      color: rgb(17, 240, 40);
+      border-color: ${BTN_BACKGROUND_VARIABLES.BRIGHT_PRIMARY};
+      color: ${BTN_BACKGROUND_VARIABLES.BRIGHT_PRIMARY};
+      box-shadow: 0 0 5px 5px rgba(22, 238, 246, 0);
+
       &:hover {
-        color: rgb(9, 166, 25);
+        box-shadow: 0 0 5px 5px rgba(22, 238, 246, 0.1);
       }
 
       &:active {
-        color: rgb(17, 240, 40);
+        box-shadow: 0 0 5px 5px rgba(22, 238, 246, 0.05);
+        filter: brightness(1.2);
+      }
+
+      &.isLoading ${Loader} svg {
+        color: ${BTN_BACKGROUND_VARIABLES.BRIGHT_PRIMARY};
       }
     }
 
     &.secondary {
       border-color: rgb(255, 255, 255, 0.8);
       color: rgb(255, 255, 255, 0.8);
+      box-shadow: 0 0 5px 5px rgba(255, 255, 255, 0);
       &:hover {
-        color: rgb(255, 255, 255, 0.6);
+        box-shadow: 0 0 5px 5px rgba(255, 255, 255, 0.07);
       }
 
       &:active {
+        box-shadow: 0 0 5px 5px rgba(255, 255, 255, 0.05);
+        filter: brightness(1.2);
+      }
+
+      &.isLoading ${Loader} svg {
         color: rgb(255, 255, 255, 0.8);
       }
     }
@@ -109,7 +121,12 @@ export const ButtonComponent = styled.button`
 
   &.small {
     font-size: 12px;
-    padding: 0px 12px 0px 12px;
+    padding: 9px 12px 9px 12px;
+  }
+
+  &.large {
+    font-size: 18px;
+    padding: 12px 26px 12px 26px;
   }
 
   &.text {
@@ -117,7 +134,11 @@ export const ButtonComponent = styled.button`
     transition: all 0.2s;
 
     &.primary {
-      background: linear-gradient(45deg, rgb(22, 238, 246), rgb(4, 187, 209));
+      background: linear-gradient(
+        45deg,
+        ${BTN_BACKGROUND_VARIABLES.NORM_PRIMARY},
+        ${BTN_BACKGROUND_VARIABLES.BRIGHT_PRIMARY}
+      );
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -139,9 +160,5 @@ export const ButtonComponent = styled.button`
 
   &.isLoading ${ChildrenContainer} {
     opacity: 0;
-  }
-
-  &:disabled ${Loader} {
-    filter: invert(100%);
   }
 `

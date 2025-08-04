@@ -1,8 +1,9 @@
 import { ReactNode } from 'react'
 
-import { CrossIcon, ModalVeil, ModalWindow } from '../index.linaria'
+import { CrossIcon } from '../index.linaria'
 import { ModalBody, modalFlex, ModalFooter, ModalHeader } from './index.linaria'
 import { Button } from '../../Button'
+import { Modal } from '../Modal'
 
 interface IContentModal {
   onClose: () => void
@@ -19,26 +20,23 @@ export const ContentModal = ({
   hideHeader = false,
   footer,
 }: IContentModal) => (
-  <div>
-    <ModalVeil onClick={onClose}>
-      <ModalWindow
-        className={modalFlex}
-        onClick={(e: React.MouseEvent) => e.stopPropagation()}
-      >
-        {!hideHeader && (
-          <ModalHeader>
-            <div>{headerTitle}</div>
-            <Button
-              kind="text"
-              onClick={onClose}
-            >
-              <CrossIcon />
-            </Button>
-          </ModalHeader>
-        )}
-        <ModalBody>{children}</ModalBody>
-        {footer && <ModalFooter>{footer}</ModalFooter>}
-      </ModalWindow>
-    </ModalVeil>
-  </div>
+  <Modal
+    onClose={onClose}
+    className={modalFlex}
+    onClick={(e) => e.stopPropagation()}
+  >
+    {!hideHeader && (
+      <ModalHeader>
+        <div>{headerTitle}</div>
+        <Button
+          kind="text"
+          onClick={onClose}
+        >
+          <CrossIcon />
+        </Button>
+      </ModalHeader>
+    )}
+    <ModalBody>{children}</ModalBody>
+    {footer && <ModalFooter>{footer}</ModalFooter>}
+  </Modal>
 )
