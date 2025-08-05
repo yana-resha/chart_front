@@ -4,11 +4,11 @@ export const ToolsBarWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 16px;
+  padding: 0.625rem 1rem;
   background: rgba(255, 255, 255, 0.03);
   border: none;
   backdrop-filter: blur(0px);
-  font-size: 14px;
+  font-size: clamp(12px, 0.875rem, 16px);
   color: white;
   background: rgba(255, 255, 255, 0.03);
   border-radius: 14px;
@@ -28,8 +28,8 @@ export const RightSide = styled.div`
 `
 
 export const Icon = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
 
   & svg {
     width: 100%;

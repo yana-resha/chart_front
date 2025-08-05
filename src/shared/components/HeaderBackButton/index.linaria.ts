@@ -7,7 +7,7 @@ export const HeaderBackButtonContainer = styled.button`
   all: unset;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.75rem;
   cursor: pointer;
   transition: all 0.2s;
 
@@ -26,13 +26,13 @@ export const HeaderBackButtonContainer = styled.button`
 
 export const HeaderBackIcon = styled(LeftChevron)`
   margin: 5px 0;
-  width: 12px;
+  width: 0.75rem;
   height: fit-content;
 `
 
 export const HeaderBackText = styled.span`
   color: ${TEXT_COLOR_VARIABLES.PRIMARY_TEXT};
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 100%;
   font-weight: 500;
 `

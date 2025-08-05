@@ -10,8 +10,8 @@ export const DefaultContainer = styled.div`
   min-height: 100%;
   height: 100%;
   max-height: fit-content;
-  padding: 12px;
-  gap: 12px;
+  padding: 0.75rem;
+  gap: 0.75rem;
 
   background-image: url(${background});
   background-size: cover;
@@ -98,9 +98,9 @@ export const SidebarStaticWrapper = styled.div`
 `
 
 export const SidebarContainer = styled.div`
-  height: calc(100vh - 24px);
+  height: calc(100vh - 1.5rem);
   position: sticky;
-  top: 12px;
+  top: 0.75rem;
 `
 
 export const PagesContainer = styled.main`

@@ -17,11 +17,4 @@ export const ContentContainer = styled.div`
 
 export const FormBlock = styled.div`
   width: clamp(350px, 76.19cqw, 500px);
-  /* padding: 16px;
-  border-radius: 16px;
-  background: rgba(26, 29, 33, 0.96);
-  box-shadow:
-    inset 0px 8px 12px 0px rgba(255, 255, 255, 0.04),
-    0px 24px 64px -16px rgba(0, 0, 0, 0.24),
-    inset 16px 24px 64px -24px rgba(255, 255, 255, 0.04); */
 `

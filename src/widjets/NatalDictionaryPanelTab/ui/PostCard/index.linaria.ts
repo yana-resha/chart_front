@@ -3,7 +3,7 @@ import { styled } from '@linaria/react'
 import { addAlpha } from '@/shared/helpers/addAlpha'
 
 export const Layout = styled.div`
-  padding: 30px 10px;
+  padding: 1.875rem 10px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -16,7 +16,7 @@ export const Layout = styled.div`
 export const Card = styled.div<{ glowColor?: string }>`
   position: relative;
   border-radius: 20px;
-  padding: 20px;
+  padding: 1.25rem;
   box-shadow:
     inset 0 0 60px rgba(19, 22, 25, 0.1),
     0 0 10px rgba(0, 0, 0, 0.1);
@@ -33,8 +33,8 @@ export const Card = styled.div<{ glowColor?: string }>`
 
 export const ImageOverlay = styled.img`
   position: absolute;
-  top: -20px;
-  right: -10px;
+  top: -1.25rem;
+  right: -0.625rem;
   width: 160px;
   height: 160px;
   opacity: 0.6;
@@ -59,7 +59,7 @@ export const ImageOverlay = styled.img`
 
 export const ContentWrapper = styled.div`
   display: flex;
-  gap: 24px;
+  gap: 1.5rem;
   flex-direction: column;
   padding-right: 50px;
   padding-left: 20px;
@@ -74,12 +74,17 @@ export const Header = styled.div`
 export const Icon = styled.span`
   line-height: 100%;
   color: rgba(255, 255, 255, 1);
-  font-size: 28px;
+  font-size: 1.75rem;
   filter: drop-shadow(0 0 6px #55cdfc88);
+
+  svg {
+    height: 1.75rem;
+    width: auto;
+  }
 `
 
 export const Title = styled.h3`
-  font-size: 20px;
+  font-size: clamp(16px, 1.25rem, 22px);
   font-weight: 500;
   color: rgba(255, 255, 255, 1);
   line-height: 1.2;
@@ -101,14 +106,14 @@ export const TitleLine = styled.div`
 
 /* если нужна какая то подпись у заголовка */
 export const TitleSubTag = styled.span`
-  font-size: 14px;
+  font-size: clamp(12px, 0.85rem, 16px);
   font-weight: 400;
   color: rgba(255, 255, 255, 0.65);
   font-style: italic;
 `
 
 export const Subtitle = styled.span`
-  font-size: 14px;
+  font-size: clamp(12px, 0.85rem, 16px);
   font-weight: 400;
   color: rgba(255, 255, 255, 0.6);
   margin-top: 2px;
@@ -116,7 +121,7 @@ export const Subtitle = styled.span`
 `
 
 export const InterpritationBlock = styled.div`
-  font-size: 16px;
+  font-size: clamp(14px, 1rem, 18px);
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.85);
   display: flex;

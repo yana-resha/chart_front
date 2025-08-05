@@ -5,16 +5,16 @@ import { SHARED_COLORS_VARIABLES } from '@/shared/assets/styles/colors'
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 100%;
-  row-gap: 10px;
+  row-gap: 0.625rem;
 `
 export const Label = styled.label`
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 0.875rem;
+  line-height: 1.25;
   color: rgba(155, 156, 158);
 `
 export const ErrorContainer = styled.div`
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 0.875rem;
+  line-height: 1.25;
   letter-spacing: 0.15px;
   color: ${SHARED_COLORS_VARIABLES.ERROR_COLOR};
 `
@@ -27,10 +27,10 @@ export const ValuesContainer = styled.div`
   color: white;
   position: relative;
   min-height: 48px;
-  padding: 12px 17px 12px 19px;
+  padding: 0.75rem 1.06rem 0.75rem 1.18rem;
   display: flex;
   flex-direction: row;
-  column-gap: 12px;
+  column-gap: 0.75rem;
   align-items: center;
   transition: all 0.2s;
 
@@ -66,8 +66,8 @@ export const Values = styled.div`
   margin: 0;
   flex-grow: 1;
   height: 100%;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 1rem;
+  line-height: 1.5rem;
   font-weight: 500;
   color: rgb(205, 206, 207);
 

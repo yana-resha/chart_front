@@ -8,8 +8,8 @@ export const ChildrenContainer = styled.div`
 
 export const Loader = styled.div`
   position: absolute;
-  width: 18px;
-  height: 18px;
+  width: 1.125rem;
+  height: 1.125rem;
 
   & svg {
     width: 100%;
@@ -24,9 +24,9 @@ export const ButtonComponent = styled.button`
   color: ${BUTTON_COLOR_VARIABLES.DARK_COLOR};
   font-weight: 500 !important;
   border-radius: ${(props) => (props.roundedCorner ? '12' : '4')}px;
-  padding: 14px 24px 14px 24px;
+  padding: 0.875rem 1.5rem 0.875rem 1.5rem;
   text-align: center;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1;
   letter-spacing: 0.15px;
   text-align: center;
@@ -120,13 +120,13 @@ export const ButtonComponent = styled.button`
   }
 
   &.small {
-    font-size: 12px;
-    padding: 9px 12px 9px 12px;
+    font-size: clamp(12px, 0.75rem, 16px);
+    padding: 0.564rem 0.75rem 0.564rem 0.75rem;
   }
 
   &.large {
-    font-size: 18px;
-    padding: 12px 26px 12px 26px;
+    font-size: 1.125rem;
+    padding: 0.75rem 1.625rem 0.75rem 1.625rem;
   }
 
   &.text {

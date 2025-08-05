@@ -16,7 +16,7 @@ export const TabContainer = styled.div<TabContainerProps>`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 10px 20px;
+  padding: 0.625rem 1.25rem;
   border-radius: 8px;
   transition:
     color 0.3s,
@@ -27,11 +27,11 @@ export const TabContainer = styled.div<TabContainerProps>`
   &::before {
     content: '';
     position: absolute;
-    bottom: -10px;
+    bottom: -0.625rem;
     left: 50%;
     transform: translateX(-50%) scaleX(${({ $active }) => ($active ? 1 : 0.6)});
     width: 60%;
-    height: 6px;
+    height: 0.375rem;
     pointer-events: none;
     background: radial-gradient(circle, rgba(22, 238, 246, 0.4) 0%, transparent 80%);
     opacity: ${({ $active }) => ($active ? 1 : 0)};

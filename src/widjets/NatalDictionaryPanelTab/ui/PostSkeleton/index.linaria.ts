@@ -2,7 +2,7 @@ import { styled } from '@linaria/react'
 
 export const Card = styled.div`
   border-radius: 20px;
-  padding: 20px;
+  padding: 1.25rem;
   box-shadow:
     inset 0 0 60px rgba(19, 22, 25, 0.1),
     0 0 10px rgba(0, 0, 0, 0.1);
@@ -11,13 +11,13 @@ export const Card = styled.div`
   backdrop-filter: blur(1px) contrast(1.1) brightness(1.1);
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 1.5rem;
 `
 export const Title = styled.div`
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: bold;
 `
 export const Paragraph = styled.div`
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.75;
 `

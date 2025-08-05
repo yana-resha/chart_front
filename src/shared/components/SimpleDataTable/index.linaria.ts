@@ -9,7 +9,7 @@ export const Table = styled.table`
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  font-size: 14px;
+  font-size: clamp(12px, 0.85rem, 16px);
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.8);
   border-radius: 8px;
@@ -27,7 +27,7 @@ export const HeaderCell = styled.th`
   top: 0;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
   text-align: left;
   color: rgba(255, 255, 255, 1);
@@ -52,7 +52,7 @@ export const Cell = styled.td`
   }
 
   & > div {
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
 
     &:last-child {
       margin-bottom: 0;
@@ -72,8 +72,8 @@ export const Tbody = styled.tbody`
 
 export const Caption = styled.caption`
   caption-side: top;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
   color: rgb(22, 238, 246);
-  padding: 8px 0;
+  padding: 0.5rem 0;
 `

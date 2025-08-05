@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: clamp(12px, 0.85rem, 16px);
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.8);
   height: 100%;
@@ -34,7 +34,7 @@ export const Th = styled.th`
 `
 
 export const Td = styled.td<{ highlight?: boolean }>`
-  padding: 6px 10px;
+  padding: 0.375rem 0.625rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
 

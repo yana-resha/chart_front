@@ -36,11 +36,11 @@ export const Dropdown = styled.div`
 export const OptionsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem;
 `
 export const CheckIcon = styled(CheckSvg)`
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   opacity: 0;
   &.show {
     opacity: 0.5;
@@ -48,11 +48,11 @@ export const CheckIcon = styled(CheckSvg)`
   transition: opacity 0.2s;
 `
 export const OptionItem = styled.div`
-  padding: 12px 20px;
+  padding: 0.75rem 1.25rem;
   width: 100%;
   font-weight: 300;
-  line-height: 24px;
-  font-size: 16px;
+  line-height: 1.5rem;
+  font-size: 1rem;
   background-color: transparent;
   color: rgba(255, 255, 255, 1);
   position: relative;
@@ -90,13 +90,13 @@ export const ItemContent = styled.div`
 `
 export const SkeletonItem = styled.div`
   background: linear-gradient(145.32deg, rgba(215, 237, 237, 0.16) -28.965%, rgba(204, 235, 235, 0) 100%);
-  margin: 0 20px;
+  margin: 0 1.5rempx;
   overflow: hidden;
-  height: 48px;
+  height: 3rem;
   display: flex;
   align-items: stretch;
   &:not(:last-child) {
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
   }
 `
 export const DropdownAlertBlock = styled.div`
@@ -108,17 +108,17 @@ export const DropdownAlertBlock = styled.div`
   color: rgba(255, 255, 255, 1);
 `
 export const AlertTitle = styled.div`
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 1rem;
+  line-height: 1.5rem;
   font-weight: 500;
 `
 export const AlertDescription = styled.div`
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   font-weight: 500;
 `
 export const UpsetIconSVG = styled(UpsetIcon)`
-  width: 64px;
-  height: 64px;
+  width: 4rem;
+  height: 4rem;
   margin-bottom: 8px;
 `

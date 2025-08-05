@@ -13,18 +13,18 @@ export const Layout = styled.section<LayoutProps>`
 `
 
 export const layoutLoading = css`
-  max-height: calc(100dvh - 25px);
+  max-height: calc(100dvh - 1.56rem);
   overflow: hidden;
 `
 
 export const PageContent = styled.div`
-  padding-top: 30px;
+  padding-top: 1.875;
   padding-bottom: 10px;
 `
 
 export const WidjetsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 1.56rem;
   max-width: 100%;
 `

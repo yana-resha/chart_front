@@ -7,7 +7,7 @@ export const Container = styled.div`
 `
 
 export const Block = styled.div`
-  padding: 16px;
+  padding: 1rem;
   border-radius: 16px;
   display: flex;
   flex-direction: row;

@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 25px;
-  padding-top: 30px;
+  padding-top: 1.875rem;
   padding-bottom: 10px;
   max-width: 100%;
 `
@@ -12,11 +12,11 @@ export const Wrapper = styled.div`
 export const Section = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem;
 `
 
 export const TitleRow = styled.div`
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 `
 
 export const Block = styled.div`

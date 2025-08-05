@@ -28,8 +28,8 @@ export const Dropdown = styled.div`
   background-color: rgba(19, 22, 25, 1);
   border-radius: 5px;
   border: 1px solid rgba(54, 58, 61);
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   z-index: 1;
   width: 100%;
   overflow-y: auto;
@@ -38,24 +38,24 @@ export const Dropdown = styled.div`
 export const DropdownList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem;
 `
 
 export const ItemIconContainer = styled.div`
   opacity: 0.3;
-  height: 24px;
+  height: 1.5rem;
   transition: opacity 0.2s;
   & svg {
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 `
 export const DropdownItem = styled.div`
-  padding: 12px 20px;
+  padding: 0.75px 1.25rem;
   width: 100%;
   font-weight: 300;
-  line-height: 24px;
-  font-size: 16px;
+  line-height: 1.2;
+  font-size: 1rem;
   background-color: transparent;
   color: rgba(255, 255, 255, 1);
   outline: 1px solid rgba(255, 255, 255, 0);
@@ -99,39 +99,39 @@ export const ItemContent = styled.div`
 export const SkeletonItem = styled.div`
   background: linear-gradient(145.32deg, rgba(215, 237, 237, 0.16) -28.965%, rgba(204, 235, 235, 0) 100%);
   border-radius: 0px;
-  margin: 0 20px;
+  margin: 0 1.25rem;
   overflow: hidden;
-  height: 48px;
+  height: 3rem;
   display: flex;
   align-items: stretch;
   &:not(:last-child) {
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
   }
 `
 export const DropdownAlertBlock = styled.div`
   min-height: 140px;
   display: flex;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 1rem;
+  padding-right: 1rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: rgba(255, 255, 255, 1);
 `
 export const AlertTitle = styled.div`
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 1rem;
+  line-height: 1.2;
   font-weight: 500;
   text-align: center;
 `
 export const AlertDescription = styled.div`
-  font-size: 14px;
-  line-height: 20px;
+  font-size: clamp(12px, 0.875rem, 16px);
+  line-height: 1.2;
   font-weight: 300;
   text-align: center;
 `
 export const UpsetIconSVG = styled(UpsetIcon)`
-  width: 64px;
-  height: 64px;
-  margin-bottom: 8px;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 0.5rem;
 `

@@ -7,5 +7,5 @@ export const EmptyPage = styled.div`
   justify-content: center;
   color: rgba(255, 255, 255);
   font-weight: 500;
-  font-size: 20px;
+  font-size: 1.25rem;
 `

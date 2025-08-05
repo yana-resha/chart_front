@@ -10,14 +10,14 @@ export const Container = styled.div`
   justify-content: center;
 
   &.large {
-    font-size: 18px;
-    width: 48px;
-    height: 48px;
+    font-size: 1.25rem;
+    width: 3rem;
+    height: 3rem;
   }
 
   &.medium {
-    font-size: 16px;
-    width: 46px;
-    height: 46px;
+    font-size: 1rem;
+    width: 2.875rem;
+    height: 2.875rem;
   }
 `

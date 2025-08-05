@@ -1,10 +1,10 @@
 import { styled } from '@linaria/react'
 
 export const Card = styled.div`
-  padding: 16px;
-  margin-top: 20px;
+  padding: 1rem;
+  margin-top: 1.25rem;
   color: rgba(255, 255, 255, 1);
-  font-size: 14px;
+  font-size: clamp(12px, 0.875rem, 16px);
   line-height: 1.6;
   width: 100%;
   max-width: 100%;
@@ -24,15 +24,15 @@ export const Card = styled.div`
 `
 
 export const Row = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
   display: flex;
-  gap: 6px;
+  gap: 0.5rem;
 `
 
 export const LabelBlock = styled.div`
   display: flex;
   min-width: 160px;
-  gap: 6px;
+  gap: 0.5rem;
 `
 
 export const Label = styled.span`
@@ -40,13 +40,13 @@ export const Label = styled.span`
 `
 
 export const Icon = styled.span`
-  font-size: 14px;
+  font-size: clamp(12px, 0.875rem, 16px);
   line-height: 1.6;
 `
 
 export const Divider = styled.div`
   height: 1px;
   background: rgba(255, 255, 255, 0.05);
-  margin: 12px 0;
+  margin: 0.725rem 0;
   width: 100%;
 `

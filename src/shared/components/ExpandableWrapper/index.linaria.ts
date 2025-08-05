@@ -12,7 +12,7 @@ export const ToggleButton = styled.button`
   color: black;
   font-weight: 400;
   border: none;
-  padding: 12px;
+  padding: 0.75rem;
   margin-top: -2px;
   cursor: pointer;
   font-weight: 400;

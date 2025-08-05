@@ -40,14 +40,14 @@ export const Card = styled.div<{ color: string }>`
 
 export const CardTitle = styled.h3`
   margin: 0 0 0.5rem 0;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 1);
 `
 
 export const CardText = styled.p`
   margin: 0.2rem 0;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.8);
 `
@@ -62,7 +62,7 @@ export const Summary = styled.div`
 
 export const SummaryLine = styled.p`
   margin: 0.3rem 0;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.8);
 `

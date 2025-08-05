@@ -100,7 +100,7 @@ export const PlanetInHouse = ({ chartId, items }: IPlanetsInHouseProps) => {
                 <Header>
                   <div>
                     <PlanetInHouseTitleLine>
-                      <HighlightPlanet style={{ fontSize: '25px' }}>
+                      <HighlightPlanet>
                         <PlanetSVG />
                       </HighlightPlanet>{' '}
                       <Title>

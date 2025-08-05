@@ -8,22 +8,22 @@ export const Container = styled.aside`
   height: 100%;
   background-color: ${BACKGROUND_COLORS_VARIABLES.SIDEBAR_BACK};
   border-radius: 20px;
-  padding: 16px 8px 24px 8px;
+  padding: 1rem 0.5rem 1.5rem 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 24px;
+  gap: 1.5rem;
 `
 
 export const TopBlock = styled.div`
-  padding: 8px;
+  padding: 0.8rem;
 `
 
 export const PublicAccountBlock = styled.div`
-  padding: 16px;
+  padding: 1rem;
   background: rgb(19, 22, 25);
   border-radius: 16px;
-  height: 78px;
+  height: 4.875rem;
 `
 
 export const NavList = styled.nav`
@@ -33,7 +33,7 @@ export const NavList = styled.nav`
 `
 
 export const navlinkCSS = css`
-  padding: 14px 16px 14px 16px;
+  padding: 0.85rem 1rem 0.85rem 1rem;
   background: transparent;
   position: relative;
 
@@ -41,14 +41,14 @@ export const navlinkCSS = css`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  gap: 16px;
+  gap: 1rem;
   text-decoration: none;
   width: 100%;
 
   color: rgb(232, 233, 233);
-  font-size: 14px;
+  font-size: clamp(12px, 0.85rem, 16px);
   font-weight: 400;
-  line-height: 20px;
+  line-height: 1.3;
   letter-spacing: 0.15px;
   transition: all 0.2s;
 

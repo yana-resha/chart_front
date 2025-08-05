@@ -10,13 +10,13 @@ export const Container = styled.div`
   row-gap: 10px;
 `
 export const Label = styled.label`
-  font-size: 14px;
-  line-height: 20px;
+  font-size: clamp(12px, 0.875rem, 16px);
+  line-height: 1.2rem;
   color: rgba(155, 156, 158);
 `
 export const ErrorContainer = styled.div`
-  font-size: 14px;
-  line-height: 20px;
+  font-size: clamp(12px, 0.875rem, 16px);
+  line-height: 1.2rem;
   letter-spacing: 0.15px;
   color: ${SHARED_COLORS_VARIABLES.ERROR_COLOR};
 `
@@ -28,10 +28,10 @@ export const InputContainer = styled.div`
   color: white;
   position: relative;
   min-height: 48px;
-  padding: 12px 17px 12px 19px;
+  padding: 0.75rem 1.06rem 0.75rem 1.18rem;
   display: flex;
   flex-direction: row;
-  column-gap: 12px;
+  column-gap: 0.75rem;
   align-items: center;
   transition: all 0.2s;
 
@@ -60,8 +60,8 @@ export const InputContainer = styled.div`
 `
 
 export const ClearIcon = styled(ClearSVG)`
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
   cursor: pointer;
   transition: opacity 0.2s;
 
@@ -71,8 +71,8 @@ export const ClearIcon = styled(ClearSVG)`
 `
 
 export const InfoIcon = styled(InfoSVG)`
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
   cursor: pointer;
   transition: opacity 0.2s;
 
@@ -90,8 +90,8 @@ export const Input = styled.input`
   margin: 0;
   flex-grow: 1;
   height: 100%;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 1rem;
+  line-height: 1.3;
   font-weight: 500;
   color: rgb(205, 206, 207);
   outline: none;

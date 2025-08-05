@@ -9,17 +9,17 @@ export const Container = styled.div`
 `
 
 export const Label = styled.label`
-  font-size: 14px;
-  line-height: 20px;
+  font-size: clamp(12px, 0.875rem, 16px);
+  line-height: 1.2;
   color: rgba(155, 156, 158);
   margin-bottom: 10px;
 `
 export const ErrorContainer = styled.div`
-  font-size: 14px;
-  line-height: 20px;
+  font-size: clamp(12px, 0.875rem, 16px);
+  line-height: 1.2;
   color: ${SHARED_COLORS_VARIABLES.ERROR_COLOR};
   overflow: hidden;
-  height: 20px;
+  height: 1.25rem;
   max-height: 0;
   margin-top: 0;
   transition:
@@ -27,7 +27,7 @@ export const ErrorContainer = styled.div`
     margin-top 0.1s;
 
   &:not(:empty) {
-    margin-top: 16px;
+    margin-top: 1rem;
     opacity: 1;
     max-height: 100px;
   }
@@ -40,10 +40,10 @@ export const InputContainer = styled.div`
   color: white;
   position: relative;
   min-height: 48px;
-  padding: 12px 17px 12px 19px;
+  padding: 0.75rem 1.06rem 0.75rem 1.18rem;
   display: flex;
   flex-direction: row;
-  column-gap: 12px;
+  column-gap: 0.75rem;
   align-items: center;
   transition: all 0.2s;
 
@@ -77,8 +77,8 @@ export const IconContainer = styled.div`
 export const defaultIconConstainerCSS = css`
   cursor: pointer;
   & svg {
-    width: 24px;
-    height: 24px;
+    width: 1rem;
+    height: 1rem;
   }
 `
 export const inputCSS = css`
@@ -86,8 +86,8 @@ export const inputCSS = css`
   margin: 0;
   flex-grow: 1;
   height: 100%;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 1rem;
+  line-height: 1.4;
   font-weight: 500;
   color: rgb(205, 206, 207);
   letter-spacing: 0.15px;

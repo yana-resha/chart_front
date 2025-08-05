@@ -21,7 +21,7 @@ export const BadgeComponent = styled.div`
 
   &[data-size='l'] {
     padding: 4px 12px;
-    font-size: 14px;
-    line-height: 24px;
+    font-size: clamp(10px, 0.875rem, 16px);
+    line-height: 1.8;
   }
 `

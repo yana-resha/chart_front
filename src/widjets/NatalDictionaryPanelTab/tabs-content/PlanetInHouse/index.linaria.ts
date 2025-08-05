@@ -7,5 +7,10 @@ export const PlanetInHouseTitleLine = styled(TitleLine)`
 `
 
 export const HighlightPlanet = styled(Highlight)`
-  font-size: 25px;
+  font-size: 1.562rem;
+
+  svg {
+    height: 1.562rem;
+    width: auto;
+  }
 `

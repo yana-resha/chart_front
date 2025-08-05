@@ -11,11 +11,11 @@ export const Tooltip = styled.div`
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   background: rgb(0, 0, 0);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
-  line-height: 18px;
+  line-height: 128%;
   letter-spacing: 0.15px;
   color: white;
-  padding: 7px 12px;
+  padding: 0.48rem 0.75rem;
   transform: translate(var(--x), var(--y));
 `

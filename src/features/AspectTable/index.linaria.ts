@@ -33,13 +33,13 @@ export const cellContentStyle = css`
 
 export const CellContent = styled.div<{ $color?: string }>`
   color: ${(props) => props.$color ?? 'white'};
-  font-size: 14px;
+  font-size: 0.875rem;
   font-family: 'Hamburg';
   cursor: pointer;
 `
 export const DiagonalCellContent = styled.div`
   font-weight: 400;
-  font-size: 20px;
+  font-size: 0.875rem;
   width: 100%;
   height: 100%;
   font-family: 'Hamburg';
@@ -72,19 +72,19 @@ export const diagonalCellContentStyle = css`
 
 export const AspectTooltipContent = styled.div``
 export const TooltipTitle = styled.div`
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
   &:not(:last-child) {
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
   }
 `
 export const TooltipList = styled.div`
   &:not(:last-child) {
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
   }
 `
 export const TooltipItem = styled.div`
-  font-size: 12px;
+  font-size: 0.75rem;
 `
 export const hamburgFamilyStyle = css`
   font-family: 'Hamburg';

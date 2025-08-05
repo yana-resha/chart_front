@@ -36,9 +36,9 @@ export const Emoji = styled.span`
   }
 `
 export const Title = styled.div`
-  font-size: 17px;
+  font-size: 1.06rem;
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 0.375rem;
   color: rgba(255, 255, 255, 1);
   text-align: center;
   text-shadow:
@@ -47,9 +47,9 @@ export const Title = styled.div`
     0 0 20px rgba(22, 238, 246, 0.15);
 `
 export const Description = styled.div`
-  font-size: 14px;
+  font-size: clamp(12px, 0.875rem, 16px);
   font-style: italic;
-  margin-bottom: 16px;
+  margin-bottom: clamp(10px, 1rem, 20px);
   color: rgba(255, 255, 255, 0.8);
   text-shadow:
     0 0 6px rgba(22, 238, 246, 0.1),
@@ -71,14 +71,14 @@ export const LinkBlock = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 18px;
 
-  padding: 8px 12px;
+  padding: 0.5rem 0.75rem;
   cursor: pointer;
 
   transition: all 0.2s ease;
   backdrop-filter: blur(4px);
   box-shadow: 0 0 4px rgba(22, 238, 246, 0.05);
 
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 
   &:hover {
     background: rgba(255, 255, 255, 0.08);
@@ -87,7 +87,7 @@ export const LinkBlock = styled.div`
 `
 export const LinkText = styled.span`
   flex: 1;
-  font-size: 13px;
+  font-size: clamp(12px, 0.81rem, 16px);
   color: white;
   white-space: nowrap;
   overflow: hidden;
@@ -96,8 +96,8 @@ export const LinkText = styled.span`
 
 export const IconLink = styled.a`
   display: block;
-  width: 30px;
-  height: 30px;
+  width: 1.875rem;
+  height: 1.875rem;
 
   border-radius: 6px;
   overflow: hidden;
@@ -135,7 +135,7 @@ export const ShareFooter = styled.div`
 `
 
 export const ShareLabel = styled.div`
-  font-size: 13px;
+  font-size: clamp(12px, 0.81rem, 16px);
   margin-bottom: 8px;
   color: rgba(255, 255, 255, 0.8);
 `

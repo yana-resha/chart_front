@@ -41,7 +41,7 @@ export const ModalWindow = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 30px;
+  padding: 1.875rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow:
     0 0 12px rgba(255, 255, 255, 0.06),
@@ -61,6 +61,6 @@ export const ModalWindow = styled.div`
 `
 
 export const CrossIcon = styled(ExitCross)`
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 125rem;
 `

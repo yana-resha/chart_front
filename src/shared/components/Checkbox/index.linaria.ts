@@ -6,8 +6,8 @@ import { BTN_BACKGROUND_VARIABLES } from '@/shared/assets/styles/colors'
 export const Input = styled.input`
   padding: 0;
   margin: 0;
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
   position: absolute;
   opacity: 0;
   z-index: -1;
@@ -17,13 +17,13 @@ export const CheckboxContainer = styled.label`
   display: inline-flex;
   align-items: center;
   user-select: none;
-  column-gap: 16px;
+  column-gap: 1rem;
   cursor: pointer;
   &::before {
     content: '';
     display: inline-block;
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
     outline: 1px solid rgb(54, 58, 61);
     border-radius: 4px;
     box-shadow:
