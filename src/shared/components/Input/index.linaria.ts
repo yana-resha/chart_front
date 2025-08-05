@@ -51,7 +51,7 @@ export const InputContainer = styled.div`
     box-shadow: 0px 0px 0px 4px rgba(54, 58, 61, 0.24);
   }
 
-  &:disabled {
+  &.disabled {
     opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;

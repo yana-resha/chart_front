@@ -10,7 +10,7 @@ import { formInitialValues } from './utils/config'
 import { chartFormSchema } from './utils/validationSchema'
 import { LoaderModal } from '@/shared/components/Modal'
 
-const ChartForm = () => {
+const NatalCalculatorForm = () => {
   const formRef = useRef<FormikProps<ChartFormFieldValues>>(null)
   const { formSubmit, formIsLoading, isRedirecting } = useFormOutside()
 
@@ -49,4 +49,4 @@ const ChartForm = () => {
   )
 }
 
-export default ChartForm
+export default NatalCalculatorForm

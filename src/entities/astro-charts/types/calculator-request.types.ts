@@ -1,5 +1,4 @@
 export enum CalculatorRequestKeys {
-  type = 'chart_type',
   latitude = 'latitude',
   longitude = 'longitude',
   date = 'date',

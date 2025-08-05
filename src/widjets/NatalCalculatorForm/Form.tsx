@@ -2,12 +2,10 @@ import { useEffect } from 'react'
 
 import { useFormInside } from './hooks/useFormInside'
 import { TimeGridRow, FormContainer, CoordsGridRow } from './index.linaria'
-import { CALCULATOR_TYPES } from '@/entities/astro-charts/data/calculator'
 import { TIMEZONE_LIST } from '@/entities/astro-charts/data/calculator'
 import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator-request.types'
 import InfoIcon from '@/shared/assets/icons/info-circle.svg?react'
 import Pin3 from '@/shared/assets/icons/pin-3.svg?react'
-import StarSVG from '@/shared/assets/icons/Star.svg?react'
 import { SHARED_COLORS_VARIABLES } from '@/shared/assets/styles/colors'
 import { formIconCSS } from '@/shared/assets/styles/icons.linaria'
 import { Button } from '@/shared/components/Button'
@@ -32,7 +30,6 @@ export const Form = () => {
     closeErrorToast,
   } = useFormInside()
 
-  const { value: typeValue, handleChange: typeHandleChange } = useFormikWrapper(CalculatorRequestKeys.type)
   const {
     value: dateValue,
     handleChange: dateHadleChange,
@@ -99,76 +96,68 @@ export const Form = () => {
 
   return (
     <FormContainer>
-      <CustomSelect
-        label="Тип карты"
-        values={CALCULATOR_TYPES.filter((el) => el.value === typeValue)}
-        leftIcon={<StarSVG className={formIconCSS} />}
-        setValues={(val) => typeHandleChange(val.value)}
-        optionsList={CALCULATOR_TYPES}
+      <SearchInput
+        tooltip={
+          localityValue ? (
+            <div>
+              <div>{localityValue?.content}</div>
+              <div>Широта: {localityValue.latitude}</div>
+              <div>Долгота: {localityValue.longitude}</div>
+              <div>Часовой пояс: {localityValue.time_zone}</div>
+            </div>
+          ) : undefined
+        }
+        value={searchLocalityValue}
+        onChange={(e) => searchLocalityHadleChange(e.target.value)}
+        isClearOnFocus={localityValue ? true : false}
+        leftIcon={<Pin3 className={formIconCSS} />}
+        label={'Населенный пункт'}
+        placeholder="Укажите населенный пункт"
+        dropdownList={(localitiesList ?? []).map((obj) => ({
+          ...obj,
+          content: [
+            obj.asciiname_ru,
+            obj.admin2_data?.asciiname_ru,
+            obj.admin1_data?.asciiname_ru,
+            obj.country_data?.name_ru,
+          ]
+            .filter((el) => el)
+            .join(', '),
+          id: obj.geonameid,
+        }))}
+        onClickItem={localitiesClickHandler}
+        clearValueFunc={resetLocality}
+        listIsLoading={isLocalitiesLoading}
+        invalid={isLocalityInvalid}
+        invalidText={isLocalityInvalid ? localityInvalidText : ''}
+        isError={isLocalitiesError}
+        error={{
+          title: 'Ошибка сервера',
+          description: 'Попробуйте изменить поисковой запрос или перезагрузить страницу.',
+        }}
       />
-      {!enterCoordValue ? (
-        <SearchInput
-          tooltip={
-            localityValue ? (
-              <div>
-                <div>{localityValue?.content}</div>
-                <div>Широта: {localityValue.latitude}</div>
-                <div>Долгота: {localityValue.longitude}</div>
-                <div>Часовой пояс: {localityValue.time_zone}</div>
-              </div>
-            ) : undefined
-          }
-          value={searchLocalityValue}
-          onChange={(e) => searchLocalityHadleChange(e.target.value)}
-          isClearOnFocus={localityValue ? true : false}
-          leftIcon={<Pin3 className={formIconCSS} />}
-          label={'Населенный пункт'}
-          placeholder="Укажите населенный пункт"
-          dropdownList={(localitiesList ?? []).map((obj) => ({
-            ...obj,
-            content: [
-              obj.asciiname_ru,
-              obj.admin2_data?.asciiname_ru,
-              obj.admin1_data?.asciiname_ru,
-              obj.country_data?.name_ru,
-            ]
-              .filter((el) => el)
-              .join(', '),
-            id: obj.geonameid,
-          }))}
-          onClickItem={localitiesClickHandler}
-          clearValueFunc={resetLocality}
-          listIsLoading={isLocalitiesLoading}
-          invalid={isLocalityInvalid}
-          invalidText={isLocalityInvalid ? localityInvalidText : ''}
-          isError={isLocalitiesError}
-          error={{
-            title: 'Ошибка сервера',
-            description: 'Попробуйте изменить поисковой запрос или перезагрузить страницу.',
-          }}
+      <CoordsGridRow>
+        <Input
+          disabled={!enterCoordValue}
+          value={values.latitude}
+          invalid={isLatitudeError}
+          invalidText={isLatitudeError ? latitudeError : ''}
+          onChange={(e) => latitudeHadleChange(e.currentTarget.value.replaceAll('_', ''))}
+          maskPlaceholder="__.____"
+          mask="99.9999"
+          label="Широта"
         />
-      ) : (
-        <CoordsGridRow>
-          <Input
-            value={values.latitude}
-            invalid={isLatitudeError}
-            invalidText={isLatitudeError ? latitudeError : ''}
-            onChange={(e) => latitudeHadleChange(e.currentTarget.value.replaceAll('_', ''))}
-            maskPlaceholder="__.____"
-            mask="99.9999"
-            label="Широта"
-          />
-          <Input
-            value={values.longitude}
-            invalid={isLongitudeError}
-            invalidText={isLongitudeError ? longitudeError : ''}
-            onChange={(e) => longitudeHadleChange(e.currentTarget.value.replaceAll('_', ''))}
-            maskPlaceholder="__.____"
-            mask="99.9999"
-            label="Долгота"
-          />
-        </CoordsGridRow>
-      )}
+        <Input
+          disabled={!enterCoordValue}
+          value={values.longitude}
+          invalid={isLongitudeError}
+          invalidText={isLongitudeError ? longitudeError : ''}
+          onChange={(e) => longitudeHadleChange(e.currentTarget.value.replaceAll('_', ''))}
+          maskPlaceholder="__.____"
+          mask="99.9999"
+          label="Долгота"
+        />
+      </CoordsGridRow>
       <Checkbox
         checked={enterCoordValue}
         label="Ввести координаты"

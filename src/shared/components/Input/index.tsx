@@ -82,7 +82,7 @@ const Input = ({
       <InputContainer
         onClick={setInputFocus}
         ref={ref}
-        className={classNames({ disabled, isActive, invalid })}
+        className={classNames({ isActive, invalid, disabled })}
       >
         {leftIcon && <IconContainer onClick={leftIconHandler}>{leftIcon}</IconContainer>}
         <InputMask

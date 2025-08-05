@@ -2,8 +2,8 @@ import { Route, Routes } from 'react-router-dom'
 
 import { EmptyPage } from '../index.linaria'
 import DefaultLayout from '@/app/layout/DefaultLayout'
-import { CalculatorPage } from '@/pages/CalculatorPage'
 import Components from '@/pages/Components'
+import { NatalCalculatorPage } from '@/pages/NatalCalculatorPage'
 import { NatalDecodingPage } from '@/pages/NatalDecodingPage'
 import { ROUTER_PATHES } from '@/shared/constants/router-paths'
 
@@ -25,7 +25,7 @@ export const MainRouter = () => (
       />
       <Route
         path={ROUTER_PATHES.CALCULATOR_PATH}
-        element={<CalculatorPage />}
+        element={<NatalCalculatorPage />}
       />
       <Route
         path={ROUTER_PATHES.NATAL_DECODING_PATH}
