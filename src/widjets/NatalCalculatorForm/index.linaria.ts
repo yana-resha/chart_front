@@ -33,3 +33,11 @@ export const CoordsGridRow = styled.div`
 `
 
 export const LoaderContent = styled.div``
+
+export const LocalityTooltipContent = styled.div`
+  font-size: inherit;
+
+  & div {
+    font-size: inherit;
+  }
+`

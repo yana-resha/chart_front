@@ -11,9 +11,12 @@ export const prepareIconColors = (color: string) => ({
 
 export const primaryIconCSS = css`
   ${prepareIconColors(ICONS_STROKES.PRIMARY_DEFAULT_COLOR)}
+
+  display: inline;
+  vertical-align: -0.15em;
+
   cursor: pointer;
-  width: 1.25rem;
-  height: 1.25rem;
+  font-size: inherit;
   stroke: var(--icon-color);
   transition: stroke 0.2s;
 
@@ -34,6 +37,6 @@ export const primaryIconCSS = css`
 `
 
 export const formIconCSS = css`
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
 `

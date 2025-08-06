@@ -28,7 +28,7 @@ export const Dropdown = styled.div`
   background-color: rgba(19, 22, 25, 1);
   border-radius: 5px;
   border: 1px solid rgba(54, 58, 61);
-  padding: 16px 0px;
+  padding: 1rem 0px;
   z-index: 1;
   width: 100%;
   overflow-y: auto;
@@ -39,8 +39,8 @@ export const OptionsList = styled.div`
   gap: 1rem;
 `
 export const CheckIcon = styled(CheckSvg)`
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1rem;
+  height: 1rem;
   opacity: 0;
   &.show {
     opacity: 0.5;
@@ -52,7 +52,7 @@ export const OptionItem = styled.div`
   width: 100%;
   font-weight: 300;
   line-height: 1.5rem;
-  font-size: 1rem;
+  font-size: clamp(12px, 0.875rem, 16px);
   background-color: transparent;
   color: rgba(255, 255, 255, 1);
   position: relative;

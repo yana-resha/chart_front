@@ -90,14 +90,14 @@ export const Tooltip = ({
       onMouseLeave={handleMouseLeave}
       {...props}
     >
-      <div
+      <span
         onClick={() => {
           if (trigger === 'click') setOpen((prev) => !prev)
         }}
         style={{ cursor: trigger === 'click' ? 'pointer' : 'default' }}
       >
         {children}
-      </div>
+      </span>
 
       <FloatingPortal>
         <AnimatePresence>

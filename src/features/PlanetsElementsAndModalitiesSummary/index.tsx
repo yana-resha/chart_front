@@ -113,6 +113,7 @@ export const PlanetsElementsAndModalitiesSummary: React.FC<{ planets: IPlanetVal
                 &emsp;
                 <span
                   style={{
+                    fontWeight: signStats.dominant.includes(s) ? 600 : 400,
                     color: signStats.dominant.includes(s) ? 'rgb(22, 238, 246)' : 'rgba(255, 255, 255, 0.8)',
                   }}
                 >

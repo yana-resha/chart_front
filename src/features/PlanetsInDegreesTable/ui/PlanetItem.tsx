@@ -37,14 +37,15 @@ export const PlanetItem = ({ planet, houseIndex = undefined }: Props) => {
         {label ?? name}{' '}
         {isRetrograde && (
           <Tooltip
-            style={{ display: 'inline-block', verticalAlign: 'middle' }}
             placement="top"
             tooltipContent={'Ретроградная планета'}
+            style={{
+              display: 'inline', // строчный элемент
+            }}
           >
             <span style={{ color: '#D46A6A', fontWeight: 500 }}>R</span>
           </Tooltip>
         )}
-        &emsp;
       </SimpleDataTable.Cell>
       <SimpleDataTable.Cell>
         {formattedDegree(degree)}

@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import React from 'react'
 
 import { orb } from './data/tooltip.data'
 import { IAspect, Props } from './types'
@@ -6,7 +7,6 @@ import { Row } from './ui/Row'
 import { InfoTooltip } from '@/shared/components/InfoTooltip'
 import { SimpleDataTable } from '@/shared/components/SimpleDataTable'
 import { sortAspectsByPlanetAndAspectPriority } from '@/shared/helpers/astro/sortAspects'
-import React from 'react'
 
 export const PlanetsAspectsInDegreesTable = ({ planetsAspects }: Props) => {
   const duplicatedAspects = useMemo(() => {
@@ -35,8 +35,7 @@ export const PlanetsAspectsInDegreesTable = ({ planetsAspects }: Props) => {
         <SimpleDataTable.Header style={{ position: 'sticky', top: 0 }}>Аспект</SimpleDataTable.Header>
         <SimpleDataTable.Header style={{ position: 'sticky', top: 0 }}>Планета</SimpleDataTable.Header>
         <SimpleDataTable.Header style={{ position: 'sticky', top: 0 }}>
-          Орбис &nbsp;
-          <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{orb}</div>} />
+          Орбис <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{orb}</div>} />
         </SimpleDataTable.Header>
       </SimpleDataTable.HeadRow>
       <SimpleDataTable.TBody>

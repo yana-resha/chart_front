@@ -51,11 +51,11 @@ export const ItemIconContainer = styled.div`
   }
 `
 export const DropdownItem = styled.div`
-  padding: 0.75px 1.25rem;
+  padding: 0.75rem 1.25rem;
   width: 100%;
   font-weight: 300;
   line-height: 1.2;
-  font-size: 1rem;
+  font-size: clamp(12px, 0.875rem, 16px);
   background-color: transparent;
   color: rgba(255, 255, 255, 1);
   outline: 1px solid rgba(255, 255, 255, 0);

@@ -76,17 +76,13 @@ export const IconContainer = styled.div`
 `
 export const defaultIconConstainerCSS = css`
   cursor: pointer;
-  & svg {
-    width: 1rem;
-    height: 1rem;
-  }
 `
 export const inputCSS = css`
   padding: 0;
   margin: 0;
   flex-grow: 1;
   height: 100%;
-  font-size: 1rem;
+  font-size: clamp(12px, 0.875rem, 16px);
   line-height: 1.4;
   font-weight: 500;
   color: rgb(205, 206, 207);

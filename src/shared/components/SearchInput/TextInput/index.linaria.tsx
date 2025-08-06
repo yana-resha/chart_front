@@ -71,11 +71,8 @@ export const ClearIcon = styled(ClearSVG)`
 `
 
 export const InfoIcon = styled(InfoSVG)`
-  width: 1.5rem;
-  height: 1.5rem;
   cursor: pointer;
   transition: opacity 0.2s;
-
   &:hover {
     opacity: 0.7;
   }
@@ -90,7 +87,7 @@ export const Input = styled.input`
   margin: 0;
   flex-grow: 1;
   height: 100%;
-  font-size: 1rem;
+  font-size: clamp(12px, 0.875rem, 16px);
   line-height: 1.3;
   font-weight: 500;
   color: rgb(205, 206, 207);

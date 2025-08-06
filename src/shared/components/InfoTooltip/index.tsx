@@ -13,7 +13,7 @@ export const InfoTooltip: React.FC<InfoTooltipProps> = ({ content, color }) => (
   <Tooltip
     trigger="click"
     tooltipContent={content}
-    style={{ display: 'inline-block', verticalAlign: 'middle' }}
+    style={{ display: 'inline' }}
   >
     <InfoIcon
       className={primaryIconCSS}

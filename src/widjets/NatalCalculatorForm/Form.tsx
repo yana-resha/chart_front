@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import { useFormInside } from './hooks/useFormInside'
-import { TimeGridRow, FormContainer, CoordsGridRow } from './index.linaria'
+import { TimeGridRow, FormContainer, CoordsGridRow, LocalityTooltipContent } from './index.linaria'
 import { TIMEZONE_LIST } from '@/entities/astro-charts/data/calculator'
 import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator-request.types'
 import InfoIcon from '@/shared/assets/icons/info-circle.svg?react'
@@ -99,12 +99,12 @@ export const Form = () => {
       <SearchInput
         tooltip={
           localityValue ? (
-            <div>
+            <LocalityTooltipContent>
               <div>{localityValue?.content}</div>
               <div>Широта: {localityValue.latitude}</div>
               <div>Долгота: {localityValue.longitude}</div>
               <div>Часовой пояс: {localityValue.time_zone}</div>
-            </div>
+            </LocalityTooltipContent>
           ) : undefined
         }
         value={searchLocalityValue}

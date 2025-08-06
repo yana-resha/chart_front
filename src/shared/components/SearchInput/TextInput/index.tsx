@@ -15,6 +15,7 @@ import {
   Label,
 } from './index.linaria'
 import { Tooltip } from '../../Tooltip'
+import { formIconCSS } from '@/shared/assets/styles/icons.linaria'
 
 export const TextInput = ({
   label,
@@ -60,7 +61,7 @@ export const TextInput = ({
         {tooltip && (
           <Tooltip tooltipContent={tooltip}>
             <IconContainer>
-              <InfoIcon />
+              <InfoIcon className={formIconCSS} />
             </IconContainer>
           </Tooltip>
         )}

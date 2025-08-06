@@ -26,7 +26,7 @@ export const ValuesContainer = styled.div`
   min-height: 100%;
   color: white;
   position: relative;
-  min-height: 48px;
+  min-height: 3rem;
   padding: 0.75rem 1.06rem 0.75rem 1.18rem;
   display: flex;
   flex-direction: row;
@@ -66,8 +66,8 @@ export const Values = styled.div`
   margin: 0;
   flex-grow: 1;
   height: 100%;
-  font-size: 1rem;
-  line-height: 1.5rem;
+  font-size: clamp(12px, 0.875rem, 16px);
+  line-height: 1.25rem;
   font-weight: 500;
   color: rgb(205, 206, 207);
 

@@ -16,6 +16,7 @@ import CalendarDay from '@/shared/assets/icons/calendar-day.svg?react'
 import Clock from '@/shared/assets/icons/clock.svg?react'
 import ClosedEye from '@/shared/assets/icons/eye-cross.svg?react'
 import OpenedEye from '@/shared/assets/icons/eye.svg?react'
+import { formIconCSS } from '@/shared/assets/styles/icons.linaria'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: ReactNode | string
@@ -108,7 +109,7 @@ const Input = ({
             className={defaultIconConstainerCSS}
             onClick={() => inputRef.current?.showPicker()}
           >
-            {type === 'date' ? <CalendarDay /> : <Clock />}
+            {type === 'date' ? <CalendarDay className={formIconCSS} /> : <Clock className={formIconCSS} />}
           </IconContainer>
         )}
       </InputContainer>

@@ -19,6 +19,7 @@ export const CheckboxContainer = styled.label`
   user-select: none;
   column-gap: 1rem;
   cursor: pointer;
+  font-size: clamp(12px, 0.875rem, 16px);
   &::before {
     content: '';
     display: inline-block;
