@@ -1,17 +1,22 @@
-import { Container, ContentContainer, FormBlock } from './index.linaria'
+import { PageTitle } from '@/shared/assets/styles/titles.linaria'
+import { Layout, FormWrapper, FormBlock } from './index.linaria'
+import { PageContentWrapper } from '@/shared/assets/styles/pages.linaria'
 import { HeaderBackButton } from '@/shared/components/HeaderBackButton'
 import { PageHeader } from '@/shared/components/PageHeader'
 import NatalCalculatorForm from '@/widjets/NatalCalculatorForm'
 
 export const NatalCalculatorPage = () => (
-  <Container>
+  <Layout>
     <PageHeader>
       <HeaderBackButton />
     </PageHeader>
-    <ContentContainer>
-      <FormBlock>
-        <NatalCalculatorForm />
-      </FormBlock>
-    </ContentContainer>
-  </Container>
+    <PageContentWrapper>
+      <PageTitle>Рассчитать натальную карту онлайн</PageTitle>
+      <FormWrapper>
+        <FormBlock>
+          <NatalCalculatorForm />
+        </FormBlock>
+      </FormWrapper>
+    </PageContentWrapper>
+  </Layout>
 )

@@ -8,6 +8,7 @@ import {
 import { ASTRO_HOUSE_ACTIVITY } from '@/shared/types/astro/astro-houses.types'
 
 export interface ISingleChartSourceData {
+  name?: string
   datetime: string
   timezone: number
   latitude: number

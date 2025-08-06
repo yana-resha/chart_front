@@ -31,7 +31,9 @@ export const Row = styled.div`
 
 export const LabelBlock = styled.div`
   display: flex;
-  min-width: 160px;
+  min-width: 0;
+  width: 172px;
+  max-width: 172px;
   gap: 0.5rem;
 `
 

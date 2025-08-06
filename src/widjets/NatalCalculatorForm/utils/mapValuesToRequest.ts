@@ -18,5 +18,6 @@ export const natalChartRequestMapper = (values: ChartFormFieldValues) => {
     [CalculatorRequestKeys.time]: time,
     [CalculatorRequestKeys.timezone]: timezone,
     [CalculatorRequestKeys.place]: place,
+    [CalculatorRequestKeys.name]: values.name?.trim() ?? undefined,
   }
 }

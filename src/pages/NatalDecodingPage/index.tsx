@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 
-import { Layout, layoutLoading, PageContent, WidjetsWrapper } from './index.linaria'
+import { Layout, layoutLoading, WidjetsWrapper } from './index.linaria'
 import { PageSkeleton } from './ui/PageSkeleton'
 import { DEFAULT_NATAL_CHART_ID } from '@/entities/astro-charts/constants'
 import {
@@ -25,6 +25,7 @@ import { NatalCanvasPanel } from '@/widjets/NatalCanvasPanel'
 import { NatalChartSourceData } from '@/widjets/NatalChartSourceData'
 import { NatalDictionaryPanelTab } from '@/widjets/NatalDictionaryPanelTab'
 import { NatalSummaryPanelTab } from '@/widjets/NatalSummaryPanelTab'
+import { PageContentWrapper } from '@/shared/assets/styles/pages.linaria'
 
 export const NatalDecodingPage = () => {
   const location = useLocation()
@@ -85,7 +86,7 @@ export const NatalDecodingPage = () => {
           />
         </>
       </PageHeader>
-      <PageContent>
+      <PageContentWrapper>
         <PageTitle>Расшифровка натальной карты 💫</PageTitle>
         {(isLoading || error) && <PageSkeleton />}
         {!isLoading && !error && chartValue && (
@@ -111,7 +112,7 @@ export const NatalDecodingPage = () => {
             </section>
           </WidjetsWrapper>
         )}
-      </PageContent>
+      </PageContentWrapper>
       {!isLoading && error && (
         <AlertModal
           showExitCross={true}

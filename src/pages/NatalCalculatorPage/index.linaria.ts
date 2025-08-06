@@ -1,17 +1,16 @@
 import { styled } from '@linaria/react'
 
-export const Container = styled.div`
+export const Layout = styled.section`
   color: rgba(255, 255, 255, 1);
   height: 100%;
   display: grid;
   grid-template-rows: auto 1fr;
   min-width: 0;
 `
-export const ContentContainer = styled.div`
+export const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   container-type: inline-size;
 `
 

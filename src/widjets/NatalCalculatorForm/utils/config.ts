@@ -11,4 +11,5 @@ export const formInitialValues: ChartFormFieldValues = {
   [CalculatorRequestKeys.timezone]: 0,
   [CalculatorRequestKeys.latitude]: '',
   [CalculatorRequestKeys.longitude]: '',
+  [CalculatorRequestKeys.name]: undefined,
 }

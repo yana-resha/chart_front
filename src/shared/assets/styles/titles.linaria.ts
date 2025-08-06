@@ -1,10 +1,10 @@
 import { styled } from '@linaria/react'
 
 export const PageTitle = styled.div`
-  font-size: 30px;
+  font-size: 1.875rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 1);
-  margin-bottom: 30px;
+  margin-bottom: 1.875rem;
   text-align: center;
   text-shadow:
     0 0 6px rgba(22, 238, 246, 0.1),
@@ -13,10 +13,10 @@ export const PageTitle = styled.div`
 `
 
 export const SectionTitle = styled.h2`
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: 500;
-  padding-left: 16px;
-  margin-bottom: 16px;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.9);
   text-shadow:

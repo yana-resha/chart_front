@@ -12,7 +12,7 @@ export const NatalChartSourceData: FC<ChartSourceDataProps> = ({ chartId }) => {
 
   if (!sourceData) return null
 
-  const { datetime, timezone, latitude, longitude, place, jd } = sourceData
+  const { datetime, timezone, latitude, longitude, place, jd, name } = sourceData
 
   const toStr = (d: Date | null) => {
     if (!d || isNaN(d.getTime())) return 'не указано'
@@ -39,6 +39,14 @@ export const NatalChartSourceData: FC<ChartSourceDataProps> = ({ chartId }) => {
 
   return (
     <Card>
+      <Row>
+        <LabelBlock>
+          <Icon>🕓</Icon>
+          <Label>Имя:</Label>
+        </LabelBlock>
+        {name ?? 'Не указано'}
+      </Row>
+
       <Row>
         <LabelBlock>
           <Icon>🕓</Icon>

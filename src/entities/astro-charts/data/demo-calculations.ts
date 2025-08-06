@@ -5,6 +5,7 @@ export const DEMO_NATAL_SOURCE_VALUE = {
   longitude: 55.7833,
   place: 'Стерлитамак, Республика Башкортостан, Россия',
   jd: 2449729.07986111,
+  name: 'Yana',
 }
 
 export const DEMO_NATAL_CALCULATION = {

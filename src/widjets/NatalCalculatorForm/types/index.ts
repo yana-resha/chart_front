@@ -10,6 +10,7 @@ type NatalChartValues = {
   [CalculatorRequestKeys.timezone]: number
   [CalculatorRequestKeys.latitude]: string
   [CalculatorRequestKeys.longitude]: string
+  name: string | undefined
   locality: IInputLocality | null
   searchLocality: string
   enter_coordinates: boolean

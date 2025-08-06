@@ -2,6 +2,7 @@ export const mockSergNatalCalculations = {
   success: true,
   data: {
     sourceData: {
+      name: 'Serg',
       datetime: '1990-04-01T23:45:00.000Z',
       timezone: 6,
       latitude: 53.63793,

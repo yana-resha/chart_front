@@ -32,6 +32,10 @@ export const NavList = styled.nav`
   flex-direction: column;
 `
 
+export const iconFs = css`
+  font-size: 1.2rem;
+`
+
 export const navlinkCSS = css`
   padding: 0.85rem 1rem 0.85rem 1rem;
   background: transparent;

@@ -31,6 +31,13 @@ export const Form = () => {
   } = useFormInside()
 
   const {
+    value: nameValue,
+    handleChange: nameHandleChange,
+    isError: isNameError,
+    error: nameError,
+  } = useFormikWrapper(CalculatorRequestKeys.name)
+
+  const {
     value: dateValue,
     handleChange: dateHadleChange,
     isError: isDateError,
@@ -96,6 +103,14 @@ export const Form = () => {
 
   return (
     <FormContainer>
+      <Input
+        type="text"
+        defaultValue={nameValue}
+        onChange={(e) => nameHandleChange(e.currentTarget.value)}
+        label="Имя"
+        invalid={isNameError}
+        invalidText={isNameError ? nameError : ''}
+      />
       <SearchInput
         tooltip={
           localityValue ? (

@@ -2,6 +2,7 @@ export const mockMyNatalCalculations = {
   success: true,
   data: {
     sourceData: {
+      name: 'Yana',
       datetime: '1995-01-11T13:55:00.000Z',
       timezone: 5,
       latitude: 52.7667,
