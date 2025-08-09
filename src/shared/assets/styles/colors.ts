@@ -15,6 +15,7 @@ export enum BUTTON_COLOR_VARIABLES {
 }
 
 export enum TEXT_COLOR_VARIABLES {
+  BRIGHT_TEXT = 'rgb(22, 238, 246)',
   SECONDARY_TEXT = 'rgb(155, 156, 158)',
   PRIMARY_TEXT = 'rgb(255, 255, 255)',
 }

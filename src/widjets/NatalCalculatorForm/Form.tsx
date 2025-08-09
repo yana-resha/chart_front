@@ -209,7 +209,6 @@ export const Form = () => {
       </TimeGridRow>
       <Button
         isLoading={isSubmitting}
-        roundedCorner
         onClick={submitForm}
       >
         Рассчитать

@@ -23,6 +23,13 @@ export const Card = styled.div`
   }
 `
 
+export const Divider = styled.div`
+  height: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  margin: 0.725rem 0;
+  width: 100%;
+`
+
 export const Row = styled.div`
   margin-bottom: 0.625rem;
   display: flex;
@@ -44,11 +51,4 @@ export const Label = styled.span`
 export const Icon = styled.span`
   font-size: clamp(12px, 0.875rem, 16px);
   line-height: 1.6;
-`
-
-export const Divider = styled.div`
-  height: 1px;
-  background: rgba(255, 255, 255, 0.05);
-  margin: 0.725rem 0;
-  width: 100%;
 `
