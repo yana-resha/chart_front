@@ -5,14 +5,36 @@ import {
   MarkdownText,
   BenefitCard,
   BenefitsList,
-  TopBlock,
+  IntroductionBlock,
   Divider,
+  StepsGrid,
+  InstructionsGrid,
+  StepCard,
+  Tip,
+  InstructionCard,
+  CalculationCard,
+  CalculationStepsGrid,
+  DataInfoBlock,
+  CalculatorInstructionBlock,
+  CalculationsInfoBlock,
+  CalculatorCard,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  CardHint,
+  CardTitle,
+  FooterNote,
 } from './index.linaria'
+import CalendarDay from '@/shared/assets/icons/calendar-day.svg?react'
+import Clock from '@/shared/assets/icons/clock.svg?react'
+import PinIcon from '@/shared/assets/icons/pin-3.svg?react'
 import { linkTextCss } from '@/shared/assets/styles/links.linaria'
 import { PageContentWrapper } from '@/shared/assets/styles/pages.linaria'
-import { PageTitle, SectionTitle, SubSectionTitle } from '@/shared/assets/styles/titles.linaria'
+import { PageTitle, SectionTitle } from '@/shared/assets/styles/titles.linaria'
 import { HeaderBackButton } from '@/shared/components/HeaderBackButton'
+import { InfoTooltip } from '@/shared/components/InfoTooltip'
 import { PageHeader } from '@/shared/components/PageHeader'
+import { Tooltip } from '@/shared/components/Tooltip'
 import { smoothScrollAnchor } from '@/shared/helpers/smoothScrollAnchor'
 import NatalCalculatorForm from '@/widjets/NatalCalculatorForm'
 
@@ -22,8 +44,8 @@ export const NatalCalculatorPage = () => (
       <HeaderBackButton />
     </PageHeader>
     <PageContentWrapper style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
-      <PageTitle>Расчёт натальной карты онлайн 💫</PageTitle>
-      <TopBlock>
+      <IntroductionBlock>
+        <PageTitle>Расчёт натальной карты онлайн 💫</PageTitle>
         <MarkdownText>
           <Divider />
           <p>
@@ -95,9 +117,9 @@ export const NatalCalculatorPage = () => (
           <p>
             📌 Чтобы построить карту, потребуется несколько простых данных —{' '}
             <a
-              href="#calculator-info"
+              href="#data-info"
               className={linkTextCss}
-              onClick={(e) => smoothScrollAnchor(e, 'calculator-info')}
+              onClick={(e) => smoothScrollAnchor(e, 'data-info')}
             >
               посмотрите, что нужно для расчёта
             </a>
@@ -105,47 +127,324 @@ export const NatalCalculatorPage = () => (
           </p>
           <Divider />
         </MarkdownText>
-      </TopBlock>
+      </IntroductionBlock>
 
       <FormWrapper id="calculator">
-        <SectionTitle>Введите данные рождения</SectionTitle>
-        <FormBlock>
-          <NatalCalculatorForm />
-        </FormBlock>
+        <CalculatorCard>
+          <CardHeader>
+            <CardTitle>Введите данные рождения</CardTitle>
+            <CardHint>Если города нет в списке — введите координаты вручную.</CardHint>
+          </CardHeader>
+
+          <CardBody>
+            <NatalCalculatorForm />
+          </CardBody>
+
+          <CardFooter>
+            {<FooterNote>Если ввели координаты вручную — не забудьте выбрать часовой пояс.</FooterNote>}
+          </CardFooter>
+        </CalculatorCard>
       </FormWrapper>
 
-      <MarkdownText id="calculator-info">
-        <SectionTitle>📊 Как работает наш калькулятор</SectionTitle>
-        <p>
-          После ввода данных нажмите кнопку <strong>"Рассчитать"</strong>, и система построит вашу натальную
-          карту с учётом:
-        </p>
-        <ul>
-          <li>астрономических эфемерид,</li>
-          <li>часового пояса,</li>
-          <li>перехода на летнее/зимнее время,</li>
-          <li>географических координат населённого пункта.</li>
-        </ul>
-        <p>
-          🔎 В результате вы получите подробную карту неба на момент вашего рождения — со всеми планетами,
-          домами, аспектами и другими важными точками. Она станет основой для дальнейших{' '}
-          <strong>интерпретаций, анализа и прогностических техник</strong>.
-        </p>
+      {/* Инструкция: что нужно и как ввести */}
+      <DataInfoBlock id="data-info">
+        <MarkdownText>
+          <SectionTitle>Какие данные нужны для расчёта</SectionTitle>
 
-        <SubSectionTitle>💡 Что дальше?</SubSectionTitle>
-        <ul>
-          <li>увидеть, в каких знаках и домах находятся ваши планеты;</li>
-          <li>изучить аспекты между ними;</li>
-          <li>
-            перейти к <strong>расшифровкам и толкованиям</strong>;
-          </li>
-          <li>сохранить карту и поделиться ею.</li>
-        </ul>
-        <p>
-          Это первый шаг в <strong>ваше астрологическое путешествие</strong> — исследование себя через звёзды
-          ✨
-        </p>
-      </MarkdownText>
+          <InstructionsGrid>
+            <InstructionCard>
+              <div className="title">
+                <div className="icon">
+                  <PinIcon />
+                </div>
+                Место рождения
+              </div>
+              <div className="divider" />
+              <div className="desc">
+                Населённый пункт, где вы родились. По нему автоматически определяются координаты и часовой
+                пояс.
+              </div>
+            </InstructionCard>
+
+            <InstructionCard>
+              <div className="title">
+                <div className="icon">
+                  <CalendarDay />
+                </div>
+                Дата рождения
+              </div>
+              <div className="divider" />
+              <div className="desc">Точная календарная дата в формате ДД.ММ.ГГГГ.</div>
+            </InstructionCard>
+
+            <InstructionCard>
+              <div className="title">
+                <div className="icon">
+                  <Clock />
+                </div>
+                Время рождения
+              </div>
+              <div className="divider" />
+              <div className="desc">
+                Желательно до минут. Если точного времени нет — укажите ориентировочное (например, 12:00):
+                положения планет по знакам сохранятся, но дома и Асцендент могут отличаться.
+              </div>
+            </InstructionCard>
+          </InstructionsGrid>
+        </MarkdownText>
+      </DataInfoBlock>
+      <Divider />
+      <CalculatorInstructionBlock>
+        <MarkdownText>
+          <SectionTitle>Как заполнить поля в калькуляторе</SectionTitle>
+
+          <StepsGrid>
+            <StepCard>
+              <div className="title">
+                <div className="badge">1</div>
+                Имя (необязательно)
+              </div>
+              <div className="divider" />
+              <div className="desc">Поможет сохранить и отличать ваши расчёты.</div>
+            </StepCard>
+
+            <StepCard>
+              <div className="title">
+                <div className="badge">2</div>
+                Населённый пункт
+              </div>
+              <div className="divider" />
+              <div className="desc">
+                Начните вводить город — выберите из подсказки. Часовой пояс и координаты подставятся
+                автоматически. Если города нет в списке, включите «Ввести координаты» и укажите широту/долготу
+                вручную.
+              </div>
+            </StepCard>
+
+            <StepCard>
+              <div className="title">
+                <div className="badge">3</div>
+                Дата
+              </div>
+              <div className="divider" />
+              <div className="desc">Выберите дату в календаре или введите вручную.</div>
+            </StepCard>
+
+            <StepCard>
+              <div className="title">
+                <div className="badge">4</div>
+                Время и часовой пояс
+              </div>
+              <div className="divider" />
+              <div className="desc">
+                Укажите время рождения. Пояс будет «Auto» по городу — при необходимости можно сменить вручную
+                (особенно для исторических дат или редких исключений).
+              </div>
+            </StepCard>
+
+            <StepCard>
+              <div className="title">
+                <div className="badge">5</div>
+                Проверка
+              </div>
+              <div className="divider" />
+              <div className="desc">
+                Убедитесь, что город, дата, время и пояс указаны верно. Нажмите <strong>«Рассчитать»</strong>.
+              </div>
+            </StepCard>
+          </StepsGrid>
+
+          <Tip>
+            💡 Если точное время рождения неизвестно, укажите примерное (например, 12:00). Положения планет по
+            знакам сохранятся, но дома и Асцендент могут отличаться.
+          </Tip>
+        </MarkdownText>
+      </CalculatorInstructionBlock>
+      <Divider />
+      <CalculationsInfoBlock>
+        <MarkdownText>
+          <SectionTitle>Как мы рассчитываем вашу натальную карту</SectionTitle>
+
+          <CalculationStepsGrid>
+            <CalculationCard>
+              <div className="title">
+                <div className="badge">1</div>
+                Время и место
+              </div>
+              <div className="divider" />
+              <div className="desc">
+                Вы вводите дату, время и населённый пункт. Мы определяем точный часовой пояс по базе данных{' '}
+                <Tooltip
+                  placement="top"
+                  tooltipContent="🌐 Мировая база данных часовых поясов с историческими изменениями"
+                >
+                  <span
+                    className="term"
+                    style={{ color: '#8ea6ff' }}
+                  >
+                    IANA Time Zone
+                  </span>
+                </Tooltip>
+                , учитывая переходы на летнее время и другие поправки. Это позволяет перевести всё в{' '}
+                <Tooltip
+                  placement="top"
+                  tooltipContent="🕒 Всемирное координированное время — стандарт для астрономических расчётов"
+                >
+                  <span
+                    className="term"
+                    style={{ color: '#ffd166' }}
+                  >
+                    UTC
+                  </span>
+                </Tooltip>
+                .
+              </div>
+            </CalculationCard>
+
+            <CalculationCard>
+              <div className="title">
+                <div className="badge">2</div>
+                Переход к астрономическому времени
+              </div>
+              <div className="divider" />
+              <div className="desc">
+                Из UTC мы вычисляем{' '}
+                <Tooltip
+                  placement="top"
+                  tooltipContent="📅 Число, показывающее количество дней от начальной эпохи — используется в астрономии"
+                >
+                  <span
+                    className="term"
+                    style={{ color: '#f78da7' }}
+                  >
+                    юлианское число
+                  </span>
+                </Tooltip>{' '}
+                — универсальный формат, который астрономы применяют с античных времён.
+              </div>
+            </CalculationCard>
+
+            <CalculationCard>
+              <div className="title">
+                <div className="badge">3</div>
+                Положение планет
+              </div>
+              <div className="divider" />
+              <div className="desc">
+                С помощью точных{' '}
+                <Tooltip
+                  placement="top"
+                  tooltipContent="📜 Таблицы с координатами небесных тел на каждый момент времени"
+                >
+                  <span
+                    style={{ color: '#16eef6' }}
+                    className="term"
+                  >
+                    эфемерид
+                  </span>
+                </Tooltip>{' '}
+                мы определяем геоцентрические координаты планет. В расчётах учитываются{' '}
+                <Tooltip
+                  placement="top"
+                  tooltipContent="🔄 Медленное смещение оси вращения Земли"
+                >
+                  <span
+                    className="term"
+                    style={{ color: '#ff9f68' }}
+                  >
+                    прецессия
+                  </span>
+                </Tooltip>{' '}
+                и{' '}
+                <Tooltip
+                  placement="top"
+                  tooltipContent="🌊 Небольшие колебания оси вращения Земли"
+                >
+                  <span
+                    className="term"
+                    style={{ color: '#c792ea' }}
+                  >
+                    нутация
+                  </span>
+                </Tooltip>
+                .
+              </div>
+            </CalculationCard>
+
+            <CalculationCard>
+              <div className="title">
+                <div className="badge">4</div>
+                Построение домов
+              </div>
+              <div className="divider" />
+              <div className="desc">
+                Мы вычисляем{' '}
+                <Tooltip
+                  placement="top"
+                  tooltipContent="✨ Время, определяемое по звёздам, а не по Солнцу — важно для расчёта Асцендента"
+                >
+                  <span
+                    className="term"
+                    style={{ color: '#6ad4a8' }}
+                  >
+                    локальное звёздное время
+                  </span>
+                </Tooltip>
+                , чтобы определить Асцендент, МС и куспиды домов в системе{' '}
+                <Tooltip
+                  placement="top"
+                  tooltipContent="🏛 Одна из самых распространённых систем домификации в астрологии"
+                >
+                  <span
+                    className="term"
+                    style={{ color: '#4ba3f7' }}
+                  >
+                    Placidus
+                  </span>
+                </Tooltip>
+                .
+              </div>
+            </CalculationCard>
+
+            <CalculationCard>
+              <div className="title">
+                <div className="badge">5</div>
+                Знаки зодиака
+              </div>
+              <div className="divider" />
+              <div className="desc">
+                Эклиптика делится на 12 секторов по 30°. Мы переводим градусы положения планет в знак зодиака,
+                начиная с{' '}
+                <Tooltip
+                  placement="top"
+                  tooltipContent="🌳 Момент, когда Солнце пересекает небесный экватор, переходя в северное полушарие"
+                >
+                  <span
+                    className="term"
+                    style={{ color: '#a2f78d' }}
+                  >
+                    точки весеннего равноденствия
+                  </span>
+                </Tooltip>
+                .
+              </div>
+            </CalculationCard>
+
+            <CalculationCard>
+              <div className="title">
+                <div className="badge">6</div>
+                Финальная сборка
+              </div>
+              <div className="divider" />
+              <div className="desc">
+                Мы объединяем планеты, дома, аспекты и другие точки, строим интерактивную карту и
+                подготавливаем для вас интерпретации.
+              </div>
+            </CalculationCard>
+          </CalculationStepsGrid>
+        </MarkdownText>
+      </CalculationsInfoBlock>
+      <Divider />
     </PageContentWrapper>
   </Layout>
 )

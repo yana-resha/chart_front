@@ -15,16 +15,17 @@ const NatalCalculatorForm = () => {
   const { formSubmit, formIsLoading, isRedirecting } = useFormOutside()
 
   return (
-    <Container>
-      <Formik
-        initialValues={formInitialValues}
-        validationSchema={chartFormSchema}
-        onSubmit={formSubmit}
-        innerRef={formRef}
-      >
-        <Form />
-      </Formik>
-
+    <>
+      <Container>
+        <Formik
+          initialValues={formInitialValues}
+          validationSchema={chartFormSchema}
+          onSubmit={formSubmit}
+          innerRef={formRef}
+        >
+          <Form />
+        </Formik>
+      </Container>
       {(isRedirecting || formIsLoading) && (
         <LoaderModal
           showExitCross={false}
@@ -45,7 +46,7 @@ const NatalCalculatorForm = () => {
           onClose={() => {}}
         />
       )}
-    </Container>
+    </>
   )
 }
 

@@ -1,24 +1,8 @@
 import { styled } from '@linaria/react'
 
-import { DROPDOWN_VERTICAL_POSITION } from '../types'
 import UpsetIcon from '@/shared/assets/icons/upset-smile.svg?react'
 
-export const DropdownContainer = styled.div<{
-  vertical: DROPDOWN_VERTICAL_POSITION
-  width: number
-  left: number
-  parentTop: number
-  parentBottom: number
-  inputHeight: number
-  currentHeight: number
-}>`
-  width: ${(props) => props.width}px;
-  position: absolute;
-  left: ${(props) => props.left}px;
-  top: ${({ vertical, parentTop, parentBottom, currentHeight }) =>
-    vertical === DROPDOWN_VERTICAL_POSITION.TOP ? parentTop - currentHeight + 'px' : parentBottom + 'px'};
-  min-height: 150px;
-  max-height: 300px;
+export const DropdownContainer = styled.div`
   display: flex;
   padding-top: 10px;
   padding-bottom: 10px;

@@ -5,7 +5,7 @@ export const smoothScrollAnchor = (
   maybeOffset?: number,
 ) => {
   let id: string
-  let offset = 50 // значение по умолчанию
+  let offset = 10 // значение по умолчанию
 
   if (typeof idOrEvent === 'string') {
     // Вызов вида smoothScrollTo('anchorId', 80)

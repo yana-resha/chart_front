@@ -1,10 +1,5 @@
 import { InputHTMLAttributes, ReactNode, RefObject } from 'react'
 
-export enum DROPDOWN_VERTICAL_POSITION {
-  TOP = 'top',
-  BOTTOM = 'bottom',
-}
-
 export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   ref?: RefObject<HTMLDivElement | null>
   label?: ReactNode | string

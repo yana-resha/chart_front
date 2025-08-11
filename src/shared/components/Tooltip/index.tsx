@@ -28,6 +28,7 @@ export const Tooltip = ({
   tooltipContent,
   trigger = 'hover',
   placement = 'top-start',
+  style,
   ...props
 }: TooltipProps) => {
   const [open, setOpen] = useState(false)
@@ -88,6 +89,10 @@ export const Tooltip = ({
       ref={wrapperRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      style={{
+        display: 'inline',
+        ...style,
+      }}
       {...props}
     >
       <span
