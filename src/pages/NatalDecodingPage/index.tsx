@@ -1,84 +1,122 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
+import { nanoid } from 'nanoid'
 import { useDispatch } from 'react-redux'
-import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { Layout, layoutLoading, WidjetsWrapper } from './index.linaria'
 import { PageSkeleton } from './ui/PageSkeleton'
 import { DEFAULT_NATAL_CHART_ID } from '@/entities/astro-charts/constants'
-import {
-  DEMO_NATAL_CALCULATION,
-  DEMO_NATAL_SOURCE_VALUE,
-} from '@/entities/astro-charts/data/demo-calculations'
-import { IFullNatalСalculations } from '@/entities/astro-charts/types/astro-charts.types'
+import { IBasicCalculatorRequest } from '@/entities/astro-charts/types/calculator-request.types'
 import { SharedButton } from '@/features/SharedButton'
 import InfoIcon from '@/shared/assets/icons/info-circle.svg?react'
 import { SHARED_COLORS_VARIABLES } from '@/shared/assets/styles/colors'
+import { PageContentWrapper } from '@/shared/assets/styles/pages.linaria'
 import { PageTitle, SectionTitle } from '@/shared/assets/styles/titles.linaria'
 import { HeaderBackButton } from '@/shared/components/HeaderBackButton'
 import { AlertModal } from '@/shared/components/Modal'
 import { PageHeader } from '@/shared/components/PageHeader'
 import { ROUTER_PATHES } from '@/shared/constants/router-paths'
-import { useAppSelector, store } from '@/store'
-import { addNatalChart, removeNatalChart } from '@/store/slices/natal-decoding'
+import { decodeRequestFromQuery, encodeRequestToQuery } from '@/shared/helpers/shareRequest'
+import { useAppSelector } from '@/store'
+import { usePostCalculateNatalMutation } from '@/store/api/astro-calculate.api'
+import { addNatalChart } from '@/store/slices/natal-decoding'
 import { NatalCanvasPanel } from '@/widjets/NatalCanvasPanel'
 import { NatalChartSourceData } from '@/widjets/NatalChartSourceData'
 import { NatalDictionaryPanelTab } from '@/widjets/NatalDictionaryPanelTab'
 import { NatalSummaryPanelTab } from '@/widjets/NatalSummaryPanelTab'
-import { PageContentWrapper } from '@/shared/assets/styles/pages.linaria'
 
 export const NatalDecodingPage = () => {
-  const location = useLocation()
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [postNatalChart] = usePostCalculateNatalMutation()
 
+  // --- состояния загрузки и ошибок ---
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setIsError] = useState(false)
+  const [serverError, setServerError] = useState<string | null>(null)
+  const [dataError, setDataError] = useState<string | null>(null)
 
-  const rawChartId = useMemo(() => searchParams.get('chartId'), [location]) // 🔥 реагирует на ручное изменение URL
+  // --- параметры из URL (реагируют на ручную правку) ---
+  const rawChartId = useMemo(() => searchParams.get('chartId'), [searchParams])
+  const paramsChart = useMemo(() => searchParams.get('r'), [searchParams])
   const chartId = rawChartId ?? DEFAULT_NATAL_CHART_ID
 
   const chartValue = useAppSelector((store) => store.natalDecoding.chartsById[chartId])
 
+  /** единый вызов расчёта + запись в стор + навигация */
+  const postNatal = useCallback(
+    async (request: IBasicCalculatorRequest) => {
+      setServerError(null)
+      setIsLoading(true)
+      try {
+        const r = encodeRequestToQuery(request)
+        const response = await postNatalChart(request).unwrap()
+
+        if (response?.success === true && response.data) {
+          const { sourceData, result } = response.data
+          const newChartId = nanoid()
+
+          dispatch(
+            addNatalChart({
+              id: newChartId,
+              sourceValue: sourceData,
+              calculation: result,
+            }),
+          )
+
+          navigate(`${ROUTER_PATHES.NATAL_DECODING_PATH}?chartId=${newChartId}&r=${r}`, { replace: true })
+        } else {
+          throw new Error('SERVER_RESPONSE_INVALID')
+        }
+      } catch {
+        // серверная/сетевоая ошибка — показываем вторую модалку
+        setServerError('Произошла ошибка сервера. Попробуйте повторить загрузку.')
+      } finally {
+        setIsLoading(false)
+      }
+    },
+    [dispatch, navigate, postNatalChart],
+  )
+
+  /** ретрай: повторяем попытку с тем, что в URL (если ок), иначе уходим к калькулятору */
+  const handleRetry = useCallback(() => {
+    const fromUrl = decodeRequestFromQuery<IBasicCalculatorRequest>(paramsChart)
+    if (fromUrl) {
+      void postNatal(fromUrl)
+    } else {
+      navigate(ROUTER_PATHES.CALCULATOR_PATH)
+    }
+  }, [navigate, paramsChart, postNatal])
+
+  /** перейти к калькулятору */
+  const goToCalculator = useCallback(() => {
+    navigate(ROUTER_PATHES.CALCULATOR_PATH)
+  }, [navigate])
+
+  // --- первичная инициализация по URL ---
   useEffect(() => {
-    const isDefault = rawChartId === DEFAULT_NATAL_CHART_ID
-    if (!chartValue) {
-      // Перекидываем на дефолт, если id некорректный
-      if (!isDefault) {
-        navigate(`${ROUTER_PATHES.NATAL_DECODING_PATH}?chartId=${DEFAULT_NATAL_CHART_ID}`, {
-          replace: true,
-        })
-      }
+    if (chartValue) return // уже есть расчёт — ничего не делаем
 
-      const alreadyExists = store.getState().natalDecoding.chartsById[DEFAULT_NATAL_CHART_ID]
-      if (!alreadyExists) {
-        dispatch(
-          addNatalChart({
-            id: DEFAULT_NATAL_CHART_ID,
-            sourceValue: DEMO_NATAL_SOURCE_VALUE,
-            calculation: DEMO_NATAL_CALCULATION as unknown as IFullNatalСalculations,
-          }),
-        )
-      }
-    }
-    // тут нужно разобраться, при размонтировании удаляется, но потом при монтировании не добавляется
+    const fromUrl = decodeRequestFromQuery<IBasicCalculatorRequest>(paramsChart)
 
-    return () => {
-      /* const wasDefault = chartId === DEFAULT_NATAL_CHART_ID
-      if (wasDefault) {
-        dispatch(removeNatalChart(DEFAULT_NATAL_CHART_ID))
-      } */
+    if (!fromUrl) {
+      setDataError('Рассчётные данные отсутствуют или повреждены.')
+
+      return
     }
-  }, [])
+
+    // данные валидны — запускаем расчёт
+    void postNatal(fromUrl)
+  }, [chartValue, paramsChart, postNatal])
 
   return (
-    <Layout className={isLoading || error ? layoutLoading : ''}>
+    <Layout className={isLoading || serverError ? layoutLoading : ''}>
       <PageHeader>
         <>
           <HeaderBackButton />
           <SharedButton
-            shareUrl="https://astrodoc.ru/natal-decoding?name=Ирина&..."
+            shareUrl={window.location.href}
             title="Моя натальная карта"
             messageText="✨ Моя натальная карта"
             buttonText="Поделиться картой"
@@ -86,10 +124,15 @@ export const NatalDecodingPage = () => {
           />
         </>
       </PageHeader>
+
       <PageContentWrapper>
         <PageTitle>Расшифровка натальной карты 💫</PageTitle>
-        {(isLoading || error) && <PageSkeleton />}
-        {!isLoading && !error && chartValue && (
+
+        {/* Скелетон, пока грузимся или пока ещё не получили chartValue */}
+        {(!chartValue || isLoading) && <PageSkeleton />}
+
+        {/* Основное содержимое — только когда нет загрузки/ошибок и есть данные */}
+        {!isLoading && !serverError && !dataError && chartValue && (
           <WidjetsWrapper>
             <section>
               <SectionTitle>Исходные данные</SectionTitle>
@@ -113,20 +156,35 @@ export const NatalDecodingPage = () => {
           </WidjetsWrapper>
         )}
       </PageContentWrapper>
-      {!isLoading && error && (
+
+      {/* Модалка №1: ошибка сервера — 2 кнопки (повторить / вернуться) */}
+      {!isLoading && serverError && (
         <AlertModal
           showExitCross={true}
           title={'Ошибка сервера'}
           subtitle={
             <>
-              Прозошла ошибка сервера, попробуйте повторить загрузку <br /> или вернитесь к калькулятору
+              Произошла ошибка сервера. Попробуйте повторить загрузку <br /> или вернитесь к калькулятору.
             </>
           }
           primaryButtonText={'Повторить'}
-          onPrimaryClick={() => {}}
+          onPrimaryClick={handleRetry}
           secondaryButtonText={'Вернуться'}
+          onClose={goToCalculator}
           icon={<InfoIcon stroke={SHARED_COLORS_VARIABLES.ERROR_COLOR} />}
-          onClose={() => setIsError(false)}
+        />
+      )}
+
+      {/* Модалка №2: данные повреждены — 1 кнопка (к калькулятору) */}
+      {!isLoading && !serverError && dataError && (
+        <AlertModal
+          showExitCross={true}
+          title={'Данные повреждены'}
+          subtitle={<>{dataError} Вернитесь к калькулятору.</>}
+          primaryButtonText={'К калькулятору'}
+          onPrimaryClick={goToCalculator}
+          onClose={goToCalculator}
+          icon={<InfoIcon stroke={SHARED_COLORS_VARIABLES.ERROR_COLOR} />}
         />
       )}
     </Layout>

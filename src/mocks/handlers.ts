@@ -47,7 +47,7 @@ export const handlers = [
 
   http.post(SERVER_PATH + '/astro/natal-chart', async () => {
     await delay(1000)
-    
+
     return HttpResponse.json(mockSergNatalCalculations)
   }),
 

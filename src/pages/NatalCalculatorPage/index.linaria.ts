@@ -48,15 +48,15 @@ export const MarkdownText = styled.div`
 export const FormWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding: 28px 12px 36px;
+  padding-top: 25px;
+  padding-bottom: 30px;
   container-type: inline-size;
 `
 
 export const CalculatorCard = styled.div`
-  --radius: 16px;
   position: relative;
   width: clamp(340px, 75cqw, 560px);
-  border-radius: var(--radius);
+  border-radius: 16px;
   padding: 18px 18px 14px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)), rgba(16, 18, 22, 0.65);
@@ -78,7 +78,6 @@ export const CalculatorCard = styled.div`
 
   @container (min-width: 520px) {
     padding: 22px 22px 16px;
-    --radius: 18px;
   }
 `
 
