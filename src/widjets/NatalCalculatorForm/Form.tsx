@@ -216,8 +216,12 @@ export const Form = () => {
       {showErrorToast && (
         <AlertModal
           showExitCross={true}
-          title={'Ошибка сервера'}
-          subtitle={'Прозошла ошибка сервера, попробуйте повторить отправку'}
+          title={'Упс...'}
+          subtitle={
+            <>
+              Похоже что то сломалось. <br /> Попробуйте повторить загрузку.
+            </>
+          }
           primaryButtonText={'Повторить'}
           onPrimaryClick={submitForm}
           secondaryButtonText={'Отмена'}

@@ -6,6 +6,8 @@ export const dropdownContainer = css`
   border: 1px solid rgba(54, 58, 61, 0.6);
   border-radius: 12px;
   padding: 20px;
+  min-width: 0;
+  width: 500px;
   backdrop-filter: blur(6px);
   box-shadow:
     0 0 10px rgba(22, 238, 246, 0.03),

@@ -161,10 +161,10 @@ export const NatalDecodingPage = () => {
       {!isLoading && serverError && (
         <AlertModal
           showExitCross={true}
-          title={'Ошибка сервера'}
+          title={'Упс...'}
           subtitle={
             <>
-              Произошла ошибка сервера. Попробуйте повторить загрузку <br /> или вернитесь к калькулятору.
+              Похоже что то сломалось. <br /> Попробуйте повторить загрузку или вернитесь к калькулятору.
             </>
           }
           primaryButtonText={'Повторить'}
@@ -181,8 +181,8 @@ export const NatalDecodingPage = () => {
           showExitCross={true}
           title={'Данные повреждены'}
           subtitle={<>{dataError} Вернитесь к калькулятору.</>}
-          primaryButtonText={'К калькулятору'}
-          onPrimaryClick={goToCalculator}
+          secondaryButtonText={'Вернуться'}
+          onSecondaryClick={goToCalculator}
           onClose={goToCalculator}
           icon={<InfoIcon stroke={SHARED_COLORS_VARIABLES.ERROR_COLOR} />}
         />

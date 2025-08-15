@@ -5,9 +5,9 @@ export const DropdownContainer = styled.div`
   border-radius: 5px;
   border: 1px solid rgba(54, 58, 61);
   padding: 1rem;
-  width: fit-content;
   font-size: 0.875rem;
   color: white;
   position: relative;
+  max-width: 100vw;
   z-index: 1000;
 `

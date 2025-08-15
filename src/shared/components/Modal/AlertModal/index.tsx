@@ -8,6 +8,7 @@ import {
   IconContainer,
   ButtonsContainer,
   CrossContainer,
+  modal,
 } from './index.linaria'
 import { CrossIcon } from '../index.linaria'
 import { Modal } from '../Modal'
@@ -37,6 +38,7 @@ export const AlertModal = ({
   showExitCross,
 }: ModalProps) => (
   <Modal
+    className={modal}
     onClose={onClose}
     onClick={(e) => e.stopPropagation()}
   >
@@ -59,7 +61,7 @@ export const AlertModal = ({
       {secondaryButtonText && (
         <Button
           kind="outline"
-          theme="secondary"
+          theme="primary"
           roundedCorner
           onClick={() => {
             if (onSecondaryClick) {

@@ -1,6 +1,10 @@
 import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
 
+export const modal = css`
+  width: 578px;
+`
+
 export const IconContainer = styled.div`
   cursor: default;
   display: flex;
@@ -51,4 +55,10 @@ export const ButtonsContainer = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   justify-content: center;
+
+  /* Если только одна кнопка */
+/*   &:has(:only-child) {
+    grid-template-columns: auto;
+    justify-content: center;
+  } */
 `
