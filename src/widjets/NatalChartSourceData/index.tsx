@@ -1,6 +1,7 @@
 import { FC } from 'react'
 
 import { Card, Label, Row, Icon, Divider, LabelBlock } from './index.linaria'
+import { TIMEZONE_LIST } from '@/entities/astro-charts/data/calculator'
 import { useAppSelector } from '@/store'
 
 interface ChartSourceDataProps {
@@ -30,8 +31,11 @@ export const NatalChartSourceData: FC<ChartSourceDataProps> = ({ chartId }) => {
   const timezoneOffsetMs = typeof timezone === 'number' ? timezone * 60 * 60 * 1000 : 0
   const localDate = utcDate ? new Date(utcDate.getTime() + timezoneOffsetMs) : null
 
-  const formatTimezone =
-    typeof timezone === 'number' ? `GMT${timezone >= 0 ? `+${timezone}` : timezone}` : 'не указано'
+  const timeZoneName =
+    TIMEZONE_LIST.find((el) => el.value === timezone)?.content ??
+    `UTC${timezone >= 0 ? `+${timezone}` : timezone}`
+
+  const formatTimezone = typeof timezone === 'number' ? timeZoneName : 'не указано'
   const formatCoordinates =
     typeof latitude === 'number' && typeof longitude === 'number'
       ? `широта ${latitude}°, долгота ${longitude}°`

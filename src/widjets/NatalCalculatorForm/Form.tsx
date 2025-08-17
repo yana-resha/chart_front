@@ -15,6 +15,7 @@ import Input from '@/shared/components/Input'
 import { AlertModal } from '@/shared/components/Modal'
 import { SearchInput } from '@/shared/components/SearchInput'
 import { useFormikWrapper } from '@/shared/hooks/useFormikWrapper'
+import { LatitudeInput, LongitudeInput } from '@/shared/components/CoordInputs'
 export const Form = () => {
   const {
     isSubmitting,
@@ -152,25 +153,21 @@ export const Form = () => {
         }}
       />
       <CoordsGridRow>
-        <Input
+        <LatitudeInput
+          label="Широта"
           disabled={!enterCoordValue}
           value={values.latitude}
+          onChange={latitudeHadleChange}
           invalid={isLatitudeError}
           invalidText={isLatitudeError ? latitudeError : ''}
-          onChange={(e) => latitudeHadleChange(e.currentTarget.value.replaceAll('_', ''))}
-          maskPlaceholder="__.____"
-          mask="99.9999"
-          label="Широта"
         />
-        <Input
+        <LongitudeInput
+          label="Долгота"
           disabled={!enterCoordValue}
           value={values.longitude}
+          onChange={longitudeHadleChange}
           invalid={isLongitudeError}
           invalidText={isLongitudeError ? longitudeError : ''}
-          onChange={(e) => longitudeHadleChange(e.currentTarget.value.replaceAll('_', ''))}
-          maskPlaceholder="__.____"
-          mask="99.9999"
-          label="Долгота"
         />
       </CoordsGridRow>
       <Checkbox

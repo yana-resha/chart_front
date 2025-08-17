@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, ReactNode, useCallback, useRef, useState } from 'react'
+import { FocusEvent, InputHTMLAttributes, ReactNode, useCallback, useRef, useState } from 'react'
 
 import InputMask from '@mona-health/react-input-mask'
 import classNames from 'classnames'
@@ -43,6 +43,8 @@ const Input = ({
   handlerRightIconClick,
   mask = '',
   type,
+  onBlur,
+  onFocus,
   ...otherProps
 }: InputProps) => {
   const ref = useRef<HTMLDivElement>(null)
@@ -90,8 +92,14 @@ const Input = ({
           ref={inputRef}
           className={inputCSS}
           type={isShowPassword ? 'text' : type}
-          onFocus={() => setIsActive(true)}
-          onBlur={() => setIsActive(false)}
+          onFocus={(e: FocusEvent<HTMLInputElement, Element>) => {
+            setIsActive(true)
+            onFocus?.(e)
+          }}
+          onBlur={(e: FocusEvent<HTMLInputElement, Element>) => {
+            setIsActive(false)
+            onBlur?.(e)
+          }}
           mask={mask}
           {...otherProps}
         />
