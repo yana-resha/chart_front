@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 
 import { Formik, FormikProps } from 'formik'
 
@@ -6,19 +6,20 @@ import { Form } from './Form'
 import { useFormOutside } from './hooks/useFormOutside'
 import { Container, LoaderContent } from './index.linaria'
 import { ChartFormFieldValues } from './types'
-import { formInitialValues } from './utils/config'
+import { getInitialValues } from './utils/config'
 import { chartFormSchema } from './utils/validationSchema'
 import { LoaderModal } from '@/shared/components/Modal'
 
 const NatalCalculatorForm = () => {
   const formRef = useRef<FormikProps<ChartFormFieldValues>>(null)
   const { formSubmit, formIsLoading, isRedirecting } = useFormOutside()
+  const initialValues = useMemo(getInitialValues, [])
 
   return (
     <>
       <Container>
         <Formik
-          initialValues={formInitialValues}
+          initialValues={initialValues}
           validationSchema={chartFormSchema}
           onSubmit={formSubmit}
           innerRef={formRef}

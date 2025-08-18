@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { Card, Label, Row, Icon, Divider, LabelBlock } from './index.linaria'
 import { TIMEZONE_LIST } from '@/entities/astro-charts/data/calculator'
 import { useAppSelector } from '@/store'
+import { ASTRO_HOUSE_SYSTEM_DESCRIPTION } from '@/shared/configs/astro-houses.config'
 
 interface ChartSourceDataProps {
   chartId: string
@@ -13,7 +14,7 @@ export const NatalChartSourceData: FC<ChartSourceDataProps> = ({ chartId }) => {
 
   if (!sourceData) return null
 
-  const { datetime, timezone, latitude, longitude, place, jd, name } = sourceData
+  const { datetime, timezone, latitude, longitude, place, jd, name, hsys } = sourceData
 
   const toStr = (d: Date | null) => {
     if (!d || isNaN(d.getTime())) return 'не указано'
@@ -101,6 +102,14 @@ export const NatalChartSourceData: FC<ChartSourceDataProps> = ({ chartId }) => {
           <Label>Юлианская дата (JD):</Label>
         </LabelBlock>
         {typeof jd === 'number' ? jd : 'не указано'}
+      </Row>
+
+      <Row>
+        <LabelBlock>
+          <Icon>🔢</Icon>
+          <Label>Система домов:</Label>
+        </LabelBlock>
+        {ASTRO_HOUSE_SYSTEM_DESCRIPTION[hsys] ? ASTRO_HOUSE_SYSTEM_DESCRIPTION[hsys] : 'не указано'}
       </Row>
     </Card>
   )

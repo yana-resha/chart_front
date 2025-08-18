@@ -17,5 +17,5 @@ export const useFormikWrapper = (name: string, onChange?: (value: unknown) => vo
     [setFieldValue, name, onChange],
   )
 
-  return { value, isError, error, handleChange }
+  return { value, isError, error, touched, handleChange }
 }

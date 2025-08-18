@@ -5,7 +5,7 @@ import {
   IPlanetsConfiguration,
   IStrongestPlanetByAspects,
 } from './astro-items.types'
-import { ASTRO_HOUSE_ACTIVITY } from '@/shared/types/astro/astro-houses.types'
+import { ASTRO_HOUSE_ACTIVITY, HOUSE_SYSTEM } from '@/shared/types/astro/astro-houses.types'
 
 export interface ISingleChartSourceData {
   name?: string
@@ -15,6 +15,7 @@ export interface ISingleChartSourceData {
   longitude: number
   place?: string
   jd: number
+  hsys: HOUSE_SYSTEM
 }
 
 export interface IFullNatalСalculations {

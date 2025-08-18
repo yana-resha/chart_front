@@ -1,5 +1,7 @@
 import { ASTRO_CHART_VARIABLE_DESCRIPTION } from '../configs/astro-chart.config'
+import { ASTRO_HOUSE_SYSTEM_DESCRIPTION } from '@/shared/configs/astro-houses.config'
 import { ASTRO_CHART_VARIABLE } from '@/shared/types/astro/astro-commom.types'
+import { HOUSE_SYSTEM } from '@/shared/types/astro/astro-houses.types'
 
 export interface ICalculatorTypes {
   id: string | number
@@ -75,4 +77,55 @@ export const TIMEZONE_LIST: ITimezoneSelectList[] = [
   { id: 4, value: -10, content: 'UTC -10' },
   { id: 3, value: -11, content: 'UTC -11' },
   { id: 2, value: -12, content: 'UTC -12' },
+]
+
+export interface IHouseSystemSelectList {
+  content: string
+  default?: boolean
+  value: HOUSE_SYSTEM
+  id: HOUSE_SYSTEM
+}
+export const HOUSE_SYSTEM_LIST: IHouseSystemSelectList[] = [
+  {
+    id: HOUSE_SYSTEM.Placidus,
+    default: true,
+    value: HOUSE_SYSTEM.Placidus,
+    content: ASTRO_HOUSE_SYSTEM_DESCRIPTION.Placidus,
+  },
+
+  {
+    id: HOUSE_SYSTEM.Koch,
+    value: HOUSE_SYSTEM.Koch,
+    content: ASTRO_HOUSE_SYSTEM_DESCRIPTION.Koch,
+  },
+
+  {
+    id: HOUSE_SYSTEM.Campanus,
+    value: HOUSE_SYSTEM.Campanus,
+    content: ASTRO_HOUSE_SYSTEM_DESCRIPTION.Campanus,
+  },
+
+  {
+    id: HOUSE_SYSTEM.EqualAsc,
+    value: HOUSE_SYSTEM.EqualAsc,
+    content: ASTRO_HOUSE_SYSTEM_DESCRIPTION.EqualAsc,
+  },
+
+  {
+    id: HOUSE_SYSTEM.EqualMC,
+    value: HOUSE_SYSTEM.EqualMC,
+    content: ASTRO_HOUSE_SYSTEM_DESCRIPTION.EqualMC,
+  },
+
+  {
+    id: HOUSE_SYSTEM.Porphyry,
+    value: HOUSE_SYSTEM.Porphyry,
+    content: ASTRO_HOUSE_SYSTEM_DESCRIPTION.Porphyry,
+  },
+
+  {
+    id: HOUSE_SYSTEM.Regiomontanus,
+    value: HOUSE_SYSTEM.Regiomontanus,
+    content: ASTRO_HOUSE_SYSTEM_DESCRIPTION.Regiomontanus,
+  },
 ]

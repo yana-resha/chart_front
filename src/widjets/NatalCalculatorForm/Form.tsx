@@ -1,8 +1,6 @@
-import { useEffect } from 'react'
-
 import { useFormInside } from './hooks/useFormInside'
 import { TimeGridRow, FormContainer, CoordsGridRow, LocalityTooltipContent } from './index.linaria'
-import { TIMEZONE_LIST } from '@/entities/astro-charts/data/calculator'
+import { HOUSE_SYSTEM_LIST, TIMEZONE_LIST } from '@/entities/astro-charts/data/calculator'
 import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator-request.types'
 import InfoIcon from '@/shared/assets/icons/info-circle.svg?react'
 import Pin3 from '@/shared/assets/icons/pin-3.svg?react'
@@ -10,12 +8,13 @@ import { SHARED_COLORS_VARIABLES } from '@/shared/assets/styles/colors'
 import { formIconCSS } from '@/shared/assets/styles/icons.linaria'
 import { Button } from '@/shared/components/Button'
 import { Checkbox } from '@/shared/components/Checkbox'
+import { LatitudeInput, LongitudeInput } from '@/shared/components/CoordInputs'
 import { CustomSelect } from '@/shared/components/CustomSelect'
 import Input from '@/shared/components/Input'
 import { AlertModal } from '@/shared/components/Modal'
 import { SearchInput } from '@/shared/components/SearchInput'
 import { useFormikWrapper } from '@/shared/hooks/useFormikWrapper'
-import { LatitudeInput, LongitudeInput } from '@/shared/components/CoordInputs'
+
 export const Form = () => {
   const {
     isSubmitting,
@@ -71,7 +70,11 @@ export const Form = () => {
     error: longitudeError,
   } = useFormikWrapper(CalculatorRequestKeys.longitude)
 
-  useEffect(() => {
+  const { value: houseSystemValue, handleChange: houseSystemHadleChange } = useFormikWrapper(
+    CalculatorRequestKeys.hsys,
+  )
+
+  /* useEffect(() => {
     const obj = {
       id: '539283',
       geonameid: '539283',
@@ -100,7 +103,7 @@ export const Form = () => {
     }
 
     localitiesClickHandler(undefined, obj)
-  }, [])
+  }, []) */
 
   return (
     <FormContainer>
@@ -186,9 +189,16 @@ export const Form = () => {
       <TimeGridRow>
         <Input
           type="time"
-          step={0}
+          step={60}
           defaultValue={timeValue}
-          onChange={(e) => timeHadleChange(e.currentTarget.value + ':00')}
+          onChange={(e) => {
+            const val = e.currentTarget.value
+            if (!val) {
+              timeHadleChange(undefined) // если пусто → undefined
+            } else {
+              timeHadleChange(val) // HH:MM → HH:MM:00
+            }
+          }}
           label="Время"
           invalid={isTimeError}
           invalidText={isTimeError ? timeError : ''}
@@ -204,6 +214,16 @@ export const Form = () => {
           optionsList={TIMEZONE_LIST}
         />
       </TimeGridRow>
+      <CustomSelect
+        label="Система домов"
+        values={[
+          HOUSE_SYSTEM_LIST.find((el) => el.value === houseSystemValue) ??
+            HOUSE_SYSTEM_LIST.find((el) => el.default) ??
+            HOUSE_SYSTEM_LIST[0],
+        ]}
+        setValues={(el) => houseSystemHadleChange(el.value)}
+        optionsList={HOUSE_SYSTEM_LIST}
+      />
       <Button
         isLoading={isSubmitting}
         onClick={submitForm}

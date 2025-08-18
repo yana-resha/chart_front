@@ -1,7 +1,10 @@
+import { HOUSE_SYSTEM } from '@/shared/types/astro/astro-houses.types'
+
 export enum CalculatorRequestKeys {
   latitude = 'latitude',
   longitude = 'longitude',
   date = 'date',
+  hsys = 'hsys',
   time = 'time',
   timezone = 'timezone',
   place = 'place',
@@ -9,6 +12,7 @@ export enum CalculatorRequestKeys {
 }
 
 export interface IBasicCalculatorRequest {
+  [CalculatorRequestKeys.hsys]?: HOUSE_SYSTEM
   [CalculatorRequestKeys.latitude]: number // широта
   [CalculatorRequestKeys.longitude]: number // долгота
   [CalculatorRequestKeys.date]: string // дата

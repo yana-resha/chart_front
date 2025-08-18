@@ -2,6 +2,9 @@ import * as Yup from 'yup'
 
 import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator-request.types'
 
+const TIME_RE_FULL = /^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/
+const TIME_RE_NOSEC = /^([01]\d|2[0-3]):([0-5]\d)$/
+
 // Helper: безопасно парсим строку в число (учитываем запятую)
 const toNum = (v: unknown) => {
   if (typeof v !== 'string') return NaN
@@ -23,27 +26,9 @@ const coordValidator = (maxAbs: number) =>
     })
 
 export const chartFormSchema = Yup.object().shape({
-  ['locality']: Yup.object()
-    .nullable()
-    .when('enter_coordinates', {
-      is: false,
-      then: (schema) => schema.required('Данное поле обязательно для заполнения'),
-      otherwise: (schema) => schema, // когда вводим координаты — locality не обязателен
-    }),
-
   [CalculatorRequestKeys.date]: Yup.date().required('Обязательное поле'),
   [CalculatorRequestKeys.name]: Yup.string().max(50, 'Максимальное значение 50 символов'),
-  [CalculatorRequestKeys.time]: Yup.string().required('Некорректное время'),
-
-  [CalculatorRequestKeys.latitude]: Yup.string().when('enter_coordinates', {
-    is: true,
-    then: () => coordValidator(90),
-    otherwise: () => Yup.string(), // без обязательности, когда координаты не вводим
-  }),
-
-  [CalculatorRequestKeys.longitude]: Yup.string().when('enter_coordinates', {
-    is: true,
-    then: () => coordValidator(180),
-    otherwise: () => Yup.string(),
-  }),
+  [CalculatorRequestKeys.time]: Yup.string().required('Введите дату'),
+  [CalculatorRequestKeys.latitude]: coordValidator(90),
+  [CalculatorRequestKeys.longitude]: coordValidator(180),
 })

@@ -1,6 +1,7 @@
 import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator-request.types'
 import { IFullLocality } from '@/entities/locality/types'
 import { IDropdownItem } from '@/shared/components/SearchInput/types'
+import { HOUSE_SYSTEM } from '@/shared/types/astro/astro-houses.types'
 
 export type IInputLocality = IFullLocality & IDropdownItem
 
@@ -10,6 +11,7 @@ type NatalChartValues = {
   [CalculatorRequestKeys.timezone]: number
   [CalculatorRequestKeys.latitude]: string
   [CalculatorRequestKeys.longitude]: string
+  [CalculatorRequestKeys.hsys]: HOUSE_SYSTEM | undefined
   name: string | undefined
   locality: IInputLocality | null
   searchLocality: string

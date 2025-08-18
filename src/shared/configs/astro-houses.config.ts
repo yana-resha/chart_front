@@ -1,3 +1,5 @@
+import { HOUSE_SYSTEM } from '../types/astro/astro-houses.types'
+
 export const ASTRO_HOUSE_SYMBOL: { [key: number]: string } = {
   1: 'Ⅰ',
   2: 'Ⅱ',
@@ -25,4 +27,14 @@ export const ASTRO_HOUSE_SHORTNAME: { [key: number]: string } = {
   4: 'IC',
   7: 'DC',
   10: 'MC',
+}
+
+export const ASTRO_HOUSE_SYSTEM_DESCRIPTION: Record<HOUSE_SYSTEM, string> = {
+  [HOUSE_SYSTEM.Placidus]: 'Плацидус',
+  [HOUSE_SYSTEM.Koch]: 'Кох',
+  [HOUSE_SYSTEM.Porphyry]: 'Порфирий',
+  [HOUSE_SYSTEM.Regiomontanus]: 'Региомонтанус',
+  [HOUSE_SYSTEM.Campanus]: 'Кампанус',
+  [HOUSE_SYSTEM.EqualMC]: 'Равнодомная от MC',
+  [HOUSE_SYSTEM.EqualAsc]: 'Равнодомная от Asc',
 }
