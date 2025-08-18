@@ -189,16 +189,9 @@ export const Form = () => {
       <TimeGridRow>
         <Input
           type="time"
-          step={60}
+          step={0}
           defaultValue={timeValue}
-          onChange={(e) => {
-            const val = e.currentTarget.value
-            if (!val) {
-              timeHadleChange(undefined) // если пусто → undefined
-            } else {
-              timeHadleChange(val) // HH:MM → HH:MM:00
-            }
-          }}
+          onChange={(e) => timeHadleChange(e.currentTarget.value)}
           label="Время"
           invalid={isTimeError}
           invalidText={isTimeError ? timeError : ''}
