@@ -37,6 +37,7 @@ export const primaryIconCSS = css`
 `
 
 export const formIconCSS = css`
+  color: rgba(255, 255, 255, 0.7);
   width: 1.25rem;
   height: 1.25rem;
 `

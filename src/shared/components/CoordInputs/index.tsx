@@ -87,7 +87,7 @@ export const CoordInput = ({
       invalidText={invalidText}
       value={value}
       inputMode="decimal"
-      placeholder={placeholder ?? (intDigits === 2 ? '±DD.dddddd' : '±DDD.dddddd')}
+      placeholder={placeholder ?? (intDigits === 2 ? '±XX.XXXXXX' : '±XXX.XXXXXX')}
       onChange={handleChange}
       onPaste={handlePaste}
       mask="" // маски НЕ используем

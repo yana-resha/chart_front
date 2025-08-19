@@ -10,6 +10,11 @@ export const PageTitle = styled.div`
     0 0 6px rgba(22, 238, 246, 0.1),
     0 0 12px rgba(22, 238, 246, 0.1),
     0 0 20px rgba(22, 238, 246, 0.15);
+
+  @media (max-width: 1000px) {
+    font-size: 1.8rem;
+    margin-bottom: 1.8rem;
+  }
 `
 
 export const SectionTitle = styled.h2`

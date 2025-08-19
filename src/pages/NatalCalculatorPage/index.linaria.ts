@@ -1,16 +1,155 @@
 import { styled } from '@linaria/react'
 
 import { TEXT_COLOR_VARIABLES } from '@/shared/assets/styles/colors'
+import { PageContentWrapper } from '@/shared/assets/styles/pages.linaria'
 import { addAlpha } from '@/shared/helpers/addAlpha'
+import { PageTitle } from '@/shared/assets/styles/titles.linaria'
 
-export const Layout = styled.section`
-  color: rgba(255, 255, 255, 1);
-  height: 100%;
-  display: grid;
-  grid-template-rows: auto 1fr;
-  min-width: 0;
+export const PageWrapper = styled(PageContentWrapper)`
+  padding-left: 1rem;
+  padding-right: 1rem;
 `
 
+export const MainTitle = styled(PageTitle)``
+
+export const DescText = styled.div`
+  font-size: 0.92rem;
+  line-height: 1.45;
+  opacity: 0.9;
+`
+
+/** Горизонтальная строка заголовка карточки */
+export const CardTitleRow = styled.div<{ size?: 'sm' | 'md' | 'lg' }>`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  line-height: 1.35;
+
+  /* базовый флюидный размер + твики по size */
+  font-size: clamp(
+    0.95rem,
+    0.85rem + 0.4vw,
+    ${(p) => (p.size === 'lg' ? '1.05rem' : p.size === 'sm' ? '0.98rem' : '1rem')}
+  );
+`
+
+/** Обёртка под иконку слева в заголовке */
+export const CardIcon = styled.div`
+  flex-shrink: 0;
+  width: clamp(20px, 2.2vw, 24px);
+  height: clamp(20px, 2.2vw, 24px);
+
+  svg,
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.35)) drop-shadow(0 0 6px rgba(255, 255, 255, 0.25));
+    -webkit-filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.35))
+      drop-shadow(0 0 6px rgba(255, 255, 255, 0.25));
+  }
+`
+
+/** Тонкая линия внутри карточек */
+export const CardDivider = styled.div`
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.15);
+`
+
+export const BenefitCard = styled.li<{ color: string }>`
+  position: relative;
+  border-radius: 12px;
+  padding: 0.75rem 1.25rem 1.25rem;
+  border: 1px solid ${(p) => addAlpha(p.color, 0.25)};
+  background: linear-gradient(135deg, ${(p) => addAlpha(p.color, 0.12)}, rgba(255, 255, 255, 0.02));
+  color: rgba(255, 255, 255, 0.95);
+  transition:
+    all 0.25s ease,
+    transform 0.25s ease;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  text-align: left;
+
+  &:hover {
+    background: linear-gradient(135deg, ${(p) => addAlpha(p.color, 0.22)}, rgba(255, 255, 255, 0.04));
+    border-color: ${(p) => addAlpha(p.color, 0.4)};
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+  }
+
+  .title {
+    font-weight: 500;
+    font-size: 1.05rem;
+    line-height: 1.25;
+    color: ${(p) => p.color};
+  }
+`
+export const BenefitGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin: 1.25rem 0 1.75rem;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1rem 0 1.25rem;
+
+    & ${BenefitCard} {
+      min-height: 100px;
+    }
+  }
+`
+export const InstructionsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin: 1.25rem 0 1.75rem;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`
+
+export const InstructionDesc = styled(DescText)`
+  min-height: 60px;
+`
+
+/* Шаги заполнения: 2 → 1 (как у тебя по смыслу) */
+export const StepsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 1.25rem;
+  margin: 1rem 0 1.5rem;
+`
+export const StepDesc = styled(DescText)``
+
+/** Кружок-номер для шагов/этапов */
+export const Badge = styled.span`
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+`
+
+/* ======= common blocks ======= */
 export const Divider = styled.div`
   height: 1px;
   background: linear-gradient(
@@ -23,6 +162,20 @@ export const Divider = styled.div`
   width: 100%;
 `
 
+export const SectionBlock = styled.div`
+  padding-top: 30px;
+  padding-bottom: 30px;
+`
+
+/* ======= page layout & text ======= */
+export const Layout = styled.section`
+  color: rgba(255, 255, 255, 1);
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+`
+
 export const MarkdownText = styled.div`
   color: rgba(255, 255, 255, 0.95);
   font-size: clamp(12px, 1rem, 18px);
@@ -32,14 +185,12 @@ export const MarkdownText = styled.div`
   p {
     margin-bottom: 0.5rem;
   }
-
   code {
     background: rgba(255, 255, 255, 0.08);
     padding: 0.15em 0.35em;
     border-radius: 4px;
     font-size: 0.95em;
   }
-
   strong {
     color: ${TEXT_COLOR_VARIABLES.BRIGHT_TEXT};
   }
@@ -53,6 +204,33 @@ export const FormWrapper = styled.div`
   container-type: inline-size;
 `
 
+/* ======= cards ======= */
+export const BaseCard = styled.div`
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01) 70%);
+  border-radius: 14px;
+  color: rgba(255, 255, 255, 0.95);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02) 70%);
+      border-color: rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 22px rgba(255, 255, 255, 0.02);
+      transform: translateY(-1px);
+    }
+  }
+  padding: 1rem 1.1rem;
+`
+
+/* — Специальная карточка калькулятора — */
 export const CalculatorCard = styled.div`
   position: relative;
   width: clamp(340px, 75cqw, 560px);
@@ -76,8 +254,8 @@ export const CalculatorCard = styled.div`
       inset 0 1px 0 rgba(255, 255, 255, 0.04);
   }
 
-  @container (min-width: 520px) {
-    padding: 22px 22px 16px;
+  @media (max-width: 1100px) {
+    width: 100%;
   }
 `
 
@@ -103,7 +281,6 @@ export const CardHint = styled.div`
 
 export const CardBody = styled.div`
   padding: 14px 4px 4px;
-  /* чтобы кнопка/итог внутри формы не липли к краю */
   & > *:last-child {
     margin-bottom: 6px;
   }
@@ -120,225 +297,45 @@ export const FooterNote = styled.div`
   color: rgba(255, 255, 255, 0.55);
 `
 
-export const IntroductionBlock = styled.div`
-  padding-bottom: 30px;
-
+/* ======= sections ======= */
+export const IntroductionBlock = styled(SectionBlock)`
+  padding-top: 0px;
   & ${Divider} {
     margin: 1rem 0;
   }
 `
+export const DataInfoBlock = styled(SectionBlock)``
+export const CalculatorInstructionBlock = styled(SectionBlock)``
+export const CalculationsInfoBlock = styled(SectionBlock)``
 
-export const DataInfoBlock = styled.div`
-  padding-top: 30px;
-  padding-bottom: 30px;
-`
+/* ======= lists & specific cards ======= */
 
-export const CalculatorInstructionBlock = styled.div`
-  padding-top: 30px;
-  padding-bottom: 30px;
-`
+/* Инструкция */
+export const InstructionCard = styled(BaseCard)``
 
-export const CalculationsInfoBlock = styled.div`
-  padding-top: 30px;
-  padding-bottom: 30px;
-`
+/* Шаги заполнения */
+export const StepCard = styled(BaseCard)``
 
-export const BenefitsList = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 карточки в ряд */
-  gap: 1.5rem;
-  margin: 2.5rem 0;
-  padding: 0;
-  list-style: none;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr; /* на мобилках по одной */
-  }
-`
-
-export const BenefitCard = styled.li<{ color: string }>`
-  position: relative;
-  border-radius: 12px;
-  padding: 0.75rem 1.25rem 1.25rem 1.25rem;
-  border: 1px solid ${(props) => addAlpha(props.color, 0.25)};
-  background: linear-gradient(135deg, ${(props) => addAlpha(props.color, 0.12)}, rgba(255, 255, 255, 0.02));
-  color: rgba(255, 255, 255, 0.95);
-  transition:
-    all 0.25s ease,
-    transform 0.25s ease;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.4rem;
-  text-align: left;
-
-  &:hover {
-    background: linear-gradient(135deg, ${(props) => addAlpha(props.color, 0.22)}, rgba(255, 255, 255, 0.04));
-    border-color: ${(props) => addAlpha(props.color, 0.4)};
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
-    transform: translateY(-1px); /* лёгкий подъём */
-  }
-
-  .title {
-    font-weight: 500;
-    font-size: 1.05rem;
-    line-height: 1.25;
-    color: ${(props) => props.color};
-  }
-
-  .desc {
-    font-size: 0.9rem;
-    line-height: 1.4;
-    opacity: 0.88;
-  }
-`
-
-export const InstructionsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-  margin: 1.25rem 0 1.75rem;
-  @media (max-width: 900px) {
-    grid-template-columns: 1fr;
-  }
-`
-export const InstructionCard = styled.div`
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01) 70%);
-  border-radius: 14px;
-  padding: 1rem 1.1rem;
-  color: rgba(255, 255, 255, 0.95);
-
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
-
-  &:hover {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02) 70%);
-    border-color: rgba(255, 255, 255, 0.18);
-    box-shadow: 0 8px 22px rgba(255, 255, 255, 0.02);
-    transform: translateY(-1px);
-  }
-
-  .title {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-
-    font-weight: 500;
-    font-size: 1rem;
-    line-height: 1.35;
-
-    .icon {
-      flex-shrink: 0;
-      width: 24px;
-      height: 24px;
-
-      svg,
-      img {
-        width: 100%;
-        height: 100%;
-        display: block;
-        filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.35)) drop-shadow(0 0 6px rgba(255, 255, 255, 0.25));
-        -webkit-filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.35))
-          drop-shadow(0 0 6px rgba(255, 255, 255, 0.25));
-      }
-    }
-  }
-
-  .divider {
-    height: 1px;
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 4px rgba(255, 255, 255, 0.15);
-  }
-
-  .desc {
-    font-size: 0.92rem;
-    line-height: 1.45;
-    opacity: 0.9;
-  }
-`
-
-export const StepsGrid = styled.div`
+/* Как считаем */
+export const CalculationStepsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem 1.25rem;
-  margin: 1rem 0 2.5rem;
-
-  @media (max-width: 920px) {
+  margin: 1.25rem 0 2rem;
+  @media (max-width: 1100px) {
     grid-template-columns: 1fr;
   }
 `
-
-export const StepCard = styled.div`
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01) 70%);
-  border-radius: 14px;
-  padding: 1rem 1.1rem;
-  color: rgba(255, 255, 255, 0.95);
-
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
-
-  &:hover {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02) 70%);
-    border-color: rgba(255, 255, 255, 0.18);
-    box-shadow: 0 8px 22px rgba(255, 255, 255, 0.02);
-    transform: translateY(-1px);
-  }
-
-  .title {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+export const CalculationCard = styled(BaseCard)`
+  .term {
     font-weight: 500;
-    font-size: 1rem;
-    line-height: 1.35;
-  }
-
-  .badge {
-    flex-shrink: 0;
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #fff;
-    box-shadow: 0 0 6px rgba(255, 255 255, 0.4);
-  }
-
-  .divider {
-    height: 1px;
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 4px rgba(255, 255, 255, 0.15);
-  }
-
-  .desc {
-    font-size: 0.92rem;
-    line-height: 1.45;
-    opacity: 0.9;
+    font-style: italic;
+    color: rgb(4, 187, 209) !important;
+    cursor: pointer;
   }
 `
 
+/* Плашка-подсказка */
 export const Tip = styled.div`
   border: 1px solid rgba(255, 209, 102, 0.4);
   background: rgba(255, 209, 102, 0.08);
@@ -348,7 +345,6 @@ export const Tip = styled.div`
   line-height: 1.45;
   color: rgba(255, 255, 255, 0.95);
   box-shadow: 0 0 8px rgba(255, 209, 102, 0.15);
-
   transition: all 0.25s ease;
 
   &:hover {
@@ -356,85 +352,5 @@ export const Tip = styled.div`
     border-color: ${addAlpha('#ffd166', 0.55)};
     box-shadow: 0 0 10px ${addAlpha('#ffd166', 0.25)};
     transform: translateY(-1px);
-  }
-`
-
-export const CalculationStepsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem 1.25rem;
-  margin: 1.25rem 0 2rem;
-
-  @media (max-width: 920px) {
-    grid-template-columns: 1fr;
-  }
-`
-
-export const CalculationCard = styled.div`
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01) 70%);
-  border-radius: 14px;
-  padding: 1rem 1.1rem;
-  color: rgba(255, 255, 255, 0.95);
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
-
-  &:hover {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02) 70%);
-    border-color: rgba(255, 255, 255, 0.18);
-    box-shadow: 0 8px 22px rgba(255, 255, 255, 0.02);
-    transform: translateY(-1px);
-  }
-
-  .title {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 500;
-    font-size: 1rem;
-    line-height: 1.35;
-  }
-
-  .badge {
-    flex-shrink: 0;
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #fff;
-    box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
-  }
-
-  .divider {
-    height: 1px;
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 4px rgba(255, 255, 255, 0.15);
-  }
-
-  .desc {
-    font-size: 0.92rem;
-    line-height: 1.45;
-    opacity: 0.9;
-  }
-
-  .term {
-    font-weight: 500;
-    font-style: italic;
-    /* color: rgb(72 178 182) !important; */
-    color: rgb(4, 187, 209) !important;
-    /* color: ${TEXT_COLOR_VARIABLES.BRIGHT_TEXT}!important; */
-    cursor: pointer;
   }
 `

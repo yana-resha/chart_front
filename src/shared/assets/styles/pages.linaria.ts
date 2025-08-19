@@ -1,6 +1,6 @@
 import { styled } from '@linaria/react'
 
 export const PageContentWrapper = styled.div`
-  padding-top: 1.875rem;
+  padding-top: 1rem;
   padding-bottom: 10px;
 `
