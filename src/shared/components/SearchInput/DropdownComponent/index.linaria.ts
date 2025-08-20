@@ -93,7 +93,7 @@ export const SkeletonItem = styled.div`
   }
 `
 export const DropdownAlertBlock = styled.div`
-  min-height: 140px;
+  height: 140px;
   display: flex;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -105,17 +105,17 @@ export const DropdownAlertBlock = styled.div`
 export const AlertTitle = styled.div`
   font-size: 1rem;
   line-height: 1.2;
+  margin-bottom: 3px;
   font-weight: 500;
   text-align: center;
 `
 export const AlertDescription = styled.div`
-  font-size: clamp(12px, 0.875rem, 16px);
+  font-size: 0.875rem;
   line-height: 1.2;
-  font-weight: 300;
   text-align: center;
 `
 export const UpsetIconSVG = styled(UpsetIcon)`
   width: 4rem;
   height: 4rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 `

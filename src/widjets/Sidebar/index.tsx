@@ -26,7 +26,7 @@ const Sidebar = () => {
   const topBarRef = useRef<HTMLDivElement | null>(null)
   const [topBarH, setTopBarH] = useState(64)
 
-  // убрать 
+  // убрать скролл
   useScrollLock(open, 'fixed')
 
   // закрыть на переход
