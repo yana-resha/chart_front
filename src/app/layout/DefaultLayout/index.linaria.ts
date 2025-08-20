@@ -106,9 +106,9 @@ export const SidebarStaticWrapper = styled.div`
 
   /* планшет: обычный поток, авто-высота */
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    position: sticky;
-    z-index: 1;
-    top: max(0px, env(safe-area-inset-top)); /* iOS вырезы */
+    // position: sticky;
+    // z-index: 1;
+    // top: max(0px, env(safe-area-inset-top)); /* iOS вырезы */
     height: auto;
   }
 `

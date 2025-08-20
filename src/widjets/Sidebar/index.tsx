@@ -1,5 +1,4 @@
-// Sidebar.tsx
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import { NavLink, useLocation } from 'react-router-dom'
 
@@ -9,23 +8,33 @@ import {
   MobileTopBar,
   TopBlock,
   PublicAccountBlock,
-  BurgerButton,
   NavList,
+  NavSheet,
+  NavSheetScroll,
+  Backdrop,
   navlinkCSS,
 } from './index.linaria'
 import { BurgerIcon } from '@/shared/components/Burger'
+import { Button } from '@/shared/components/Button'
+import { useScrollLock } from '@/shared/hooks/useScrollLock'
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false)
-  const listRef = useRef<HTMLElement | null>(null)
   const { pathname } = useLocation()
 
-  // Закрывать меню при переходе по ссылке
+  // высота MobileTopBar, чтобы NavSheet начинался сразу под ним
+  const topBarRef = useRef<HTMLDivElement | null>(null)
+  const [topBarH, setTopBarH] = useState(64)
+
+  // убрать 
+  useScrollLock(open, 'fixed')
+
+  // закрыть на переход
   useEffect(() => {
     setOpen(false)
   }, [pathname])
 
-  // Закрывать по Escape
+  // закрыть по Escape
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setOpen(false)
@@ -35,67 +44,79 @@ const Sidebar = () => {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
-  // Для плавности max-height можно измерять контент (не обязательно)
-  useEffect(() => {
-    if (!listRef.current) return
-    if (open) {
-      // раскрывая меню, выставим текущую естественную высоту, затем auto
-      const el = listRef.current
-      el.style.maxHeight = '0px'
-      const h = el.scrollHeight
-      // принудительный reflow
-      void el.offsetHeight
-      el.style.maxHeight = `${h}px`
-      const done = () => {
-        el.style.maxHeight = '70vh' // после анимации «с потолком»
-        el.removeEventListener('transitionend', done)
-      }
-      el.addEventListener('transitionend', done)
-    } else {
-      if (listRef.current) {
-        listRef.current.style.maxHeight = '0px'
-      }
+  // замер высоты топ-бара
+  useLayoutEffect(() => {
+    const measure = () => {
+      if (!topBarRef.current) return
+      const h = Math.ceil(topBarRef.current.getBoundingClientRect().height)
+      if (h) setTopBarH(h)
     }
-  }, [open])
+    measure()
+    window.addEventListener('resize', measure)
+
+    return () => window.removeEventListener('resize', measure)
+  }, [])
 
   return (
     <Container aria-label="Навигация по сайту">
-      {/* Десктопный блок с логотипом */}
+      {/* Десктопный верхний блок */}
       <TopBlock>
         <PublicAccountBlock />
       </TopBlock>
 
-      {/* Планшетный топ-бар: логотип слева + бургер справа */}
-      <MobileTopBar>
+      {/* Планшетный топ-бар (логотип + бургер) */}
+      <MobileTopBar ref={topBarRef}>
         <PublicAccountBlock />
-        <BurgerButton
-          type="button"
+        <Button
           aria-label={open ? 'Закрыть меню' : 'Открыть меню'}
           aria-controls="sidebar-nav"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
+          theme="secondary"
+          kind="text"
         >
-          <BurgerIcon open={open}/>
-        </BurgerButton>
+          <BurgerIcon open={open} />
+        </Button>
       </MobileTopBar>
 
-      {/* Навигация: обычная колонка на десктопе; на планшете — выпадающее меню */}
-      <NavList
-        id="sidebar-nav"
-        ref={listRef}
-        data-open={open}
-      >
-        {NAVIGATION_DATA.map((data) => (
+      {/* Десктопная навигация (в потоке) */}
+      <NavList id="sidebar-nav">
+        {NAVIGATION_DATA.map((item) => (
           <NavLink
-            key={data.path}
+            key={item.path}
             className={navlinkCSS}
-            to={data.path}
+            to={item.path}
           >
-            {data.icon}
-            {data.name}
+            {item.icon}
+            {item.name}
           </NavLink>
         ))}
       </NavList>
+
+      {/* Мобильный шит поверх верстки */}
+      <Backdrop
+        open={open}
+        onClick={() => setOpen(false)}
+      />
+
+      <NavSheet
+        open={open}
+        top={topBarH}
+        aria-hidden={!open}
+      >
+        <NavSheetScroll>
+          {NAVIGATION_DATA.map((item) => (
+            <NavLink
+              key={item.path}
+              className={navlinkCSS}
+              to={item.path}
+            >
+              {item.icon}
+              {item.name}
+            </NavLink>
+          ))}
+        </NavSheetScroll>
+      </NavSheet>
     </Container>
   )
 }

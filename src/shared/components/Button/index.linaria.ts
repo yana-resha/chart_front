@@ -134,11 +134,21 @@ export const ButtonComponent = styled.button`
     transition: all 0.2s;
 
     &.primary {
+      color: ${BTN_BACKGROUND_VARIABLES.BRIGHT_PRIMARY};
       background: linear-gradient(
         45deg,
         ${BTN_BACKGROUND_VARIABLES.NORM_PRIMARY},
         ${BTN_BACKGROUND_VARIABLES.BRIGHT_PRIMARY}
       );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+
+    &.secondary {
+      color: rgba(255, 255, 255, 1);
+      background: linear-gradient(45deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 1));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;

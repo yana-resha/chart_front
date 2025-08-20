@@ -1,4 +1,3 @@
-// index.linaria.ts
 import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
 
@@ -6,7 +5,7 @@ import { BACKGROUND_COLORS_VARIABLES, ICONS_STROKES } from '@/shared/assets/styl
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { addAlpha } from '@/shared/helpers/addAlpha'
 
-/** Константы для читаемости и единства */
+/** Константы */
 export const SIDEBAR_UI = {
   GUTTER_X: '0.5rem',
   GUTTER_Y: '1rem',
@@ -17,8 +16,6 @@ export const SIDEBAR_UI = {
   TOPBAR: {
     PADDING: '0.6rem 0.75rem',
     RADIUS: '14px',
-    BORDER: '1px solid rgba(255, 255, 255, 0.06)',
-    BACKDROP_BG: 'rgba(19, 22, 25, 0.75)',
   },
 
   ACCOUNT: {
@@ -28,22 +25,16 @@ export const SIDEBAR_UI = {
     HEIGHT: '4.875rem',
   },
 
-  BURGER: {
-    SIZE: 40,
-    RADIUS: 10,
-    LINE_W: 22,
-    LINE_H: 2,
-    LINE_OFFSET: 6,
+  NAV: {
+    TRANSFORM_Y_CLOSED: -8, // px
   },
 
-  NAV: {
-    OPEN_MAX_VH: 70, // 70vh
-    TRANSFORM_Y_CLOSED: -8, // px
-    DURATION: {
-      HEIGHT_MS: 280,
-      OPACITY_MS: 200,
-      TRANSFORM_MS: 280,
-    },
+  SHEET: {
+    Z_MENU: 1000,
+    Z_BACKDROP: 999,
+    RADIUS: '16px',
+    DURATION_IN_MS: 280,
+    OPACITY_IN_MS: 200,
   },
 } as const
 
@@ -65,7 +56,7 @@ export const Container = styled.aside`
   }
 `
 
-/* Верхний блок с логотипом */
+/* Десктопный блок с логотипом (на планшете скрыт) */
 export const TopBlock = styled.div`
   padding: 0.8rem;
   display: block;
@@ -75,7 +66,7 @@ export const TopBlock = styled.div`
   }
 `
 
-/* Топ-бар для планшета и ниже (логотип слева, бургер справа) */
+/* Топ‑бар для планшета и ниже (логотип слева, бургер справа) */
 export const MobileTopBar = styled.div`
   display: none;
 
@@ -93,93 +84,75 @@ export const PublicAccountBlock = styled.div`
   padding: ${SIDEBAR_UI.ACCOUNT.PADDING};
   background: ${SIDEBAR_UI.ACCOUNT.BG};
   border-radius: ${SIDEBAR_UI.ACCOUNT.RADIUS};
-  // height: ${SIDEBAR_UI.ACCOUNT.HEIGHT};
+  /* height: ${SIDEBAR_UI.ACCOUNT.HEIGHT}; */
 `
 
-/* Бургер-кнопка */
-export const BurgerButton = styled.button`
-  appearance: none;
-  border: 0;
-  background: transparent;
-  width: ${SIDEBAR_UI.BURGER.SIZE}px;
-  height: ${SIDEBAR_UI.BURGER.SIZE}px;
-  border-radius: ${SIDEBAR_UI.BURGER.RADIUS}px;
-  position: relative;
-  cursor: pointer;
-
-  display: grid;
-  place-items: center;
-
-  &:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.3);
-    outline-offset: 2px;
-  }
-
-  /* иконка из трёх линий */
-  &::before,
-  &::after,
-  span {
-    content: '';
-    display: block;
-    width: ${SIDEBAR_UI.BURGER.LINE_W}px;
-    height: ${SIDEBAR_UI.BURGER.LINE_H}px;
-    background: #e8e9e9;
-    transition:
-      transform 0.2s ease,
-      opacity 0.2s ease;
-  }
-  span {
-    /* средняя линия */
-  }
-
-  &::before {
-    transform: translateY(-${SIDEBAR_UI.BURGER.LINE_OFFSET}px);
-  }
-  &::after {
-    transform: translateY(${SIDEBAR_UI.BURGER.LINE_OFFSET}px);
-  }
-
-  &[aria-expanded='true'] {
-    /* крестик */
-    &::before {
-      transform: translateY(0) rotate(45deg);
-    }
-    &::after {
-      transform: translateY(0) rotate(-45deg);
-    }
-    span {
-      opacity: 0;
-      transform: scaleX(0);
-    }
-  }
-`
-
-/* Навигация */
+/* Десктопная навигация (в потоке) */
 export const NavList = styled.nav`
   width: 100%;
   display: flex;
   flex-direction: column;
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-    transform: translateY(${SIDEBAR_UI.NAV.TRANSFORM_Y_CLOSED}px);
-    transition:
-      max-height ${SIDEBAR_UI.NAV.DURATION.HEIGHT_MS}ms ease,
-      opacity ${SIDEBAR_UI.NAV.DURATION.OPACITY_MS}ms ease,
-      transform ${SIDEBAR_UI.NAV.DURATION.TRANSFORM_MS}ms ease;
-
-    &[data-open='true'] {
-      max-height: ${SIDEBAR_UI.NAV.OPEN_MAX_VH}vh;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
-    }
+    display: none; /* на планшете показываем отдельный NavSheet */
   }
+`
+
+/* Бэкдроп поверх контента */
+export const Backdrop = styled.button<{ open: boolean }>`
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: ${({ open }) => (open ? 1 : 0)};
+    pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
+    transition: opacity 0.2s ease;
+    z-index: ${SIDEBAR_UI.SHEET.Z_BACKDROP};
+    border: 0;
+    padding: 0;
+  }
+
+  @media (min-width: ${MEDIA_POINTS.TABLET + 1}px) {
+    display: none;
+  }
+`
+
+/* Фиксированное мобильное меню (слайд‑овер) */
+export const NavSheet = styled.nav<{ open: boolean; top: number }>`
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: ${({ top }) => `${top}px`};
+    bottom: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    background: ${BACKGROUND_COLORS_VARIABLES.SIDEBAR_BACK};
+    border-radius: ${SIDEBAR_UI.SHEET.RADIUS} ${SIDEBAR_UI.SHEET.RADIUS} 0 0;
+    z-index: ${SIDEBAR_UI.SHEET.Z_MENU};
+
+    transform: translateY(${({ open }) => (open ? 0 : `${SIDEBAR_UI.NAV.TRANSFORM_Y_CLOSED}px`)});
+    opacity: ${({ open }) => (open ? 1 : 0)};
+    pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
+    transition:
+      transform ${SIDEBAR_UI.SHEET.DURATION_IN_MS}ms ease,
+      opacity ${SIDEBAR_UI.SHEET.OPACITY_IN_MS}ms ease;
+  }
+
+  @media (min-width: ${MEDIA_POINTS.TABLET + 1}px) {
+    display: none;
+  }
+`
+
+/* Прокручиваемая область внутри NavSheet */
+export const NavSheetScroll = styled.div`
+  flex: 1 1 auto;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.5rem 0.5rem 1rem;
+  overscroll-behavior: contain;
 `
 
 export const iconFs = css`

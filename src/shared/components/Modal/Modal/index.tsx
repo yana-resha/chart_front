@@ -5,6 +5,7 @@ import React from 'react'
 import { createPortal } from 'react-dom'
 
 import { ModalVeil, ModalWindow } from '../index.linaria'
+import { useScrollLock } from '@/shared/hooks/useScrollLock'
 
 export interface IModal extends HTMLAttributes<HTMLDivElement> {
   onClose: () => void
@@ -31,13 +32,15 @@ export const Modal = ({ onClose, children, container, ...rest }: IModal) => {
     }
     const prevOverflow = document.body.style.overflow
     document.addEventListener('keydown', onKey)
-    document.body.style.overflow = 'hidden'
+    // document.body.style.overflow = 'hidden'
 
     return () => {
       document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = prevOverflow
+      // document.body.style.overflow = prevOverflow
     }
   }, [canUseDOM, onClose])
+
+  useScrollLock(true, 'overflow')
 
   if (!target) return null
 
