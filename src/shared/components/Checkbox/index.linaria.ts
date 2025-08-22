@@ -2,6 +2,7 @@ import { styled } from '@linaria/react'
 
 import checkIMG from './assets/check.svg'
 import { BTN_BACKGROUND_VARIABLES } from '@/shared/assets/styles/colors'
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
 export const Input = styled.input`
   padding: 0;
@@ -20,6 +21,7 @@ export const CheckboxContainer = styled.label`
   column-gap: 1rem;
   cursor: pointer;
   font-size: clamp(12px, 0.875rem, 16px);
+  color: rgb(255, 255, 255, 0.8);
   &::before {
     content: '';
     display: inline-block;
@@ -34,6 +36,15 @@ export const CheckboxContainer = styled.label`
     transition:
       outline 0.2s,
       opacity 0.2s;
+
+    @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+      width: 1.15rem;
+      height: 1.15rem;
+    }
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    gap: 0.8rem;
   }
 
   &:has(${Input}:checked):before {

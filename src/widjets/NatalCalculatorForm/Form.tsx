@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { useFormInside } from './hooks/useFormInside'
 import { TimeGridRow, FormContainer, CoordsGridRow, LocalityTooltipContent } from './index.linaria'
 import { HOUSE_SYSTEM_LIST, TIMEZONE_LIST } from '@/entities/astro-charts/data/calculator'
@@ -5,7 +7,7 @@ import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator-
 import InfoIcon from '@/shared/assets/icons/info-circle.svg?react'
 import Pin3 from '@/shared/assets/icons/pin-3.svg?react'
 import { SHARED_COLORS_VARIABLES } from '@/shared/assets/styles/colors'
-import { formIconCSS } from '@/shared/assets/styles/icons.linaria'
+import { FormIconCSS } from '@/shared/assets/styles/form'
 import { Button } from '@/shared/components/Button'
 import { Checkbox } from '@/shared/components/Checkbox'
 import { LatitudeInput, LongitudeInput } from '@/shared/components/CoordInputs'
@@ -54,11 +56,7 @@ export const Form = () => {
   const { value: searchLocalityValue, handleChange: searchLocalityHadleChange } =
     useFormikWrapper('searchLocality')
 
-  const {
-    value: localityValue,
-    isError: isLocalityInvalid,
-    error: localityInvalidText,
-  } = useFormikWrapper('locality')
+  const { value: localityValue } = useFormikWrapper('locality')
   const {
     handleChange: latitudeHadleChange,
     isError: isLatitudeError,
@@ -74,7 +72,7 @@ export const Form = () => {
     CalculatorRequestKeys.hsys,
   )
 
-  /* useEffect(() => {
+  useEffect(() => {
     const obj = {
       id: '539283',
       geonameid: '539283',
@@ -103,11 +101,12 @@ export const Form = () => {
     }
 
     localitiesClickHandler(undefined, obj)
-  }, []) */
+  }, [])
 
   return (
     <FormContainer>
       <Input
+        name={CalculatorRequestKeys.name}
         type="text"
         defaultValue={nameValue}
         onChange={(e) => nameHandleChange(e.currentTarget.value)}
@@ -126,10 +125,11 @@ export const Form = () => {
             </LocalityTooltipContent>
           ) : undefined
         }
+        name={'locality'}
         value={searchLocalityValue}
         onChange={(e) => searchLocalityHadleChange(e.target.value)}
         isClearOnFocus={localityValue ? true : false}
-        leftIcon={<Pin3 className={formIconCSS} />}
+        leftIcon={<Pin3 className={FormIconCSS} />}
         label={'Населенный пункт'}
         placeholder="Укажите населенный пункт"
         dropdownList={(localitiesList ?? []).map((obj) => ({
@@ -147,16 +147,15 @@ export const Form = () => {
         onClickItem={localitiesClickHandler}
         clearValueFunc={resetLocality}
         listIsLoading={isLocalitiesLoading}
-        invalid={isLocalityInvalid}
-        invalidText={isLocalityInvalid ? localityInvalidText : ''}
         isError={isLocalitiesError}
         error={{
-          title: 'Ошибка сервера',
-          description: 'Попробуйте изменить поисковой запрос или перезагрузить страницу.',
+          title: <>Упс...</>,
+          description: 'Похоже что то сломалось. Попробуйте повторить загрузку.',
         }}
       />
       <CoordsGridRow>
         <LatitudeInput
+          name={CalculatorRequestKeys.latitude}
           label="Широта"
           disabled={!enterCoordValue}
           value={values.latitude}
@@ -165,6 +164,7 @@ export const Form = () => {
           invalidText={isLatitudeError ? latitudeError : ''}
         />
         <LongitudeInput
+          name={CalculatorRequestKeys.longitude}
           label="Долгота"
           disabled={!enterCoordValue}
           value={values.longitude}
@@ -174,12 +174,14 @@ export const Form = () => {
         />
       </CoordsGridRow>
       <Checkbox
+        name={'is_coords'}
         checked={enterCoordValue}
         label="Ввести координаты"
         onChange={(e) => enterCoordHandleChange(e.currentTarget.checked)}
       />
       <Input
         type="date"
+        name={CalculatorRequestKeys.date}
         defaultValue={dateValue}
         onChange={(e) => dateHadleChange(e.currentTarget.value)}
         label="Дата"
@@ -188,6 +190,7 @@ export const Form = () => {
       />
       <TimeGridRow>
         <Input
+          name={CalculatorRequestKeys.time}
           type="time"
           step={0}
           defaultValue={timeValue}
@@ -218,6 +221,8 @@ export const Form = () => {
         optionsList={HOUSE_SYSTEM_LIST}
       />
       <Button
+        type="submit"
+        roundedCorner
         isLoading={isSubmitting}
         onClick={submitForm}
       >

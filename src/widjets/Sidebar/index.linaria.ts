@@ -50,9 +50,12 @@ export const Container = styled.aside`
   gap: ${SIDEBAR_UI.GAP_DESKTOP};
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    gap: ${SIDEBAR_UI.GAP_TABLET};
-    padding: 0.5rem 0.5rem 0.75rem 0.5rem;
     border-radius: 0;
+    margin-bottom: 0;
+    gap: ${SIDEBAR_UI.GAP_TABLET};
+    padding: 0.3rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 6px 12px rgba(255, 255, 255, 0.045);
   }
 `
 
@@ -103,7 +106,7 @@ export const Backdrop = styled.button<{ open: boolean }>`
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0);
     opacity: ${({ open }) => (open ? 1 : 0)};
     pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
     transition: opacity 0.2s ease;
@@ -123,17 +126,15 @@ export const NavSheet = styled.nav<{ open: boolean; top: number }>`
     position: fixed;
     left: 0;
     right: 0;
-    top: ${({ top }) => `${top}px`};
+    top: ${({ top }) => `calc(${top}px)`};
     bottom: 0;
-
     display: flex;
     flex-direction: column;
 
     background: ${BACKGROUND_COLORS_VARIABLES.SIDEBAR_BACK};
-    border-radius: ${SIDEBAR_UI.SHEET.RADIUS} ${SIDEBAR_UI.SHEET.RADIUS} 0 0;
     z-index: ${SIDEBAR_UI.SHEET.Z_MENU};
 
-    transform: translateY(${({ open }) => (open ? 0 : `${SIDEBAR_UI.NAV.TRANSFORM_Y_CLOSED}px`)});
+    transform: translateX(${({ open }) => (open ? 0 : `50%`)});
     opacity: ${({ open }) => (open ? 1 : 0)};
     pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
     transition:

@@ -4,20 +4,19 @@ import { autoUpdate, flip, offset, size, useFloating } from '@floating-ui/react'
 import Skeleton from 'react-loading-skeleton'
 
 import { IDropdownItem, IDropdownProps } from '../types'
+import { DropdownContainer, DropdownItemElement } from './index.linaria'
+import MagicIcon from '@/shared/assets/icons/magic-wand.svg?react'
 import {
   AlertDescription,
   AlertTitle,
   Dropdown,
   DropdownAlertBlock,
-  DropdownContainer,
-  DropdownItem,
+  DropdownItemContent,
+  DropdownItemIconContainer,
   DropdownList,
-  ItemContent,
-  ItemIconContainer,
   SkeletonItem,
   UpsetIconSVG,
-} from './index.linaria'
-import MagicIcon from '@/shared/assets/icons/magic-wand.svg?react'
+} from '@/shared/assets/styles/form'
 
 export const DropdownComponent = <IValue extends IDropdownItem>({
   emptyList,
@@ -42,8 +41,7 @@ export const DropdownComponent = <IValue extends IDropdownItem>({
         apply({ rects, elements }) {
           Object.assign(elements.floating.style, {
             width: `${rects.reference.width}px`,
-            maxHeight: `300px`,
-            minHeight: `150px`,
+            height: '250px',
             overflowY: 'auto',
           })
         },
@@ -99,7 +97,7 @@ export const DropdownComponent = <IValue extends IDropdownItem>({
             aria-label="Search results"
           >
             {dropdownList.map((el) => (
-              <DropdownItem
+              <DropdownItemElement
                 key={el.id}
                 role="option"
                 onMouseDown={(e: { preventDefault: () => unknown }) => e.preventDefault()}
@@ -108,9 +106,9 @@ export const DropdownComponent = <IValue extends IDropdownItem>({
                   closeDropdown()
                 }}
               >
-                <ItemContent>{el.content}</ItemContent>
-                <ItemIconContainer>{el.rightIcon ?? <MagicIcon />}</ItemIconContainer>
-              </DropdownItem>
+                <DropdownItemContent>{el.content}</DropdownItemContent>
+                <DropdownItemIconContainer>{el.rightIcon ?? <MagicIcon />}</DropdownItemIconContainer>
+              </DropdownItemElement>
             ))}
           </DropdownList>
         )}

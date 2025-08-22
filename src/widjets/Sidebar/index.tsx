@@ -58,14 +58,17 @@ const Sidebar = () => {
   }, [])
 
   return (
-    <Container aria-label="Навигация по сайту">
+    <Container
+      aria-label="Навигация по сайту"
+      ref={topBarRef}
+    >
       {/* Десктопный верхний блок */}
       <TopBlock>
         <PublicAccountBlock />
       </TopBlock>
 
       {/* Планшетный топ-бар (логотип + бургер) */}
-      <MobileTopBar ref={topBarRef}>
+      <MobileTopBar>
         <PublicAccountBlock />
         <Button
           aria-label={open ? 'Закрыть меню' : 'Открыть меню'}

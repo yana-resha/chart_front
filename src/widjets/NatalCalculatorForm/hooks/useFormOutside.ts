@@ -7,12 +7,12 @@ import { useNavigate } from 'react-router-dom'
 
 import { ChartFormFieldValues } from '../types'
 import { natalChartRequestMapper } from '../utils/mapValuesToRequest'
+import { LocalStorageKeys } from '@/shared/constants/localStorageKeys'
 import { ROUTER_PATHES } from '@/shared/constants/router-paths'
+import { encodeRequestToQuery, saveRequest } from '@/shared/helpers/shareRequest'
 import { sleep } from '@/shared/helpers/sleep'
 import { usePostCalculateNatalMutation } from '@/store/api/astro-calculate.api'
 import { addNatalChart } from '@/store/slices/natal-decoding'
-import { encodeRequestToQuery, saveRequest } from '@/shared/helpers/shareRequest'
-import { LocalStorageKeys } from '@/shared/constants/localStorageKeys'
 
 export const useFormOutside = () => {
   const [postNatalChart] = usePostCalculateNatalMutation()

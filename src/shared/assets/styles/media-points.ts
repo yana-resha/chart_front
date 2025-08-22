@@ -1,3 +1,4 @@
 export enum MEDIA_POINTS {
+  DESKTOP_SMALL = 1100,
   TABLET = 900,
 }

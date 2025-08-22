@@ -1,22 +1,21 @@
-import { FocusEvent, InputHTMLAttributes, ReactNode, useCallback, useRef, useState } from 'react'
+import { InputHTMLAttributes, ReactNode, useCallback, useId, useRef, useState } from 'react'
 
 import InputMask from '@mona-health/react-input-mask'
 import classNames from 'classnames'
 
-import {
-  Container,
-  defaultIconConstainerCSS,
-  ErrorContainer,
-  IconContainer,
-  InputContainer,
-  inputCSS,
-  Label,
-} from './index.linaria'
+import { defaultIconConstainerCSS, IconContainer } from './index.linaria'
 import CalendarDay from '@/shared/assets/icons/calendar-day.svg?react'
 import Clock from '@/shared/assets/icons/clock.svg?react'
 import ClosedEye from '@/shared/assets/icons/eye-cross.svg?react'
 import OpenedEye from '@/shared/assets/icons/eye.svg?react'
-import { formIconCSS } from '@/shared/assets/styles/icons.linaria'
+import {
+  FormElementContainer,
+  FormElementLabel,
+  FormElementError,
+  FormInputContainer,
+  FormInputCSS,
+  FormIconCSS,
+} from '@/shared/assets/styles/form'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: ReactNode | string
@@ -43,14 +42,12 @@ const Input = ({
   handlerRightIconClick,
   mask = '',
   type,
-  onBlur,
-  onFocus,
   ...otherProps
 }: InputProps) => {
   const ref = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  const [isActive, setIsActive] = useState<boolean>(false)
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false)
+  const id = useId()
 
   const setInputFocus = () => inputRef.current?.focus()
   const leftIconHandler = useCallback(
@@ -80,26 +77,27 @@ const Input = ({
   )
 
   return (
-    <Container>
-      {label && <Label>{label}</Label>}
-      <InputContainer
+    <FormElementContainer>
+      {label && (
+        <FormElementLabel
+          htmlFor={id}
+          id={`${id}-label`}
+        >
+          {label}
+        </FormElementLabel>
+      )}
+      <FormInputContainer
         onClick={setInputFocus}
         ref={ref}
-        className={classNames({ isActive, invalid, disabled })}
+        className={classNames({ invalid, disabled })}
       >
         {leftIcon && <IconContainer onClick={leftIconHandler}>{leftIcon}</IconContainer>}
         <InputMask
+          disabled={disabled}
           ref={inputRef}
-          className={inputCSS}
+          id={id}
+          className={FormInputCSS}
           type={isShowPassword ? 'text' : type}
-          onFocus={(e: FocusEvent<HTMLInputElement, Element>) => {
-            setIsActive(true)
-            onFocus?.(e)
-          }}
-          onBlur={(e: FocusEvent<HTMLInputElement, Element>) => {
-            setIsActive(false)
-            onBlur?.(e)
-          }}
           mask={mask}
           {...otherProps}
         />
@@ -109,7 +107,7 @@ const Input = ({
             className={defaultIconConstainerCSS}
             onClick={showPasswordHandler}
           >
-            {isShowPassword ? <OpenedEye /> : <ClosedEye />}
+            {isShowPassword ? <OpenedEye className={FormIconCSS} /> : <ClosedEye className={FormIconCSS} />}
           </IconContainer>
         )}
         {!rightIcon && (type === 'date' || type === 'time') && (
@@ -117,12 +115,12 @@ const Input = ({
             className={defaultIconConstainerCSS}
             onClick={() => inputRef.current?.showPicker()}
           >
-            {type === 'date' ? <CalendarDay className={formIconCSS} /> : <Clock className={formIconCSS} />}
+            {type === 'date' ? <CalendarDay className={FormIconCSS} /> : <Clock className={FormIconCSS} />}
           </IconContainer>
         )}
-      </InputContainer>
-      {invalidText && <ErrorContainer>{invalidText}</ErrorContainer>}
-    </Container>
+      </FormInputContainer>
+      {invalidText && <FormElementError>{invalidText}</FormElementError>}
+    </FormElementContainer>
   )
 }
 

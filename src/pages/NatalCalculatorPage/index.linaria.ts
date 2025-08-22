@@ -1,37 +1,61 @@
 import { styled } from '@linaria/react'
 
 import { TEXT_COLOR_VARIABLES } from '@/shared/assets/styles/colors'
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { PageContentWrapper } from '@/shared/assets/styles/pages.linaria'
-import { addAlpha } from '@/shared/helpers/addAlpha'
 import { PageTitle } from '@/shared/assets/styles/titles.linaria'
+import { addAlpha } from '@/shared/helpers/addAlpha'
+
+const TEXT_SIZE = {
+  desktop: '0.92rem',
+  tablet: '0.8rem',
+}
+
+const CARD_TITLE_TEXT = {
+  desktop: '1rem',
+  tablet: '0.92rem',
+}
 
 export const PageWrapper = styled(PageContentWrapper)`
   padding-left: 1rem;
   padding-right: 1rem;
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 `
 
 export const MainTitle = styled(PageTitle)``
 
 export const DescText = styled.div`
-  font-size: 0.92rem;
+  font-size: ${TEXT_SIZE.desktop};
   line-height: 1.45;
   opacity: 0.9;
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    font-size: ${TEXT_SIZE.tablet};
+  }
 `
 
-/** Горизонтальная строка заголовка карточки */
-export const CardTitleRow = styled.div<{ size?: 'sm' | 'md' | 'lg' }>`
+export const BaseCardHeader = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.6rem;
+`
+/** Горизонтальная строка заголовка карточки */
+export const CardTitleRow = styled.div`
+  display: flex;
+  align-items: flex-start;
   gap: 0.5rem;
   font-weight: 500;
   line-height: 1.35;
 
-  /* базовый флюидный размер + твики по size */
-  font-size: clamp(
-    0.95rem,
-    0.85rem + 0.4vw,
-    ${(p) => (p.size === 'lg' ? '1.05rem' : p.size === 'sm' ? '0.98rem' : '1rem')}
-  );
+  font-size: ${CARD_TITLE_TEXT.desktop};
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    font-size: ${CARD_TITLE_TEXT.tablet};
+  }
 `
 
 /** Обёртка под иконку слева в заголовке */
@@ -49,6 +73,11 @@ export const CardIcon = styled.div`
     -webkit-filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.35))
       drop-shadow(0 0 6px rgba(255, 255, 255, 0.25));
   }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    width: clamp(18px, 2vw, 22px);
+    height: clamp(18px, 2vw, 22px);
+  }
 `
 
 /** Тонкая линия внутри карточек */
@@ -61,9 +90,10 @@ export const CardDivider = styled.div`
 export const BenefitCard = styled.li<{ color: string }>`
   position: relative;
   border-radius: 12px;
+  border-radius: 0px;
   padding: 0.75rem 1.25rem 1.25rem;
   border: 1px solid ${(p) => addAlpha(p.color, 0.25)};
-  background: linear-gradient(135deg, ${(p) => addAlpha(p.color, 0.12)}, rgba(255, 255, 255, 0.02));
+  background: linear-gradient(135deg, ${(p) => addAlpha(p.color, 0.5)}, rgba(0, 0, 0, 0));
   color: rgba(255, 255, 255, 0.95);
   transition:
     all 0.25s ease,
@@ -84,9 +114,16 @@ export const BenefitCard = styled.li<{ color: string }>`
 
   .title {
     font-weight: 500;
-    font-size: 1.05rem;
+    font-size: ${CARD_TITLE_TEXT.desktop};
     line-height: 1.25;
     color: ${(p) => p.color};
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    padding: 0.5rem 1rem 1rem;
+    .title {
+      font-size: ${CARD_TITLE_TEXT.tablet};
+    }
   }
 `
 export const BenefitGrid = styled.div`
@@ -96,13 +133,7 @@ export const BenefitGrid = styled.div`
   margin: 1.25rem 0 1.75rem;
 
   @media (max-width: 1100px) {
-    grid-template-columns: 1fr;
     gap: 1rem;
-    margin: 1rem 0 1.25rem;
-
-    & ${BenefitCard} {
-      min-height: 100px;
-    }
   }
 `
 export const InstructionsGrid = styled.div`
@@ -111,8 +142,13 @@ export const InstructionsGrid = styled.div`
   gap: 1.25rem;
   margin: 1.25rem 0 1.75rem;
 
-  @media (max-width: 1200px) {
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
   }
 `
 
@@ -143,10 +179,17 @@ export const Badge = styled.span`
   justify-content: center;
 
   font-size: 0.85rem;
+  line-height: 0;
   font-weight: 600;
   color: #fff;
-
   box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+    width: 22px;
+    height: 22px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
 `
 
 /* ======= common blocks ======= */
@@ -163,10 +206,14 @@ export const Divider = styled.div`
 `
 
 export const SectionBlock = styled.div`
-  padding-top: 30px;
-  padding-bottom: 30px;
-`
+  padding-top: 1.875rem;
+  padding-bottom: 1.875rem;
 
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+`
 /* ======= page layout & text ======= */
 export const Layout = styled.section`
   color: rgba(255, 255, 255, 1);
@@ -178,9 +225,13 @@ export const Layout = styled.section`
 
 export const MarkdownText = styled.div`
   color: rgba(255, 255, 255, 0.95);
-  font-size: clamp(12px, 1rem, 18px);
+  font-size: ${TEXT_SIZE.desktop};
   line-height: 1.7;
   width: 100%;
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    font-size: ${TEXT_SIZE.tablet};
+  }
 
   p {
     margin-bottom: 0.5rem;
@@ -202,6 +253,11 @@ export const FormWrapper = styled.div`
   padding-top: 25px;
   padding-bottom: 30px;
   container-type: inline-size;
+
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+    padding-top: 10px;
+    padding-bottom: 20px;
+  }
 `
 
 /* ======= cards ======= */
@@ -227,9 +283,9 @@ export const BaseCard = styled.div`
       transform: translateY(-1px);
     }
   }
-  padding: 1rem 1.1rem;
+  padding: 1rem;
+  padding-top: 0.7rem;
 `
-
 /* — Специальная карточка калькулятора — */
 export const CalculatorCard = styled.div`
   position: relative;
@@ -254,8 +310,12 @@ export const CalculatorCard = styled.div`
       inset 0 1px 0 rgba(255, 255, 255, 0.04);
   }
 
-  @media (max-width: 1100px) {
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
     width: 100%;
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    width: 85%;
   }
 `
 
@@ -302,6 +362,10 @@ export const IntroductionBlock = styled(SectionBlock)`
   padding-top: 0px;
   & ${Divider} {
     margin: 1rem 0;
+
+    @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+      margin: 0.7rem 0;
+    }
   }
 `
 export const DataInfoBlock = styled(SectionBlock)``
@@ -322,8 +386,12 @@ export const CalculationStepsGrid = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem 1.25rem;
   margin: 1.25rem 0 2rem;
-  @media (max-width: 1100px) {
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
     grid-template-columns: 1fr;
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    grid-template-columns: repeat(2, 1fr);
   }
 `
 export const CalculationCard = styled(BaseCard)`
@@ -352,5 +420,10 @@ export const Tip = styled.div`
     border-color: ${addAlpha('#ffd166', 0.55)};
     box-shadow: 0 0 10px ${addAlpha('#ffd166', 0.25)};
     transform: translateY(-1px);
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    font-size: 0.8rem;
+    padding: 0.65rem 0.8rem;
   }
 `

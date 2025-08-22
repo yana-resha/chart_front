@@ -50,7 +50,8 @@ export const ButtonComponent = styled.button`
       box-shadow: 0 0 5px 5px rgba(22, 238, 246, 0);
     }
 
-    &:hover {
+    &:hover,
+    &:focus-within {
       box-shadow: 0 0 5px 5px rgba(22, 238, 246, 0.15);
     }
 
@@ -82,7 +83,8 @@ export const ButtonComponent = styled.button`
       color: ${BTN_BACKGROUND_VARIABLES.BRIGHT_PRIMARY};
       box-shadow: 0 0 5px 5px rgba(22, 238, 246, 0);
 
-      &:hover {
+      &:hover,
+      &:focus-within {
         box-shadow: 0 0 5px 5px rgba(22, 238, 246, 0.1);
       }
 
@@ -100,7 +102,9 @@ export const ButtonComponent = styled.button`
       border-color: rgb(255, 255, 255, 0.8);
       color: rgb(255, 255, 255, 0.8);
       box-shadow: 0 0 5px 5px rgba(255, 255, 255, 0);
-      &:hover {
+
+      &:hover,
+      &:focus-within {
         box-shadow: 0 0 5px 5px rgba(255, 255, 255, 0.07);
       }
 
@@ -155,7 +159,8 @@ export const ButtonComponent = styled.button`
       text-fill-color: transparent;
     }
 
-    &:hover {
+    &:hover,
+    &:focus-within {
       filter: brightness(0.7);
     }
 

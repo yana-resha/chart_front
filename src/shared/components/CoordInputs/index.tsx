@@ -50,6 +50,7 @@ type CoordInputProps = {
   invalid?: boolean
   invalidText?: string
   label: string
+  name?: string
   /** число цифр до точки: 2 для широты, 3 для долготы */
   intDigits: number
   /** подсказка в плейсхолдере (по умолчанию генерится) */

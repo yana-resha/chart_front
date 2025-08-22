@@ -1,21 +1,18 @@
-import { useCallback, useRef } from 'react'
+import { useCallback, useId, useRef } from 'react'
 import React from 'react'
 
 import classNames from 'classnames'
 
 import { TextInputProps } from '../types'
-import {
-  ClearIcon,
-  Container,
-  ErrorContainer,
-  IconContainer,
-  InfoIcon,
-  Input,
-  InputContainer,
-  Label,
-} from './index.linaria'
+import { ClearIcon, IconContainer, InfoIcon, Input, InputContainer } from './index.linaria'
 import { Tooltip } from '../../Tooltip'
-import { formIconCSS } from '@/shared/assets/styles/icons.linaria'
+import {
+  FormElementContainer,
+  FormElementError,
+  FormElementLabel,
+  FormIconCSS,
+  FormInputCSS,
+} from '@/shared/assets/styles/form'
 
 export const TextInput = ({
   label,
@@ -29,9 +26,11 @@ export const TextInput = ({
   isClearOnFocus,
   tooltip,
   ref = React.createRef(),
+  className,
   ...otherProps
 }: TextInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
+  const id = useId()
   const clearIconHandler = useCallback(
     (e: MouseEvent) => {
       e.stopPropagation()
@@ -43,25 +42,34 @@ export const TextInput = ({
   )
 
   return (
-    <Container>
-      {label && <Label>{label}</Label>}
+    <FormElementContainer>
+      {label && (
+        <FormElementLabel
+          htmlFor={id}
+          id={`${id}-label`}
+        >
+          {label}
+        </FormElementLabel>
+      )}
       <InputContainer
         ref={ref}
         className={classNames({ disabled, invalid })}
       >
         {leftIcon && <IconContainer>{leftIcon}</IconContainer>}
         <Input
+          id={id}
           onFocus={(e: MouseEvent) => {
             if (isClearOnFocus) clearIconHandler(e)
           }}
           onClick={openDropdownFunc}
           ref={inputRef}
+          className={classNames([FormInputCSS, className])}
           {...otherProps}
         />
         {tooltip && (
           <Tooltip tooltipContent={tooltip}>
             <IconContainer>
-              <InfoIcon className={formIconCSS} />
+              <InfoIcon className={FormIconCSS} />
             </IconContainer>
           </Tooltip>
         )}
@@ -71,7 +79,7 @@ export const TextInput = ({
           </IconContainer>
         )}
       </InputContainer>
-      {invalidText && <ErrorContainer>{invalidText}</ErrorContainer>}
-    </Container>
+      {invalidText && <FormElementError>{invalidText}</FormElementError>}
+    </FormElementContainer>
   )
 }

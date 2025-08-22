@@ -9,8 +9,6 @@ export const Container = styled.div`
 `
 
 export const ChevronDown = styled(ShevronDownSvg)`
-  width: 1.5rem;
-  height: 1.5rem;
   transition: transform 0.2s;
   cursor: pointer;
   &.isOpen {

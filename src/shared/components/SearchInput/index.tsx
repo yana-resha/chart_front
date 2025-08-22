@@ -13,7 +13,7 @@ export const SearchInput = <IValue extends IDropdownItem>({
   listIsLoading,
   error,
   isError,
-  emptyList = { title: 'Ничего не найдено', description: 'Попробуйте изменить поисковой запрос' },
+  emptyList = { title: 'Не нашлось...', description: 'Попробуй короче или по-другому написать.' },
   ...inputProps
 }: SearchInputProps<IValue>) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)

@@ -31,6 +31,7 @@ import {
   BenefitGrid,
   StepDesc,
   InstructionDesc,
+  BaseCardHeader,
 } from './index.linaria'
 import CalendarDay from '@/shared/assets/icons/calendar-day.svg?react'
 import Clock from '@/shared/assets/icons/clock.svg?react'
@@ -48,7 +49,7 @@ export const NatalCalculatorPage = () => (
     <PageHeader>
       <HeaderBackButton />
     </PageHeader>
-    <PageWrapper style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
+    <PageWrapper>
       <IntroductionBlock>
         <PageTitle>Расчёт натальной карты онлайн&nbsp;💫</PageTitle>
         <MarkdownText>
@@ -65,12 +66,12 @@ export const NatalCalculatorPage = () => (
               {' '}
               рассчитать натальную карту онлайн{' '}
             </a>{' '}
-            всего за пару минут — бесплатно и с подробными пояснениями.{' '}
+            всего за пару минут&nbsp;— бесплатно и с подробными пояснениями.{' '}
           </p>{' '}
           <Divider />{' '}
           <p>
             {' '}
-            🪐 <strong>Натальная карта</strong> — это подробная астрологическая схема, построенная на{' '}
+            🪐 <strong>Натальная карта</strong>&nbsp;— это подробная астрологическая схема, построенная на{' '}
             <em>точное время</em> и <em>место рождения</em>. Она показывает 🌌 расположение планет, Солнца,
             Луны и ключевых точек гороскопа в момент вашего появления на свет. Такой «небесный портрет»
             помогает понять особенности личности, сильные и слабые стороны, таланты, кармические задачи и
@@ -118,7 +119,7 @@ export const NatalCalculatorPage = () => (
           </p>
           <Divider />
           <p>
-            📌 Чтобы построить карту, потребуется несколько простых данных —{' '}
+            📌 Чтобы построить карту, потребуется несколько простых данных&nbsp;—{' '}
             <a
               href="#data-info"
               className={linkTextCss}
@@ -136,13 +137,13 @@ export const NatalCalculatorPage = () => (
         <CalculatorCard>
           <CardHeader>
             <CardTitle>Введите данные рождения</CardTitle>
-            <CardHint>Если города нет в списке — введите координаты вручную.</CardHint>
+            <CardHint>Если города нет в списке&nbsp;— введите координаты вручную.</CardHint>
           </CardHeader>
           <CardBody>
             <NatalCalculatorForm />
           </CardBody>
           <CardFooter>
-            <FooterNote>Если ввели координаты вручную — не забудьте выбрать часовой пояс.</FooterNote>
+            <FooterNote>Если ввели координаты вручную&nbsp;— не забудьте выбрать часовой пояс.</FooterNote>
           </CardFooter>
         </CalculatorCard>
       </FormWrapper>
@@ -154,39 +155,47 @@ export const NatalCalculatorPage = () => (
 
           <InstructionsGrid>
             <InstructionCard>
-              <CardTitleRow>
-                <CardIcon>
-                  <PinIcon />
-                </CardIcon>{' '}
-                Место рождения
-              </CardTitleRow>
-              <CardDivider />
+              <BaseCardHeader>
+                <CardTitleRow>
+                  <CardIcon>
+                    <PinIcon />
+                  </CardIcon>{' '}
+                  Место рождения
+                </CardTitleRow>
+                <CardDivider />
+              </BaseCardHeader>
               <InstructionDesc>
                 Населённый пункт, где вы родились. По нему автоматически определяются координаты и пояс.
               </InstructionDesc>
             </InstructionCard>
 
             <InstructionCard>
-              <CardTitleRow>
-                <CardIcon>
-                  <CalendarDay />
-                </CardIcon>{' '}
-                Дата рождения
-              </CardTitleRow>
-              <CardDivider />
+              <BaseCardHeader>
+                <CardTitleRow>
+                  <CardIcon>
+                    <CalendarDay />
+                  </CardIcon>{' '}
+                  Дата рождения
+                </CardTitleRow>
+                <CardDivider />
+              </BaseCardHeader>
               <InstructionDesc>Точная календарная дата в формате ДД.ММ.ГГГГ.</InstructionDesc>
             </InstructionCard>
 
             <InstructionCard>
-              <CardTitleRow>
-                <CardIcon>
-                  <Clock />
-                </CardIcon>{' '}
-                Время рождения
-              </CardTitleRow>
-              <CardDivider />
+              <BaseCardHeader>
+                <CardTitleRow>
+                  <CardIcon>
+                    <Clock />
+                  </CardIcon>{' '}
+                  Время рождения
+                </CardTitleRow>
+                <CardDivider />
+              </BaseCardHeader>
+
               <InstructionDesc>
-                Желательно до минут. Если точного времени нет — укажите ориентировочное (например, 12:00).
+                Желательно до минут. Если точного времени нет&nbsp;— укажите ориентировочное (например,
+                12:00).
               </InstructionDesc>
             </InstructionCard>
           </InstructionsGrid>
@@ -201,42 +210,53 @@ export const NatalCalculatorPage = () => (
 
           <StepsGrid>
             <StepCard>
-              <CardTitleRow>
-                <Badge>1</Badge> Имя (необязательно)
-              </CardTitleRow>
-              <CardDivider />
+              <BaseCardHeader>
+                <CardTitleRow>
+                  <Badge>1</Badge> Имя (необязательно)
+                </CardTitleRow>
+                <CardDivider />
+              </BaseCardHeader>
+
               <StepDesc>Поможет сохранить и отличать ваши расчёты.</StepDesc>
             </StepCard>
 
             <StepCard>
-              <CardTitleRow>
-                <Badge>2</Badge> Населённый пункт
-              </CardTitleRow>
-              <CardDivider />
-              <StepDesc>Начните вводить город — выберите из подсказки…</StepDesc>
+              <BaseCardHeader>
+                <CardTitleRow>
+                  <Badge>2</Badge> Населённый пункт
+                </CardTitleRow>
+                <CardDivider />
+              </BaseCardHeader>
+              <StepDesc>Начните вводить город&nbsp;— выберите из подсказки…</StepDesc>
             </StepCard>
 
             <StepCard>
-              <CardTitleRow>
-                <Badge>3</Badge> Дата
-              </CardTitleRow>
-              <CardDivider />
+              <BaseCardHeader>
+                <CardTitleRow>
+                  <Badge>3</Badge> Дата
+                </CardTitleRow>
+                <CardDivider />
+              </BaseCardHeader>
               <StepDesc>Выберите дату в календаре или введите вручную.</StepDesc>
             </StepCard>
 
             <StepCard>
-              <CardTitleRow>
-                <Badge>4</Badge> Время и часовой пояс
-              </CardTitleRow>
-              <CardDivider />
+              <BaseCardHeader>
+                <CardTitleRow>
+                  <Badge>4</Badge> Время и часовой пояс
+                </CardTitleRow>
+                <CardDivider />
+              </BaseCardHeader>
               <StepDesc>Укажите время рождения. Пояс будет «Auto» по городу…</StepDesc>
             </StepCard>
 
             <StepCard>
-              <CardTitleRow>
-                <Badge>5</Badge> Проверка
-              </CardTitleRow>
-              <CardDivider />
+              <BaseCardHeader>
+                <CardTitleRow>
+                  <Badge>5</Badge> Проверка
+                </CardTitleRow>
+                <CardDivider />
+              </BaseCardHeader>
               <StepDesc>
                 Убедитесь, что все данные указаны верно и нажмите <strong>«Рассчитать»</strong>.
               </StepDesc>
@@ -258,11 +278,13 @@ export const NatalCalculatorPage = () => (
 
           <CalculationStepsGrid>
             <CalculationCard>
-              <CardTitleRow>
-                <Badge>1</Badge>
-                Время и место
-              </CardTitleRow>
-              <CardDivider />
+              <BaseCardHeader>
+                <CardTitleRow>
+                  <Badge>1</Badge>
+                  Время и место
+                </CardTitleRow>
+                <CardDivider />
+              </BaseCardHeader>
               <DescText>
                 Вы вводите дату, время и населённый пункт. Мы определяем точный часовой пояс по базе данных{' '}
                 <Tooltip
@@ -279,7 +301,7 @@ export const NatalCalculatorPage = () => (
                 , учитывая переходы на летнее время и другие поправки. Это позволяет перевести всё в{' '}
                 <Tooltip
                   placement="top"
-                  tooltipContent="🕒 Всемирное координированное время — стандарт для астрономических расчётов"
+                  tooltipContent="🕒 Всемирное координированное время&nbsp;— стандарт для астрономических расчётов"
                 >
                   <span
                     className="term"
@@ -293,16 +315,18 @@ export const NatalCalculatorPage = () => (
             </CalculationCard>
 
             <CalculationCard>
-              <CardTitleRow>
-                <Badge>2</Badge>
-                Переход к астрономическому времени
-              </CardTitleRow>
-              <CardDivider />
+              <BaseCardHeader>
+                <CardTitleRow>
+                  <Badge>2</Badge>
+                  Переход к астрономическому времени
+                </CardTitleRow>
+                <CardDivider />
+              </BaseCardHeader>
               <DescText>
                 Из UTC мы вычисляем{' '}
                 <Tooltip
                   placement="top"
-                  tooltipContent="📅 Число, показывающее количество дней от начальной эпохи — используется в астрономии"
+                  tooltipContent="📅 Число, показывающее количество дней от начальной эпохи&nbsp;— используется в астрономии"
                 >
                   <span
                     className="term"
@@ -316,11 +340,13 @@ export const NatalCalculatorPage = () => (
             </CalculationCard>
 
             <CalculationCard>
-              <CardTitleRow>
-                <Badge>3</Badge>
-                Положение планет
-              </CardTitleRow>
-              <CardDivider />
+              <BaseCardHeader>
+                <CardTitleRow>
+                  <Badge>3</Badge>
+                  Положение планет
+                </CardTitleRow>
+                <CardDivider />
+              </BaseCardHeader>
               <DescText>
                 С помощью точных{' '}
                 <Tooltip
@@ -363,16 +389,18 @@ export const NatalCalculatorPage = () => (
             </CalculationCard>
 
             <CalculationCard>
-              <CardTitleRow>
-                <Badge>4</Badge>
-                Построение домов
-              </CardTitleRow>
+              <BaseCardHeader>
+                <CardTitleRow>
+                  <Badge>4</Badge>
+                  Построение домов
+                </CardTitleRow>
+              </BaseCardHeader>
               <CardDivider />
               <DescText>
                 Мы вычисляем{' '}
                 <Tooltip
                   placement="top"
-                  tooltipContent="✨ Время, определяемое по звёздам, а не по Солнцу — важно для расчёта Асцендента"
+                  tooltipContent="✨ Время, определяемое по звёздам, а не по Солнцу&nbsp;— важно для расчёта Асцендента"
                 >
                   <span
                     className="term"
@@ -398,11 +426,13 @@ export const NatalCalculatorPage = () => (
             </CalculationCard>
 
             <CalculationCard>
-              <CardTitleRow>
-                <Badge>5</Badge>
-                Знаки зодиака
-              </CardTitleRow>
-              <CardDivider />
+              <BaseCardHeader>
+                <CardTitleRow>
+                  <Badge>5</Badge>
+                  Знаки зодиака
+                </CardTitleRow>
+                <CardDivider />
+              </BaseCardHeader>
               <DescText>
                 Эклиптика делится на 12 секторов по 30°. Мы переводим градусы положения планет в знак зодиака,
                 начиная с{' '}
@@ -422,11 +452,13 @@ export const NatalCalculatorPage = () => (
             </CalculationCard>
 
             <CalculationCard>
-              <CardTitleRow>
-                <Badge>6</Badge>
-                Финальная сборка
-              </CardTitleRow>
-              <CardDivider />
+              <BaseCardHeader>
+                <CardTitleRow>
+                  <Badge>6</Badge>
+                  Финальная сборка
+                </CardTitleRow>
+                <CardDivider />
+              </BaseCardHeader>
               <DescText>
                 Мы объединяем планеты, дома, аспекты и другие точки, строим интерактивную карту и
                 подготавливаем для вас интерпретации.

@@ -3,19 +3,19 @@ import { useLayoutEffect } from 'react'
 import { autoUpdate, flip, offset, size, useFloating } from '@floating-ui/react'
 import Skeleton from 'react-loading-skeleton'
 
+import { CheckIcon, OptionItem } from './index.linaria'
+import { IDropdownProps, IOption } from '../types'
 import {
   AlertDescription,
   AlertTitle,
-  CheckIcon,
+  Dropdown,
   DropdownAlertBlock,
-  DropdownContainer,
-  ItemContent,
-  OptionItem,
-  OptionsList,
+  DropdownItemContent,
+  DropdownItemIconContainer,
+  DropdownList,
   SkeletonItem,
   UpsetIconSVG,
-} from './index.linaria'
-import { IDropdownProps, IOption } from '../types'
+} from '@/shared/assets/styles/form'
 
 export const DropdownComponent = <IValue extends IOption>({
   emptyList,
@@ -39,8 +39,7 @@ export const DropdownComponent = <IValue extends IOption>({
         apply({ rects, elements }) {
           Object.assign(elements.floating.style, {
             width: `${rects.reference.width}px`,
-            maxHeight: `300px`,
-            minHeight: `150px`,
+            height: '250px',
             overflowY: 'auto',
           })
         },
@@ -62,7 +61,7 @@ export const DropdownComponent = <IValue extends IOption>({
   }
 
   return (
-    <DropdownContainer
+    <Dropdown
       ref={refs.setFloating}
       style={floatingStyles}
       data-floating="true"
@@ -76,13 +75,13 @@ export const DropdownComponent = <IValue extends IOption>({
       )}
 
       {listIsLoading && (
-        <OptionsList>
+        <DropdownList>
           {Array.from({ length: 5 }).map((_, i) => (
             <SkeletonItem key={i}>
               <Skeleton height={20} />
             </SkeletonItem>
           ))}
-        </OptionsList>
+        </DropdownList>
       )}
 
       {isError && (
@@ -94,7 +93,7 @@ export const DropdownComponent = <IValue extends IOption>({
       )}
 
       {!listIsLoading && !isError && optionsList && optionsList.length > 0 && (
-        <OptionsList
+        <DropdownList
           role="listbox"
           aria-label="Select options"
         >
@@ -105,12 +104,14 @@ export const DropdownComponent = <IValue extends IOption>({
               onMouseDown={(e: { preventDefault: () => unknown }) => e.preventDefault()}
               onClick={() => handleClick(el)}
             >
-              <ItemContent>{el.content}</ItemContent>
-              <CheckIcon className={values.some((v) => v.id === el.id) ? 'show' : ''} />
+              <DropdownItemContent>{el.content}</DropdownItemContent>
+              <DropdownItemIconContainer>
+                <CheckIcon className={values.some((v) => v.id === el.id) ? 'show' : ''} />
+              </DropdownItemIconContainer>
             </OptionItem>
           ))}
-        </OptionsList>
+        </DropdownList>
       )}
-    </DropdownContainer>
+    </Dropdown>
   )
 }

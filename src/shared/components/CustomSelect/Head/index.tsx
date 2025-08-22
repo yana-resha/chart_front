@@ -4,7 +4,13 @@ import React from 'react'
 import classNames from 'classnames'
 
 import { HeadProps, IOption } from '../types'
-import { Container, ErrorContainer, IconContainer, Label, Values, ValuesContainer } from './index.linaria'
+import { IconContainer, Values, ValuesContainer } from './index.linaria'
+import {
+  FormElementContainer,
+  FormElementError,
+  FormElementLabel,
+  FormInputCSS,
+} from '@/shared/assets/styles/form'
 
 export const Head = <IValue extends IOption>({
   label,
@@ -23,15 +29,17 @@ export const Head = <IValue extends IOption>({
   const inputRef = useRef<HTMLInputElement>(null)
 
   return (
-    <Container>
-      {label && <Label>{label}</Label>}
+    <FormElementContainer>
+      {label && <FormElementLabel>{label}</FormElementLabel>}
       <ValuesContainer
+        tabIndex={0}
         onClick={toogleFunc}
         ref={ref}
-        className={classNames({ disabled, invalid, focus: isOpen })}
+        className={classNames({ disabled, invalid, isActive: isOpen })}
       >
         {leftIcon && <IconContainer>{leftIcon}</IconContainer>}
         <Values
+          className={FormInputCSS}
           ref={inputRef}
           {...otherProps}
         >
@@ -39,7 +47,7 @@ export const Head = <IValue extends IOption>({
         </Values>
         {rightIcon && <IconContainer>{rightIcon}</IconContainer>}
       </ValuesContainer>
-      {invalidText && <ErrorContainer>{invalidText}</ErrorContainer>}
-    </Container>
+      {invalidText && <FormElementError>{invalidText}</FormElementError>}
+    </FormElementContainer>
   )
 }

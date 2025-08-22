@@ -7,13 +7,14 @@ import { DropdownComponent } from './DropdownComponent'
 import { Head } from './Head'
 import { Container, ChevronDown } from './index.linaria'
 import { CustomSelectProps, IOption } from './types'
+import { FormIconCSS } from '@/shared/assets/styles/form'
 
 export const CustomSelect = <IValue extends IOption>({
   optionsList,
   listIsLoading,
   values,
   setValues,
-  emptyList = { title: 'Ничего не найдено', description: 'Попробуйте изменить поисковой запрос' },
+  emptyList = { title: 'Ничего на выбор.', description: 'Сюда ещё ничего не добавили.' },
   ...selectProps
 }: CustomSelectProps<IValue>) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -44,7 +45,7 @@ export const CustomSelect = <IValue extends IOption>({
     <Container ref={containerRef}>
       <Head
         toogleFunc={() => toggleDropdown(!isOpen)}
-        rightIcon={<ChevronDown className={classNames({ isOpen })} />}
+        rightIcon={<ChevronDown className={classNames({ isOpen }, [FormIconCSS])} />}
         ref={inputRef}
         isOpen={isOpen}
         values={values}

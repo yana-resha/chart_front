@@ -26,7 +26,7 @@ export const TimeGridRow = styled.div`
 
 export const CoordsGridRow = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: calc(50% - 5px) calc(50% - 5px);
   justify-content: space-between;
   gap: 10px;
   align-items: start;

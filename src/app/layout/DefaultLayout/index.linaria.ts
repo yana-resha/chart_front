@@ -90,6 +90,7 @@ export const DefaultContainer = styled.div`
 
   /* планшет и ниже: сайдбар наверх, одна колонка */
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    gap: 0;
     padding: 0;
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -135,6 +136,6 @@ export const PagesContainer = styled.main`
   position: relative;
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    padding: 0.75rem;
+    padding: 0.5rem;
   }
 `
