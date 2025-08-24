@@ -1,4 +1,4 @@
-import { ReactNode, RefObject } from 'react'
+import { ReactNode, RefObject, ButtonHTMLAttributes } from 'react'
 
 export enum DROPDOWN_VERTICAL_POSITION {
   TOP = 'top',
@@ -12,9 +12,8 @@ export interface IOption {
 }
 
 // --- Head (крышка селекта) ---
-export interface HeadProps<VALUE extends IOption> {
-  /** ref на кликабельную область (у тебя это Values) */
-  ref?: RefObject<HTMLDivElement | null>
+export interface HeadProps<VALUE extends IOption> extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /** ref на кликабельную кнопку (combobox) */
   label?: ReactNode | string
   leftIcon?: ReactNode
   rightIcon?: ReactNode
@@ -58,10 +57,16 @@ export interface IDropdownProps<VALUE extends IOption> {
   closeFunc: () => void
 
   /** контейнер дропа (ты передаёшь prop с именем ref именно как обычный проп) */
-  ref: RefObject<HTMLDivElement | null>
+  ref?: RefObject<HTMLDivElement | null>
 
-  /** ref на «голову»/триггер (div), к которому прилипает выпадашка */
-  inputRef: RefObject<HTMLDivElement | null>
+  /** ref на «голову»/триггер (кнопка), к которому прилипает выпадашка */
+  inputRef: RefObject<HTMLElement | null>
+
+  /** ARIA/управление активной опцией (combobox-мод) */
+  id?: string // id listbox
+  getOptionId?: (i: number) => string
+  activeIndex?: number
+  setActiveIndex?: (i: number) => void
 }
 
 // --- Внешние пропсы селекта ---

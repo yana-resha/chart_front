@@ -9,7 +9,14 @@ interface IPlanetValue {
   longitude: number
 }
 
-export function getPlanetsModalityStats(planets: IPlanetValue[]) {
+interface IModalityStats {
+  counts: Record<ASTRO_ZODIAC_MODALITY, number>
+  total: number
+  percentages: Record<ASTRO_ZODIAC_MODALITY, number>
+  dominant: ASTRO_ZODIAC_MODALITY[]
+}
+
+export function getPlanetsModalityStats(planets: IPlanetValue[]): IModalityStats {
   const counts: Record<ASTRO_ZODIAC_MODALITY, number> = {
     [ASTRO_ZODIAC_MODALITY.CARDINAL]: 0,
     [ASTRO_ZODIAC_MODALITY.FIXED]: 0,
@@ -38,3 +45,8 @@ export function getPlanetsModalityStats(planets: IPlanetValue[]) {
 
   return { counts, total, percentages, dominant }
 }
+
+export const getSortedModalitiesByPercentage = (modalityStats: IModalityStats) =>
+  (Object.keys(modalityStats.percentages) as ASTRO_ZODIAC_MODALITY[]).sort(
+    (a, b) => modalityStats.percentages[b] - modalityStats.percentages[a],
+  )

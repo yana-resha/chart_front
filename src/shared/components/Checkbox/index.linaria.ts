@@ -59,8 +59,10 @@ export const CheckboxContainer = styled.label`
   }
 
   &:hover::before,
+  &:focus-within::before,
   &:has(${Input}:checked):hover::before {
     outline: 2px solid rgb(54, 58, 61);
+    box-shadow: 0px 0px 0px 4px rgba(54, 58, 61, 0.24);
   }
 
   &:has(${Input}:disabled) {

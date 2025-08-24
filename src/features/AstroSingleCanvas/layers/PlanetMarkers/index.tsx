@@ -44,11 +44,12 @@ export const PlanetMarkers = () => {
   const BASE_RADIUS_OFFSET = PLANET_OUTSIDE_RADIUS * 0.15
   const MAX_MARGIN = ZODIAC_INSIDE_RADIUS * 0.07
 
-  const grouped = groupClosePlanets(planets, ascendant)
   const MAX_RADIUS = ZODIAC_INSIDE_RADIUS - MAX_MARGIN
   const MIN_RADIUS = PLANET_OUTSIDE_RADIUS + BASE_RADIUS_OFFSET
 
   const fs = (ZODIAC_INSIDE_RADIUS - PLANET_INSIDE_RADIUS) * 0.18
+
+  const grouped = groupClosePlanets(planets, ascendant)
 
   const [planetImages, setPlanetImages] = useState<Record<string, HTMLImageElement>>({})
 

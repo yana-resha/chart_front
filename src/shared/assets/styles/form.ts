@@ -70,7 +70,10 @@ export const FormInputContainer = styled.div`
     min-height: 45px;
   }
 
-  &:hover {
+  &:hover,
+  &:focus-visible,
+  &:focus-within {
+    outline: none;
     box-shadow: 0px 0px 0px 4px rgba(54, 58, 61, 0.24);
   }
 
@@ -141,6 +144,9 @@ export const Dropdown = styled.div`
   width: 100%;
   overflow-y: auto;
 
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+
   will-change: transform, top, left;
   transition: none;
 `
@@ -188,6 +194,10 @@ export const DropdownItem = styled.div`
 
   &:hover:after {
     opacity: 1;
+  }
+
+  &.active:after {
+    opacity: 0.8;
   }
 `
 

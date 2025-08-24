@@ -9,7 +9,14 @@ interface IPlanetValue {
   longitude: number
 }
 
-export function getPlanetsElementStats(planets: IPlanetValue[]) {
+interface IPlanetsElementStats {
+  counts: Record<ASTRO_ZODIAC_ELEMENT, number>
+  total: number
+  percentages: Record<ASTRO_ZODIAC_ELEMENT, number>
+  dominant: ASTRO_ZODIAC_ELEMENT[]
+}
+
+export function getPlanetsElementStats(planets: IPlanetValue[]): IPlanetsElementStats {
   const counts: Record<ASTRO_ZODIAC_ELEMENT, number> = {
     [ASTRO_ZODIAC_ELEMENT.FIRE]: 0,
     [ASTRO_ZODIAC_ELEMENT.EARTH]: 0,
@@ -40,3 +47,8 @@ export function getPlanetsElementStats(planets: IPlanetValue[]) {
 
   return { counts, total, percentages, dominant }
 }
+
+export const getSortedElementsByPercentage = (elementStats: IPlanetsElementStats) =>
+  (Object.keys(elementStats.percentages) as ASTRO_ZODIAC_ELEMENT[]).sort(
+    (a, b) => elementStats.percentages[b] - elementStats.percentages[a],
+  )

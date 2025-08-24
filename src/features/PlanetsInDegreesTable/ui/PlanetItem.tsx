@@ -52,7 +52,7 @@ export const PlanetItem = ({ planet, houseIndex = undefined }: Props) => {
         <HamburgSymbol style={{ color: color }}>&ensp;{signSymbol}&ensp;</HamburgSymbol>
         {formattedDegree(minutes)}&rsquo; {formattedDegree(seconds)}&apos;&apos;
       </SimpleDataTable.Cell>
-      {house && <SimpleDataTable.Cell style={{ textAlign: 'end' }}>{house} дом</SimpleDataTable.Cell>}
+      {house && <SimpleDataTable.Cell>{house} дом</SimpleDataTable.Cell>}
     </SimpleDataTable.RowHovered>
   )
 }

@@ -9,7 +9,14 @@ export interface IPlanetValue {
   longitude: number
 }
 
-export function getPlanetsSignStats(planets: IPlanetValue[]) {
+interface ISignStats {
+  counts: Record<ASTRO_ZODIAC, number>
+  total: number
+  percentages: Record<ASTRO_ZODIAC, number>
+  dominant: ASTRO_ZODIAC[]
+}
+
+export function getPlanetsSignStats(planets: IPlanetValue[]): ISignStats {
   const counts: Record<ASTRO_ZODIAC, number> = {
     [ASTRO_ZODIAC.ARIES]: 0,
     [ASTRO_ZODIAC.TAURUS]: 0,
@@ -44,3 +51,8 @@ export function getPlanetsSignStats(planets: IPlanetValue[]) {
 
   return { counts, total, percentages, dominant }
 }
+
+export const getSortedSignsByPercentage = (signStats: ISignStats) =>
+  (Object.keys(signStats.percentages) as ASTRO_ZODIAC[])
+    .filter((s) => signStats.percentages[s] > 0)
+    .sort((a, b) => signStats.percentages[b] - signStats.percentages[a])

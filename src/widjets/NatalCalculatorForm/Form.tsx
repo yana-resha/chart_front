@@ -192,7 +192,7 @@ export const Form = () => {
         <Input
           name={CalculatorRequestKeys.time}
           type="time"
-          step={0}
+          step={3}
           defaultValue={timeValue}
           onChange={(e) => timeHadleChange(e.currentTarget.value)}
           label="Время"

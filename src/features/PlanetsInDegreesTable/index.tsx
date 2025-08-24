@@ -11,9 +11,7 @@ export const PlanetsInDegreesTable = ({ planets, houses }: AstroPlanetListProps)
       <SimpleDataTable.HeadRow>
         <SimpleDataTable.Header>Планета</SimpleDataTable.Header>
         <SimpleDataTable.Header>Долгота</SimpleDataTable.Header>
-        {isHouses && (
-          <SimpleDataTable.Header style={{ textAlign: 'end' }}>Позиция дома</SimpleDataTable.Header>
-        )}
+        {isHouses && <SimpleDataTable.Header>Позиция дома</SimpleDataTable.Header>}
       </SimpleDataTable.HeadRow>
       <SimpleDataTable.TBody>
         {planets.map((planet) => {

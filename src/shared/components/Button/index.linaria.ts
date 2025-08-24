@@ -1,6 +1,7 @@
 import { styled } from '@linaria/react'
 
 import { BTN_BACKGROUND_VARIABLES, BUTTON_COLOR_VARIABLES } from '@/shared/assets/styles/colors'
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
 export const ChildrenContainer = styled.div`
   font-weight: 500;
@@ -36,6 +37,11 @@ export const ButtonComponent = styled.button`
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    /* padding: 0.875rem 1rem 0.875rem 1rem; */
+    font-size: 0.875rem;
+  }
 
   &:disabled,
   &.isLoading {

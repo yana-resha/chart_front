@@ -1,4 +1,5 @@
 import { styled } from '@linaria/react'
+
 import { MEDIA_POINTS } from './media-points'
 
 export const PageTitle = styled.div`
@@ -44,6 +45,10 @@ export const SectionTitle = styled.h2`
     font-size: 1.2rem;
     margin-bottom: 0.85rem;
     padding-left: 0.85rem;
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
+    padding-left: 0.5rem;
   }
 `
 export const SubSectionTitle = styled.h3`

@@ -8,12 +8,23 @@ import { addAlpha } from '@/shared/helpers/addAlpha'
 
 const TEXT_SIZE = {
   desktop: '0.92rem',
+  tablet: '0.875rem',
+}
+
+const CARD_TEXT_SIZE = {
+  desktop: '0.92rem',
   tablet: '0.8rem',
 }
 
 const CARD_TITLE_TEXT = {
   desktop: '1rem',
   tablet: '0.92rem',
+}
+
+const LISTS_GAP = {
+  desktop: '1.25rem',
+  tablet: '0.8rem',
+  sm_tablet: '1.25rem',
 }
 
 export const PageWrapper = styled(PageContentWrapper)`
@@ -29,12 +40,12 @@ export const PageWrapper = styled(PageContentWrapper)`
 export const MainTitle = styled(PageTitle)``
 
 export const DescText = styled.div`
-  font-size: ${TEXT_SIZE.desktop};
+  font-size: ${CARD_TEXT_SIZE.desktop};
   line-height: 1.45;
   opacity: 0.9;
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    font-size: ${TEXT_SIZE.tablet};
+    font-size: ${CARD_TEXT_SIZE.tablet};
   }
 `
 
@@ -129,17 +140,17 @@ export const BenefitCard = styled.li<{ color: string }>`
 export const BenefitGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
+  gap: ${LISTS_GAP.desktop};
   margin: 1.25rem 0 1.75rem;
 
-  @media (max-width: 1100px) {
-    gap: 1rem;
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+    gap: ${LISTS_GAP.tablet};
   }
 `
 export const InstructionsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
+  gap: ${LISTS_GAP.desktop};
   margin: 1.25rem 0 1.75rem;
 
   @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
@@ -148,7 +159,12 @@ export const InstructionsGrid = styled.div`
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.8rem;
+    gap: ${LISTS_GAP.tablet};
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
+    grid-template-columns: 1fr;
+    gap: ${LISTS_GAP.sm_tablet};
   }
 `
 
@@ -160,8 +176,12 @@ export const InstructionDesc = styled(DescText)`
 export const StepsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem 1.25rem;
+  gap: ${LISTS_GAP.desktop};
   margin: 1rem 0 1.5rem;
+
+  @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
+    grid-template-columns: 1fr;
+  }
 `
 export const StepDesc = styled(DescText)``
 
@@ -317,6 +337,10 @@ export const CalculatorCard = styled.div`
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     width: 85%;
   }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
+    width: 100%;
+  }
 `
 
 export const CardHeader = styled.div`
@@ -384,7 +408,7 @@ export const StepCard = styled(BaseCard)``
 export const CalculationStepsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem 1.25rem;
+  gap: ${LISTS_GAP.desktop};
   margin: 1.25rem 0 2rem;
   @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
     grid-template-columns: 1fr;
@@ -392,6 +416,12 @@ export const CalculationStepsGrid = styled.div`
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     grid-template-columns: repeat(2, 1fr);
+    gap: ${LISTS_GAP.tablet};
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
+    grid-template-columns: 1fr;
+    gap: ${LISTS_GAP.sm_tablet};
   }
 `
 export const CalculationCard = styled(BaseCard)`
@@ -409,7 +439,7 @@ export const Tip = styled.div`
   background: rgba(255, 209, 102, 0.08);
   border-radius: 10px;
   padding: 0.75rem 0.9rem;
-  font-size: 0.9rem;
+  font-size: ${CARD_TEXT_SIZE.desktop};
   line-height: 1.45;
   color: rgba(255, 255, 255, 0.95);
   box-shadow: 0 0 8px rgba(255, 209, 102, 0.15);
@@ -423,7 +453,7 @@ export const Tip = styled.div`
   }
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    font-size: 0.8rem;
+    font-size: ${CARD_TEXT_SIZE.tablet};
     padding: 0.65rem 0.8rem;
   }
 `
