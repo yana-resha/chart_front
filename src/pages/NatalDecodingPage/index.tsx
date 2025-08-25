@@ -126,8 +126,7 @@ export const NatalDecodingPage = () => {
       </PageHeader>
 
       <PageContentWrapper>
-        <PageTitle>Расшифровка натальной карты 💫</PageTitle>
-
+        <PageTitle>Расшифровка натальной&nbsp;карты&nbsp;💫</PageTitle>
         {/* Скелетон, пока грузимся или пока ещё не получили chartValue */}
         {(!chartValue || isLoading) && <PageSkeleton />}
 
@@ -145,14 +144,18 @@ export const NatalDecodingPage = () => {
             </section>
 
             <section>
+              <SectionTitle>Интерпретации</SectionTitle>
+              <NatalDictionaryPanelTab chartId={chartId} />
+            </section>
+
+{/*             
+
+            <section>
               <SectionTitle>Основные значения карты</SectionTitle>
               <NatalSummaryPanelTab chartId={chartId} />
             </section>
 
-            <section>
-              <SectionTitle>Интерпретации</SectionTitle>
-              <NatalDictionaryPanelTab chartId={chartId} />
-            </section>
+            */}
           </WidjetsWrapper>
         )}
       </PageContentWrapper>

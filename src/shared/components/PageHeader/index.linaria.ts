@@ -7,7 +7,7 @@ export const PageHeaderWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     padding: 0.5rem;

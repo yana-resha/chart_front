@@ -39,7 +39,7 @@ export const NatalChartSourceData: FC<ChartSourceDataProps> = ({ chartId }) => {
   const formatTimezone = typeof timezone === 'number' ? timeZoneName : 'не указано'
   const formatCoordinates =
     typeof latitude === 'number' && typeof longitude === 'number'
-      ? `широта ${latitude}°, долгота ${longitude}°`
+      ? `широта\u00A0${latitude}°, долгота\u00A0${longitude}°`
       : 'не указано'
 
   return (
@@ -47,7 +47,7 @@ export const NatalChartSourceData: FC<ChartSourceDataProps> = ({ chartId }) => {
       <Row>
         <LabelBlock>
           <Icon>🕓</Icon>
-          <Label>Имя:</Label>
+          <Label>Имя</Label>
         </LabelBlock>
         {name ?? 'Не указано'}
       </Row>
@@ -55,7 +55,7 @@ export const NatalChartSourceData: FC<ChartSourceDataProps> = ({ chartId }) => {
       <Row>
         <LabelBlock>
           <Icon>🕓</Icon>
-          <Label>Местная дата и время:</Label>
+          <Label>Местная дата и время</Label>
         </LabelBlock>
         {toStr(localDate)} {formatTimezone !== 'не указано' ? `(${formatTimezone})` : ''}
       </Row>
@@ -63,7 +63,7 @@ export const NatalChartSourceData: FC<ChartSourceDataProps> = ({ chartId }) => {
       <Row>
         <LabelBlock>
           <Icon>🕘</Icon>
-          <Label>Дата и время (UTC):</Label>
+          <Label>Дата и время (UTC)</Label>
         </LabelBlock>
         {toStr(utcDate)}
       </Row>
@@ -71,7 +71,7 @@ export const NatalChartSourceData: FC<ChartSourceDataProps> = ({ chartId }) => {
       <Row>
         <LabelBlock>
           <Icon>🌐</Icon>
-          <Label>Часовой пояс:</Label>
+          <Label>Часовой пояс</Label>
         </LabelBlock>
         {formatTimezone}
       </Row>
@@ -81,7 +81,7 @@ export const NatalChartSourceData: FC<ChartSourceDataProps> = ({ chartId }) => {
       <Row>
         <LabelBlock>
           <Icon>📍</Icon>
-          <Label>Координаты:</Label>
+          <Label>Координаты</Label>
         </LabelBlock>
         {formatCoordinates}
       </Row>
@@ -89,7 +89,7 @@ export const NatalChartSourceData: FC<ChartSourceDataProps> = ({ chartId }) => {
       <Row>
         <LabelBlock>
           <Icon>🌍</Icon>
-          <Label>Место:</Label>
+          <Label>Место</Label>
         </LabelBlock>
         {place || 'не указано'}
       </Row>
@@ -99,15 +99,15 @@ export const NatalChartSourceData: FC<ChartSourceDataProps> = ({ chartId }) => {
       <Row>
         <LabelBlock>
           <Icon>📅</Icon>
-          <Label>Юлианская дата (JD):</Label>
+          <Label>Юлианская дата (JD)</Label>
         </LabelBlock>
-        {typeof jd === 'number' ? jd : 'не указано'}
+        {typeof jd === 'number' ? <span style={{ overflowWrap: 'anywhere' }}>{jd}</span> : 'не указано'}
       </Row>
 
       <Row>
         <LabelBlock>
           <Icon>🔢</Icon>
-          <Label>Система домов:</Label>
+          <Label>Система домов</Label>
         </LabelBlock>
         {ASTRO_HOUSE_SYSTEM_DESCRIPTION[hsys] ? ASTRO_HOUSE_SYSTEM_DESCRIPTION[hsys] : 'не указано'}
       </Row>

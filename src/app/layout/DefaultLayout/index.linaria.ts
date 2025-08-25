@@ -16,6 +16,7 @@ export const DefaultContainer = styled.div`
   min-height: 100%;
   height: 100%;
   max-height: fit-content;
+  /* background-color: red; */
 
   background-image: url(${background});
   background-size: cover;
@@ -93,6 +94,7 @@ export const DefaultContainer = styled.div`
     gap: 0;
     padding: 0;
     grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
     grid-template-areas:
       'sidebar'
       'main';
@@ -110,13 +112,13 @@ export const SidebarStaticWrapper = styled.div`
     // position: sticky;
     // z-index: 1;
     // top: max(0px, env(safe-area-inset-top)); /* iOS вырезы */
-    height: auto;
+    height: fit-content;
   }
 `
 
 export const SidebarContainer = styled.div`
   /* десктоп: фиксируем панель */
-  height: calc(100vh - 1.5rem);
+  height: calc(100dvh - 1.5rem);
   position: sticky;
   top: 0.75rem;
 
@@ -124,7 +126,7 @@ export const SidebarContainer = styled.div`
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     position: static;
     top: 0;
-    height: auto;
+    height: fit-content;
   }
 `
 

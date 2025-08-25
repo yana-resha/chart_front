@@ -1,5 +1,7 @@
 import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
+import ShareSvg from '@/shared/assets/icons/share.svg?react'
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
 export const dropdownContainer = css`
   background: rgba(19, 22, 25, 0.9);
@@ -156,4 +158,12 @@ export const ButtonContent = styled.span`
 export const ShakyIcon = styled.span`
   display: inline-flex;
   transform-origin: center;
+`
+
+export const ShareIcon = styled(ShareSvg)`
+  font-size: 1.125rem;
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    font-size: 1rem;
+  }
 `

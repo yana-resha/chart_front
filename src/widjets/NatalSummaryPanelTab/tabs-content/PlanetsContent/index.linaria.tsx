@@ -30,19 +30,22 @@ export const PlanetInDegressGrid = styled.div`
 /* Основные качества список и карточки */
 export const BalanceGrid = styled.div`
   display: grid;
-  gap: 16px;
+  column-gap: 1rem;
   width: 100%;
   grid-template-columns: repeat(3, 1fr);
   align-items: stretch;
   min-width: 0;
 `
 
-export const GridHeader = styled.h3`
-  grid-column: 1 / -1;
+export const SectionBlock = styled.div`
+  width: 100%;
+`
+export const ListHeader = styled.h3`
   font-size: 1.05rem;
   padding-left: 0.5rem;
   font-weight: 500;
   margin: 0;
+  margin-bottom: 1rem;
   color: rgba(255, 255, 255, 0.9);
 `
 
@@ -55,6 +58,7 @@ export const Card = styled.div`
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.8);
   min-width: 0;
+  min-height: 150px;
 `
 
 export const Title = styled.div`
@@ -88,9 +92,33 @@ export const List = styled.ul`
 /* Ретро и достоинства */
 export const RetroGrid = styled.div`
   display: grid;
-  gap: 1rem;
+  gap: 16px;
   width: 100%;
-  grid-template-columns: repeat(5, 1fr);
-  align-items: stretch;
   min-width: 0;
+  align-items: stretch;
+  grid-auto-flow: row dense; /* заполняет «дыры» при разной высоте */
+
+  /* desktop — 5 колонок */
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+
+  /* ноутбуки — 3 колонки (будет 3 + 2) */
+  @media (max-width: 1250px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* планшеты — 2 колонки */
+/*   @media (max-width: 900px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* мобилки — 1 колонка */
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+  } */
 `
+
+/* базовая карточка статуса, ничего особенного */
+export const StatusCard = styled(Card)``
+
+/* карточка «Ретро»: на планшетах делаем её на всю ширину */
+export const RetroCard = styled(Card)``

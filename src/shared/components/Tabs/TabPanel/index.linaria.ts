@@ -1,3 +1,4 @@
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
 
@@ -16,8 +17,7 @@ export const TabContainer = styled.div<TabContainerProps>`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 0.625rem 1.25rem;
-  border-radius: 8px;
+  padding: 0rem 1.25rem 0.625rem 1.25rem;
   transition:
     color 0.3s,
     box-shadow 0.3s,
@@ -67,6 +67,10 @@ export const TabContainer = styled.div<TabContainerProps>`
       color 0.3s,
       font-size 0.3s,
       text-shadow 0.3s;
+
+    @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+      font-size: 0.92rem;
+    }
   }
 
   &:hover ${Label} {

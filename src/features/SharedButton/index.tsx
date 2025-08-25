@@ -13,11 +13,12 @@ import {
   IconLink,
   ButtonContent,
   ShakyIcon,
+  ShareIcon,
 } from './index.linaria'
 import Telegram from '@/shared/assets/icons/messenger-icons/telegram.svg?react'
 import VK from '@/shared/assets/icons/messenger-icons/vkontakte.svg?react'
 import Whatsapp from '@/shared/assets/icons/messenger-icons/whatsapp.svg?react'
-import ShareIcon from '@/shared/assets/icons/share.svg?react'
+
 import { Button } from '@/shared/components/Button'
 import { Dropdown } from '@/shared/components/Dropdown'
 
@@ -65,10 +66,7 @@ export const SharedButton = ({
           <ButtonContent>
             {buttonText}
             <ShakyIcon>
-              <ShareIcon
-                width={18}
-                height={18}
-              />
+              <ShareIcon />
             </ShakyIcon>
           </ButtonContent>
         </Button>

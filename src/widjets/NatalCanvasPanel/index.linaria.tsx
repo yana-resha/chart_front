@@ -1,5 +1,7 @@
 import { styled } from '@linaria/react'
 
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+
 export const Container = styled.div`
   width: 100%;
   height: fit-content;
@@ -12,6 +14,10 @@ export const Container = styled.div`
     background 0.3s ease,
     border-color 0.3s ease,
     box-shadow 0.3s ease;
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    padding: 5px;
+  }
 
   &::before {
     content: '';

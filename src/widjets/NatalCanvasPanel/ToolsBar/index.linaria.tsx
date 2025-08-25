@@ -1,5 +1,7 @@
 import { styled } from '@linaria/react'
 
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+
 export const ToolsBarWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -14,6 +16,10 @@ export const ToolsBarWrapper = styled.div`
   border-radius: 14px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   overflow: hidden;
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    padding: 0.5rem 0.65rem;
+  }
 `
 
 export const LeftSide = styled.div`
@@ -35,5 +41,10 @@ export const Icon = styled.div`
     width: 100%;
     height: 100%;
     stroke: rgba(255, 255, 255, 1);
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
+    width: 1.1rem;
+    height: 1.1rem;
   }
 `

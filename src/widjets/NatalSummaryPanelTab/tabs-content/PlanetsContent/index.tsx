@@ -6,11 +6,14 @@ import { detriment, domicile, exaltation, fall, retro } from './data/essentialsT
 import {
   BalanceGrid,
   Card,
-  GridHeader,
   List,
+  ListHeader,
   PlanetInDegressGrid,
   PlanetsContentLayout,
+  RetroCard,
   RetroGrid,
+  SectionBlock,
+  StatusCard,
   Title,
 } from './index.linaria'
 import { IPlanet } from '@/entities/astro-charts/types/astro-items.types'
@@ -92,149 +95,120 @@ export const PlanetsContent = ({ planets, houses }: Props) => {
   return (
     <Layout>
       <PlanetsContentLayout>
-        <ExpandableWrapper maxHeight={maxHeight}>
-          <PlanetInDegressGrid>
-            <GridHeader>🪐 Положения планет</GridHeader>
-            <PlanetsInDegreesTable
-              planets={planets}
-              houses={houses}
-            />
-          </PlanetInDegressGrid>
-        </ExpandableWrapper>
-        <BalanceGrid>
-          <GridHeader>⚖️ Баланс стихий, качеств и знаков</GridHeader>
-
-          {/* Стихии */}
-          <Card>
-            <Title>
-              Стихии <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{element}</div>} />
-            </Title>
-            <List>
-              {sortedElements.map((el) => {
-                const active = elementStats.dominant.includes(el)
-                const style = {
-                  fontWeight: active ? 600 : 400,
-                  color: active ? 'rgb(22, 238, 246)' : 'rgba(255, 255, 255, 0.8)',
-                } as const
-
-                return (
-                  <li
-                    key={el}
-                    style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
-                  >
-                    <span style={style}>{ASTRO_ZODIAC_ELEMENT_SYMBOL[el]}</span>
-                    <span style={style}>
-                      {ASTRO_ZODIAC_ELEMENT_NAME[el]}: {elementStats.percentages[el].toFixed(1)}%
-                    </span>
-                  </li>
-                )
-              })}
-            </List>
-          </Card>
-
-          {/* Знаки */}
-          <Card>
-            <Title>
-              Знаки <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{sign}</div>} />
-            </Title>
-            <List>
-              {sortedSigns.map((s) => {
-                const active = signStats.dominant.includes(s)
-                const textStyle = {
-                  fontWeight: active ? 600 : 400,
-                  color: active ? 'rgb(22, 238, 246)' : 'rgba(255, 255, 255, 0.8)',
-                } as const
-
-                return (
-                  <li
-                    key={s}
-                    style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
-                  >
-                    <HamburgSymbol
-                      style={{
-                        color: ASTRO_ZODIAC_COLOR[s],
-                        fontWeight: active ? 600 : 400,
-                      }}
-                    >
-                      {ASTRO_ZODIAC_SYMBOL[s]}
-                    </HamburgSymbol>
-                    <span style={textStyle}>
-                      {ASTRO_ZODIAC_NAME[s]}: {signStats.percentages[s].toFixed(1)}%
-                    </span>
-                  </li>
-                )
-              })}
-            </List>
-          </Card>
-
-          {/* Качества */}
-          <Card>
-            <Title>
-              Качества <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{modality}</div>} />
-            </Title>
-            <List>
-              {sortedModalities.map((m) => {
-                const active = modalityStats.dominant.includes(m)
-                const style = {
-                  fontWeight: active ? 600 : 400,
-                  color: active ? 'rgb(22, 238, 246)' : 'rgba(255, 255, 255, 0.8)',
-                } as const
-
-                return (
-                  <li
-                    key={m}
-                    style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
-                  >
-                    <span style={style}>{ASTRO_ZODIAC_MODALITY_SYMBOL[m]}</span>
-                    <span style={style}>
-                      {ASTRO_ZODIAC_MODALITY_NAME[m]}: {modalityStats.percentages[m].toFixed(1)}%
-                    </span>
-                  </li>
-                )
-              })}
-            </List>
-          </Card>
-        </BalanceGrid>
-        <RetroGrid>
-          <GridHeader>⏪ Ретроградность и статусы планет</GridHeader>
-
-          {/* Ретро */}
-          <Card>
-            <Title>
-              Ретро <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{retro}</div>} />
-            </Title>
-            <List>
-              {retroPlanets.length ? (
-                retroPlanets.map((p) => (
-                  <li
-                    key={`retro-${p.name}`}
-                    style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
-                  >
-                    <HamburgSymbol>{ASTRO_PLANET_SYMBOL[p.name]}</HamburgSymbol>
-                    <span>{ASTRO_PLANET_NAME[p.name]}</span>
-                  </li>
-                ))
-              ) : (
-                <li>—</li>
-              )}
-            </List>
-          </Card>
-
-          {/* достоинства */}
-          {order.map((d) => (
-            <Card key={d}>
+        <SectionBlock>
+          <ListHeader>🪐 Положения планет</ListHeader>
+          <ExpandableWrapper maxHeight={maxHeight}>
+            <PlanetInDegressGrid>
+              <PlanetsInDegreesTable
+                planets={planets}
+                houses={houses}
+              />
+            </PlanetInDegressGrid>
+          </ExpandableWrapper>
+        </SectionBlock>
+        <SectionBlock>
+          <ListHeader>⚖️ Баланс стихий, качеств и знаков</ListHeader>
+          <BalanceGrid>
+            {/* Стихии */}
+            <Card>
               <Title>
-                {ASTRO_ESSENTIAL_DIGNITY_NAME[d]}{' '}
-                <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{tooltipByDignity[d]}</div>} />
+                Стихии <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{element}</div>} />
               </Title>
               <List>
-                {dignityMap[d].length ? (
-                  dignityMap[d].map((p) => (
-                    <li
-                      key={`${d}-${p.name}`}
-                      style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
-                    >
-                      <HamburgSymbol>{ASTRO_PLANET_SYMBOL[p.name]}</HamburgSymbol>
+                {sortedElements.map((el) => {
+                  const active = elementStats.dominant.includes(el)
+                  const style = {
+                    fontWeight: active ? 600 : 400,
+                    color: active ? 'rgb(22, 238, 246)' : 'rgba(255, 255, 255, 0.8)',
+                  } as const
+
+                  return (
+                    <li key={el}>
+                      <span style={{ marginRight: '6px' }}>{ASTRO_ZODIAC_ELEMENT_SYMBOL[el]}</span>
+                      <span style={style}>
+                        {ASTRO_ZODIAC_ELEMENT_NAME[el]}: {elementStats.percentages[el].toFixed(1)}%
+                      </span>
+                    </li>
+                  )
+                })}
+              </List>
+            </Card>
+
+            {/* Знаки */}
+            <Card>
+              <Title>
+                Знаки <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{sign}</div>} />
+              </Title>
+              <List>
+                {sortedSigns.map((s) => {
+                  const active = signStats.dominant.includes(s)
+                  const textStyle = {
+                    fontWeight: active ? 600 : 400,
+                    color: active ? 'rgb(22, 238, 246)' : 'rgba(255, 255, 255, 0.8)',
+                  } as const
+
+                  return (
+                    <li key={s}>
+                      <HamburgSymbol
+                        style={{
+                          color: ASTRO_ZODIAC_COLOR[s],
+                          fontWeight: active ? 600 : 400,
+                          marginRight: '6px',
+                        }}
+                      >
+                        {ASTRO_ZODIAC_SYMBOL[s]}
+                      </HamburgSymbol>
+                      <span style={textStyle}>
+                        {ASTRO_ZODIAC_NAME[s]}: {signStats.percentages[s].toFixed(1)}%
+                      </span>
+                    </li>
+                  )
+                })}
+              </List>
+            </Card>
+
+            {/* Качества */}
+            <Card>
+              <Title>
+                Качества <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{modality}</div>} />
+              </Title>
+              <List>
+                {sortedModalities.map((m) => {
+                  const active = modalityStats.dominant.includes(m)
+                  const style = {
+                    marginRight: '6px',
+                    fontWeight: active ? 600 : 400,
+                    color: active ? 'rgb(22, 238, 246)' : 'rgba(255, 255, 255, 0.8)',
+                  } as const
+
+                  return (
+                    <li key={m}>
+                      <span style={style}>{ASTRO_ZODIAC_MODALITY_SYMBOL[m]}</span>
+                      <span style={style}>
+                        {ASTRO_ZODIAC_MODALITY_NAME[m]}: {modalityStats.percentages[m].toFixed(1)}%
+                      </span>
+                    </li>
+                  )
+                })}
+              </List>
+            </Card>
+          </BalanceGrid>
+        </SectionBlock>
+        <SectionBlock>
+          <ListHeader>⏪ Ретроградность и статусы планет</ListHeader>
+          <RetroGrid>
+            {/* Ретро */}
+            <RetroCard>
+              <Title>
+                Ретро <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{retro}</div>} />
+              </Title>
+              <List>
+                {retroPlanets.length ? (
+                  retroPlanets.map((p) => (
+                    <li key={`retro-${p.name}`}>
+                      <HamburgSymbol style={{ marginRight: '6px' }}>
+                        {ASTRO_PLANET_SYMBOL[p.name]}
+                      </HamburgSymbol>
                       <span>{ASTRO_PLANET_NAME[p.name]}</span>
                     </li>
                   ))
@@ -242,9 +216,35 @@ export const PlanetsContent = ({ planets, houses }: Props) => {
                   <li>—</li>
                 )}
               </List>
-            </Card>
-          ))}
-        </RetroGrid>
+            </RetroCard>
+
+            {/* достоинства */}
+            {order.map((d) => (
+              <StatusCard key={d}>
+                <Title>
+                  {ASTRO_ESSENTIAL_DIGNITY_NAME[d]}{' '}
+                  <InfoTooltip
+                    content={<div style={{ whiteSpace: 'pre-line' }}>{tooltipByDignity[d]}</div>}
+                  />
+                </Title>
+                <List>
+                  {dignityMap[d].length ? (
+                    dignityMap[d].map((p) => (
+                      <li key={`${d}-${p.name}`}>
+                        <HamburgSymbol style={{ marginRight: '6px' }}>
+                          {ASTRO_PLANET_SYMBOL[p.name]}
+                        </HamburgSymbol>
+                        <span>{ASTRO_PLANET_NAME[p.name]}</span>
+                      </li>
+                    ))
+                  ) : (
+                    <li>—</li>
+                  )}
+                </List>
+              </StatusCard>
+            ))}
+          </RetroGrid>
+        </SectionBlock>
       </PlanetsContentLayout>
     </Layout>
   )

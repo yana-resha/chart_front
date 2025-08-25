@@ -5,7 +5,6 @@ export const ScrollWrapper = styled.div<{ $fadeLeft?: boolean; $fadeRight?: bool
   position: relative;
   display: flex;
   align-items: center;
-  min-height: 54px;
 `
 
 export const FadeMask = styled.div<{ $fadeLeft?: boolean; $fadeRight?: boolean }>`
@@ -96,7 +95,7 @@ export const TabPanelContainer = styled.div`
   overflow-y: hidden;
   width: 100%;
   min-width: 0;
-  padding: 6px 36px;
+  padding: 6px 6px;
 
   &::after {
     content: '';

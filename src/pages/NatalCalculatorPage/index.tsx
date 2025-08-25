@@ -51,7 +51,7 @@ export const NatalCalculatorPage = () => (
     </PageHeader>
     <PageWrapper>
       <IntroductionBlock>
-        <PageTitle>Расчёт натальной карты онлайн&nbsp;💫</PageTitle>
+        <PageTitle>Расчёт натальной&nbsp;карты онлайн&nbsp;💫</PageTitle>
         <MarkdownText>
           {' '}
           <Divider />{' '}

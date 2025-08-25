@@ -2,7 +2,6 @@ import { styled } from '@linaria/react'
 
 export const Card = styled.div`
   padding: 1rem;
-  margin-top: 1.25rem;
   color: rgba(255, 255, 255, 1);
   font-size: clamp(12px, 0.875rem, 16px);
   line-height: 1.6;
@@ -32,15 +31,14 @@ export const Divider = styled.div`
 
 export const Row = styled.div`
   margin-bottom: 0.625rem;
-  display: flex;
+  display: grid;
+  grid-template-columns: 172px 1fr;
   gap: 0.5rem;
 `
 
 export const LabelBlock = styled.div`
   display: flex;
   min-width: 0;
-  width: 172px;
-  max-width: 172px;
   gap: 0.5rem;
 `
 

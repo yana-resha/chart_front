@@ -39,7 +39,6 @@ export const ButtonComponent = styled.button`
   transition: all 0.2s;
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    /* padding: 0.875rem 1rem 0.875rem 1rem; */
     font-size: 0.875rem;
   }
 
@@ -132,11 +131,19 @@ export const ButtonComponent = styled.button`
   &.small {
     font-size: clamp(12px, 0.75rem, 16px);
     padding: 0.564rem 0.75rem 0.564rem 0.75rem;
+
+    @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+      padding: 0.34rem 0.6rem 0.34rem 0.6rem;
+    }
   }
 
   &.large {
     font-size: 1.125rem;
     padding: 0.75rem 1.625rem 0.75rem 1.625rem;
+
+    @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+      padding: 0.6rem 1.3rem 0.6rem 1.3rem;
+    }
   }
 
   &.text {

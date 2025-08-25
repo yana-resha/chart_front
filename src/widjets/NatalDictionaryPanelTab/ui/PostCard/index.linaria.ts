@@ -1,9 +1,10 @@
 import { styled } from '@linaria/react'
 
 import { addAlpha } from '@/shared/helpers/addAlpha'
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
 export const Layout = styled.div`
-  padding: 1.875rem 10px;
+  padding: 1.1rem 10px 0px 10px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -61,14 +62,24 @@ export const ContentWrapper = styled.div`
   display: flex;
   gap: 1.5rem;
   flex-direction: column;
-  padding-right: 50px;
-  padding-left: 20px;
+  padding-right: 1.25rem;
+  padding-left: 1.25rem;
+
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    gap: 1rem;
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    gap: 0.5rem;
+  }
 `
 
 export const Header = styled.div`
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.75rem;
 `
 
 export const Icon = styled.span`
@@ -76,11 +87,6 @@ export const Icon = styled.span`
   color: rgba(255, 255, 255, 1);
   font-size: 1.75rem;
   filter: drop-shadow(0 0 6px #55cdfc88);
-
-  svg {
-    height: 1.75rem;
-    width: auto;
-  }
 `
 
 export const Title = styled.h3`
@@ -89,6 +95,11 @@ export const Title = styled.h3`
   color: rgba(255, 255, 255, 1);
   line-height: 1.2;
   letter-spacing: 0.5px;
+
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+    font-size: clamp(16px, 1.1rem, 20px);
+    line-height: 1.1;
+  }
 `
 
 export const Highlight = styled.span`
@@ -126,8 +137,14 @@ export const InterpritationBlock = styled.div`
   color: rgba(255, 255, 255, 0.85);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.25rem;
   white-space: pre-wrap;
+
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+    font-size: clamp(12px, 0.92rem, 16px);
+    line-height: 1.5;
+    gap: 1rem;
+  }
 
   & p {
     &:first-child {
