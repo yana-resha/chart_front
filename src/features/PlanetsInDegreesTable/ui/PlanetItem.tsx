@@ -47,7 +47,7 @@ export const PlanetItem = ({ planet, houseIndex = undefined }: Props) => {
           </Tooltip>
         )}
       </SimpleDataTable.Cell>
-      <SimpleDataTable.Cell>
+      <SimpleDataTable.Cell style={{ whiteSpace: 'nowrap' }}>
         {formattedDegree(degree)}
         <HamburgSymbol style={{ color: color }}>&ensp;{signSymbol}&ensp;</HamburgSymbol>
         {formattedDegree(minutes)}&rsquo; {formattedDegree(seconds)}&apos;&apos;

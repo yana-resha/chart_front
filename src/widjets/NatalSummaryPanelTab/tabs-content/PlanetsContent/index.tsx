@@ -8,12 +8,11 @@ import {
   Card,
   List,
   ListHeader,
+  ModalitiesCard,
   PlanetInDegressGrid,
   PlanetsContentLayout,
-  RetroCard,
   RetroGrid,
   SectionBlock,
-  StatusCard,
   Title,
 } from './index.linaria'
 import { IPlanet } from '@/entities/astro-charts/types/astro-items.types'
@@ -168,7 +167,7 @@ export const PlanetsContent = ({ planets, houses }: Props) => {
             </Card>
 
             {/* Качества */}
-            <Card>
+            <ModalitiesCard>
               <Title>
                 Качества <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{modality}</div>} />
               </Title>
@@ -191,14 +190,13 @@ export const PlanetsContent = ({ planets, houses }: Props) => {
                   )
                 })}
               </List>
-            </Card>
+            </ModalitiesCard>
           </BalanceGrid>
         </SectionBlock>
         <SectionBlock>
           <ListHeader>⏪ Ретроградность и статусы планет</ListHeader>
           <RetroGrid>
-            {/* Ретро */}
-            <RetroCard>
+            <Card>
               <Title>
                 Ретро <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{retro}</div>} />
               </Title>
@@ -216,11 +214,10 @@ export const PlanetsContent = ({ planets, houses }: Props) => {
                   <li>—</li>
                 )}
               </List>
-            </RetroCard>
+            </Card>
 
-            {/* достоинства */}
             {order.map((d) => (
-              <StatusCard key={d}>
+              <Card key={d}>
                 <Title>
                   {ASTRO_ESSENTIAL_DIGNITY_NAME[d]}{' '}
                   <InfoTooltip
@@ -241,7 +238,7 @@ export const PlanetsContent = ({ planets, houses }: Props) => {
                     <li>—</li>
                   )}
                 </List>
-              </StatusCard>
+              </Card>
             ))}
           </RetroGrid>
         </SectionBlock>

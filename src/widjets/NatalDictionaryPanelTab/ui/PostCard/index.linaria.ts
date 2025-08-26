@@ -91,7 +91,10 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  max-width: 75%;
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    gap: 0.6rem;
+  }
 `
 
 export const Icon = styled.span`
@@ -99,6 +102,10 @@ export const Icon = styled.span`
   color: rgba(255, 255, 255, 1);
   font-size: 1.75rem;
   filter: drop-shadow(0 0 6px #55cdfc88);
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    font-size: 1.5rem;
+  }
 `
 
 export const Title = styled.h3`

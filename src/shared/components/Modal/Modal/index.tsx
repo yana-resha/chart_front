@@ -30,7 +30,6 @@ export const Modal = ({ onClose, children, container, ...rest }: IModal) => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
     }
-    const prevOverflow = document.body.style.overflow
     document.addEventListener('keydown', onKey)
     // document.body.style.overflow = 'hidden'
 

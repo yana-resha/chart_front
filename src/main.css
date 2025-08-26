@@ -115,6 +115,8 @@ body {
 div#root {
   position: relative;
   display: flex;
+  height: 100dvh;
+  overflow: auto;
 }
 
 /* 🔧 Убираем отступы у заголовков и параграфов */
