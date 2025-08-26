@@ -16,7 +16,7 @@ export const handlers = [
     // можно получить body:
     const body = await request.json()
 
-    await delay(10000)
+    await delay(1000)
 
     return HttpResponse.json(mockPlanetInSign)
     /* return HttpResponse.json({ success: true, data: { chart: 'natal', items: [] } }) */

@@ -7,6 +7,6 @@ export const PageContentWrapper = styled.div`
   padding-bottom: 10px;
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    padding-top: 0.2rem;
+    // padding-top: 0.2rem;
   }
 `

@@ -1,7 +1,7 @@
 import { styled } from '@linaria/react'
 
-import { addAlpha } from '@/shared/helpers/addAlpha'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import { addAlpha } from '@/shared/helpers/addAlpha'
 
 export const Layout = styled.div`
   padding: 1.1rem 10px 0px 10px;
@@ -30,14 +30,18 @@ export const Card = styled.div<{ glowColor?: string }>`
       inset 0 0 120px ${({ glowColor }) => addAlpha(glowColor, 0.1) || 'rgba(19, 22, 25, 0.1)'},
       0 0 10px ${({ glowColor }) => addAlpha(glowColor, 0.1) || 'rgba(255, 255, 255, 0.1)'};
   }
+
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+    padding: 1rem;
+  }
 `
 
 export const ImageOverlay = styled.img`
   position: absolute;
   top: -1.25rem;
   right: -0.625rem;
-  width: 160px;
-  height: 160px;
+  width: 10rem;
+  height: 10rem;
   opacity: 0.6;
   animation: spin 20s linear infinite;
   transform-style: preserve-3d;
@@ -56,6 +60,11 @@ export const ImageOverlay = styled.img`
       transform: rotate(20deg) scale(1);
     }
   }
+
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+    width: 8.125rem;
+    height: 8.125rem;
+  }
 `
 
 export const ContentWrapper = styled.div`
@@ -73,6 +82,8 @@ export const ContentWrapper = styled.div`
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     gap: 0.5rem;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
   }
 `
 
@@ -80,6 +91,7 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  max-width: 75%;
 `
 
 export const Icon = styled.span`
@@ -98,6 +110,11 @@ export const Title = styled.h3`
 
   @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
     font-size: clamp(16px, 1.1rem, 20px);
+    line-height: 1.1;
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    font-size: clamp(16px, 1rem, 18px);
     line-height: 1.1;
   }
 `
@@ -121,6 +138,11 @@ export const TitleSubTag = styled.span`
   font-weight: 400;
   color: rgba(255, 255, 255, 0.65);
   font-style: italic;
+
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+    font-size: clamp(11px, 0.8125rem, 15px);
+    line-height: 1.1;
+  }
 `
 
 export const Subtitle = styled.span`
@@ -129,6 +151,11 @@ export const Subtitle = styled.span`
   color: rgba(255, 255, 255, 0.6);
   margin-top: 2px;
   line-height: 1.2;
+
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+    font-size: clamp(11px, 0.8125rem, 15px);
+    line-height: 1.1;
+  }
 `
 
 export const InterpritationBlock = styled.div`
@@ -144,6 +171,11 @@ export const InterpritationBlock = styled.div`
     font-size: clamp(12px, 0.92rem, 16px);
     line-height: 1.5;
     gap: 1rem;
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    font-size: clamp(12px, 0.875rem, 16px);
+    gap: 0.875rem;
   }
 
   & p {
@@ -193,16 +225,13 @@ export const EmptyCard = styled(Card)`
   position: relative;
   backdrop-filter: blur(1.5px) brightness(1.1);
   transition: all 0.3s ease;
-`
 
-export const Satellite = styled.div`
-  width: 48px;
-  height: 48px;
-  margin-bottom: 16px;
-  svg {
-    width: 100%;
-    height: 100%;
-    opacity: 0.8;
-    fill: rgba(255, 255, 255, 0.5);
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+    font-size: clamp(12px, 0.92rem, 16px);
+    line-height: 1.5;
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    font-size: clamp(12px, 0.875rem, 16px);
   }
 `

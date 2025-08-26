@@ -1,6 +1,7 @@
-import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
+
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
 interface TabContainerProps {
   $active?: boolean
@@ -45,8 +46,8 @@ export const TabContainer = styled.div<TabContainerProps>`
     position: absolute;
     bottom: -5px;
     left: 50%;
+    width: 100%;
     transform: translateX(-50%) scaleX(${({ $active }) => ($active ? 1 : 0.5)});
-    width: 50%;
     height: 2px;
     background: linear-gradient(to right, transparent, rgba(22, 238, 246, 1), transparent);
     opacity: ${({ $active }) => ($active ? 1 : 0)};

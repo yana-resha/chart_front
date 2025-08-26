@@ -61,6 +61,7 @@ export const FadeMask = styled.div<{ $fadeLeft?: boolean; $fadeRight?: boolean }
 
 export const leftButtonCss = css`
   position: absolute;
+  padding-bottom: 8px !important;
   left: 0;
   top: 0;
   bottom: 0;
@@ -70,6 +71,7 @@ export const leftButtonCss = css`
 
 export const rightButtonCss = css`
   position: absolute;
+  padding-bottom: 8px !important;
   right: 0;
   top: 0;
   bottom: 0;

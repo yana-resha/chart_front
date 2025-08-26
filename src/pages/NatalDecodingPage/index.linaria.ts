@@ -25,7 +25,7 @@ export const WidjetsWrapper = styled.div`
   gap: 1.56rem;
   max-width: 100%;
 
-  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
-    gap: 1rem;
-  }
+  // @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+  //   gap: 1rem;
+  // }
 `

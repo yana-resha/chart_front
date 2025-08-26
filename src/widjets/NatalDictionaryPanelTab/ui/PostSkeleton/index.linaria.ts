@@ -1,5 +1,7 @@
 import { styled } from '@linaria/react'
 
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+
 export const Card = styled.div`
   border-radius: 20px;
   padding: 1.25rem;
@@ -12,6 +14,19 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+    padding: 1rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    gap: 1rem;
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    gap: 0.5rem;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
 `
 export const Title = styled.div`
   font-size: 1.375rem;
