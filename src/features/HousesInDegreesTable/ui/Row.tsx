@@ -35,14 +35,15 @@ export const Row = ({ longitude, houseIndex, houseOfRuler, ruler }: Props) => {
 
   return (
     <SimpleDataTable.RowHovered>
-      <SimpleDataTable.Cell>{house} дом</SimpleDataTable.Cell>
-      <SimpleDataTable.Cell>
+      <SimpleDataTable.Cell>{house}&nbsp;дом</SimpleDataTable.Cell>
+      <SimpleDataTable.Cell style={{ whiteSpace: 'nowrap' }}>
         {formattedDegree(degree)}
         <HamburgSymbol style={{ color: color }}>&ensp;{signSymbol}&ensp;</HamburgSymbol>
         {formattedDegree(minutes)}&rsquo; {formattedDegree(seconds)}&apos;&apos;
       </SimpleDataTable.Cell>
       <SimpleDataTable.Cell className={isHighlighted ? 'highlight' : ''}>
-        <HamburgSymbol>{rulerSybmol} &emsp;</HamburgSymbol> {rulerName} в {houseOfRulerName} доме
+        <HamburgSymbol style={{ marginRight: '6px' }}>{rulerSybmol}</HamburgSymbol> {rulerName} в{' '}
+        {houseOfRulerName} доме
       </SimpleDataTable.Cell>
     </SimpleDataTable.RowHovered>
   )

@@ -1,12 +1,16 @@
 import { styled } from '@linaria/react'
 
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+
 export const TableWrapper = styled.div`
   width: 100%;
   overflow-x: auto;
+  display: flex;
 `
 
 export const Table = styled.table`
   width: 100%;
+  max-width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   font-size: clamp(12px, 0.85rem, 16px);
@@ -14,8 +18,10 @@ export const Table = styled.table`
   color: rgba(255, 255, 255, 0.8);
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  width: 100%;
-  overflow-x: auto;
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    font-size: clamp(12px, 0.8rem, 16px);
+  }
 `
 
 export const Thead = styled.thead``
@@ -32,6 +38,10 @@ export const HeaderCell = styled.th`
   text-align: left;
   color: rgba(255, 255, 255, 1);
   padding: 8px;
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    font-size: clamp(12px, 0.85rem, 16px);
+  }
 `
 export const Row = styled.tr``
 
@@ -46,6 +56,10 @@ export const Cell = styled.td`
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   padding: 6px 10px;
   vertical-align: top;
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    padding: 5px 5px;
+  }
 
   &:last-child {
     border-right: none;

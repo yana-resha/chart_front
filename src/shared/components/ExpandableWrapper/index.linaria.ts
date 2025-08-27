@@ -1,8 +1,10 @@
 import { styled } from '@linaria/react'
 
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+
 export const Container = styled.div`
-  position: relative;
   width: 100%;
+  min-width: 0;
 `
 
 export const ToggleButton = styled.button`
@@ -19,4 +21,9 @@ export const ToggleButton = styled.button`
   background: linear-gradient(to top, rgba(22, 238, 246, 0.5), rgba(22, 238, 246, 0));
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-top: none; /* чтобы не было двойной линии */
+  font-size: 0.92rem;
+
+  @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
+    font-size: 0.82rem;
+  }
 `

@@ -1,6 +1,7 @@
 import { useState, useRef, ReactNode, useLayoutEffect, useEffect } from 'react'
 
 import { ToggleButton, Container } from './index.linaria'
+import { getScrollContainer, isInViewportWithin, scrollToWithin } from '@/shared/helpers/scrollTo'
 
 const DEFAULT_BUTTON_HEIGHT = 43
 
@@ -14,76 +15,100 @@ export const ExpandableWrapper = ({
   const [expanded, setExpanded] = useState(false)
   const [needsToggle, setNeedsToggle] = useState(false)
   const [availableHeight, setAvailableHeight] = useState(maxHeight - DEFAULT_BUTTON_HEIGHT)
-  const isResizing = useRef(false)
 
+  const isResizing = useRef(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
 
-  const isInViewport = (elem: HTMLElement) => {
-    const rect = elem.getBoundingClientRect()
+  const toggleExpanded = () => {
+    setExpanded((prev) => {
+      if (prev) {
+        // при сворачивании — вернуть элемент обратно в видимую область контейнера root
+        setTimeout(() => {
+          const el = containerRef.current
+          const root = getScrollContainer()
+          if (!el || !root) return
+          if (!isInViewportWithin(el, root, 0)) {
+            scrollToWithin(el, root, 30, 'auto')
+          }
+        }, 10)
+      }
 
-    return rect.top >= 0 && rect.top <= window.innerHeight
+      return !prev
+    })
   }
 
-  // Подсчёт нужен ли toggle
+  // Единый расчёт: нужна ли кнопка и сколько давать высоты в "свернутом" состоянии
   useLayoutEffect(() => {
-    if (contentRef.current) {
-      const fullHeight = contentRef.current.scrollHeight
-      setNeedsToggle(fullHeight > maxHeight)
-    }
-  }, [children, maxHeight])
+    const el = containerRef.current
+    if (!el || !contentRef.current) return
 
-  // Подсчёт высоты кнопки
-  useLayoutEffect(() => {
-    if (buttonRef.current) {
-      const buttonHeight = buttonRef.current.offsetHeight
-      setAvailableHeight(maxHeight - buttonHeight)
-    }
-  }, [maxHeight, needsToggle])
+    el.style.transition = isResizing.current ? 'none' : 'height 0.4s ease'
 
-  // Отслеживание изменения maxHeight
+    const fullHeight = contentRef.current.scrollHeight
+
+    if (!needsToggle) {
+      // если контент меньше maxHeight → fit-content
+      el.style.height = 'fit-content'
+    } else if (expanded) {
+      el.style.height = `${fullHeight}px`
+    } else {
+      el.style.height = `${availableHeight}px`
+    }
+  }, [availableHeight, expanded, children, needsToggle])
+
+  // Следим за изменениями размеров контента (динамические children)
   useEffect(() => {
-    isResizing.current = true
-    const timeout = setTimeout(() => {
-      isResizing.current = false
-    }, 50)
+    if (!contentRef.current) return
+    const el = contentRef.current
+    const ro = new ResizeObserver(() => {
+      // форсим перерасчёт при изменении контента
+      const fullHeight = el.scrollHeight
+      const btnHeight = buttonRef.current?.offsetHeight ?? DEFAULT_BUTTON_HEIGHT
+      if (fullHeight <= maxHeight) {
+        setNeedsToggle(false)
+        setAvailableHeight(fullHeight)
+      } else {
+        setNeedsToggle(true)
+        setAvailableHeight(Math.max(maxHeight - btnHeight, 0))
+      }
+    })
+    ro.observe(el)
 
-    return () => clearTimeout(timeout)
+    return () => ro.disconnect()
   }, [maxHeight])
 
-  // Управляем высотой и плавностью
+  // Мягкая/безанимационная установка высоты
   useLayoutEffect(() => {
-    if (!containerRef.current) return
     const el = containerRef.current
+    if (!el || !contentRef.current) return
 
-    if (isResizing.current) {
-      el.style.transition = 'none'
-    } else {
-      el.style.transition = 'height 0.4s ease'
-    }
+    // выключаем transition если идёт ресайз/пересчёт, чтобы не мигало
+    el.style.transition = isResizing.current ? 'none' : 'height 0.4s ease'
 
-    if (expanded && contentRef.current) {
+    if (expanded) {
       el.style.height = `${contentRef.current.scrollHeight}px`
     } else {
       el.style.height = `${availableHeight}px`
     }
-
-    setTimeout(() => {
-      if (!isInViewport(el)) {
-        const topOffset = el.getBoundingClientRect().top + window.scrollY
-        window.scrollTo({
-          top: topOffset - 30,
-        })
-      }
-    }, 10)
   }, [availableHeight, expanded, children])
+
+  // Флаг «идёт ресайз» на короткое время при смене maxHeight
+  useEffect(() => {
+    isResizing.current = true
+    const t = setTimeout(() => (isResizing.current = false), 50)
+
+    return () => clearTimeout(t)
+  }, [maxHeight])
 
   return (
     <Container>
       <div
         ref={containerRef}
-        style={{ overflow: expanded ? 'visible' : 'hidden' }}
+        style={{
+          overflowY: expanded ? 'visible' : 'hidden',
+        }}
       >
         <div ref={contentRef}>{children}</div>
       </div>
@@ -91,10 +116,7 @@ export const ExpandableWrapper = ({
       {needsToggle && (
         <ToggleButton
           ref={buttonRef}
-          kind={'outline'}
-          size={'small'}
-          theme={'secondary'}
-          onClick={() => setExpanded(!expanded)}
+          onClick={toggleExpanded}
         >
           {expanded ? 'Свернуть' : 'Развернуть'}
         </ToggleButton>

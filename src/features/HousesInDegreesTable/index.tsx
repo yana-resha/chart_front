@@ -8,7 +8,7 @@ export const HousesInDegreesTable = ({ houses, planets }: Props) => (
     <SimpleDataTable.HeadRow>
       <SimpleDataTable.Header>Дом</SimpleDataTable.Header>
       <SimpleDataTable.Header>Долгота</SimpleDataTable.Header>
-      <SimpleDataTable.Header>Управитель в доме</SimpleDataTable.Header>
+      <SimpleDataTable.Header>Управитель</SimpleDataTable.Header>
     </SimpleDataTable.HeadRow>
     <SimpleDataTable.TBody>
       {houses.map((house: number, index: number) => {

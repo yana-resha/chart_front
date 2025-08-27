@@ -1,6 +1,16 @@
 import React from 'react'
 
-import { Table, HeadRow, HeaderCell, Row, RowHovered, Cell, Tbody, Caption } from './index.linaria'
+import {
+  Table,
+  HeadRow,
+  HeaderCell,
+  Row,
+  RowHovered,
+  Cell,
+  Tbody,
+  Caption,
+  TableWrapper,
+} from './index.linaria'
 
 interface SimpleDataTableProps extends React.HTMLAttributes<HTMLTableElement> {
   children: React.ReactNode
@@ -20,7 +30,11 @@ interface CellProps extends React.HTMLAttributes<HTMLTableCellElement> {
 }
 
 export const SimpleDataTable = Object.assign(
-  ({ children, ...rest }: SimpleDataTableProps) => <Table {...rest}>{children}</Table>,
+  ({ children, ...rest }: SimpleDataTableProps) => (
+    <TableWrapper>
+      <Table {...rest}>{children}</Table>
+    </TableWrapper>
+  ),
   {
     HeadRow: ({ children, ...rest }: RowProps) => (
       <thead>

@@ -133,25 +133,25 @@ export const NatalDecodingPage = () => {
         {/* Основное содержимое — только когда нет загрузки/ошибок и есть данные */}
         {!isLoading && !serverError && !dataError && chartValue && (
           <WidjetsWrapper>
-            <section>
+            {/* <section>
               <SectionTitle>Исходные данные</SectionTitle>
               <NatalChartSourceData chartId={chartId} />
-            </section>
+            </section> */}
 
-            <section>
+            {/* <section>
               <SectionTitle>Интерактивная натальная карта</SectionTitle>
               <NatalCanvasPanel chartId={chartId} />
-            </section>
+            </section> */}
 
             <section>
               <SectionTitle>Основные значения карты</SectionTitle>
               <NatalSummaryPanelTab chartId={chartId} />
             </section>
 
-            <section>
+            {/* <section>
               <SectionTitle>Интерпретации</SectionTitle>
               <NatalDictionaryPanelTab chartId={chartId} />
-            </section>
+            </section> */}
           </WidjetsWrapper>
         )}
       </PageContentWrapper>

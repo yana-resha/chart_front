@@ -1,5 +1,4 @@
 import { CustomRowHovered, FictionCell, WeightCell } from './index.linaria'
-import { HamburgSymbol } from '@/shared/components/HamburgSymbol'
 import { SimpleDataTable } from '@/shared/components/SimpleDataTable'
 import { ASTRO_HOUSE_SYMBOL } from '@/shared/configs/astro-houses.config'
 import { getHousesFullStats } from '@/shared/helpers/astro/getHousesFullStats'
@@ -39,7 +38,7 @@ export const HousesStatsTable = ({ planets, houses }: { planets: IPlanetValue[];
       <SimpleDataTable.HeadRow>
         <SimpleDataTable.Header>Дом</SimpleDataTable.Header>
         <SimpleDataTable.Header>Планеты</SimpleDataTable.Header>
-        <SimpleDataTable.Header>Вес в карте</SimpleDataTable.Header>
+        <SimpleDataTable.Header>Вес</SimpleDataTable.Header>
         <SimpleDataTable.Header>Фиктивные</SimpleDataTable.Header>
       </SimpleDataTable.HeadRow>
       <SimpleDataTable.TBody>
@@ -48,23 +47,20 @@ export const HousesStatsTable = ({ planets, houses }: { planets: IPlanetValue[];
           const rowClass = isEmpty ? 'empty' : isDominant ? 'highlight' : ''
 
           let indicator = ''
-          if (isHot) indicator = ' 🔥'
-          else if (isEmpty) indicator = ' 😴'
+          if (isHot) indicator = '\u00A0🔥'
+          else if (isEmpty) indicator = '\u00A0😴'
 
           return (
             <CustomRowHovered
               className={rowClass}
               key={houseIndex}
             >
-              <SimpleDataTable.Cell>{houseSymbol} дом</SimpleDataTable.Cell>
+              <SimpleDataTable.Cell>{houseSymbol}&nbsp;дом</SimpleDataTable.Cell>
               <SimpleDataTable.Cell>{realCount}</SimpleDataTable.Cell>
               <WeightCell>
                 {percentage.toFixed(2)}%{indicator}
               </WeightCell>
-              <FictionCell>
-                {fictionCount}
-                <HamburgSymbol>{''}</HamburgSymbol>
-              </FictionCell>
+              <FictionCell>{fictionCount}</FictionCell>
             </CustomRowHovered>
           )
         })}
