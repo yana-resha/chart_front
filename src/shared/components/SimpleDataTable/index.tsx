@@ -31,8 +31,8 @@ interface CellProps extends React.HTMLAttributes<HTMLTableCellElement> {
 
 export const SimpleDataTable = Object.assign(
   ({ children, ...rest }: SimpleDataTableProps) => (
-    <TableWrapper>
-      <Table {...rest}>{children}</Table>
+    <TableWrapper {...rest}>
+      <Table>{children}</Table>
     </TableWrapper>
   ),
   {

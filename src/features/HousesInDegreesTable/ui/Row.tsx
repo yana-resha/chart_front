@@ -42,8 +42,8 @@ export const Row = ({ longitude, houseIndex, houseOfRuler, ruler }: Props) => {
         {formattedDegree(minutes)}&rsquo; {formattedDegree(seconds)}&apos;&apos;
       </SimpleDataTable.Cell>
       <SimpleDataTable.Cell className={isHighlighted ? 'highlight' : ''}>
-        <HamburgSymbol style={{ marginRight: '6px' }}>{rulerSybmol}</HamburgSymbol> {rulerName} в{' '}
-        {houseOfRulerName} доме
+        <HamburgSymbol style={{ marginRight: '6px' }}>{rulerSybmol}</HamburgSymbol>
+        {rulerName} в {houseOfRulerName} доме
       </SimpleDataTable.Cell>
     </SimpleDataTable.RowHovered>
   )

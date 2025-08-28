@@ -21,3 +21,6 @@ export const HousesContentLayout = styled.div`
     grid-template-columns: 1fr;
   }
 `
+export const SectionBlock = styled.div`
+  width: 100%;
+`

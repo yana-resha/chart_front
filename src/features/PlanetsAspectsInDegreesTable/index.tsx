@@ -1,12 +1,13 @@
 import { useMemo } from 'react'
 import React from 'react'
 
-import { orb } from './data/tooltip.data'
+import { aspect, orb } from './data/tooltip.data'
 import { IAspect, Props } from './types'
 import { Row } from './ui/Row'
 import { InfoTooltip } from '@/shared/components/InfoTooltip'
 import { SimpleDataTable } from '@/shared/components/SimpleDataTable'
 import { sortAspectsByPlanetAndAspectPriority } from '@/shared/helpers/astro/sortAspects'
+import { aspectsTableBox } from './index.linaria'
 
 export const PlanetsAspectsInDegreesTable = ({ planetsAspects }: Props) => {
   const duplicatedAspects = useMemo(() => {
@@ -29,13 +30,25 @@ export const PlanetsAspectsInDegreesTable = ({ planetsAspects }: Props) => {
   )
 
   return (
-    <SimpleDataTable>
+    <SimpleDataTable
+      className={aspectsTableBox}
+      style={{
+        whiteSpace: 'nowrap',
+      }}
+    >
       <SimpleDataTable.HeadRow>
         <SimpleDataTable.Header style={{ position: 'sticky', top: 0 }}>Планета</SimpleDataTable.Header>
-        <SimpleDataTable.Header style={{ position: 'sticky', top: 0 }}>Аспект</SimpleDataTable.Header>
-        <SimpleDataTable.Header style={{ position: 'sticky', top: 0 }}>Планета</SimpleDataTable.Header>
         <SimpleDataTable.Header style={{ position: 'sticky', top: 0 }}>
-          Орбис <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{orb}</div>} />
+          Аспект <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{aspect}</div>} />
+        </SimpleDataTable.Header>
+        <SimpleDataTable.Header style={{ position: 'sticky', top: 0 }}>Планета</SimpleDataTable.Header>
+        <SimpleDataTable.Header
+          style={{
+            position: 'sticky',
+            top: 0,
+          }}
+        >
+          Орб <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{orb}</div>} />
         </SimpleDataTable.Header>
       </SimpleDataTable.HeadRow>
       <SimpleDataTable.TBody>

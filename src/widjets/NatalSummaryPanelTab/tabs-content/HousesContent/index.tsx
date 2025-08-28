@@ -1,13 +1,13 @@
 import { useRef } from 'react'
 
-import { Layout } from '../index.linaria'
-import { HousesContentLayout, POINTS_1_GRID } from './index.linaria'
+import { Layout, ListHeader } from '../index.linaria'
+import { HousesContentLayout, POINTS_1_GRID, SectionBlock } from './index.linaria'
 import { IPlanet } from '@/entities/astro-charts/types/astro-items.types'
 import { HousesInDegreesTable } from '@/features/HousesInDegreesTable'
 import { HousesStatsTable } from '@/features/HousesStatsTable'
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { ExpandableWrapper } from '@/shared/components/ExpandableWrapper'
 import { useElementAndWindowRect } from '@/shared/hooks/useElementAndWindowRect'
-import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
 interface Props {
   planets: IPlanet[]
@@ -26,18 +26,24 @@ export const HousesContent = ({ planets, houses }: Props) => {
   return (
     <Layout>
       <HousesContentLayout>
-        <ExpandableWrapper maxHeight={maxHeight}>
-          <HousesInDegreesTable
-            planets={planets}
-            houses={houses}
-          />
-        </ExpandableWrapper>
-        <ExpandableWrapper maxHeight={maxHeight}>
-          <HousesStatsTable
-            houses={houses}
-            planets={planets}
-          />
-        </ExpandableWrapper>
+        <SectionBlock>
+          <ListHeader>🏠 Куспиды домов</ListHeader>
+          <ExpandableWrapper maxHeight={maxHeight}>
+            <HousesInDegreesTable
+              planets={planets}
+              houses={houses}
+            />
+          </ExpandableWrapper>
+        </SectionBlock>
+        <SectionBlock>
+          <ListHeader>🌌 Планеты в домах</ListHeader>
+          <ExpandableWrapper maxHeight={maxHeight}>
+            <HousesStatsTable
+              houses={houses}
+              planets={planets}
+            />
+          </ExpandableWrapper>
+        </SectionBlock>
       </HousesContentLayout>
     </Layout>
   )

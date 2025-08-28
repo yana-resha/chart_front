@@ -33,7 +33,7 @@ export const PlanetItem = ({ planet, houseIndex = undefined }: Props) => {
   return (
     <SimpleDataTable.RowHovered>
       <SimpleDataTable.Cell>
-        <HamburgSymbol>{symbol} &emsp;</HamburgSymbol>
+        <HamburgSymbol style={{ marginRight: '6px' }}>{symbol}</HamburgSymbol>
         {label ?? name}{' '}
         {isRetrograde && (
           <Tooltip

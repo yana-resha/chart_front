@@ -14,10 +14,6 @@ export const DefaultContainer = styled.div`
   max-width: 100%;
   position: relative;
   min-height: 100%;
-  height: 100%;
-  max-height: fit-content;
-  /* background-color: red; */
-
   background-image: url(${background});
   background-size: cover;
   background-repeat: no-repeat;

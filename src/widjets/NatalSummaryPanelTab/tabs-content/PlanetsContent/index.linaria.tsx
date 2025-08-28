@@ -30,6 +30,11 @@ export const Card = styled.div`
   color: rgba(255, 255, 255, 0.8);
   min-width: 0;
   min-height: 120px;
+
+  @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
+    font-size: 0.8rem;
+    min-height: 100px;
+  }
 `
 
 /* Основные качества список и карточки */
@@ -56,14 +61,6 @@ export const ModalitiesCard = styled(Card)`
 export const SectionBlock = styled.div`
   width: 100%;
 `
-export const ListHeader = styled.h3`
-  font-size: 1.05rem;
-  padding-left: 0.5rem;
-  font-weight: 500;
-  margin: 0;
-  margin-bottom: 1rem;
-  color: rgba(255, 255, 255, 0.9);
-`
 
 export const Title = styled.div`
   display: flex;
@@ -74,6 +71,10 @@ export const Title = styled.div`
   font-size: 1rem;
   margin-bottom: 8px;
   position: relative;
+
+  @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
+    font-size: 0.92rem;
+  }
 
   &::after {
     content: '';

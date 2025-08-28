@@ -1,13 +1,12 @@
 import { useMemo } from 'react'
 
-import { Layout } from '../index.linaria'
+import { Layout, ListHeader } from '../index.linaria'
 import { element, modality, sign } from './data/balanceTooltips.data'
 import { detriment, domicile, exaltation, fall, retro } from './data/essentialsTooltip.data'
 import {
   BalanceGrid,
   Card,
   List,
-  ListHeader,
   ModalitiesCard,
   PlanetInDegressGrid,
   PlanetsContentLayout,

@@ -171,18 +171,18 @@ export const InterpritationBlock = styled.div`
   color: rgba(255, 255, 255, 0.85);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
   white-space: pre-wrap;
 
   @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
     font-size: clamp(12px, 0.92rem, 16px);
     line-height: 1.5;
-    gap: 1rem;
+    gap: 0.7rem;
   }
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     font-size: clamp(12px, 0.875rem, 16px);
-    gap: 0.875rem;
+    gap: 0.5rem;
   }
 
   & p {

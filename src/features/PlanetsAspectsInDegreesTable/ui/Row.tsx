@@ -1,4 +1,5 @@
 import { IAspect } from '../types'
+import { aspectCellCss, planetCellCss } from './index.linaria'
 import { HamburgSymbol } from '@/shared/components/HamburgSymbol'
 import { SimpleDataTable } from '@/shared/components/SimpleDataTable'
 import {
@@ -21,17 +22,16 @@ export const Row = ({ planetA, planetB, orb, aspectType }: IAspect) => {
 
   return (
     <SimpleDataTable.RowHovered>
-      <SimpleDataTable.Cell>
-        <HamburgSymbol>{planetASymbol} &emsp;</HamburgSymbol>
+      <SimpleDataTable.Cell className={planetCellCss}>
+        <HamburgSymbol style={{ marginRight: '6px' }}>{planetASymbol}</HamburgSymbol>
         {planetALabel ?? planetA}
       </SimpleDataTable.Cell>
-      <SimpleDataTable.Cell>
-        <HamburgSymbol style={{ color: aspectColor }}>{aspectSymbol}</HamburgSymbol>
-        &ensp;
+      <SimpleDataTable.Cell className={aspectCellCss}>
+        <HamburgSymbol style={{ color: aspectColor }}>{aspectSymbol}</HamburgSymbol>&ensp;
         {aspectName}
       </SimpleDataTable.Cell>
-      <SimpleDataTable.Cell>
-        <HamburgSymbol>{planetBSymbol} &emsp;</HamburgSymbol>
+      <SimpleDataTable.Cell className={planetCellCss}>
+        <HamburgSymbol style={{ marginRight: '6px' }}>{planetBSymbol}</HamburgSymbol>
         {planetBLabel ?? planetB}
       </SimpleDataTable.Cell>
       <SimpleDataTable.Cell>{orb}°</SimpleDataTable.Cell>
