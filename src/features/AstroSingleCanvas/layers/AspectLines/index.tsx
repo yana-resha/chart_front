@@ -6,11 +6,13 @@ import { Line, Text } from 'react-konva'
 import { useAstroCanvasContext } from '../../AstroChartContext'
 import { lineHoverAnimation, textHoverAnimation } from './helpers/animate.helper'
 import { ASPECT_COLOR } from '../../configs/aspect.config'
+import { createPointerTooltipHandlers } from '../../hooks/usePointerTooltip'
 import { getAspectTooltipHTML } from '../../tooltip-contents/getAspectTooltipHTML'
 import { getVisualAngleFromAsc, polarToCartesian } from '../../utils/astro-helpers'
-import { getMouseCoords } from '../../utils/helpers'
 import { ASTRO_ASPECT_NAME, ASTRO_ASPECT_SYMBOL } from '@/shared/configs/astro-aspects.config'
 import { ASTRO_ASPECT } from '@/shared/types/astro/astro-aspects.types'
+
+// общий хелпер фабрики pointer-хендлеров
 
 const TEXT_DEFAULT_OPACITY = 1
 const LINE_DEFAULT_OPACITY = 1
@@ -30,11 +32,11 @@ export const AspectLines = () => {
   } = useAstroCanvasContext()
 
   const ascendant = houseCusps[0] ?? FAKE_ASCENDANT
-  /* Линейные аспекты */
+
+  // refs для анимаций
   const aspect1Refs = useRef<(Konva.Line | null)[]>([])
   const aspect2Refs = useRef<(Konva.Line | null)[]>([])
   const symbolRefs = useRef<(Konva.Text | null)[]>([])
-  /* Соединения */
 
   const [hoveredAspect, setHoveredAspect] = useState<string | null>(null)
   const fs = PLANET_INSIDE_RADIUS * 0.1
@@ -54,9 +56,10 @@ export const AspectLines = () => {
           const posA = polarToCartesian(angleA, ASPECT_INSIDE_RADIUS, CENTER)
           const posB = polarToCartesian(angleB, ASPECT_INSIDE_RADIUS, CENTER)
 
+          // небольшой разрыв под символ
           const dx = posB.x - posA.x
           const dy = posB.y - posA.y
-          const length = Math.sqrt(dx * dx + dy * dy)
+          const length = Math.sqrt(dx * dx + dy * dy) || 1
           const ux = dx / length
           const uy = dy / length
           const gap = fs * 0.4
@@ -77,8 +80,6 @@ export const AspectLines = () => {
             symbolB: planetB.symbol,
             centerX,
             centerY,
-            angleA,
-            angleB,
             posA,
             posB,
             color: ASPECT_COLOR[aspect.aspectType],
@@ -90,13 +91,39 @@ export const AspectLines = () => {
     [CENTER, ascendant, aspects, fs, planets],
   )
 
+  // фабрика pointer-хендлеров для прозрачной "хит"-линии
+  const makeLineHandlers = (aspect: NonNullable<(typeof lineAspects)[number]>, i: number) =>
+    createPointerTooltipHandlers({
+      onEnter: ({ x, y }, evt) => {
+        showTooltip({ text: getAspectTooltipHTML(aspect), x, y })
+        setHoveredAspect('line' + i)
+        evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
+      },
+      onMove: ({ x, y }) => {
+        changeTooltipPosition({ x, y })
+      },
+      onLeave: (evt) => {
+        hideTooltip()
+        setHoveredAspect(null)
+        evt.target.getStage()?.container().style.setProperty('cursor', 'default')
+      },
+      onDown: ({ x, y }) => {
+        // для тачей показываем по тапу
+        showTooltip({ text: getAspectTooltipHTML(aspect), x, y })
+        setHoveredAspect('line' + i)
+      },
+      onUp: () => {
+        hideTooltip()
+        setHoveredAspect(null)
+      },
+    })
+
   return (
     <>
-      {/* Аспекты кроме соединений */}
+      {/* Аспекты (кроме соединений): отрисовка */}
       {lineAspects
-        .filter((aspect) => aspect?.aspectType !== ASTRO_ASPECT.CONJUCTION)
+        .filter((a): a is NonNullable<typeof a> => a !== null && a.aspectType !== ASTRO_ASPECT.CONJUCTION)
         .map((aspect, i) => {
-          if (aspect === null) return null
           const { color } = aspect
           const isHighlighted = hoveredAspect === 'line' + i
 
@@ -108,7 +135,6 @@ export const AspectLines = () => {
             lineHoverAnimation(line1, isHighlighted, LINE_DEFAULT_OPACITY)
             lineHoverAnimation(line2, isHighlighted, LINE_DEFAULT_OPACITY)
           }
-
           if (symbol) {
             textHoverAnimation(symbol, isHighlighted, TEXT_DEFAULT_OPACITY)
           }
@@ -160,40 +186,18 @@ export const AspectLines = () => {
           )
         })}
 
-      {/* Наведение на всю линию, кроме соединений */}
+      {/* Прозрачные "хит"-линии поверх — ловят pointer-события и показывают тултип */}
       {lineAspects
-        .filter((aspect) => aspect?.aspectType !== ASTRO_ASPECT.CONJUCTION)
-        .map((aspect, i) => {
-          if (aspect === null) return null
-          const { posA, posB } = aspect
-
-          return (
-            <Line
-              key={`aspect-transparent-${i}`}
-              points={[posA.x, posA.y, posB.x, posB.y]}
-              hitStrokeWidth={10}
-              onMouseEnter={(evt) => {
-                const { clientX, clientY } = getMouseCoords(evt)
-                showTooltip({
-                  text: getAspectTooltipHTML(aspect),
-                  x: clientX,
-                  y: clientY,
-                })
-                setHoveredAspect('line' + i)
-                evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
-              }}
-              onMouseMove={(evt) => {
-                const { clientX, clientY } = getMouseCoords(evt)
-                changeTooltipPosition({ x: clientX, y: clientY })
-              }}
-              onMouseLeave={(evt) => {
-                hideTooltip()
-                setHoveredAspect(null)
-                evt.target.getStage()?.container().style.setProperty('cursor', 'default')
-              }}
-            />
-          )
-        })}
+        .filter((a): a is NonNullable<typeof a> => a !== null && a.aspectType !== ASTRO_ASPECT.CONJUCTION)
+        .map((aspect, i) => (
+          <Line
+            key={`aspect-hit-${i}`}
+            points={[aspect.posA.x, aspect.posA.y, aspect.posB.x, aspect.posB.y]}
+            hitStrokeWidth={10}
+            stroke="transparent"
+            {...makeLineHandlers(aspect, i)}
+          />
+        ))}
     </>
   )
 }

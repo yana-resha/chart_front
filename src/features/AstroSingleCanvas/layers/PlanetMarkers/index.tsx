@@ -9,11 +9,11 @@ import { Group, Circle, Text } from 'react-konva'
 import { groupClosePlanets } from './groupClosePlanets'
 import { useAstroCanvasContext } from '../../AstroChartContext'
 import { PLANET_SIGNS } from '../../configs/planet.config'
+import { createPointerTooltipHandlers } from '../../hooks/usePointerTooltip'
 import { getPlanetTooltipHTML } from '../../tooltip-contents/getPlanetTooltipHTML'
 import { PlanetData } from '../../types'
 import { ChartIcon } from '../../ui/ChartIcon'
 import { getVisualAngleFromAsc, polarToCartesian } from '../../utils/astro-helpers'
-import { getMouseCoords } from '../../utils/helpers'
 import { ASTRO_PLANET_IMAGE } from '@/shared/configs/astro-planets.config'
 import { getHouseIndexBySmth } from '@/shared/helpers/astro.helper'
 import { ASTRO_PLANET } from '@/shared/types/astro/astro-planets.types'
@@ -78,38 +78,48 @@ export const PlanetMarkers = () => {
 
     const ref = circleRefs.current[name]
     if (ref) {
-      const current = ref.scaleX()
-      if (Math.abs(current - scale) > 0.01) {
-        ref.to({ scaleX: scale, scaleY: scale, duration, easing })
-      }
+      ref.to({ scaleX: scale, scaleY: scale, duration, easing })
     }
 
     const groupRef = groupRefs.current[name]
     if (groupRef) {
-      const current = groupRef.scaleX()
-      if (Math.abs(current - scale) > 0.01) {
-        groupRef.to({ scaleX: scale, scaleY: scale, duration, easing })
-      }
+      groupRef.to({ scaleX: scale, scaleY: scale, duration, easing })
     }
   }
 
-  const setTooltip = (evt: Konva.KonvaEventObject<MouseEvent>, planet: PlanetData) => {
-    const { clientX, clientY } = getMouseCoords(evt)
-    const houseIndex = getHouseIndexBySmth(planet.longitude, houseCusps)
-    showTooltip({ text: getPlanetTooltipHTML(planet, houseIndex), x: clientX, y: clientY })
-    evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
-  }
-
-  const changeTooltip = (evt: Konva.KonvaEventObject<MouseEvent>) => {
-    const { clientX, clientY } = getMouseCoords(evt)
-    changeTooltipPosition({ x: clientX, y: clientY })
-  }
+  // хелпер для тултипов планеты
+  const makeHandlers = (planet: PlanetData) =>
+    createPointerTooltipHandlers({
+      onEnter: ({ x, y }, evt) => {
+        const houseIndex = getHouseIndexBySmth(planet.longitude, houseCusps)
+        showTooltip({ text: getPlanetTooltipHTML(planet, houseIndex), x, y })
+        handleHover(planet.name, true)
+        evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
+      },
+      onMove: ({ x, y }) => {
+        changeTooltipPosition({ x, y })
+      },
+      onLeave: (evt) => {
+        hideTooltip()
+        handleHover(planet.name, false)
+        evt.target.getStage()?.container().style.setProperty('cursor', 'default')
+      },
+      onDown: ({ x, y }) => {
+        const houseIndex = getHouseIndexBySmth(planet.longitude, houseCusps)
+        showTooltip({ text: getPlanetTooltipHTML(planet, houseIndex), x, y })
+        handleHover(planet.name, true)
+      },
+      onUp: () => {
+        hideTooltip()
+        handleHover(planet.name, false)
+      },
+    })
 
   return (
     <>
       {planets.map((planet) => {
         const img = planetImages[planet.name]
-        if (!img) return null // изображение ещё не загрузилось
+        if (!img) return null
 
         const angle = getVisualAngleFromAsc(planet.longitude, ascendant)
         const radius = (PLANET_OUTSIDE_RADIUS + PLANET_INSIDE_RADIUS) / 2
@@ -127,16 +137,7 @@ export const PlanetMarkers = () => {
             fillPatternImage={img}
             fillPatternScale={{ x: 0.1, y: 0.1 }}
             fillPatternOffset={{ x: img.width / 2, y: img.height / 2 }}
-            onMouseEnter={(evt) => {
-              handleHover(planet.name, true)
-              setTooltip(evt, planet)
-            }}
-            onMouseMove={(evt) => changeTooltip(evt)}
-            onMouseLeave={(e) => {
-              handleHover(planet.name, false)
-              hideTooltip()
-              e.target.getStage()?.container().style.setProperty('cursor', 'default')
-            }}
+            {...makeHandlers(planet)}
           />
         )
       })}
@@ -170,17 +171,7 @@ export const PlanetMarkers = () => {
               ref={(node) => {
                 if (node) groupRefs.current[planet.name] = node
               }}
-              onMouseEnter={(evt) => {
-                const planetName = planet.name
-                handleHover(planetName, true)
-                setTooltip(evt, planet)
-              }}
-              onMouseMove={(evt) => changeTooltip(evt)}
-              onMouseLeave={(e) => {
-                handleHover(planet.name, false)
-                hideTooltip()
-                e.target.getStage()?.container().style.setProperty('cursor', 'default')
-              }}
+              {...makeHandlers(planet)}
             >
               <ChartIcon
                 path={iconPath}

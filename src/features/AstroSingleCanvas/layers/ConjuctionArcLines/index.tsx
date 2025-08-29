@@ -4,9 +4,9 @@ import { Arc, Line } from 'react-konva'
 
 import { useAstroCanvasContext } from '../../AstroChartContext'
 import { ASPECT_COLOR } from '../../configs/aspect.config'
+import { createPointerTooltipHandlers } from '../../hooks/usePointerTooltip'
 import { getConjuctionTooltipHTML } from '../../tooltip-contents/getConjuctionTooltipHTML'
 import { getVisualAngleFromAsc, polarToCartesian } from '../../utils/astro-helpers'
-import { getMouseCoords } from '../../utils/helpers'
 import { ASTRO_ASPECT_SYMBOL } from '@/shared/configs/astro-aspects.config'
 import { ASTRO_ASPECT } from '@/shared/types/astro/astro-aspects.types'
 
@@ -64,16 +64,40 @@ export const ConjuctionArcLines = () => {
         aspectSymbol: ASTRO_ASPECT_SYMBOL[aspect.aspectType],
       }
     })
-    .filter((aspect): aspect is NonNullable<typeof aspect> => aspect !== null)
+    .filter((a): a is NonNullable<typeof a> => a !== null)
 
-  const getTooltipAspects = (baseAspect: (typeof conjuctionAspects)[number]) =>
+  const getTooltipAspects = (base: (typeof conjuctionAspects)[number]) =>
     conjuctionAspects.filter(
       (a) =>
-        a.planetA === baseAspect.planetA ||
-        a.planetB === baseAspect.planetA ||
-        a.planetA === baseAspect.planetB ||
-        a.planetB === baseAspect.planetB,
+        a.planetA === base.planetA ||
+        a.planetB === base.planetA ||
+        a.planetA === base.planetB ||
+        a.planetB === base.planetB,
     )
+
+  // фабрика pointer-хендлеров для конкретной дуги соединения
+  const makeArcHandlers = (aspect: (typeof conjuctionAspects)[number]) =>
+    createPointerTooltipHandlers({
+      onEnter: ({ x, y }, evt) => {
+        const related = getTooltipAspects(aspect)
+        showTooltip({ text: getConjuctionTooltipHTML(related), x, y })
+        evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
+      },
+      onMove: ({ x, y }) => {
+        changeTooltipPosition({ x, y })
+      },
+      onLeave: (evt) => {
+        hideTooltip()
+        evt.target.getStage()?.container().style.setProperty('cursor', 'default')
+      },
+      onDown: ({ x, y }) => {
+        const related = getTooltipAspects(aspect)
+        showTooltip({ text: getConjuctionTooltipHTML(related), x, y })
+      },
+      onUp: () => {
+        hideTooltip()
+      },
+    })
 
   return (
     <>
@@ -101,39 +125,22 @@ export const ConjuctionArcLines = () => {
           />
         </Fragment>
       ))}
-      {/* Арки для наведения и отображения тултипа */}
+
+      {/* Невидимые дуги поверх — ловят pointer-события для тултипов */}
       {conjuctionAspects.map((aspect) => (
-        <Fragment key={aspect.key}>
-          <Arc
-            x={CENTER}
-            y={CENTER}
-            innerRadius={ASPECT_INSIDE_RADIUS}
-            outerRadius={PLANET_INSIDE_RADIUS}
-            angle={aspect.arc.angle}
-            rotation={aspect.arc.rotation}
-            strokeWidth={2}
-            stroke={'transparent'}
-            fill={'transparent'}
-            onMouseEnter={(evt) => {
-              const { clientX, clientY } = getMouseCoords(evt)
-              const relatedAspects = getTooltipAspects(aspect)
-              showTooltip({
-                text: getConjuctionTooltipHTML(relatedAspects),
-                x: clientX,
-                y: clientY,
-              })
-              evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
-            }}
-            onMouseMove={(evt) => {
-              const { clientX, clientY } = getMouseCoords(evt)
-              changeTooltipPosition({ x: clientX, y: clientY })
-            }}
-            onMouseLeave={(evt) => {
-              hideTooltip()
-              evt.target.getStage()?.container().style.setProperty('cursor', 'default')
-            }}
-          />
-        </Fragment>
+        <Arc
+          key={`hit-${aspect.key}`}
+          x={CENTER}
+          y={CENTER}
+          innerRadius={ASPECT_INSIDE_RADIUS}
+          outerRadius={PLANET_INSIDE_RADIUS}
+          angle={aspect.arc.angle}
+          rotation={aspect.arc.rotation}
+          strokeWidth={2}
+          stroke="transparent"
+          fill="transparent"
+          {...makeArcHandlers(aspect)}
+        />
       ))}
     </>
   )

@@ -4,10 +4,12 @@ import { Arc, Circle, Text } from 'react-konva'
 
 import { AnimateHouseArc } from './AnimateHouseArc'
 import { useAstroCanvasContext } from '../../AstroChartContext'
+import { createPointerTooltipHandlers } from '../../hooks/usePointerTooltip'
 import { getHouseTooltipHTML } from '../../tooltip-contents/getHouseTooltipHTML'
 import { getPlanetsByHouse, getVisualAngleFromAsc, polarToCartesian } from '../../utils/astro-helpers'
-import { getMouseCoords } from '../../utils/helpers'
 import { ASTRO_HOUSE_SYMBOL } from '@/shared/configs/astro-houses.config'
+
+// 👇 общий хелпер (фабрика) — НЕ хук, можно вызывать в map
 
 export const HouseLines = () => {
   const {
@@ -42,6 +44,7 @@ export const HouseLines = () => {
   ]
 
   const [hoveredHouse, setHoveredHouse] = useState<number | null>(null)
+
   const INNER_RADIUS = RADIUS - (RADIUS - PLANET_OUTSIDE_RADIUS)
   const fs = (RADIUS - HOUSES_INSIDE_RADIUS) * 0.4
 
@@ -64,6 +67,34 @@ export const HouseLines = () => {
     [ascendant, houseCusps, planetsByHouse],
   )
 
+  // фабрика обработчиков для конкретного сектора дома
+  const makeHouseHandlers = (deg: number, index: number) =>
+    createPointerTooltipHandlers({
+      onEnter: ({ x, y }, evt) => {
+        showTooltip({ text: getHouseTooltipHTML(deg, index + 1), x, y })
+        setHoveredHouse(index)
+        evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
+      },
+      onMove: ({ x, y }) => {
+        changeTooltipPosition({ x, y })
+      },
+      onLeave: (evt) => {
+        hideTooltip()
+        setHoveredHouse(null)
+        evt.target.getStage()?.container().style.setProperty('cursor', 'default')
+      },
+      onDown: ({ x, y }) => {
+        // тач/клик — тоже показать
+        showTooltip({ text: getHouseTooltipHTML(deg, index + 1), x, y })
+        setHoveredHouse(index)
+      },
+      onUp: () => {
+        // по отпусканию — скрыть
+        hideTooltip()
+        setHoveredHouse(null)
+      },
+    })
+
   return (
     <Fragment>
       <Circle
@@ -74,7 +105,7 @@ export const HouseLines = () => {
         strokeWidth={1}
       />
 
-      {/* Арки домов */}
+      {/* Видимые арки домов */}
       {arcData.map((data, i) => (
         <AnimateHouseArc
           key={`house-visible-${i}`}
@@ -87,11 +118,11 @@ export const HouseLines = () => {
           hasPlanets={data.hasPlanets}
         />
       ))}
-      {/* Labels домов */}
+
+      {/* Подписи домов */}
       {houseCusps.map((deg, i) => {
         const nextDeg = houseCusps[(i + 1) % 12]
         const middleDeg = (deg + ((nextDeg - deg + 360) % 360) / 2) % 360
-
         const angle = getVisualAngleFromAsc(middleDeg, ascendant)
         const pos = polarToCartesian(angle, (RADIUS + HOUSES_INSIDE_RADIUS) / 2, CENTER)
 
@@ -116,7 +147,7 @@ export const HouseLines = () => {
         dash={[4, 4]}
       />
 
-      {/* Асцедент/ MC/ IC / DSC */}
+      {/* Метки ASC/MC/IC/DSC */}
       {labels.map(({ label, angle }) => {
         const labelRadius = RADIUS + RADIUS * 0.06
         const pos = polarToCartesian(angle, labelRadius, CENTER)
@@ -136,7 +167,8 @@ export const HouseLines = () => {
           />
         )
       })}
-      {/* Арки домов для наведения */}
+
+      {/* Невидимые арки поверх — ловят pointer-события для тултипов */}
       {arcData.map((data, i) => (
         <Arc
           key={`house-arc-${i}`}
@@ -148,25 +180,7 @@ export const HouseLines = () => {
           angle={data.angle}
           stroke="transparent"
           strokeWidth={0}
-          onMouseEnter={(evt) => {
-            const { clientX, clientY } = getMouseCoords(evt)
-            showTooltip({
-              text: getHouseTooltipHTML(data.deg, i + 1),
-              x: clientX,
-              y: clientY,
-            })
-            setHoveredHouse(i)
-            evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
-          }}
-          onMouseMove={(evt) => {
-            const { clientX, clientY } = getMouseCoords(evt)
-            changeTooltipPosition({ x: clientX, y: clientY })
-          }}
-          onMouseLeave={(evt) => {
-            hideTooltip()
-            setHoveredHouse(null)
-            evt.target.getStage()?.container().style.setProperty('cursor', 'default')
-          }}
+          {...makeHouseHandlers(data.deg, i)}
         />
       ))}
     </Fragment>
