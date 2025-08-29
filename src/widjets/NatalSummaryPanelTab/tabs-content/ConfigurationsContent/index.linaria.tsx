@@ -1,3 +1,4 @@
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { styled } from '@linaria/react'
 
 export const Container = styled.div`
@@ -9,9 +10,6 @@ export const Container = styled.div`
     inset 0 0 80px rgba(255, 255, 255, 0.02),
     0 0 12px rgba(0, 0, 0, 0.1);
   color: rgba(255, 255, 255, 0.7);
-  font-size: 16px;
-  font-style: italic;
-  line-height: 1.7;
   text-align: center;
   display: flex;
   align-items: center;
@@ -21,6 +19,14 @@ export const Container = styled.div`
   position: relative;
   backdrop-filter: blur(1.5px) brightness(1.1);
   transition: all 0.3s ease;
+
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+    padding: 1.8rem;
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
+    padding: 1rem;
+  }
 `
 
 export const IconBox = styled.div`
@@ -36,10 +42,22 @@ export const IconBox = styled.div`
 `
 
 export const Title = styled.h3`
-  font-size: 1.375rem;
+  font-size: clamp(16px, 1.25rem, 22px);
+  font-weight: 500;
+  line-height: 1.2;
   margin-bottom: 1rem;
   margin-top: 0;
   color: rgba(255, 255, 255, 1);
+
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+    font-size: clamp(16px, 1.1rem, 20px);
+    line-height: 1.1;
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    font-size: clamp(16px, 1rem, 18px);
+    line-height: 1.1;
+  }
 `
 
 export const Description = styled.p`
@@ -48,6 +66,14 @@ export const Description = styled.p`
   color: rgba(255, 255, 255, 0.75);
   padding: 0;
   margin: 0;
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+    font-size: clamp(12px, 0.92rem, 16px);
+    line-height: 1.5;
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    font-size: clamp(12px, 0.875rem, 16px);
+  }
 
   & span {
     color: rgb(22, 238, 246);
@@ -56,15 +82,21 @@ export const Description = styled.p`
   & br {
     display: block;
     content: '';
-    margin-bottom: 0.6em;
+    margin-bottom: 1rem;
   }
 `
 
 export const Quote = styled.div`
   margin-top: 2.5rem;
-  font-style: italic;
-  font-size: 0.98rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: clamp(12px, 0.85rem, 16px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.65);
+  font-style: italic;
+
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+    font-size: clamp(11px, 0.8125rem, 15px);
+    line-height: 1.5;
+  }
   max-width: 700px;
 `
