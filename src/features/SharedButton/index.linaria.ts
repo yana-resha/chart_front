@@ -1,5 +1,6 @@
 import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
+
 import ShareSvg from '@/shared/assets/icons/share.svg?react'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
@@ -10,18 +11,6 @@ export const dropdownContainer = css`
   padding: 20px;
   min-width: 0;
   width: 500px;
-  backdrop-filter: blur(6px);
-  box-shadow:
-    0 0 10px rgba(22, 238, 246, 0.03),
-    0 0 25px rgba(22, 238, 246, 0.05);
-
-  transition: box-shadow 0.3s ease;
-
-  &:hover {
-    box-shadow:
-      0 0 14px rgba(22, 238, 246, 0.05),
-      0 0 40px rgba(22, 238, 246, 0.08);
-  }
 `
 
 export const Emoji = styled.span`

@@ -5,16 +5,20 @@ import {
   offset,
   flip,
   shift,
-  arrow,
+  arrow as arrowMw,
   autoUpdate,
   FloatingPortal,
   Placement,
 } from '@floating-ui/react'
 import { AnimatePresence, motion } from 'framer-motion'
 
-import { ClosedButton, closedIconCSS, TooltipContainer } from './index.linaria'
+import { CrossContainer, TooltipContainer, TooltipSheet, TooltipVeil, ClosedIcon } from './index.linaria'
 import { TooltipArrow } from './TooltipArrow'
-import ClosedIcon from '@/shared/assets/icons/cross.svg?react'
+import { Button } from '../Button'
+import { popoverVariants, veilVariants, sheetVariants } from '@/shared/assets/styles/alerts/alerts.animations'
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import { useMedia } from '@/shared/hooks/useMedia'
+import { useScrollLock } from '@/shared/hooks/useScrollLock'
 
 interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
@@ -22,6 +26,10 @@ interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   trigger?: 'click' | 'hover'
   placement?: Placement
 }
+
+const MotionBox = motion.div
+const MotionVeil = motion(TooltipVeil)
+const MotionSheet = motion(TooltipSheet)
 
 export const Tooltip = ({
   children,
@@ -31,6 +39,9 @@ export const Tooltip = ({
   style,
   ...props
 }: TooltipProps) => {
+  const isSheet = useMedia(`(max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px)`)
+  const effectiveTrigger: 'click' | 'hover' = isSheet ? 'click' : trigger
+
   const [open, setOpen] = useState(false)
   const arrowRef = useRef<HTMLDivElement | null>(null)
   const wrapperRef = useRef<HTMLDivElement | null>(null)
@@ -42,46 +53,49 @@ export const Tooltip = ({
     placement: actualPlacement,
   } = useFloating({
     placement,
-    middleware: [offset(10), flip(), shift(), arrow({ element: arrowRef })],
+    middleware: [offset(10), flip(), shift(), !isSheet ? arrowMw({ element: arrowRef }) : undefined].filter(
+      Boolean,
+    ),
     whileElementsMounted: autoUpdate,
   })
 
   useEffect(() => {
-    if (refs && wrapperRef.current) {
-      refs.setReference(wrapperRef.current)
-    }
+    if (refs && wrapperRef.current) refs.setReference(wrapperRef.current)
   }, [refs])
 
+  // клик вне — desktop вариант
   useEffect(() => {
-    if (!open || trigger !== 'click') return
-
+    if (!open || effectiveTrigger !== 'click' || isSheet) return
     const onClickOutside = (e: MouseEvent) => {
       const target = e.target as Node
-      if (
-        wrapperRef.current &&
-        !wrapperRef.current.contains(target) &&
-        refs.floating.current &&
-        !refs.floating.current.contains(target)
-      ) {
-        setOpen(false)
-      }
+      if (!wrapperRef.current?.contains(target) && !refs.floating.current?.contains(target)) setOpen(false)
     }
-
     document.addEventListener('mousedown', onClickOutside)
 
     return () => document.removeEventListener('mousedown', onClickOutside)
-  }, [open, trigger, refs])
+  }, [open, effectiveTrigger, refs, isSheet])
+
+  // Esc — общий
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('keydown', onKey)
+
+    return () => document.removeEventListener('keydown', onKey)
+  }, [open])
+
+  // блокируем скролл фона только для мобильного шита
+  useScrollLock(open && isSheet, 'overflow')
 
   const handleMouseEnter = () => {
-    if (trigger === 'hover') setOpen(true)
+    if (effectiveTrigger === 'hover') setOpen(true)
   }
-
   const handleMouseLeave = (e: React.MouseEvent) => {
-    if (trigger !== 'hover') return
+    if (effectiveTrigger !== 'hover') return
     const related = e.relatedTarget as Node
-    if (refs.floating.current && related && !refs.floating.current.contains(related)) {
-      setOpen(false)
-    }
+    if (refs.floating.current && related && !refs.floating.current.contains(related)) setOpen(false)
   }
 
   return (
@@ -89,39 +103,45 @@ export const Tooltip = ({
       ref={wrapperRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={{
-        display: 'inline',
-        ...style,
-      }}
+      style={{ display: 'inline', ...style }}
       {...props}
     >
       <span
         onClick={() => {
-          if (trigger === 'click') setOpen((prev) => !prev)
+          if (effectiveTrigger === 'click') setOpen((prev) => !prev)
         }}
-        style={{ cursor: trigger === 'click' ? 'pointer' : 'default' }}
+        style={{ cursor: effectiveTrigger === 'click' ? 'pointer' : 'default' }}
       >
         {children}
       </span>
 
       <FloatingPortal>
         <AnimatePresence>
-          {open && (
+          {/* Desktop popover */}
+          {!isSheet && open && (
             <div
               ref={refs.setFloating}
-              style={{ ...floatingStyles, position: 'absolute' }}
+              style={{ ...floatingStyles, position: 'absolute', zIndex: 1000 }}
             >
-              <motion.div
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.2, ease: 'easeInOut' }}
+              <MotionBox
+                variants={popoverVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
               >
                 <TooltipContainer>
                   {tooltipContent}
-                  <ClosedButton onClick={() => setOpen(false)}>
-                    <ClosedIcon className={closedIconCSS} />
-                  </ClosedButton>
+                  <CrossContainer>
+                    <ClosedIcon onClick={() => setOpen(false)} />
+                    <Button
+                      kind="text"
+                      theme={'secondary'}
+                    >
+                      <ClosedIcon />
+                    </Button>
+                  </CrossContainer>
+
+                  {/* стрелка только на desktop */}
                   <TooltipArrow
                     arrowRef={arrowRef}
                     x={middlewareData.arrow?.x}
@@ -129,8 +149,42 @@ export const Tooltip = ({
                     placement={actualPlacement}
                   />
                 </TooltipContainer>
-              </motion.div>
+              </MotionBox>
             </div>
+          )}
+
+          {/* Mobile bottom-sheet */}
+          {isSheet && open && (
+            <MotionVeil
+              onClick={() => setOpen(false)}
+              variants={veilVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              role="dialog"
+              aria-modal="true"
+            >
+              <MotionSheet
+                onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                variants={sheetVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                role="document"
+              >
+                <CrossContainer>
+                  <Button
+                    kind="text"
+                    onClick={() => setOpen(false)}
+                  >
+                    <ClosedIcon />
+                  </Button>
+                </CrossContainer>
+
+                {/* Контент тултипа без дополнительной оболочки */}
+                {tooltipContent}
+              </MotionSheet>
+            </MotionVeil>
           )}
         </AnimatePresence>
       </FloatingPortal>

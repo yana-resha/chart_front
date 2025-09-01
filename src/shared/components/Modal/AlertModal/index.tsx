@@ -22,6 +22,7 @@ interface ModalProps {
   secondaryButtonText?: string
   onPrimaryClick?: () => void
   onSecondaryClick?: () => void
+  open: boolean
   onClose: () => void
   showExitCross: boolean
 }
@@ -35,9 +36,11 @@ export const AlertModal = ({
   onPrimaryClick,
   onSecondaryClick,
   onClose,
+  open,
   showExitCross,
 }: ModalProps) => (
   <Modal
+    open={open}
     className={modal}
     onClose={onClose}
     onClick={(e) => e.stopPropagation()}
@@ -52,6 +55,7 @@ export const AlertModal = ({
         </Button>
       </CrossContainer>
     )}
+
     <ModalHeader>
       {icon && <IconContainer className={ModalIcon}>{icon}</IconContainer>}
       {title && <ModalTitle>{title}</ModalTitle>}

@@ -24,7 +24,7 @@ export const ButtonComponent = styled.button`
   cursor: pointer;
   color: ${BUTTON_COLOR_VARIABLES.DARK_COLOR};
   font-weight: 500 !important;
-  border-radius: ${(props) => (props.roundedCorner ? '12' : '4')}px;
+  border-radius: ${(props) => (props.roundedCorner ? '16' : '4')}px;
   padding: 0.875rem 1.5rem 0.875rem 1.5rem;
   text-align: center;
   font-size: 1rem;

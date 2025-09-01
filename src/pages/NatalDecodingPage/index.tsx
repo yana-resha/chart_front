@@ -157,35 +157,32 @@ export const NatalDecodingPage = () => {
       </PageContentWrapper>
 
       {/* Модалка №1: ошибка сервера — 2 кнопки (повторить / вернуться) */}
-      {!isLoading && serverError && (
-        <AlertModal
-          showExitCross={true}
-          title={'Упс...'}
-          subtitle={
-            <>
-              Похоже что то сломалось. <br /> Попробуйте повторить загрузку или вернитесь к калькулятору.
-            </>
-          }
-          primaryButtonText={'Повторить'}
-          onPrimaryClick={handleRetry}
-          secondaryButtonText={'Вернуться'}
-          onClose={goToCalculator}
-          icon={<InfoIcon stroke={SHARED_COLORS_VARIABLES.ERROR_COLOR} />}
-        />
-      )}
+      <AlertModal
+        open={!isLoading && serverError ? true : false}
+        showExitCross={true}
+        title={'Упс...'}
+        subtitle={
+          <>
+            Похоже что то сломалось. <br /> Попробуйте повторить загрузку или вернитесь к калькулятору.
+          </>
+        }
+        primaryButtonText={'Повторить'}
+        onPrimaryClick={handleRetry}
+        secondaryButtonText={'Вернуться'}
+        onClose={goToCalculator}
+        icon={<InfoIcon stroke={SHARED_COLORS_VARIABLES.ERROR_COLOR} />}
+      />
 
-      {/* Модалка №2: данные повреждены — 1 кнопка (к калькулятору) */}
-      {!isLoading && !serverError && dataError && (
-        <AlertModal
-          showExitCross={true}
-          title={'Данные повреждены'}
-          subtitle={<>{dataError} Вернитесь к калькулятору.</>}
-          secondaryButtonText={'Вернуться'}
-          onSecondaryClick={goToCalculator}
-          onClose={goToCalculator}
-          icon={<InfoIcon stroke={SHARED_COLORS_VARIABLES.ERROR_COLOR} />}
-        />
-      )}
+      <AlertModal
+        open={!isLoading && !serverError && dataError ? true : false}
+        showExitCross={true}
+        title={'Данные повреждены'}
+        subtitle={<>{dataError} Вернитесь к калькулятору.</>}
+        secondaryButtonText={'Вернуться'}
+        onSecondaryClick={goToCalculator}
+        onClose={goToCalculator}
+        icon={<InfoIcon stroke={SHARED_COLORS_VARIABLES.ERROR_COLOR} />}
+      />
     </Layout>
   )
 }

@@ -1,29 +1,21 @@
 import { styled } from '@linaria/react'
 
 import ExitCross from '@/shared/assets/icons/cross.svg?react'
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
 export const ModalVeil = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  flex-direction: column;
 
-  animation: veilFadeIn 0.25s ease-out;
-
-  @keyframes veilFadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  /* <= TABLET_SMALL — контейнер для bottom-sheet */
+  @media (max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px) {
+    justify-content: flex-end;
+    align-items: flex-end;
   }
 `
 
@@ -39,8 +31,6 @@ export const ModalWindow = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   padding: 1.875rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow:
@@ -48,19 +38,33 @@ export const ModalWindow = styled.div`
     0 0 24px rgba(255, 255, 255, 0.05),
     0 0 48px rgba(255, 255, 255, 0.04);
 
-  animation: modalFadeIn 0.25s ease-out;
-
-  @keyframes modalFadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+    padding: 1.5rem;
+  }
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    padding: 1.3rem;
+  }
+  @media (max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px) {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 16px 16px 0 0;
+    border-bottom: none;
+    box-shadow:
+      0 -6px 24px rgba(255, 255, 255, 0.15),
+      0 -2px 8px rgba(255, 255, 255, 0.05);
+    padding: 1rem 1rem 1rem;
+    max-height: 85vh;
+    /* min-height: 85vh; */
   }
 `
 
 export const CrossIcon = styled(ExitCross)`
-  width: 1.25rem;
-  height: 125rem;
+  width: 20px;
+  height: 20px;
+  color: rgba(255, 255, 255, 1);
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    width: 18px;
+    height: 18px;
+  }
 `

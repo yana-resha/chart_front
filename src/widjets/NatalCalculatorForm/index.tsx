@@ -4,7 +4,7 @@ import { Formik, FormikProps } from 'formik'
 
 import { Form } from './Form'
 import { useFormOutside } from './hooks/useFormOutside'
-import { Container, LoaderContent } from './index.linaria'
+import { Container } from './index.linaria'
 import { ChartFormFieldValues } from './types'
 import { getInitialValues } from './utils/config'
 import { chartFormSchema } from './utils/validationSchema'
@@ -27,26 +27,18 @@ const NatalCalculatorForm = () => {
           <Form />
         </Formik>
       </Container>
-      {(isRedirecting || formIsLoading) && (
-        <LoaderModal
-          showExitCross={false}
-          icon={isRedirecting ? 'check' : 'loader'}
-          content={
-            <LoaderContent>
-              {isRedirecting ? (
-                <>Расчёты завершены, переходим к результатам...</>
-              ) : (
-                <>
-                  Идёт расчёт карты на основе ваших данных.
-                  <br />
-                  Секунду терпения...
-                </>
-              )}
-            </LoaderContent>
-          }
-          onClose={() => {}}
-        />
-      )}
+      <LoaderModal
+        open={isRedirecting || formIsLoading ? true : false}
+        showExitCross={false}
+        phase={isRedirecting ? 'success' : 'loading'}
+        content={isRedirecting ? 'Готово ✨' : 'Строим вашу карту 🪐'}
+        subtitle={
+          isRedirecting
+            ? 'Перенаправляем на страницу с результатами...'
+            : 'Это займёт всего несколько секунд...'
+        }
+        onClose={() => {}}
+      />
     </>
   )
 }

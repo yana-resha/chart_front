@@ -228,22 +228,22 @@ export const Form = () => {
       >
         Рассчитать
       </Button>
-      {showErrorToast && (
-        <AlertModal
-          showExitCross={true}
-          title={'Упс...'}
-          subtitle={
-            <>
-              Похоже что то сломалось. <br /> Попробуйте повторить загрузку.
-            </>
-          }
-          primaryButtonText={'Повторить'}
-          onPrimaryClick={submitForm}
-          secondaryButtonText={'Отмена'}
-          icon={<InfoIcon stroke={SHARED_COLORS_VARIABLES.ERROR_COLOR} />}
-          onClose={closeErrorToast}
-        />
-      )}
+
+      <AlertModal
+        open={showErrorToast}
+        showExitCross={true}
+        title={'Упс...'}
+        subtitle={
+          <>
+            Похоже что то сломалось. <br /> Попробуйте повторить загрузку.
+          </>
+        }
+        primaryButtonText={'Повторить'}
+        onPrimaryClick={submitForm}
+        secondaryButtonText={'Отмена'}
+        icon={<InfoIcon color={SHARED_COLORS_VARIABLES.NEONE_ERROR_COLOR} />}
+        onClose={closeErrorToast}
+      />
     </FormContainer>
   )
 }

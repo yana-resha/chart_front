@@ -11,6 +11,7 @@ interface IContentModal {
   headerTitle?: string | ReactNode
   children: ReactNode
   footer?: ReactNode
+  open: boolean
 }
 
 export const ContentModal = ({
@@ -19,8 +20,10 @@ export const ContentModal = ({
   children,
   hideHeader = false,
   footer,
+  open,
 }: IContentModal) => (
   <Modal
+    open={open}
     onClose={onClose}
     className={modalFlex}
     onClick={(e) => e.stopPropagation()}
