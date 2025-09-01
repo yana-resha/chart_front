@@ -1,4 +1,6 @@
-export const orb = `Орбис — что это?
+import { SHARED_COLORS_VARIABLES } from '@/shared/assets/styles/colors'
+
+export const orb = `<span style="color:${SHARED_COLORS_VARIABLES.LINK_BRIGHT_COLOR};font-weight:500;">Орбис</span> — что это?
 
                   Орбис показывает, насколько планеты близки к точному углу между ними.
                   Это небольшое отклонение в градусах, которое астрологи всё равно считают важным.
@@ -6,7 +8,7 @@ export const orb = `Орбис — что это?
                   Например, если точный аспект — 90°, а планеты стоят под углом 92°, орбис равен 2°.
                   Чем меньше орбис, тем сильнее проявляется влияние аспекта в жизни человека.`
 
-export const aspect = `<span style="color:#4dabf7;font-weight:500;">Аспект</span> — что это и зачем?
+export const aspect = `<span style="color:${SHARED_COLORS_VARIABLES.LINK_BRIGHT_COLOR};font-weight:500;">Аспект</span> — что это и зачем?
 
 Аспект — это угол между планетами. Он означает, что темы этих планет связаны
 и будут проявляться вместе в вашей жизни.

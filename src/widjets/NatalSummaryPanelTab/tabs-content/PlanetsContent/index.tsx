@@ -110,7 +110,15 @@ export const PlanetsContent = ({ planets, houses }: Props) => {
             {/* Стихии */}
             <Card>
               <Title>
-                Стихии <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{element}</div>} />
+                Стихии{' '}
+                <InfoTooltip
+                  content={
+                    <div
+                      style={{ whiteSpace: 'pre-line' }}
+                      dangerouslySetInnerHTML={{ __html: element }}
+                    />
+                  }
+                />
               </Title>
               <List>
                 {sortedElements.map((el) => {
@@ -135,7 +143,15 @@ export const PlanetsContent = ({ planets, houses }: Props) => {
             {/* Знаки */}
             <Card>
               <Title>
-                Знаки <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{sign}</div>} />
+                Знаки{' '}
+                <InfoTooltip
+                  content={
+                    <div
+                      style={{ whiteSpace: 'pre-line' }}
+                      dangerouslySetInnerHTML={{ __html: sign }}
+                    />
+                  }
+                />
               </Title>
               <List>
                 {sortedSigns.map((s) => {
@@ -168,7 +184,15 @@ export const PlanetsContent = ({ planets, houses }: Props) => {
             {/* Качества */}
             <ModalitiesCard>
               <Title>
-                Качества <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{modality}</div>} />
+                Качества{' '}
+                <InfoTooltip
+                  content={
+                    <div
+                      style={{ whiteSpace: 'pre-line' }}
+                      dangerouslySetInnerHTML={{ __html: modality }}
+                    />
+                  }
+                />
               </Title>
               <List>
                 {sortedModalities.map((m) => {
@@ -197,7 +221,15 @@ export const PlanetsContent = ({ planets, houses }: Props) => {
           <RetroGrid>
             <Card>
               <Title>
-                Ретро <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{retro}</div>} />
+                Ретро{' '}
+                <InfoTooltip
+                  content={
+                    <div
+                      style={{ whiteSpace: 'pre-line' }}
+                      dangerouslySetInnerHTML={{ __html: retro }}
+                    />
+                  }
+                />
               </Title>
               <List>
                 {retroPlanets.length ? (
@@ -220,7 +252,12 @@ export const PlanetsContent = ({ planets, houses }: Props) => {
                 <Title>
                   {ASTRO_ESSENTIAL_DIGNITY_NAME[d]}{' '}
                   <InfoTooltip
-                    content={<div style={{ whiteSpace: 'pre-line' }}>{tooltipByDignity[d]}</div>}
+                    content={
+                      <div
+                        style={{ whiteSpace: 'pre-line' }}
+                        dangerouslySetInnerHTML={{ __html: tooltipByDignity[d] }}
+                      />
+                    }
                   />
                 </Title>
                 <List>

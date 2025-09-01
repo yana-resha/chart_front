@@ -1,3 +1,4 @@
+import { SHARED_COLORS_VARIABLES } from '@/shared/assets/styles/colors'
 import {
   ASTRO_ZODIAC_MODALITY_SYMBOL,
   ASTRO_ZODIAC_MODALITY_NAME,
@@ -5,14 +6,14 @@ import {
   ASTRO_ZODIAC_ELEMENT_SYMBOL,
 } from '@/shared/configs/astro-zodiac.config'
 
-export const sign = `Знак — что это?
+export const sign = `<span style="color:${SHARED_COLORS_VARIABLES.LINK_BRIGHT_COLOR};font-weight:500;">Знак</span> — что это?
 
                   Знак Зодиака указывает, через какие качества и особенности проявляется энергия планеты.
                   Он показывает стиль поведения, привычные реакции и способ взаимодействия с окружающим.
 
                   Знак помогает понять, как человек выражает ту сферу жизни, за которую отвечает планета.`
 
-export const modality = `Качества — что это?
+export const modality = `<span style="color:${SHARED_COLORS_VARIABLES.LINK_BRIGHT_COLOR};font-weight:500;">Качества</span> — что это?
 
                 В астрологии качества (кресты) показывают, как проявляется энергия знаков и каким способом человек действует и реагирует на мир.
 
@@ -22,7 +23,7 @@ export const modality = `Качества — что это?
 
                 Соотношение качеств в карте подсказывает, каких подходов к жизни больше: стабильности, движения вперёд или умения подстраиваться.`
 
-export const element = `Стихии — что это?
+export const element = `<span style="color:${SHARED_COLORS_VARIABLES.LINK_BRIGHT_COLOR};font-weight:500;">Стихии</span> — что это?
 
                   В астрологии стихии отражают четыре базовые силы природы, через которые проявляется энергия планет и знаков.
                   Они показывают общий стиль восприятия жизни и реагирования на события:

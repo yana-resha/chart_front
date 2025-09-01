@@ -1,4 +1,6 @@
-export const domicile = `Обитель — что это?
+import { SHARED_COLORS_VARIABLES } from '@/shared/assets/styles/colors'
+
+export const domicile = `<span style="color:${SHARED_COLORS_VARIABLES.LINK_BRIGHT_COLOR};font-weight:500;">Обитель</span> — что это?
 
 Обитель показывает знак Зодиака, которым планета управляет.
 Находясь в нём, планета проявляется наиболее естественно и сильно.
@@ -12,21 +14,21 @@ export const exaltation = `Экзальтация — что это?
 
 Такая планета действует более выразительно и уверенно.`
 
-export const detriment = `Изгнание — что это?
+export const detriment = `<span style="color:${SHARED_COLORS_VARIABLES.LINK_BRIGHT_COLOR};font-weight:500;">Изгнание</span> — что это?
 
 Изгнание — знак, противоположный обители планеты.
 В этом положении планете сложнее проявить свои основные качества.
 
 Она может работать менее стабильно или искать обходные пути для самовыражения.`
 
-export const fall = `Падение — что это?
+export const fall = `<span style="color:${SHARED_COLORS_VARIABLES.LINK_BRIGHT_COLOR};font-weight:500;">Падение</span> — что это?
 
 Падение показывает знак, противоположный экзальтации планеты.
 Здесь планета считается ослабленной и проявляет свои свойства неуверенно.
 
 Это положение часто связано с внутренними трудностями в реализации энергии планеты.`
 
-export const retro = `Ретроградность — что это?
+export const retro = `<span style="color:${SHARED_COLORS_VARIABLES.LINK_BRIGHT_COLOR};font-weight:500;">Ретроградность</span> — что это?
 
 Ретроградность показывает, что планета движется по небу в обратном направлении относительно обычного хода, «против шерсти» солнечной системы.
 

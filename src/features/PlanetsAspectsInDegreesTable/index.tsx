@@ -56,7 +56,15 @@ export const PlanetsAspectsInDegreesTable = ({ planetsAspects }: Props) => {
             top: 0,
           }}
         >
-          Орб <InfoTooltip content={<div style={{ whiteSpace: 'pre-line' }}>{orb}</div>} />
+          Орб{' '}
+          <InfoTooltip
+            content={
+              <div
+                style={{ whiteSpace: 'pre-line' }}
+                dangerouslySetInnerHTML={{ __html: orb }}
+              />
+            }
+          />
         </SimpleDataTable.Header>
       </SimpleDataTable.HeadRow>
       <SimpleDataTable.TBody>
