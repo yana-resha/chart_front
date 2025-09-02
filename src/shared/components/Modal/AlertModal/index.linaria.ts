@@ -10,10 +10,6 @@ export const modal = css`
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     width: 500px;
   }
-
-  @media (max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px) {
-    padding-top: 5rem !important;
-  }
 `
 
 export const IconContainer = styled.div`
@@ -41,9 +37,17 @@ export const ModalIcon = css`
 export const CrossContainer = styled.div`
   display: flex;
   justify-content: flex-end; /* прижимаем вправо */
-  position: absolute; /* выносим поверх */
-  top: 1rem;
-  right: 1rem;
+  position: sticky;
+  top: 0;
+`
+
+export const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px) {
+    padding-top: 5rem !important;
+  }
 `
 
 export const ModalHeader = styled.div`
@@ -58,6 +62,7 @@ export const ModalTitle = styled.div`
   font-weight: 500;
   margin-top: 1rem;
   color: white;
+  text-align: center;
 
   @media (max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px) {
     font-size: 1.1rem;

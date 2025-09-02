@@ -9,6 +9,7 @@ import {
   ButtonsContainer,
   CrossContainer,
   modal,
+  ContentContainer,
 } from './index.linaria'
 import { CrossIcon } from '../index.linaria'
 import { Modal } from '../Modal'
@@ -56,42 +57,44 @@ export const AlertModal = ({
       </CrossContainer>
     )}
 
-    <ModalHeader>
-      {icon && <IconContainer className={ModalIcon}>{icon}</IconContainer>}
-      {title && <ModalTitle>{title}</ModalTitle>}
-      {subtitle && <ModalSubtitle>{subtitle}</ModalSubtitle>}
-    </ModalHeader>
-    <ButtonsContainer>
-      {secondaryButtonText && (
-        <Button
-          kind="outline"
-          theme="primary"
-          roundedCorner
-          onClick={() => {
-            if (onSecondaryClick) {
-              onSecondaryClick()
-            }
-            onClose()
-          }}
-        >
-          {secondaryButtonText}
-        </Button>
-      )}
-      {primaryButtonText && (
-        <Button
-          kind="gradient"
-          theme="primary"
-          roundedCorner
-          onClick={() => {
-            if (onPrimaryClick) {
-              onPrimaryClick()
-            }
-            onClose()
-          }}
-        >
-          {primaryButtonText}
-        </Button>
-      )}
-    </ButtonsContainer>
+    <ContentContainer>
+      <ModalHeader>
+        {icon && <IconContainer className={ModalIcon}>{icon}</IconContainer>}
+        {title && <ModalTitle>{title}</ModalTitle>}
+        {subtitle && <ModalSubtitle>{subtitle}</ModalSubtitle>}
+      </ModalHeader>
+      <ButtonsContainer>
+        {secondaryButtonText && (
+          <Button
+            kind="outline"
+            theme="primary"
+            roundedCorner
+            onClick={() => {
+              if (onSecondaryClick) {
+                onSecondaryClick()
+              }
+              onClose()
+            }}
+          >
+            {secondaryButtonText}
+          </Button>
+        )}
+        {primaryButtonText && (
+          <Button
+            kind="gradient"
+            theme="primary"
+            roundedCorner
+            onClick={() => {
+              if (onPrimaryClick) {
+                onPrimaryClick()
+              }
+              onClose()
+            }}
+          >
+            {primaryButtonText}
+          </Button>
+        )}
+      </ButtonsContainer>
+    </ContentContainer>
   </Modal>
 )

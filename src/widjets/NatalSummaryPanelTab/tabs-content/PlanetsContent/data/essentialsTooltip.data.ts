@@ -7,7 +7,7 @@ export const domicile = `<span style="color:${SHARED_COLORS_VARIABLES.LINK_BRIGH
 
 Такое положение считается гармоничным и усиливает качества планеты в карте.`
 
-export const exaltation = `Экзальтация — что это?
+export const exaltation = `<span style="color:${SHARED_COLORS_VARIABLES.LINK_BRIGHT_COLOR};font-weight:500;">Экзальтация</span> — что это?
 
 Экзальтация показывает знак, в котором планета находится в особой силе.
 Это положение подчёркивает лучшие качества планеты и даёт возможности их ярко проявить.

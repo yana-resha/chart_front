@@ -86,7 +86,6 @@
   font-display: swap; /* вот сюда нужно! */
 }
 
-
 * {
   box-sizing: border-box;
   font-family: 'Open Sans', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -94,7 +93,6 @@
   font-style: normal;
   letter-spacing: 0.15px;
 }
-
 
 html,
 body,
@@ -113,18 +111,27 @@ body {
   background-color: rgb(19, 22, 25);
   min-height: 100dvh;
   height: fit-content;
-
-}
-
-div#root {
-  position: relative;
   display: flex;
+  flex-direction: column;
   height: 100dvh;
   overflow: auto;
 }
 
+div#root {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 /* 🔧 Убираем отступы у заголовков и параграфов */
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
   padding: 0;
 }

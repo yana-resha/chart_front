@@ -31,10 +31,6 @@ export const modalFlex = css`
   gap: 1rem;
   min-height: 120px;
 
-  background:
-    radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, 0.06) 0%, transparent 60%),
-    rgba(18, 20, 26, 0.92);
-
   @media (max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px) {
     width: 100%;
     min-height: 45vh;

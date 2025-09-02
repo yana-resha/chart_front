@@ -5,6 +5,11 @@ import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 export const Container = styled.div`
   width: 100%;
   min-width: 0;
+  display: flex; /* было grid — можно оставить grid с align-items:stretch,
+                          но внутри этого компонента нам нужен flex-столбик */
+  flex-direction: column;
+  height: 100%; /* важно для выравнивания по высоте со второй колонкой */
+  position: relative;
 `
 
 export const ToggleButton = styled.button`

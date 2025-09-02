@@ -1,5 +1,6 @@
-import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { styled } from '@linaria/react'
+
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
 export const POINTS_1_GRID = [1165, 700]
 
@@ -23,4 +24,6 @@ export const HousesContentLayout = styled.div`
 `
 export const SectionBlock = styled.div`
   width: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
 `

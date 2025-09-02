@@ -25,7 +25,7 @@ export const ClosedIcon = styled(ClosedSVG)`
   height: 10px;
   color: rgba(255, 255, 255, 0.9);
 
-  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+  @media (max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px) {
     width: 18px;
     height: 18px;
   }
@@ -41,7 +41,9 @@ export const TooltipContainer = styled.div`
   gap: 6px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
-  background: rgb(0, 0, 0);
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, 0.06) 0%, transparent 60%),
+    rgba(18, 20, 26, 0.92);
   font-size: 12px;
   font-weight: 500;
   line-height: 18px;
@@ -67,7 +69,9 @@ export const TooltipVeil = styled.div`
 
 export const TooltipSheet = styled.div`
   position: relative; /* нужно для абсолютной кнопки */
-  background: rgb(0, 0, 0);
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, 0.06) 0%, transparent 60%),
+    rgba(18, 20, 26, 0.92);
   border-radius: 16px 16px 0 0;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: none;
@@ -75,7 +79,7 @@ export const TooltipSheet = styled.div`
   max-width: 100%;
   max-height: 85vh;
   min-height: 30vh;
-  overflow-y: auto;
+  overflow-y: hidden;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 
@@ -91,16 +95,21 @@ export const TooltipSheet = styled.div`
   flex-direction: column;
 `
 
+export const TooltipSheetContainer = styled.div`
+  height: 100%;
+  overflow-y: auto;
+  width: 100%;
+`
+
 export const CrossContainer = styled.div`
   display: flex;
   justify-content: flex-end; /* прижимаем вправо */
   align-items: flex-start;
+  position: sticky;
+  top: 0;
 
   @media (max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px) {
     display: flex;
     justify-content: flex-end; /* прижимаем вправо */
-    position: absolute; /* выносим поверх */
-    top: 1rem;
-    right: 1rem;
   }
 `

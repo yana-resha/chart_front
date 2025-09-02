@@ -20,7 +20,9 @@ export const ModalVeil = styled.div`
 `
 
 export const ModalWindow = styled.div`
-  background: rgba(26, 29, 33, 1);
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, 0.06) 0%, transparent 60%),
+    rgba(18, 20, 26, 0.92);
   border-radius: 15px;
   position: relative;
   z-index: 1001;
@@ -54,7 +56,6 @@ export const ModalWindow = styled.div`
       0 -2px 8px rgba(255, 255, 255, 0.05);
     padding: 1rem 1rem 1rem;
     max-height: 85vh;
-    /* min-height: 85vh; */
   }
 `
 

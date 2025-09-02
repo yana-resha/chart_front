@@ -4,7 +4,9 @@ import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
 /* поповер (desktop) */
 export const DropdownContainer = styled.div`
-  background-color: rgba(19, 22, 25, 1);
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, 0.06) 0%, transparent 60%),
+    rgba(18, 20, 26, 0.92);
   border-radius: 8px;
   border: 1px solid rgba(54, 58, 61, 0.9);
   padding: 0.75rem;
@@ -50,7 +52,9 @@ export const DropdownVeil = styled.div`
 
 /* сам bottom-sheet на мобилке */
 export const DropdownSheet = styled.div`
-  background: rgba(26, 29, 33, 1);
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, 0.06) 0%, transparent 60%),
+    rgba(18, 20, 26, 0.92);
   border-radius: 16px 16px 0 0;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: none;

@@ -177,7 +177,12 @@ export const NatalDecodingPage = () => {
         open={!isLoading && !serverError && dataError ? true : false}
         showExitCross={true}
         title={'Данные повреждены'}
-        subtitle={<>{dataError} Вернитесь к калькулятору.</>}
+        subtitle={
+          <>
+            {dataError}
+            <br /> Вернитесь к калькулятору.
+          </>
+        }
         secondaryButtonText={'Вернуться'}
         onSecondaryClick={goToCalculator}
         onClose={goToCalculator}

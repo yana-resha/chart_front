@@ -12,7 +12,14 @@ import {
 } from '@floating-ui/react'
 import { AnimatePresence, motion } from 'framer-motion'
 
-import { CrossContainer, TooltipContainer, TooltipSheet, TooltipVeil, ClosedIcon } from './index.linaria'
+import {
+  CrossContainer,
+  TooltipContainer,
+  TooltipSheet,
+  TooltipVeil,
+  ClosedIcon,
+  TooltipSheetContainer,
+} from './index.linaria'
 import { TooltipArrow } from './TooltipArrow'
 import { Button } from '../Button'
 import { popoverVariants, veilVariants, sheetVariants } from '@/shared/assets/styles/alerts/alerts.animations'
@@ -132,10 +139,10 @@ export const Tooltip = ({
                 <TooltipContainer>
                   {tooltipContent}
                   <CrossContainer>
-                    <ClosedIcon onClick={() => setOpen(false)} />
                     <Button
                       kind="text"
                       theme={'secondary'}
+                      onClick={() => setOpen(false)}
                     >
                       <ClosedIcon />
                     </Button>
@@ -182,7 +189,7 @@ export const Tooltip = ({
                 </CrossContainer>
 
                 {/* Контент тултипа без дополнительной оболочки */}
-                {tooltipContent}
+                <TooltipSheetContainer>{tooltipContent}</TooltipSheetContainer>
               </MotionSheet>
             </MotionVeil>
           )}
