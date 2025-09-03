@@ -4,7 +4,7 @@ import { useFloating, offset, flip, shift, autoUpdate, Placement, FloatingPortal
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { DropdownContainer, DropdownVeil, DropdownSheet } from './index.linaria'
-import { popoverVariants, veilVariants, sheetVariants } from '@/shared/assets/styles/alerts/alerts.animations'
+import { popoverVariants, veilVariants, sheetVariants } from '@/shared/assets/styles/overlays/alerts.animations'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { useMedia } from '@/shared/hooks/useMedia'
 import { useScrollLock } from '@/shared/hooks/useScrollLock'

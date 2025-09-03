@@ -10,7 +10,7 @@ import {
   desktopModalVariants,
   sheetVariants,
   veilVariants,
-} from '@/shared/assets/styles/alerts/alerts.animations'
+} from '@/shared/assets/styles/overlays/alerts.animations'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { useScrollLock } from '@/shared/hooks/useScrollLock'
 

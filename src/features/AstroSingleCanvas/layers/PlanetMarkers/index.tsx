@@ -34,6 +34,7 @@ export const PlanetMarkers = () => {
     showTooltip,
     hideTooltip,
     CENTER,
+    isMobile,
     changeTooltipPosition,
   } = useAstroCanvasContext()
   const ascendant = houseCusps[0] ?? FAKE_ASCENDANT
@@ -89,31 +90,37 @@ export const PlanetMarkers = () => {
 
   // хелпер для тултипов планеты
   const makeHandlers = (planet: PlanetData) =>
-    createPointerTooltipHandlers({
-      onEnter: ({ x, y }, evt) => {
-        const houseIndex = getHouseIndexBySmth(planet.longitude, houseCusps)
-        showTooltip({ text: getPlanetTooltipHTML(planet, houseIndex), x, y })
-        handleHover(planet.name, true)
-        evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
+    createPointerTooltipHandlers(
+      {
+        // DESKTOP
+        onEnter: ({ x, y }, evt) => {
+          const houseIndex = getHouseIndexBySmth(planet.longitude, houseCusps)
+          showTooltip({ text: getPlanetTooltipHTML(planet, houseIndex), x, y })
+          handleHover(planet.name, true)
+          evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
+        },
+        onMove: ({ x, y }) => {
+          changeTooltipPosition({ x, y })
+        },
+        onLeave: (evt) => {
+          hideTooltip()
+          handleHover(planet.name, false)
+          evt.target.getStage()?.container().style.setProperty('cursor', 'default')
+        },
+
+        // MOBILE (нижний fixed-tooltip; координаты игнорятся стилями)
+        onOpen: () => {
+          const houseIndex = getHouseIndexBySmth(planet.longitude, houseCusps)
+          showTooltip({ text: getPlanetTooltipHTML(planet, houseIndex), x: 0, y: 0 })
+          handleHover(planet.name, true)
+        },
+        onClose: () => {
+          hideTooltip()
+          handleHover(planet.name, false)
+        },
       },
-      onMove: ({ x, y }) => {
-        changeTooltipPosition({ x, y })
-      },
-      onLeave: (evt) => {
-        hideTooltip()
-        handleHover(planet.name, false)
-        evt.target.getStage()?.container().style.setProperty('cursor', 'default')
-      },
-      onDown: ({ x, y }) => {
-        const houseIndex = getHouseIndexBySmth(planet.longitude, houseCusps)
-        showTooltip({ text: getPlanetTooltipHTML(planet, houseIndex), x, y })
-        handleHover(planet.name, true)
-      },
-      onUp: () => {
-        hideTooltip()
-        handleHover(planet.name, false)
-      },
-    })
+      isMobile,
+    )
 
   return (
     <>

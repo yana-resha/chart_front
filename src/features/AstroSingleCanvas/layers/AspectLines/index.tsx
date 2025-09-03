@@ -29,6 +29,7 @@ export const AspectLines = () => {
     showTooltip,
     changeTooltipPosition,
     hideTooltip,
+    isMobile,
   } = useAstroCanvasContext()
 
   const ascendant = houseCusps[0] ?? FAKE_ASCENDANT
@@ -93,30 +94,35 @@ export const AspectLines = () => {
 
   // фабрика pointer-хендлеров для прозрачной "хит"-линии
   const makeLineHandlers = (aspect: NonNullable<(typeof lineAspects)[number]>, i: number) =>
-    createPointerTooltipHandlers({
-      onEnter: ({ x, y }, evt) => {
-        showTooltip({ text: getAspectTooltipHTML(aspect), x, y })
-        setHoveredAspect('line' + i)
-        evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
+    createPointerTooltipHandlers(
+      {
+        // DESKTOP: hover/move/leave
+        onEnter: ({ x, y }, evt) => {
+          showTooltip({ text: getAspectTooltipHTML(aspect), x, y })
+          setHoveredAspect('line' + i)
+          evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
+        },
+        onMove: ({ x, y }) => {
+          changeTooltipPosition({ x, y })
+        },
+        onLeave: (evt) => {
+          hideTooltip()
+          setHoveredAspect(null)
+          evt.target.getStage()?.container().style.setProperty('cursor', 'default')
+        },
+
+        // MOBILE: нижний fixed-tooltip (координаты игнорируются стилями)
+        onOpen: () => {
+          showTooltip({ text: getAspectTooltipHTML(aspect), x: 0, y: 0 })
+          setHoveredAspect('line' + i)
+        },
+        onClose: () => {
+          hideTooltip()
+          setHoveredAspect(null)
+        },
       },
-      onMove: ({ x, y }) => {
-        changeTooltipPosition({ x, y })
-      },
-      onLeave: (evt) => {
-        hideTooltip()
-        setHoveredAspect(null)
-        evt.target.getStage()?.container().style.setProperty('cursor', 'default')
-      },
-      onDown: ({ x, y }) => {
-        // для тачей показываем по тапу
-        showTooltip({ text: getAspectTooltipHTML(aspect), x, y })
-        setHoveredAspect('line' + i)
-      },
-      onUp: () => {
-        hideTooltip()
-        setHoveredAspect(null)
-      },
-    })
+      isMobile,
+    )
 
   return (
     <>

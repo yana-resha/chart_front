@@ -22,6 +22,7 @@ export const HouseLines = () => {
     PLANET_OUTSIDE_RADIUS,
     hideTooltip,
     showTooltip,
+    isMobile,
     changeTooltipPosition,
   } = useAstroCanvasContext()
 
@@ -66,34 +67,37 @@ export const HouseLines = () => {
       }),
     [ascendant, houseCusps, planetsByHouse],
   )
-
   // фабрика обработчиков для конкретного сектора дома
   const makeHouseHandlers = (deg: number, index: number) =>
-    createPointerTooltipHandlers({
-      onEnter: ({ x, y }, evt) => {
-        showTooltip({ text: getHouseTooltipHTML(deg, index + 1), x, y })
-        setHoveredHouse(index)
-        evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
+    createPointerTooltipHandlers(
+      {
+        // DESKTOP: hover/move/leave
+        onEnter: ({ x, y }, evt) => {
+          showTooltip({ text: getHouseTooltipHTML(deg, index + 1), x, y })
+          setHoveredHouse(index)
+          evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
+        },
+        onMove: ({ x, y }) => {
+          changeTooltipPosition({ x, y })
+        },
+        onLeave: (evt) => {
+          hideTooltip()
+          setHoveredHouse(null)
+          evt.target.getStage()?.container().style.setProperty('cursor', 'default')
+        },
+
+        // MOBILE: нижний fixed-tooltip; координаты игнорятся стилями
+        onOpen: () => {
+          showTooltip({ text: getHouseTooltipHTML(deg, index + 1), x: 0, y: 0 })
+          setHoveredHouse(index)
+        },
+        onClose: () => {
+          hideTooltip()
+          setHoveredHouse(null)
+        },
       },
-      onMove: ({ x, y }) => {
-        changeTooltipPosition({ x, y })
-      },
-      onLeave: (evt) => {
-        hideTooltip()
-        setHoveredHouse(null)
-        evt.target.getStage()?.container().style.setProperty('cursor', 'default')
-      },
-      onDown: ({ x, y }) => {
-        // тач/клик — тоже показать
-        showTooltip({ text: getHouseTooltipHTML(deg, index + 1), x, y })
-        setHoveredHouse(index)
-      },
-      onUp: () => {
-        // по отпусканию — скрыть
-        hideTooltip()
-        setHoveredHouse(null)
-      },
-    })
+      isMobile,
+    )
 
   return (
     <Fragment>

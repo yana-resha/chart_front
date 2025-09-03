@@ -21,6 +21,7 @@ export const ConjuctionArcLines = () => {
     planets,
     hideTooltip,
     showTooltip,
+    isMobile,
     changeTooltipPosition,
   } = useAstroCanvasContext()
 
@@ -76,28 +77,35 @@ export const ConjuctionArcLines = () => {
     )
 
   // фабрика pointer-хендлеров для конкретной дуги соединения
+  // фабрика обработчиков для дуги конфигурации
   const makeArcHandlers = (aspect: (typeof conjuctionAspects)[number]) =>
-    createPointerTooltipHandlers({
-      onEnter: ({ x, y }, evt) => {
-        const related = getTooltipAspects(aspect)
-        showTooltip({ text: getConjuctionTooltipHTML(related), x, y })
-        evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
+    createPointerTooltipHandlers(
+      {
+        // DESKTOP
+        onEnter: ({ x, y }, evt) => {
+          const related = getTooltipAspects(aspect)
+          showTooltip({ text: getConjuctionTooltipHTML(related), x, y })
+          evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
+        },
+        onMove: ({ x, y }) => {
+          changeTooltipPosition({ x, y })
+        },
+        onLeave: (evt) => {
+          hideTooltip()
+          evt.target.getStage()?.container().style.setProperty('cursor', 'default')
+        },
+
+        // MOBILE (нижний fixed-tooltip; координаты игнорятся стилями)
+        onOpen: () => {
+          const related = getTooltipAspects(aspect)
+          showTooltip({ text: getConjuctionTooltipHTML(related), x: 0, y: 0 })
+        },
+        onClose: () => {
+          hideTooltip()
+        },
       },
-      onMove: ({ x, y }) => {
-        changeTooltipPosition({ x, y })
-      },
-      onLeave: (evt) => {
-        hideTooltip()
-        evt.target.getStage()?.container().style.setProperty('cursor', 'default')
-      },
-      onDown: ({ x, y }) => {
-        const related = getTooltipAspects(aspect)
-        showTooltip({ text: getConjuctionTooltipHTML(related), x, y })
-      },
-      onUp: () => {
-        hideTooltip()
-      },
-    })
+      isMobile,
+    )
 
   return (
     <>

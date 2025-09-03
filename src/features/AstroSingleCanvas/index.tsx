@@ -5,12 +5,12 @@ import { Stage, Layer, Circle, Group } from 'react-konva'
 
 import { AstroCanvasProvider, useAstroCanvasContext } from './AstroChartContext'
 import { AspectLines } from './layers/AspectLines'
+import { ConjuctionArcLines } from './layers/ConjuctionArcLines'
 import { DegreeTicks } from './layers/DegreeTicks'
 import { HouseLines } from './layers/HouseLines'
 import { PlanetMarkers } from './layers/PlanetMarkers'
 import { ZodiacRing } from './layers/ZodiacRing'
 import { AstroSingleCanvasProps } from './types'
-import { ConjuctionArcLines } from './layers/ConjuctionArcLines'
 
 function Chart() {
   const {

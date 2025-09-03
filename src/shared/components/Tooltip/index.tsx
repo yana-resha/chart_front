@@ -12,17 +12,16 @@ import {
 } from '@floating-ui/react'
 import { AnimatePresence, motion } from 'framer-motion'
 
-import {
-  CrossContainer,
-  TooltipContainer,
-  TooltipSheet,
-  TooltipVeil,
-  ClosedIcon,
-  TooltipSheetContainer,
-} from './index.linaria'
 import { TooltipArrow } from './TooltipArrow'
 import { Button } from '../Button'
-import { popoverVariants, veilVariants, sheetVariants } from '@/shared/assets/styles/alerts/alerts.animations'
+import { popoverVariants, veilVariants, sheetVariants } from '@/shared/assets/styles/overlays/alerts.animations'
+import {
+  OverlayClosedIcon,
+  OverlayContentWrapper,
+  OverlayHeader,
+  OverlayVeil,
+} from '@/shared/assets/styles/overlays/shared.linaria'
+import { TooltipSurface } from '@/shared/assets/styles/overlays/tooltip.linaria'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { useMedia } from '@/shared/hooks/useMedia'
 import { useScrollLock } from '@/shared/hooks/useScrollLock'
@@ -35,8 +34,8 @@ interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const MotionBox = motion.div
-const MotionVeil = motion(TooltipVeil)
-const MotionSheet = motion(TooltipSheet)
+const MotionVeil = motion(OverlayVeil)
+const MotionSheet = motion(TooltipSurface)
 
 export const Tooltip = ({
   children,
@@ -136,18 +135,8 @@ export const Tooltip = ({
                 animate="visible"
                 exit="exit"
               >
-                <TooltipContainer>
-                  {tooltipContent}
-                  <CrossContainer>
-                    <Button
-                      kind="text"
-                      theme={'secondary'}
-                      onClick={() => setOpen(false)}
-                    >
-                      <ClosedIcon />
-                    </Button>
-                  </CrossContainer>
-
+                <TooltipSurface>
+                  <OverlayContentWrapper>{tooltipContent}</OverlayContentWrapper>
                   {/* стрелка только на desktop */}
                   <TooltipArrow
                     arrowRef={arrowRef}
@@ -155,7 +144,7 @@ export const Tooltip = ({
                     y={middlewareData.arrow?.y}
                     placement={actualPlacement}
                   />
-                </TooltipContainer>
+                </TooltipSurface>
               </MotionBox>
             </div>
           )}
@@ -179,17 +168,17 @@ export const Tooltip = ({
                 exit="exit"
                 role="document"
               >
-                <CrossContainer>
+                <OverlayHeader>
                   <Button
                     kind="text"
                     onClick={() => setOpen(false)}
                   >
-                    <ClosedIcon />
+                    <OverlayClosedIcon />
                   </Button>
-                </CrossContainer>
+                </OverlayHeader>
 
                 {/* Контент тултипа без дополнительной оболочки */}
-                <TooltipSheetContainer>{tooltipContent}</TooltipSheetContainer>
+                <OverlayContentWrapper>{tooltipContent}</OverlayContentWrapper>
               </MotionSheet>
             </MotionVeil>
           )}

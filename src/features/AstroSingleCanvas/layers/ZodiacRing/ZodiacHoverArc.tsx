@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+
 import { Arc } from 'react-konva'
 
 import { usePointerTooltip } from '../../hooks/usePointerTooltip'
@@ -15,7 +17,6 @@ interface HoverArcProps {
   showTooltip: (params: { text: string; x: number; y: number; sticky?: boolean }) => void
   hideTooltip: () => void
   changeTooltipPosition: (pos: { x: number; y: number }) => void
-  getZodiacHTML: (index: number) => string // <-- чтобы не тянуть из другого файла здесь
 }
 
 export const ZodiacHoverArc = ({
@@ -30,9 +31,12 @@ export const ZodiacHoverArc = ({
   hideTooltip,
   changeTooltipPosition,
 }: HoverArcProps) => {
+  const html = useMemo(() => getZodiacTooltipHTML(zodiacIndex), [zodiacIndex])
+
   const handlers = usePointerTooltip({
+    // DESKTOP
     onEnter: ({ x, y }, evt) => {
-      showTooltip({ text: getZodiacTooltipHTML(zodiacIndex), x, y })
+      showTooltip({ text: html, x, y })
       onHoverChange(zodiacIndex)
       evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
     },
@@ -44,11 +48,13 @@ export const ZodiacHoverArc = ({
       onHoverChange(null)
       evt.target.getStage()?.container().style.setProperty('cursor', 'default')
     },
-    onDown: ({ x, y }) => {
-      showTooltip({ text: getZodiacTooltipHTML(zodiacIndex), x, y, sticky: true })
+
+    // MOBILE (нижний fixed-tooltip): координаты игнорятся стилями
+    onOpen: () => {
+      showTooltip({ text: html, x: 0, y: 0 })
       onHoverChange(zodiacIndex)
     },
-    onUp: () => {
+    onClose: () => {
       hideTooltip()
       onHoverChange(null)
     },
