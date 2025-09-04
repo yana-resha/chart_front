@@ -41,6 +41,7 @@ export const PlanetsAspectsInDegreesTable = ({ planetsAspects }: Props) => {
         <SimpleDataTable.Header style={{ position: 'sticky', top: 0 }}>
           Аспект{' '}
           <InfoTooltip
+            mobileTitle={'Аспект в натальной карте'}
             content={
               <div
                 style={{ whiteSpace: 'pre-line' }}
@@ -58,6 +59,7 @@ export const PlanetsAspectsInDegreesTable = ({ planetsAspects }: Props) => {
         >
           Орб{' '}
           <InfoTooltip
+            mobileTitle={'Орбис'}
             content={
               <div
                 style={{ whiteSpace: 'pre-line' }}

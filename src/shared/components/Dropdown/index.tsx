@@ -4,20 +4,25 @@ import { useFloating, offset, flip, shift, autoUpdate, Placement, FloatingPortal
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { DropdownContainer, DropdownVeil, DropdownSheet, MobileClosedIcon } from './index.linaria'
+import { Button } from '../Button'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import {
   popoverVariants,
   veilVariants,
   sheetVariants,
 } from '@/shared/assets/styles/overlays/alerts.animations'
+import {
+  OverlayContentWrapper,
+  OverlayHeader,
+  OverlayHeaderTitle,
+} from '@/shared/assets/styles/overlays/shared.linaria'
 import { useMedia } from '@/shared/hooks/useMedia'
 import { useScrollLock } from '@/shared/hooks/useScrollLock'
-import { OverlayContentWrapper, OverlayHeader } from '@/shared/assets/styles/overlays/shared.linaria'
-import { Button } from '../Button'
 
 interface DropdownProps extends HTMLAttributes<HTMLDivElement> {
   trigger: ReactNode
   children: ReactNode
+  mobileTitle?: string | ReactNode
   placement?: Placement
   open?: boolean
   onClose?: () => void
@@ -28,6 +33,7 @@ const MotionVeil = motion(DropdownVeil)
 const MotionSheet = motion(DropdownSheet)
 
 export const Dropdown = ({
+  mobileTitle,
   trigger,
   children,
   placement = 'bottom-start',
@@ -150,7 +156,7 @@ export const Dropdown = ({
                 role="document"
               >
                 <OverlayHeader>
-                  <div></div>
+                  <OverlayHeaderTitle>{mobileTitle}</OverlayHeaderTitle>
                   <Button
                     kind="text"
                     onClick={close}

@@ -38,6 +38,7 @@ export const PlanetItem = ({ planet, houseIndex = undefined }: Props) => {
         {isRetrograde && (
           <Tooltip
             placement="top"
+            mobileTitle={<span style={{ color: '#D46A6A', fontWeight: 500 }}>R</span>}
             tooltipContent={'Ретроградная планета'}
             style={{
               display: 'inline', // строчный элемент

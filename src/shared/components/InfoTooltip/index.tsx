@@ -5,13 +5,15 @@ import { prepareIconColors, primaryIconCSS } from '@/shared/assets/styles/icons.
 import { Tooltip } from '@/shared/components/Tooltip'
 
 interface InfoTooltipProps {
+  mobileTitle: string | ReactNode
   content: ReactNode
   color?: string
 }
 
-export const InfoTooltip: React.FC<InfoTooltipProps> = ({ content, color }) => (
+export const InfoTooltip: React.FC<InfoTooltipProps> = ({ content, color, mobileTitle }) => (
   <Tooltip
     trigger="click"
+    mobileTitle={mobileTitle}
     tooltipContent={content}
     style={{ display: 'inline' }}
   >

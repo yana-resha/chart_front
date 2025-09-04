@@ -6,6 +6,7 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   leftIcon?: ReactNode
   isClearOnFocus?: boolean
   tooltip?: string | ReactNode
+  mobileTooltipTitle?: string | ReactNode
   clearValueFunc?: (e: MouseEvent) => void
   showClearIcon?: boolean
   disabled?: boolean

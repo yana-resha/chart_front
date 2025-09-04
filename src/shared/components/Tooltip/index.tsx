@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, HTMLAttributes } from 'react'
+import React, { useState, useRef, useEffect, HTMLAttributes, useId } from 'react'
 
 import {
   useFloating,
@@ -24,6 +24,7 @@ import {
 import {
   OverlayContentWrapper,
   OverlayHeader,
+  OverlayHeaderTitle,
   OverlayVeil,
 } from '@/shared/assets/styles/overlays/shared.linaria'
 import { useMedia } from '@/shared/hooks/useMedia'
@@ -31,7 +32,9 @@ import { useScrollLock } from '@/shared/hooks/useScrollLock'
 
 interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
-  tooltipContent: React.ReactNode
+  tooltipContent: React.ReactNode | string
+  /** Заголовок только для мобильного шита */
+  mobileTitle?: React.ReactNode | string
   trigger?: 'click' | 'hover'
   placement?: Placement
 }
@@ -43,6 +46,7 @@ const MotionSheet = motion(TooltipSurface)
 export const Tooltip = ({
   children,
   tooltipContent,
+  mobileTitle,
   trigger = 'hover',
   placement = 'top-start',
   style,
@@ -54,6 +58,8 @@ export const Tooltip = ({
   const [open, setOpen] = useState(false)
   const arrowRef = useRef<HTMLDivElement | null>(null)
   const wrapperRef = useRef<HTMLDivElement | null>(null)
+
+  const titleId = useId()
 
   const {
     refs,
@@ -139,14 +145,14 @@ export const Tooltip = ({
                 exit="exit"
               >
                 <TooltipSurface>
+                  <OverlayContentWrapper>{tooltipContent}</OverlayContentWrapper>
                   <Button
-                    style={{ position: 'absolute', right: '12px', top: '7px' }}
                     kind="text"
                     onClick={() => setOpen(false)}
+                    aria-label="Close tooltip"
                   >
                     <ClosedIcon />
                   </Button>
-                  <OverlayContentWrapper>{tooltipContent}</OverlayContentWrapper>
                   {/* стрелка только на desktop */}
                   <TooltipArrow
                     arrowRef={arrowRef}
@@ -169,6 +175,8 @@ export const Tooltip = ({
               exit="exit"
               role="dialog"
               aria-modal="true"
+              aria-labelledby={mobileTitle ? titleId : undefined}
+              aria-label={mobileTitle ? undefined : 'Tooltip'}
             >
               <MotionSheet
                 onClick={(e: React.MouseEvent) => e.stopPropagation()}
@@ -179,10 +187,13 @@ export const Tooltip = ({
                 role="document"
               >
                 <OverlayHeader>
-                  <div></div>
+                  {/* место для мобильного заголовка */}
+                  <OverlayHeaderTitle>{mobileTitle}</OverlayHeaderTitle>
+
                   <Button
                     kind="text"
                     onClick={() => setOpen(false)}
+                    aria-label="Close tooltip"
                   >
                     <ClosedIcon />
                   </Button>

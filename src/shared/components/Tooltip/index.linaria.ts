@@ -7,8 +7,10 @@ import { SURFACE_TOKENS } from '@/shared/assets/styles/overlays/shared'
 
 export const TooltipSurface = styled.div`
   /* === БАЗА: как TooltipContentWrapper (десктопный пузырь) === */
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 12px;
+  align-items: start;
+  gap: 5px;
   width: max-content;
   max-width: ${SURFACE_TOKENS.TOOLTIP.DESKTOP.TOOLTIP_MAX_WIDTH}px;
   padding: 7px 12px;
@@ -27,6 +29,9 @@ export const TooltipSurface = styled.div`
   /* === МОБИЛКА: как TooltipSheet (нижний шит) === */
   @media (max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px) {
     position: relative; /* для абсолютной кнопки закрытия */
+    display: flex;
+    flex-direction: column;
+    align-items: start;
 
     gap: ${SURFACE_TOKENS.MOBILE_SHARED.GAP};
     width: 100%;

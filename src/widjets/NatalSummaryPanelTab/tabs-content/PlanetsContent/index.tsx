@@ -112,6 +112,7 @@ export const PlanetsContent = ({ planets, houses }: Props) => {
               <Title>
                 Стихии{' '}
                 <InfoTooltip
+                  mobileTitle={`Стихии`}
                   content={
                     <div
                       style={{ whiteSpace: 'pre-line' }}
@@ -145,6 +146,7 @@ export const PlanetsContent = ({ planets, houses }: Props) => {
               <Title>
                 Знаки{' '}
                 <InfoTooltip
+                  mobileTitle={`Знаки`}
                   content={
                     <div
                       style={{ whiteSpace: 'pre-line' }}
@@ -186,6 +188,7 @@ export const PlanetsContent = ({ planets, houses }: Props) => {
               <Title>
                 Качества{' '}
                 <InfoTooltip
+                  mobileTitle={`Качества`}
                   content={
                     <div
                       style={{ whiteSpace: 'pre-line' }}
@@ -223,6 +226,7 @@ export const PlanetsContent = ({ planets, houses }: Props) => {
               <Title>
                 Ретро{' '}
                 <InfoTooltip
+                  mobileTitle={`Ретроградность`}
                   content={
                     <div
                       style={{ whiteSpace: 'pre-line' }}
@@ -252,6 +256,7 @@ export const PlanetsContent = ({ planets, houses }: Props) => {
                 <Title>
                   {ASTRO_ESSENTIAL_DIGNITY_NAME[d]}{' '}
                   <InfoTooltip
+                    mobileTitle={ASTRO_ESSENTIAL_DIGNITY_NAME[d]}
                     content={
                       <div
                         style={{ whiteSpace: 'pre-line' }}

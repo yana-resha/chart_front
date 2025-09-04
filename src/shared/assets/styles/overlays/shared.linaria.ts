@@ -17,17 +17,24 @@ export const OverlayVeil = styled.div`
   }
 `
 export const OverlayHeader = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between; /* прижимаем вправо */
   align-items: flex-start;
 
   @media (max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px) {
-    position: sticky;
-    top: 0;
     display: flex;
     justify-content: space-between; /* прижимаем вправо */
   }
 `
+
+export const OverlayHeaderTitle = styled.div`
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 1);
+  line-height: 1;
+  font-weight: 500;
+`
+
 export const OverlayContentWrapper = styled.div`
   height: 100%;
   overflow-y: auto;

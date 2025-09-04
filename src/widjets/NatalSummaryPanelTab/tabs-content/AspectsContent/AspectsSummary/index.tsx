@@ -51,6 +51,7 @@ export const AspectsSummary = ({ chartAspectStatistics }: Props) => {
                 {title}&nbsp;
                 <InfoTooltip
                   color={color}
+                  mobileTitle={`${ASPECT_CATEGORY_NAME[category]} аспекты`}
                   content={
                     <AspectTooltipContent
                       categoryKey={category}

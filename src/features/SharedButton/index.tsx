@@ -18,7 +18,6 @@ import {
 import Telegram from '@/shared/assets/icons/messenger-icons/telegram.svg?react'
 import VK from '@/shared/assets/icons/messenger-icons/vkontakte.svg?react'
 import Whatsapp from '@/shared/assets/icons/messenger-icons/whatsapp.svg?react'
-
 import { Button } from '@/shared/components/Button'
 import { Dropdown } from '@/shared/components/Dropdown'
 
@@ -53,6 +52,7 @@ export const SharedButton = ({
 
   return (
     <Dropdown
+      /* mobileTitle={'Поделиться картой'} */
       open={open}
       className={dropdownContainer}
       onClose={() => setOpen(false)}

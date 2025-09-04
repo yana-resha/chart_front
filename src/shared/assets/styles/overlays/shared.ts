@@ -18,7 +18,7 @@ export const SURFACE_TOKENS = {
     GAP: '1rem',
     MAXH: '90%',
     MINH: '45%',
-    CLOSED_ICON_WIDTH: '18px',
-    CLOSED_ICON_HEIGHT: '18px',
+    CLOSED_ICON_WIDTH: '1rem',
+    CLOSED_ICON_HEIGHT: '1rem',
   },
 }

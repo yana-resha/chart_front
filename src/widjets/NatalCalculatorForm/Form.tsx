@@ -115,6 +115,7 @@ export const Form = () => {
         invalidText={isNameError ? nameError : ''}
       />
       <SearchInput
+        mobileTooltipTitle={'Населенный пункт'}
         tooltip={
           localityValue ? (
             <LocalityTooltipContent>

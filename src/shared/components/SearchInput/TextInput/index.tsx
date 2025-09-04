@@ -24,6 +24,7 @@ export const TextInput = ({
   openDropdownFunc,
   clearValueFunc,
   isClearOnFocus,
+  mobileTooltipTitle,
   tooltip,
   ref = React.createRef(),
   className,
@@ -67,7 +68,10 @@ export const TextInput = ({
           {...otherProps}
         />
         {tooltip && (
-          <Tooltip tooltipContent={tooltip}>
+          <Tooltip
+            tooltipContent={tooltip}
+            mobileTitle={mobileTooltipTitle}
+          >
             <IconContainer>
               <InfoIcon className={FormIconCSS} />
             </IconContainer>
