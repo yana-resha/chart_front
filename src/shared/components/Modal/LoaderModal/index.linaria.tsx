@@ -5,18 +5,7 @@ import LoaderSVG from '../assets/louder.svg?react'
 import CheckSVG from '@/shared/assets/icons/check.svg?react'
 import { SHARED_COLORS_VARIABLES } from '@/shared/assets/styles/colors'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
-
-/* ────────────────────────────── */
-/*   Кнопка закрытия (крестик)    */
-/* ────────────────────────────── */
-export const CrossContainer = styled.div`
-  position: absolute;
-  top: 0.75rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-`
+import { OverlayContentWrapper } from '@/shared/assets/styles/overlays/shared.linaria'
 
 /* ────────────────────────────── */
 /*        Панель модалки          */
@@ -77,7 +66,7 @@ export const CheckAnimated = styled(CheckSVG)`
 /*        Тексты внутри панели    */
 /* ────────────────────────────── */
 
-export const Content = styled.div`
+export const Content = styled(OverlayContentWrapper)`
   display: flex;
   flex-direction: column;
   gap: 0rem;

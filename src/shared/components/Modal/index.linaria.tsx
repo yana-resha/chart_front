@@ -1,12 +1,13 @@
 import { styled } from '@linaria/react'
 
-import ExitCross from '@/shared/assets/icons/cross.svg?react'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import { OVERLAYS_BACKGROUND_COLORS } from '@/shared/assets/styles/overlays/colors'
+import { SURFACE_TOKENS } from '@/shared/assets/styles/overlays/shared'
 
 export const ModalVeil = styled.div`
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: ${OVERLAYS_BACKGROUND_COLORS.VEIL_BACK};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,9 +21,7 @@ export const ModalVeil = styled.div`
 `
 
 export const ModalWindow = styled.div`
-  background:
-    radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, 0.06) 0%, transparent 60%),
-    rgba(18, 20, 26, 0.92);
+  background: ${OVERLAYS_BACKGROUND_COLORS.WINDOW_BACK};
   border-radius: 15px;
   position: relative;
   z-index: 1001;
@@ -33,39 +32,44 @@ export const ModalWindow = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
+
   padding: 1.875rem;
+  padding-top: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    0 0 12px rgba(255, 255, 255, 0.06),
-    0 0 24px rgba(255, 255, 255, 0.05),
-    0 0 48px rgba(255, 255, 255, 0.04);
+  box-shadow: ${OVERLAYS_BACKGROUND_COLORS.WINDOW_MOBILE_SHADOW};
 
   @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
     padding: 1.5rem;
+    padding-top: 0.8rem;
   }
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     padding: 1.3rem;
+    padding-top: 0.7rem;
   }
   @media (max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px) {
     width: 100%;
     max-width: 100%;
-    border-radius: 16px 16px 0 0;
+    border-radius: ${SURFACE_TOKENS.MOBILE_SHARED.RADIUS};
     border-bottom: none;
-    box-shadow:
-      0 -6px 24px rgba(255, 255, 255, 0.15),
-      0 -2px 8px rgba(255, 255, 255, 0.05);
-    padding: 1rem 1rem 1rem;
-    max-height: 85vh;
+    box-shadow: ${SURFACE_TOKENS.MOBILE_SHARED.SHADOW};
+    padding: ${SURFACE_TOKENS.MOBILE_SHARED.PADDING};
+    max-height: ${SURFACE_TOKENS.MOBILE_SHARED.MAXH};
+    min-height: ${SURFACE_TOKENS.MOBILE_SHARED.MINH};
   }
 `
 
-export const CrossIcon = styled(ExitCross)`
+export const CrossIcon = styled(SURFACE_TOKENS.CLOSED_ICON_COMPONENT)`
   width: 20px;
   height: 20px;
-  color: rgba(255, 255, 255, 1);
+  color: ${SURFACE_TOKENS.CLOSED_ICON_COLOR};
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     width: 18px;
     height: 18px;
+  }
+
+  @media (max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px) {
+    width: ${SURFACE_TOKENS.MOBILE_SHARED.CLOSED_ICON_WIDTH};
+    height: ${SURFACE_TOKENS.MOBILE_SHARED.CLOSED_ICON_WIDTH};
   }
 `

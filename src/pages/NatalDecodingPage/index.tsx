@@ -159,7 +159,7 @@ export const NatalDecodingPage = () => {
       {/* Модалка №1: ошибка сервера — 2 кнопки (повторить / вернуться) */}
       <AlertModal
         open={!isLoading && serverError ? true : false}
-        showExitCross={true}
+        showExitCross={false}
         title={'Упс...'}
         subtitle={
           <>
@@ -175,7 +175,7 @@ export const NatalDecodingPage = () => {
 
       <AlertModal
         open={!isLoading && !serverError && dataError ? true : false}
-        showExitCross={true}
+        showExitCross={false}
         title={'Данные повреждены'}
         subtitle={
           <>

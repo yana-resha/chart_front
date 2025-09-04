@@ -1,18 +1,16 @@
 import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
 
-import { OVERLAYS_BACKGROUND_COLORS, OVERLAYS_TEXT_COLORS } from './colors'
-import { MEDIA_POINTS } from '../media-points'
-
-export const tooltipMaxWidth = 404
-export const tooltipTailHeight = 16
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import { OVERLAYS_BACKGROUND_COLORS, OVERLAYS_TEXT_COLORS } from '@/shared/assets/styles/overlays/colors'
+import { SURFACE_TOKENS } from '@/shared/assets/styles/overlays/shared'
 
 export const TooltipSurface = styled.div`
   /* === БАЗА: как TooltipContentWrapper (десктопный пузырь) === */
   display: flex;
   flex-direction: column;
   width: max-content;
-  max-width: ${tooltipMaxWidth}px;
+  max-width: ${SURFACE_TOKENS.TOOLTIP.DESKTOP.TOOLTIP_MAX_WIDTH}px;
   padding: 7px 12px;
 
   border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -30,24 +28,21 @@ export const TooltipSurface = styled.div`
   @media (max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px) {
     position: relative; /* для абсолютной кнопки закрытия */
 
-    gap: 0px;
-
+    gap: ${SURFACE_TOKENS.MOBILE_SHARED.GAP};
     width: 100%;
     max-width: 100%;
-    max-height: 85vh;
-    min-height: 30vh;
+    max-height: ${SURFACE_TOKENS.MOBILE_SHARED.MAXH};
+    min-height: ${SURFACE_TOKENS.MOBILE_SHARED.MINH};
     overflow-y: hidden;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
 
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: ${SURFACE_TOKENS.MOBILE_SHARED.BORDER};
     border-bottom: none;
-    border-radius: 16px 16px 0 0;
+    border-radius: ${SURFACE_TOKENS.MOBILE_SHARED.RADIUS};
 
-    padding: 0.5rem 0.8rem 0.8rem;
-    box-shadow:
-      0 -6px 24px rgba(255, 255, 255, 0.15),
-      0 -2px 8px rgba(255, 255, 255, 0.05);
+    padding: ${SURFACE_TOKENS.MOBILE_SHARED.PADDING};
+    box-shadow: ${SURFACE_TOKENS.MOBILE_SHARED.SHADOW};
 
     line-height: 1.5;
   }
@@ -64,4 +59,16 @@ export const tooltipTailIconCSS = css`
   height: 100%;
   display: block;
   transform-origin: center;
+  color: rgba(18, 20, 26, 0.92);
+`
+
+export const ClosedIcon = styled(SURFACE_TOKENS.CLOSED_ICON_COMPONENT)`
+  width: 12px;
+  height: 12px;
+  color: ${SURFACE_TOKENS.CLOSED_ICON_COLOR};
+
+  @media (max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px) {
+    width: ${SURFACE_TOKENS.MOBILE_SHARED.CLOSED_ICON_WIDTH};
+    height: ${SURFACE_TOKENS.MOBILE_SHARED.CLOSED_ICON_WIDTH};
+  }
 `

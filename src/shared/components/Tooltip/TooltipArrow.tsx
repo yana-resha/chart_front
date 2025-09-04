@@ -1,7 +1,7 @@
 import { CSSProperties, RefObject } from 'react'
 
 import Tail from './assets/tail.svg?react'
-import { TooltipTailContainer, tooltipTailIconCSS } from '@/shared/assets/styles/overlays/tooltip.linaria'
+import { TooltipTailContainer, tooltipTailIconCSS } from './index.linaria'
 
 type TooltipArrowProps = {
   arrowRef: RefObject<HTMLDivElement | null>

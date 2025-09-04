@@ -109,11 +109,10 @@ div#root {
 body {
   position: relative;
   background-color: rgb(19, 22, 25);
-  min-height: 100dvh;
   height: fit-content;
   display: flex;
   flex-direction: column;
-  height: 100dvh;
+  min-height: 100dvh;
   overflow: auto;
 }
 

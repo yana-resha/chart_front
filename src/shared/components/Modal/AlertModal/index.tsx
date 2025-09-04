@@ -7,12 +7,12 @@ import {
   ModalIcon,
   IconContainer,
   ButtonsContainer,
-  CrossContainer,
   modal,
   ContentContainer,
 } from './index.linaria'
 import { CrossIcon } from '../index.linaria'
 import { Modal } from '../Modal'
+import { OverlayHeader } from '@/shared/assets/styles/overlays/shared.linaria'
 import { Button } from '@/shared/components/Button'
 
 interface ModalProps {
@@ -46,17 +46,17 @@ export const AlertModal = ({
     onClose={onClose}
     onClick={(e) => e.stopPropagation()}
   >
-    {showExitCross && (
-      <CrossContainer>
+    <OverlayHeader>
+      <div></div>
+      {showExitCross && (
         <Button
           kind="text"
           onClick={onClose}
         >
           <CrossIcon />
         </Button>
-      </CrossContainer>
-    )}
-
+      )}
+    </OverlayHeader>
     <ContentContainer>
       <ModalHeader>
         {icon && <IconContainer className={ModalIcon}>{icon}</IconContainer>}

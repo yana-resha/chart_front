@@ -1,14 +1,13 @@
 import { styled } from '@linaria/react'
 
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import { SURFACE_TOKENS } from '@/shared/assets/styles/overlays/shared'
 
 /* поповер (desktop) */
 export const DropdownContainer = styled.div`
-  background:
-    radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, 0.06) 0%, transparent 60%),
-    rgba(18, 20, 26, 0.92);
+  background: ${SURFACE_TOKENS.MOBILE_SHARED.BACKGROUND};
   border-radius: 8px;
-  border: 1px solid rgba(54, 58, 61, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 0.75rem;
   font-size: 0.875rem;
   color: white;
@@ -52,26 +51,28 @@ export const DropdownVeil = styled.div`
 
 /* сам bottom-sheet на мобилке */
 export const DropdownSheet = styled.div`
-  background:
-    radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, 0.06) 0%, transparent 60%),
-    rgba(18, 20, 26, 0.92);
-  border-radius: 16px 16px 0 0;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: ${SURFACE_TOKENS.MOBILE_SHARED.BACKGROUND};
+  border-radius: ${SURFACE_TOKENS.MOBILE_SHARED.RADIUS};
+  border: ${SURFACE_TOKENS.MOBILE_SHARED.BORDER};
   border-bottom: none;
   width: 100%;
   max-width: 100%;
-  max-height: 80vh;
+  max-height: ${SURFACE_TOKENS.MOBILE_SHARED.MAXH};
+  min-height: ${SURFACE_TOKENS.MOBILE_SHARED.MINH};
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
-  padding: 1rem 1rem calc(1rem + env(safe-area-inset-bottom));
-  box-shadow:
-    0 -6px 24px rgba(0, 0, 0, 0.35),
-    0 -2px 8px rgba(0, 0, 0, 0.25);
-
+  padding: ${SURFACE_TOKENS.MOBILE_SHARED.PADDING};
+  box-shadow: ${SURFACE_TOKENS.MOBILE_SHARED.SHADOW};
   display: none;
 
   @media (max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px) {
     display: block;
   }
+`
+
+export const MobileClosedIcon = styled(SURFACE_TOKENS.CLOSED_ICON_COMPONENT)`
+  color: ${SURFACE_TOKENS.CLOSED_ICON_COLOR};
+  width: ${SURFACE_TOKENS.MOBILE_SHARED.CLOSED_ICON_WIDTH};
+  height: ${SURFACE_TOKENS.MOBILE_SHARED.CLOSED_ICON_WIDTH};
 `

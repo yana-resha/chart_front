@@ -2,6 +2,7 @@ import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
 
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import { OverlayContentWrapper } from '@/shared/assets/styles/overlays/shared.linaria'
 
 export const modal = css`
   width: 550px;
@@ -34,19 +35,12 @@ export const ModalIcon = css`
   }
 `
 
-export const CrossContainer = styled.div`
-  display: flex;
-  justify-content: flex-end; /* прижимаем вправо */
-  position: sticky;
-  top: 0;
-`
-
-export const ContentContainer = styled.div`
+export const ContentContainer = styled(OverlayContentWrapper)`
   display: flex;
   flex-direction: column;
 
   @media (max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px) {
-    padding-top: 5rem !important;
+    margin-top: auto !important;
   }
 `
 

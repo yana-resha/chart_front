@@ -1,10 +1,9 @@
 import { styled } from '@linaria/react'
 
 import ClosedSVG from '@/shared/assets/icons/cross.svg?react'
-import { OVERLAYS_BACKGROUND_COLORS } from '@/shared/assets/styles/overlays/colors'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
-
-const tooltipMaxWidth = 404
+import { OVERLAYS_BACKGROUND_COLORS } from '@/shared/assets/styles/overlays/colors'
+import { SURFACE_TOKENS } from '@/shared/assets/styles/overlays/shared'
 
 export const ClosedIcon = styled(ClosedSVG)`
   width: 10px;
@@ -31,7 +30,7 @@ export const Tooltip = styled.div`
 
   display: none;
   width: max-content;
-  max-width: ${tooltipMaxWidth}px;
+  max-width: ${SURFACE_TOKENS.TOOLTIP.DESKTOP.TOOLTIP_MAX_WIDTH}px;
   padding: 7px 12px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;

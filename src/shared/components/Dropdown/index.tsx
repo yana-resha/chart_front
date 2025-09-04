@@ -3,11 +3,17 @@ import React, { useEffect, useRef, useState, ReactNode, HTMLAttributes, useId, u
 import { useFloating, offset, flip, shift, autoUpdate, Placement, FloatingPortal } from '@floating-ui/react'
 import { AnimatePresence, motion } from 'framer-motion'
 
-import { DropdownContainer, DropdownVeil, DropdownSheet } from './index.linaria'
-import { popoverVariants, veilVariants, sheetVariants } from '@/shared/assets/styles/overlays/alerts.animations'
+import { DropdownContainer, DropdownVeil, DropdownSheet, MobileClosedIcon } from './index.linaria'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import {
+  popoverVariants,
+  veilVariants,
+  sheetVariants,
+} from '@/shared/assets/styles/overlays/alerts.animations'
 import { useMedia } from '@/shared/hooks/useMedia'
 import { useScrollLock } from '@/shared/hooks/useScrollLock'
+import { OverlayContentWrapper, OverlayHeader } from '@/shared/assets/styles/overlays/shared.linaria'
+import { Button } from '../Button'
 
 interface DropdownProps extends HTMLAttributes<HTMLDivElement> {
   trigger: ReactNode
@@ -143,7 +149,16 @@ export const Dropdown = ({
                 exit="exit"
                 role="document"
               >
-                {children}
+                <OverlayHeader>
+                  <div></div>
+                  <Button
+                    kind="text"
+                    onClick={close}
+                  >
+                    <MobileClosedIcon />
+                  </Button>
+                </OverlayHeader>
+                <OverlayContentWrapper>{children}</OverlayContentWrapper>
               </MotionSheet>
             </MotionVeil>
           )}

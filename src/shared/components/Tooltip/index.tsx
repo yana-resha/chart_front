@@ -14,15 +14,18 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 import { TooltipArrow } from './TooltipArrow'
 import { Button } from '../Button'
-import { popoverVariants, veilVariants, sheetVariants } from '@/shared/assets/styles/overlays/alerts.animations'
+import { ClosedIcon, TooltipSurface } from './index.linaria'
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import {
-  OverlayClosedIcon,
+  popoverVariants,
+  veilVariants,
+  sheetVariants,
+} from '@/shared/assets/styles/overlays/alerts.animations'
+import {
   OverlayContentWrapper,
   OverlayHeader,
   OverlayVeil,
 } from '@/shared/assets/styles/overlays/shared.linaria'
-import { TooltipSurface } from '@/shared/assets/styles/overlays/tooltip.linaria'
-import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { useMedia } from '@/shared/hooks/useMedia'
 import { useScrollLock } from '@/shared/hooks/useScrollLock'
 
@@ -136,6 +139,13 @@ export const Tooltip = ({
                 exit="exit"
               >
                 <TooltipSurface>
+                  <Button
+                    style={{ position: 'absolute', right: '12px', top: '7px' }}
+                    kind="text"
+                    onClick={() => setOpen(false)}
+                  >
+                    <ClosedIcon />
+                  </Button>
                   <OverlayContentWrapper>{tooltipContent}</OverlayContentWrapper>
                   {/* стрелка только на desktop */}
                   <TooltipArrow
@@ -169,11 +179,12 @@ export const Tooltip = ({
                 role="document"
               >
                 <OverlayHeader>
+                  <div></div>
                   <Button
                     kind="text"
                     onClick={() => setOpen(false)}
                   >
-                    <OverlayClosedIcon />
+                    <ClosedIcon />
                   </Button>
                 </OverlayHeader>
 

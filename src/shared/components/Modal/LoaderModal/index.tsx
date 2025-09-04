@@ -3,7 +3,8 @@ import { ReactNode } from 'react'
 import { Button } from '../../Button'
 import { CrossIcon } from '../index.linaria'
 import { Modal } from '../Modal'
-import { modalFlex, CrossContainer, Loader, CheckAnimated, Title, Subtitle, Content } from './index.linaria'
+import { modalFlex, Loader, CheckAnimated, Title, Subtitle, Content } from './index.linaria'
+import { OverlayHeader } from '@/shared/assets/styles/overlays/shared.linaria'
 
 // ── новый интерфейс (бек-совместимый):
 interface ModalProps {
@@ -32,16 +33,17 @@ export const LoaderModal = ({
     onClick={(e) => e.stopPropagation()}
   >
     <>
-      {showExitCross && (
-        <CrossContainer>
+      <OverlayHeader>
+        <div></div>
+        {showExitCross && (
           <Button
             kind="text"
             onClick={onClose}
           >
             <CrossIcon />
           </Button>
-        </CrossContainer>
-      )}
+        )}
+      </OverlayHeader>
 
       {phase === 'loading' ? <Loader /> : <CheckAnimated />}
       <Content>
