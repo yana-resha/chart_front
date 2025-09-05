@@ -1,4 +1,5 @@
-import './style.css'
+import { Title } from './index.linaria'
+import { HamburgSymbol } from '@/shared/components/HamburgSymbol'
 import { ASTRO_HOUSE_SYMBOL } from '@/shared/configs/astro-houses.config'
 import {
   ASTRO_ZODIAC_COLOR,
@@ -7,7 +8,13 @@ import {
 } from '@/shared/configs/astro-zodiac.config'
 import { formattedDegree, getDegreeInSign, getSignIndexByLongitude } from '@/shared/helpers/astro.helper'
 
-export function getHouseTooltipHTML(houseLongitude: number, houseIndex: number): string {
+export function HouseTooltipContent({
+  houseLongitude,
+  houseIndex,
+}: {
+  houseLongitude: number
+  houseIndex: number
+}) {
   const fullDegrees = houseLongitude
   const signIndex = getSignIndexByLongitude(fullDegrees)
 
@@ -18,18 +25,13 @@ export function getHouseTooltipHTML(houseLongitude: number, houseIndex: number):
 
   const house = houseIndex ? ASTRO_HOUSE_SYMBOL[houseIndex] : undefined
 
-  return `
-    <div class="tooltip">
-      <div class="title mb-1">
-        ${house} дом
-      </div>
+  return (
+    <>
+      <Title>{house} дом</Title>
       <div>
-        <div class="text">
-          ${formattedDegree(degree)} 
-          <span class="astro-symbol" style="color: ${color}">${signSymbol}</span> 
-          ${formattedDegree(minutes)}' ${formattedDegree(seconds)}''
-        </div>
+        {formattedDegree(degree)} <HamburgSymbol style={{ color: color }}>{signSymbol}</HamburgSymbol>{' '}
+        {formattedDegree(minutes)}&apos; {formattedDegree(seconds)}&apos;&apos;
       </div>
-    </div>
-  `
+    </>
+  )
 }

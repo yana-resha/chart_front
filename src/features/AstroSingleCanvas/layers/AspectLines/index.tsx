@@ -7,7 +7,7 @@ import { useAstroCanvasContext } from '../../AstroChartContext'
 import { lineHoverAnimation, textHoverAnimation } from './helpers/animate.helper'
 import { ASPECT_COLOR } from '../../configs/aspect.config'
 import { createPointerTooltipHandlers } from '../../hooks/usePointerTooltip'
-import { getAspectTooltipHTML } from '../../tooltip-contents/getAspectTooltipHTML'
+import { AspectTooltipContent } from '../../tooltip-contents/AspectTooltipContent'
 import { getVisualAngleFromAsc, polarToCartesian } from '../../utils/astro-helpers'
 import { ASTRO_ASPECT_NAME, ASTRO_ASPECT_SYMBOL } from '@/shared/configs/astro-aspects.config'
 import { ASTRO_ASPECT } from '@/shared/types/astro/astro-aspects.types'
@@ -89,7 +89,7 @@ export const AspectLines = () => {
             linePart2: { x1: afterX, y1: afterY, x2: posB.x, y2: posB.y },
           }
         }),
-    [CENTER, ascendant, aspects, fs, planets],
+    [ASPECT_INSIDE_RADIUS, CENTER, ascendant, aspects, fs, planets],
   )
 
   // фабрика pointer-хендлеров для прозрачной "хит"-линии
@@ -98,7 +98,7 @@ export const AspectLines = () => {
       {
         // DESKTOP: hover/move/leave
         onEnter: ({ x, y }, evt) => {
-          showTooltip({ text: getAspectTooltipHTML(aspect), x, y })
+          showTooltip({ text: <AspectTooltipContent {...aspect} />, x, y, mobileTitle: 'Аспект' })
           setHoveredAspect('line' + i)
           evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
         },
@@ -113,7 +113,7 @@ export const AspectLines = () => {
 
         // MOBILE: нижний fixed-tooltip (координаты игнорируются стилями)
         onOpen: () => {
-          showTooltip({ text: getAspectTooltipHTML(aspect), x: 0, y: 0 })
+          showTooltip({ text: <AspectTooltipContent {...aspect} />, x: 0, y: 0, mobileTitle: 'Аспект' })
           setHoveredAspect('line' + i)
         },
         onClose: () => {

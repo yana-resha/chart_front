@@ -11,5 +11,5 @@ export enum OVERLAYS_BACKGROUND_COLORS {
 }
 
 export enum OVERLAYS_TEXT_COLORS {
-  CONTENT_COLOR = 'rgba(255, 255, 255, 0.8)',
+  CONTENT_COLOR = 'rgba(255, 255, 255, 0.85)',
 }

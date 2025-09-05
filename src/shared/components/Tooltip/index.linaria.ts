@@ -17,7 +17,8 @@ export const TooltipSurface = styled.div`
 
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
-  background: ${OVERLAYS_BACKGROUND_COLORS.WINDOW_BACK};
+  background: rgba(0, 0, 0, 1);
+  /* background: ${OVERLAYS_BACKGROUND_COLORS.WINDOW_BACK}; */
 
   font-size: 0.8rem;
   font-weight: 500;

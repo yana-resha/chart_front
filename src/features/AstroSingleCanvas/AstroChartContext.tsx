@@ -1,29 +1,12 @@
-import {
-  ReactNode,
-  RefObject,
-  useContext,
-  useRef,
-  useMemo,
-  createContext,
-  forwardRef,
-  useCallback,
-} from 'react'
+import { ReactNode, RefObject, useContext, useMemo, createContext, useCallback, useState } from 'react'
 
 import { createPortal } from 'react-dom'
 
 import { useContainerSize } from './hooks/useContainerSize'
-import { Tooltip as TooltipBox, ClosedIcon } from './index.linaria'
-import { AstroSingleCanvasProps } from './types'
+import { AstroSingleCanvasProps, CoordsSpace, TooltipMethods } from './types'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import { Tooltip as UiTooltip } from '@/shared/components/Tooltip' // <-- твой обычный Tooltip
 import { useMedia } from '@/shared/hooks/useMedia'
-
-type CoordsSpace = 'client' | 'local'
-
-interface TooltipMethods {
-  showTooltip: (args: { text: ReactNode; x: number; y: number; space?: CoordsSpace }) => void
-  changeTooltipPosition: (args: { x: number; y: number; space?: CoordsSpace }) => void
-  hideTooltip: () => void
-}
 
 interface AstroChartContextType extends TooltipMethods, AstroSingleCanvasProps {
   containerRef: RefObject<HTMLDivElement | null>
@@ -42,7 +25,6 @@ interface AstroChartContextType extends TooltipMethods, AstroSingleCanvasProps {
 }
 
 const AstroChartContext = createContext<AstroChartContextType | null>(null)
-
 export const useAstroCanvasContext = () => {
   const ctx = useContext(AstroChartContext)
   if (!ctx) throw new Error('useAstroCanvasContext must be used within AstroCanvasProvider')
@@ -53,26 +35,6 @@ export const useAstroCanvasContext = () => {
 interface Props extends AstroSingleCanvasProps {
   children: ReactNode
 }
-
-const TooltipBody = forwardRef<HTMLDivElement, { onClose: () => void }>(function TooltipBody(
-  { onClose },
-  ref,
-) {
-  return (
-    <TooltipBox ref={ref}>
-      {/* Контент будет заполняться из провайдера через querySelector */}
-      <div data-role="content" />
-      {/* Крестик показывается только на мобилке (см. CSS) */}
-      <button
-        className="close"
-        aria-label="Закрыть"
-        onClick={onClose}
-      >
-        <ClosedIcon />
-      </button>
-    </TooltipBox>
-  )
-})
 
 export const AstroCanvasProvider = ({ children, planets, aspects, houseCusps }: Props) => {
   const FAKE_ASCENDANT = 360
@@ -91,12 +53,14 @@ export const AstroCanvasProvider = ({ children, planets, aspects, houseCusps }: 
   const GENERAL_FIRST_RENDER_ANIMATION = 1.5
   const isMobile = useMedia(`(max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px)`)
 
-  const tipRef = useRef<HTMLDivElement | null>(null)
+  // --- Tooltip state (для обычного UI Tooltip)
+  const [tipOpen, setTipOpen] = useState(false)
+  const [tipContent, setTipContent] = useState<ReactNode | null>(null)
+  const [tipMobileTitle, setTipMobileTitle] = useState<ReactNode | string | undefined>(undefined)
+  // координаты якоря (fixed к окну)
+  const [anchorPos, setAnchorPos] = useState<{ x: number; y: number }>({ x: -9999, y: -9999 })
 
-  // --- Tooltip: fixed по окну с flip/clamp
-  const OFFSET = 12
-  const PADDING_VP = 6
-
+  // Перевод координат из локальных (внутри контейнера) в клиентские (окно)
   const toClientCoords = useCallback(
     (x: number, y: number, space: CoordsSpace = 'client'): { cx: number; cy: number } => {
       if (space === 'client') return { cx: x, cy: y }
@@ -108,97 +72,38 @@ export const AstroCanvasProvider = ({ children, planets, aspects, houseCusps }: 
     },
     [containerRef],
   )
-  function getContentEl() {
-    const root = tipRef.current
-    if (!root) return null
 
-    return root.querySelector('[data-role="content"]') as HTMLElement | null
-  }
-
-  const setTipContent = useCallback((text: ReactNode) => {
-    const el = getContentEl()
-    if (!el) return
-    // Если приходит строка с HTML — рендерим как HTML (как у тебя было ранее).
-    // Иначе пытаемся toString().
-    el.innerHTML = typeof text === 'string' ? text : (text?.toString?.() ?? '')
+  const positionAnchor = useCallback((cx: number, cy: number) => {
+    // Чуть сместим якорь, чтобы тултип появлялся рядом с курсором/точкой
+    const OFFSET = 0
+    setAnchorPos({ x: cx + OFFSET, y: cy + OFFSET })
   }, [])
 
-  function placeFixed(client: { x: number; y: number }) {
-    const tip = tipRef.current
-    if (!tip) return
-
-    tip.style.visibility = 'hidden'
-    tip.style.display = 'block'
-
-    const vw = window.innerWidth
-    const vh = window.innerHeight
-    const rect = tip.getBoundingClientRect()
-
-    const baseX = client.x
-    const baseY = client.y
-
-    // по умолчанию — справа/снизу
-    let x = baseX + OFFSET
-    let y = baseY + OFFSET
-    let sideX: 'left' | 'right' = 'right'
-    let sideY: 'top' | 'bottom' = 'bottom'
-
-    // flip X
-    if (x + rect.width > vw - PADDING_VP) {
-      x = baseX - rect.width - OFFSET
-      sideX = 'left'
-    }
-    // flip Y
-    if (y + rect.height > vh - PADDING_VP) {
-      y = baseY - rect.height - OFFSET
-      sideY = 'top'
-    }
-
-    // clamp
-    x = Math.min(Math.max(x, PADDING_VP), vw - rect.width - PADDING_VP)
-    y = Math.min(Math.max(y, PADDING_VP), vh - rect.height - PADDING_VP)
-
-    tip.style.setProperty('--x', `${x}px`)
-    tip.style.setProperty('--y', `${y}px`)
-    tip.dataset.sidex = sideX
-    tip.dataset.sidey = sideY
-
-    tip.style.visibility = 'visible'
-  }
-
   const showTooltip: TooltipMethods['showTooltip'] = useCallback(
-    ({ text, x, y, space = 'client' }) => {
-      const tip = tipRef.current
-      if (!tip) return
-      setTipContent(text)
+    ({ text, x, y, space = 'client', mobileTitle }) => {
       const { cx, cy } = toClientCoords(x, y, space)
-      placeFixed({ x: cx, y: cy })
+      setTipContent(text)
+      setTipMobileTitle(mobileTitle)
+      positionAnchor(cx, cy)
+      setTipOpen(true)
     },
-    [setTipContent, toClientCoords],
+    [positionAnchor, toClientCoords],
   )
 
   const changeTooltipPosition: TooltipMethods['changeTooltipPosition'] = useCallback(
     ({ x, y, space = 'client' }) => {
-      const tip = tipRef.current
-      if (!tip) return
       const { cx, cy } = toClientCoords(x, y, space)
-      placeFixed({ x: cx, y: cy })
+      positionAnchor(cx, cy)
     },
-    [toClientCoords],
+    [positionAnchor, toClientCoords],
   )
 
   const hideTooltip = useCallback(() => {
-    const tip = tipRef.current
-    if (!tip) return
-    tip.style.display = 'none'
-    tip.style.removeProperty('--x')
-    tip.style.removeProperty('--y')
-    tip.removeAttribute('data-sidex')
-    tip.removeAttribute('data-sidey')
-    const el = getContentEl()
-    if (el) el.innerHTML = ''
+    setTipOpen(false)
+    /* setTipContent(null) */
   }, [])
 
+  // Пробросим контекст наружу
   const ctx = useMemo(
     () => ({
       containerRef,
@@ -242,16 +147,37 @@ export const AstroCanvasProvider = ({ children, planets, aspects, houseCusps }: 
     ],
   )
 
+  // SSR guard: рендерим якорь и тултип только в браузере
+  const canMount = typeof document !== 'undefined' && typeof window !== 'undefined'
+
   return (
     <AstroChartContext.Provider value={ctx}>
       {children}
-      {typeof document !== 'undefined' &&
+
+      {canMount &&
         createPortal(
-          <TooltipBody
-            ref={tipRef}
-            onClose={hideTooltip}
-            data-astro-tooltip-root="1"
-          />,
+          <span
+            style={{
+              position: 'fixed',
+              left: `${anchorPos.x}px`,
+              top: `${anchorPos.y}px`,
+              width: 1,
+              height: 1,
+              pointerEvents: 'none', // не мешаем
+              zIndex: 0,
+            }}
+          >
+            <UiTooltip
+              trigger="manual"
+              open={tipOpen}
+              onOpenChange={setTipOpen} // на случай закрытия по Esc/кнопке
+              tooltipContent={tipContent ?? null}
+              mobileTitle={tipMobileTitle}
+              placement="top-start"
+            >
+              <span style={{ display: 'inline-block', width: 1, height: 1 }} />
+            </UiTooltip>
+          </span>,
           document.body,
         )}
     </AstroChartContext.Provider>

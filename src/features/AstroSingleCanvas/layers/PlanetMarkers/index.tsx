@@ -10,7 +10,7 @@ import { groupClosePlanets } from './groupClosePlanets'
 import { useAstroCanvasContext } from '../../AstroChartContext'
 import { PLANET_SIGNS } from '../../configs/planet.config'
 import { createPointerTooltipHandlers } from '../../hooks/usePointerTooltip'
-import { getPlanetTooltipHTML } from '../../tooltip-contents/getPlanetTooltipHTML'
+import { PlanetTooltipContent } from '../../tooltip-contents/PlanetTooltipContent'
 import { PlanetData } from '../../types'
 import { ChartIcon } from '../../ui/ChartIcon'
 import { getVisualAngleFromAsc, polarToCartesian } from '../../utils/astro-helpers'
@@ -95,7 +95,17 @@ export const PlanetMarkers = () => {
         // DESKTOP
         onEnter: ({ x, y }, evt) => {
           const houseIndex = getHouseIndexBySmth(planet.longitude, houseCusps)
-          showTooltip({ text: getPlanetTooltipHTML(planet, houseIndex), x, y })
+          showTooltip({
+            text: (
+              <PlanetTooltipContent
+                planet={planet}
+                houseIndex={houseIndex}
+              />
+            ),
+            x,
+            y,
+            mobileTitle: 'Планета',
+          })
           handleHover(planet.name, true)
           evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
         },
@@ -111,7 +121,17 @@ export const PlanetMarkers = () => {
         // MOBILE (нижний fixed-tooltip; координаты игнорятся стилями)
         onOpen: () => {
           const houseIndex = getHouseIndexBySmth(planet.longitude, houseCusps)
-          showTooltip({ text: getPlanetTooltipHTML(planet, houseIndex), x: 0, y: 0 })
+          showTooltip({
+            text: (
+              <PlanetTooltipContent
+                planet={planet}
+                houseIndex={houseIndex}
+              />
+            ),
+            x: 0,
+            y: 0,
+            mobileTitle: 'Планета',
+          })
           handleHover(planet.name, true)
         },
         onClose: () => {

@@ -33,10 +33,12 @@ import { useScrollLock } from '@/shared/hooks/useScrollLock'
 interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
   tooltipContent: React.ReactNode | string
-  /** Заголовок только для мобильного шита */
   mobileTitle?: React.ReactNode | string
-  trigger?: 'click' | 'hover'
+  trigger?: 'click' | 'hover' | 'manual' // <-- добавили manual
   placement?: Placement
+  open?: boolean // <-- контролируемый режим
+  defaultOpen?: boolean
+  onOpenChange?: (open: boolean) => void
 }
 
 const MotionBox = motion.div
@@ -50,15 +52,21 @@ export const Tooltip = ({
   trigger = 'hover',
   placement = 'top-start',
   style,
+  open, // <-- new
+  defaultOpen, // <-- new
+  onOpenChange, // <-- new
   ...props
 }: TooltipProps) => {
   const isSheet = useMedia(`(max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px)`)
-  const effectiveTrigger: 'click' | 'hover' = isSheet ? 'click' : trigger
+  const effectiveTrigger: 'click' | 'hover' | 'manual' = isSheet ? 'click' : trigger
 
-  const [open, setOpen] = useState(false)
+  const isControlled = open !== undefined
+  const [uncontrolledOpen, setUncontrolledOpen] = useState<boolean>(defaultOpen ?? false)
+  const actualOpen = isControlled ? !!open : uncontrolledOpen
+  const setOpen = (v: boolean) => (isControlled ? onOpenChange?.(v) : setUncontrolledOpen(v))
+
   const arrowRef = useRef<HTMLDivElement | null>(null)
   const wrapperRef = useRef<HTMLDivElement | null>(null)
-
   const titleId = useId()
 
   const {
@@ -78,9 +86,9 @@ export const Tooltip = ({
     if (refs && wrapperRef.current) refs.setReference(wrapperRef.current)
   }, [refs])
 
-  // клик вне — desktop вариант
+  // клик вне — desktop вариант (не работаем в manual)
   useEffect(() => {
-    if (!open || effectiveTrigger !== 'click' || isSheet) return
+    if (!actualOpen || effectiveTrigger !== 'click' || isSheet) return
     const onClickOutside = (e: MouseEvent) => {
       const target = e.target as Node
       if (!wrapperRef.current?.contains(target) && !refs.floating.current?.contains(target)) setOpen(false)
@@ -88,22 +96,23 @@ export const Tooltip = ({
     document.addEventListener('mousedown', onClickOutside)
 
     return () => document.removeEventListener('mousedown', onClickOutside)
-  }, [open, effectiveTrigger, refs, isSheet])
+  }, [actualOpen, effectiveTrigger, refs, isSheet])
 
-  // Esc — общий
+  // Esc — общий (работает и в manual)
   useEffect(() => {
-    if (!open) return
+    if (!actualOpen) return
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setOpen(false)
     }
     document.addEventListener('keydown', onKey)
 
     return () => document.removeEventListener('keydown', onKey)
-  }, [open])
+  }, [actualOpen])
 
   // блокируем скролл фона только для мобильного шита
-  useScrollLock(open && isSheet, 'overflow')
+  useScrollLock(actualOpen && isSheet, 'overflow')
 
+  // события только если не manual
   const handleMouseEnter = () => {
     if (effectiveTrigger === 'hover') setOpen(true)
   }
@@ -112,19 +121,20 @@ export const Tooltip = ({
     const related = e.relatedTarget as Node
     if (refs.floating.current && related && !refs.floating.current.contains(related)) setOpen(false)
   }
+  const handleClick = () => {
+    if (effectiveTrigger === 'click') setOpen(!actualOpen)
+  }
 
   return (
     <div
       ref={wrapperRef}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={effectiveTrigger === 'hover' ? handleMouseEnter : undefined}
+      onMouseLeave={effectiveTrigger === 'hover' ? handleMouseLeave : undefined}
       style={{ display: 'inline', ...style }}
       {...props}
     >
       <span
-        onClick={() => {
-          if (effectiveTrigger === 'click') setOpen((prev) => !prev)
-        }}
+        onClick={effectiveTrigger === 'click' ? handleClick : undefined}
         style={{ cursor: effectiveTrigger === 'click' ? 'pointer' : 'default' }}
       >
         {children}
@@ -133,7 +143,7 @@ export const Tooltip = ({
       <FloatingPortal>
         <AnimatePresence>
           {/* Desktop popover */}
-          {!isSheet && open && (
+          {!isSheet && actualOpen && (
             <div
               ref={refs.setFloating}
               style={{ ...floatingStyles, position: 'absolute', zIndex: 1000 }}
@@ -153,7 +163,6 @@ export const Tooltip = ({
                   >
                     <ClosedIcon />
                   </Button>
-                  {/* стрелка только на desktop */}
                   <TooltipArrow
                     arrowRef={arrowRef}
                     x={middlewareData.arrow?.x}
@@ -166,7 +175,7 @@ export const Tooltip = ({
           )}
 
           {/* Mobile bottom-sheet */}
-          {isSheet && open && (
+          {isSheet && actualOpen && (
             <MotionVeil
               onClick={() => setOpen(false)}
               variants={veilVariants}
@@ -187,9 +196,7 @@ export const Tooltip = ({
                 role="document"
               >
                 <OverlayHeader>
-                  {/* место для мобильного заголовка */}
-                  <OverlayHeaderTitle>{mobileTitle}</OverlayHeaderTitle>
-
+                  <OverlayHeaderTitle id={titleId}>{mobileTitle}</OverlayHeaderTitle>
                   <Button
                     kind="text"
                     onClick={() => setOpen(false)}
@@ -198,8 +205,6 @@ export const Tooltip = ({
                     <ClosedIcon />
                   </Button>
                 </OverlayHeader>
-
-                {/* Контент тултипа без дополнительной оболочки */}
                 <OverlayContentWrapper>{tooltipContent}</OverlayContentWrapper>
               </MotionSheet>
             </MotionVeil>

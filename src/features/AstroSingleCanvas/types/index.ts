@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 import { ASTRO_ASPECT } from '@/shared/types/astro/astro-aspects.types'
 
 export interface PlanetData {
@@ -23,4 +25,18 @@ export interface AstroSingleCanvasProps {
   houseCusps?: number[]
   planets: PlanetData[]
   aspects: AspectData[]
+}
+
+export type CoordsSpace = 'client' | 'local'
+
+export interface TooltipMethods {
+  showTooltip: (args: {
+    text: ReactNode
+    x: number
+    y: number
+    space?: CoordsSpace
+    mobileTitle?: ReactNode | string
+  }) => void
+  changeTooltipPosition: (args: { x: number; y: number; space?: CoordsSpace }) => void
+  hideTooltip: () => void
 }

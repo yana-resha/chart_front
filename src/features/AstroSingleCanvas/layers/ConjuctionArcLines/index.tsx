@@ -5,7 +5,7 @@ import { Arc, Line } from 'react-konva'
 import { useAstroCanvasContext } from '../../AstroChartContext'
 import { ASPECT_COLOR } from '../../configs/aspect.config'
 import { createPointerTooltipHandlers } from '../../hooks/usePointerTooltip'
-import { getConjuctionTooltipHTML } from '../../tooltip-contents/getConjuctionTooltipHTML'
+import { ConjuctionTooltipContent } from '../../tooltip-contents/ConjuctionTooltipContent'
 import { getVisualAngleFromAsc, polarToCartesian } from '../../utils/astro-helpers'
 import { ASTRO_ASPECT_SYMBOL } from '@/shared/configs/astro-aspects.config'
 import { ASTRO_ASPECT } from '@/shared/types/astro/astro-aspects.types'
@@ -84,7 +84,7 @@ export const ConjuctionArcLines = () => {
         // DESKTOP
         onEnter: ({ x, y }, evt) => {
           const related = getTooltipAspects(aspect)
-          showTooltip({ text: getConjuctionTooltipHTML(related), x, y })
+          showTooltip({ text: <ConjuctionTooltipContent aspects={related} />, x, y, mobileTitle: 'Аспект' })
           evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
         },
         onMove: ({ x, y }) => {
@@ -98,7 +98,12 @@ export const ConjuctionArcLines = () => {
         // MOBILE (нижний fixed-tooltip; координаты игнорятся стилями)
         onOpen: () => {
           const related = getTooltipAspects(aspect)
-          showTooltip({ text: getConjuctionTooltipHTML(related), x: 0, y: 0 })
+          showTooltip({
+            text: <ConjuctionTooltipContent aspects={related} />,
+            x: 0,
+            y: 0,
+            mobileTitle: 'Аспект',
+          })
         },
         onClose: () => {
           hideTooltip()

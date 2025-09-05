@@ -5,7 +5,7 @@ import { Arc, Circle, Text } from 'react-konva'
 import { AnimateHouseArc } from './AnimateHouseArc'
 import { useAstroCanvasContext } from '../../AstroChartContext'
 import { createPointerTooltipHandlers } from '../../hooks/usePointerTooltip'
-import { getHouseTooltipHTML } from '../../tooltip-contents/getHouseTooltipHTML'
+import { HouseTooltipContent } from '../../tooltip-contents/HouseTooltipContent'
 import { getPlanetsByHouse, getVisualAngleFromAsc, polarToCartesian } from '../../utils/astro-helpers'
 import { ASTRO_HOUSE_SYMBOL } from '@/shared/configs/astro-houses.config'
 
@@ -73,7 +73,17 @@ export const HouseLines = () => {
       {
         // DESKTOP: hover/move/leave
         onEnter: ({ x, y }, evt) => {
-          showTooltip({ text: getHouseTooltipHTML(deg, index + 1), x, y })
+          showTooltip({
+            text: (
+              <HouseTooltipContent
+                houseLongitude={deg}
+                houseIndex={index + 1}
+              />
+            ),
+            x,
+            y,
+            mobileTitle: 'Дом гороскопа',
+          })
           setHoveredHouse(index)
           evt.target.getStage()?.container().style.setProperty('cursor', 'pointer')
         },
@@ -88,7 +98,17 @@ export const HouseLines = () => {
 
         // MOBILE: нижний fixed-tooltip; координаты игнорятся стилями
         onOpen: () => {
-          showTooltip({ text: getHouseTooltipHTML(deg, index + 1), x: 0, y: 0 })
+          showTooltip({
+            text: (
+              <HouseTooltipContent
+                houseLongitude={deg}
+                houseIndex={index + 1}
+              />
+            ),
+            x: 0,
+            y: 0,
+            mobileTitle: 'Дом гороскопа',
+          })
           setHoveredHouse(index)
         },
         onClose: () => {
