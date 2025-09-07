@@ -20,7 +20,6 @@ import {
   CardHint,
   CardTitle,
   FooterNote,
-  Badge,
   CardTitleRow,
   CardIcon,
   CardDivider,
@@ -213,9 +212,7 @@ export const NatalCalculatorPage = () => (
           <StepsGrid>
             <StepCard>
               <BaseCardHeader>
-                <CardTitleRow>
-                  <Badge>1</Badge> Имя (необязательно)
-                </CardTitleRow>
+                <CardTitleRow>1. Имя (необязательно)</CardTitleRow>
                 <CardDivider />
               </BaseCardHeader>
 
@@ -224,9 +221,7 @@ export const NatalCalculatorPage = () => (
 
             <StepCard>
               <BaseCardHeader>
-                <CardTitleRow>
-                  <Badge>2</Badge> Населённый пункт
-                </CardTitleRow>
+                <CardTitleRow>2. Населённый пункт</CardTitleRow>
                 <CardDivider />
               </BaseCardHeader>
               <StepDesc>Начните вводить город&nbsp;— выберите из подсказки…</StepDesc>
@@ -234,9 +229,7 @@ export const NatalCalculatorPage = () => (
 
             <StepCard>
               <BaseCardHeader>
-                <CardTitleRow>
-                  <Badge>3</Badge> Дата
-                </CardTitleRow>
+                <CardTitleRow>3. Дата</CardTitleRow>
                 <CardDivider />
               </BaseCardHeader>
               <StepDesc>Выберите дату в календаре или введите вручную.</StepDesc>
@@ -244,9 +237,7 @@ export const NatalCalculatorPage = () => (
 
             <StepCard>
               <BaseCardHeader>
-                <CardTitleRow>
-                  <Badge>4</Badge> Время и часовой пояс
-                </CardTitleRow>
+                <CardTitleRow>4. Время и часовой пояс</CardTitleRow>
                 <CardDivider />
               </BaseCardHeader>
               <StepDesc>Укажите время рождения. Пояс будет «Auto» по городу…</StepDesc>
@@ -254,9 +245,15 @@ export const NatalCalculatorPage = () => (
 
             <StepCard>
               <BaseCardHeader>
-                <CardTitleRow>
-                  <Badge>5</Badge> Проверка
-                </CardTitleRow>
+                <CardTitleRow>5. Система домов</CardTitleRow>
+                <CardDivider />
+              </BaseCardHeader>
+              <StepDesc>Выберите систему рассчета домов или оставьте по умолчанию...</StepDesc>
+            </StepCard>
+
+            <StepCard>
+              <BaseCardHeader>
+                <CardTitleRow>6. Проверка</CardTitleRow>
                 <CardDivider />
               </BaseCardHeader>
               <StepDesc>
@@ -281,10 +278,7 @@ export const NatalCalculatorPage = () => (
           <CalculationStepsGrid>
             <CalculationCard>
               <BaseCardHeader>
-                <CardTitleRow>
-                  <Badge>1</Badge>
-                  Время и место
-                </CardTitleRow>
+                <CardTitleRow>1. Время и место</CardTitleRow>
                 <CardDivider />
               </BaseCardHeader>
               <DescText>
@@ -320,10 +314,7 @@ export const NatalCalculatorPage = () => (
 
             <CalculationCard>
               <BaseCardHeader>
-                <CardTitleRow>
-                  <Badge>2</Badge>
-                  Переход к астрономическому времени
-                </CardTitleRow>
+                <CardTitleRow>2. Переход к астрономическому времени</CardTitleRow>
                 <CardDivider />
               </BaseCardHeader>
               <DescText>
@@ -346,10 +337,7 @@ export const NatalCalculatorPage = () => (
 
             <CalculationCard>
               <BaseCardHeader>
-                <CardTitleRow>
-                  <Badge>3</Badge>
-                  Положение планет
-                </CardTitleRow>
+                <CardTitleRow>3. Положение планет</CardTitleRow>
                 <CardDivider />
               </BaseCardHeader>
               <DescText>
@@ -398,10 +386,7 @@ export const NatalCalculatorPage = () => (
 
             <CalculationCard>
               <BaseCardHeader>
-                <CardTitleRow>
-                  <Badge>4</Badge>
-                  Построение домов
-                </CardTitleRow>
+                <CardTitleRow>4. Построение домов</CardTitleRow>
               </BaseCardHeader>
               <CardDivider />
               <DescText>
@@ -437,10 +422,7 @@ export const NatalCalculatorPage = () => (
 
             <CalculationCard>
               <BaseCardHeader>
-                <CardTitleRow>
-                  <Badge>5</Badge>
-                  Знаки зодиака
-                </CardTitleRow>
+                <CardTitleRow>5. Знаки зодиака</CardTitleRow>
                 <CardDivider />
               </BaseCardHeader>
               <DescText>
@@ -464,10 +446,7 @@ export const NatalCalculatorPage = () => (
 
             <CalculationCard>
               <BaseCardHeader>
-                <CardTitleRow>
-                  <Badge>6</Badge>
-                  Финальная сборка
-                </CardTitleRow>
+                <CardTitleRow>6. Финальная сборка</CardTitleRow>
                 <CardDivider />
               </BaseCardHeader>
               <DescText>

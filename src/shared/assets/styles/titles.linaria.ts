@@ -4,14 +4,12 @@ import { MEDIA_POINTS } from './media-points'
 
 export const PageTitle = styled.div`
   font-size: 1.875rem;
-  font-weight: 500;
   color: rgba(255, 255, 255, 1);
   margin-bottom: 1.875rem;
   text-align: center;
-  text-shadow:
-    0 0 6px rgba(22, 238, 246, 0.1),
-    0 0 12px rgba(22, 238, 246, 0.1),
-    0 0 20px rgba(22, 238, 246, 0.15);
+
+  font-weight: 800;
+  letter-spacing: 0.2px;
 
   @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
     font-size: 1.8rem;
@@ -30,11 +28,10 @@ export const SectionTitle = styled.h2`
   padding-left: 1rem;
   line-height: 1.4;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow:
-    0 0 6px rgba(22, 238, 246, 0.1),
-    0 0 12px rgba(22, 238, 246, 0.1),
-    0 0 20px rgba(22, 238, 246, 0.15);
+
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: rgba(255, 255, 255, 0.92);
 
   @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
     font-size: 1.3rem;

@@ -41,6 +41,7 @@ export const ButtonComponent = styled.button`
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     font-size: ${TEXT_SIZE.S};
+    padding: 0.55rem 1rem 0.55rem 1rem;
   }
 
   &:disabled,

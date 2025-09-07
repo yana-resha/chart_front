@@ -66,9 +66,6 @@ export const CardIcon = styled.div`
     width: 100%;
     height: 100%;
     display: block;
-    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.35)) drop-shadow(0 0 6px rgba(255, 255, 255, 0.25));
-    -webkit-filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.35))
-      drop-shadow(0 0 6px rgba(255, 255, 255, 0.25));
   }
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
@@ -188,7 +185,6 @@ export const Badge = styled.span`
   line-height: 0;
   font-weight: 600;
   color: #fff;
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
 
   @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
     width: 22px;

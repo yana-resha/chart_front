@@ -34,20 +34,11 @@ export const Title = styled.div`
   margin-bottom: 0.375rem;
   color: rgba(255, 255, 255, 1);
   text-align: center;
-  text-shadow:
-    0 0 6px rgba(22, 238, 246, 0.1),
-    0 0 12px rgba(22, 238, 246, 0.1),
-    0 0 20px rgba(22, 238, 246, 0.15);
 `
 export const Description = styled.div`
   font-size: clamp(12px, 0.875rem, 16px);
-  font-style: italic;
   margin-bottom: clamp(10px, 1rem, 20px);
   color: rgba(255, 255, 255, 0.8);
-  text-shadow:
-    0 0 6px rgba(22, 238, 246, 0.1),
-    0 0 12px rgba(22, 238, 246, 0.1),
-    0 0 20px rgba(22, 238, 246, 0.15);
   line-height: 1.4;
   text-align: center;
   display: flex;

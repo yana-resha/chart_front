@@ -59,8 +59,8 @@ export const SharedButton = ({
       trigger={
         <Button
           onClick={() => setOpen((prev) => !prev)}
-          theme="primary"
-          kind="outline"
+          theme="secondary"
+          kind="ghost"
           size="small"
         >
           <ButtonContent>
