@@ -6,6 +6,7 @@ import Components from '@/pages/Components'
 import { NatalCalculatorPage } from '@/pages/NatalCalculatorPage'
 import { NatalDecodingPage } from '@/pages/NatalDecodingPage'
 import { ROUTER_PATHES } from '@/shared/constants/router-paths'
+import { MainPage } from '@/pages/MainPage'
 
 export const MainRouter = () => (
   <Routes>
@@ -21,7 +22,7 @@ export const MainRouter = () => (
     <Route element={<DefaultLayout />}>
       <Route
         path={ROUTER_PATHES.DEFAULT_PATH}
-        element={<NatalDecodingPage />}
+        element={<MainPage />}
       />
       <Route
         path={ROUTER_PATHES.CALCULATOR_PATH}

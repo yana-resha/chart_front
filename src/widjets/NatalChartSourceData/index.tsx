@@ -2,8 +2,8 @@ import { FC } from 'react'
 
 import { Card, Label, Row, Icon, Divider, LabelBlock } from './index.linaria'
 import { TIMEZONE_LIST } from '@/entities/astro-charts/data/calculator'
-import { useAppSelector } from '@/store'
 import { ASTRO_HOUSE_SYSTEM_DESCRIPTION } from '@/shared/configs/astro-houses.config'
+import { useAppSelector } from '@/store'
 
 interface ChartSourceDataProps {
   chartId: string

@@ -1,4 +1,5 @@
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import { TEXT_SIZE } from '@/shared/assets/styles/text-size'
 import { styled } from '@linaria/react'
 
 export const Container = styled.div`
@@ -61,18 +62,14 @@ export const Title = styled.h3`
 `
 
 export const Description = styled.p`
-  font-size: 1rem;
-  line-height: 1.7;
+  font-size: ${TEXT_SIZE.M};
+  line-height: 1.5;
   color: rgba(255, 255, 255, 0.75);
   padding: 0;
   margin: 0;
-  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
-    font-size: clamp(12px, 0.92rem, 16px);
-    line-height: 1.5;
-  }
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    font-size: clamp(12px, 0.875rem, 16px);
+    font-size: ${TEXT_SIZE.S};
   }
 
   & span {

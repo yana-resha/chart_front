@@ -1,17 +1,8 @@
 import { styled } from '@linaria/react'
 
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import { CARD_TEXT_SIZE, CARD_TITLE_TEXT } from '@/shared/assets/styles/text-size'
 import { addAlpha } from '@/shared/helpers/addAlpha'
-
-const CARD_TEXT_FONT_SIZE = {
-  default: '0.85rem',
-  small: '0.8rem',
-}
-
-const CARD_TITLE_TEXT = {
-  default: '1rem',
-  small: '0.92rem',
-}
 
 export const Wrapper = styled.div`
   container-type: inline-size;
@@ -67,23 +58,23 @@ export const Card = styled.div<{ color: string }>`
 
 export const CardTitle = styled.h3`
   margin: 0 0 0.5rem 0;
-  font-size: ${CARD_TITLE_TEXT.default};
+  font-size: ${CARD_TITLE_TEXT.S};
   font-weight: 500;
   color: rgba(255, 255, 255, 1);
 
   @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
-    font-size: ${CARD_TITLE_TEXT.small};
+    font-size: ${CARD_TITLE_TEXT.XS};
   }
 `
 
 export const CardText = styled.p`
   margin: 0.2rem 0;
-  font-size: ${CARD_TEXT_FONT_SIZE.default};
+  font-size: ${CARD_TEXT_SIZE.S};
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.8);
 
   @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
-    font-size: ${CARD_TEXT_FONT_SIZE.small};
+    font-size: ${CARD_TEXT_SIZE.XS};
   }
 `
 
@@ -97,12 +88,12 @@ export const Summary = styled.div`
 
 export const SummaryLine = styled.p`
   margin: 0.3rem 0;
-  font-size: ${CARD_TEXT_FONT_SIZE.default};
+  font-size: ${CARD_TEXT_SIZE.S};
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.8);
 
   @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
-    font-size: ${CARD_TEXT_FONT_SIZE.small};
+    font-size: ${CARD_TEXT_SIZE.XS};
   }
 `
 

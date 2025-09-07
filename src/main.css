@@ -111,16 +111,17 @@ body {
   background-color: rgb(19, 22, 25);
   height: fit-content;
   display: flex;
-  flex-direction: column;
   min-height: 100dvh;
+  flex-direction: column;
   overflow: auto;
 }
 
 div#root {
   position: relative;
   height: 100%;
+  min-height: 100dvh;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
 }
 
 /* 🔧 Убираем отступы у заголовков и параграфов */

@@ -2,6 +2,8 @@ import { styled } from '@linaria/react'
 
 import { BTN_BACKGROUND_VARIABLES, BUTTON_COLOR_VARIABLES } from '@/shared/assets/styles/colors'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import { TEXT_SIZE } from '@/shared/assets/styles/text-size'
+import { addAlpha } from '@/shared/helpers/addAlpha'
 
 export const ChildrenContainer = styled.div`
   font-weight: 500;
@@ -23,12 +25,11 @@ export const ButtonComponent = styled.button`
   position: relative;
   cursor: pointer;
   color: ${BUTTON_COLOR_VARIABLES.DARK_COLOR};
-  font-weight: 500 !important;
   border-radius: ${(props) => (props.roundedCorner ? '16' : '4')}px;
-  padding: 0.875rem 1.5rem 0.875rem 1.5rem;
+  padding: 0.85rem 1.2rem 0.85rem 1.2rem;
   text-align: center;
-  font-size: 1rem;
-  line-height: 1;
+  font-size: ${TEXT_SIZE.M};
+  line-height: 1.1;
   letter-spacing: 0.15px;
   text-align: center;
   outline: none;
@@ -39,12 +40,13 @@ export const ButtonComponent = styled.button`
   transition: all 0.2s;
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    font-size: 0.875rem;
+    font-size: ${TEXT_SIZE.S};
   }
 
   &:disabled,
   &.isLoading {
     pointer-events: none;
+    opacity: 0.5;
   }
 
   &.gradient {
@@ -64,17 +66,48 @@ export const ButtonComponent = styled.button`
       box-shadow: 0 0 5px 5px rgba(22, 238, 246, 0.08);
     }
 
-    &:disabled {
-      color: rgba(255, 255, 255, 1);
-      background: ${BTN_BACKGROUND_VARIABLES.PRIMARY_GRADIENT_DISABLED_BUTTON};
-      box-shadow:
-        inset 0px 8px 12px 0px rgba(255, 255, 255, 0.08),
-        0px 24px 24px -16px rgba(0, 0, 0, 0.12),
-        inset 16px 24px 64px -24px rgba(255, 255, 255, 0.08);
-    }
-
     &.isLoading ${Loader} svg {
       color: ${BUTTON_COLOR_VARIABLES.DARK_COLOR};
+    }
+  }
+
+  &.ghost {
+    border: 1px solid transparent;
+
+    &.primary {
+      color: ${BUTTON_COLOR_VARIABLES.LIGHT_COLOR};
+      background: ${addAlpha(BTN_BACKGROUND_VARIABLES.NORM_PRIMARY, 0.2)};
+
+      &:hover,
+      &:focus-within {
+        background: ${addAlpha(BTN_BACKGROUND_VARIABLES.NORM_PRIMARY, 0.3)};
+      }
+
+      &:active {
+        background: ${addAlpha(BTN_BACKGROUND_VARIABLES.NORM_PRIMARY, 0.25)};
+      }
+
+      &.isLoading ${Loader} svg {
+        color: ${BUTTON_COLOR_VARIABLES.LIGHT_COLOR};
+      }
+    }
+
+    &.secondary {
+      color: ${BUTTON_COLOR_VARIABLES.LIGHT_COLOR};
+      background: rgba(255, 255, 255, 0.1);
+
+      &:hover,
+      &:focus-within {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      &:active {
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      &.isLoading ${Loader} svg {
+        color: ${BUTTON_COLOR_VARIABLES.LIGHT_COLOR};
+      }
     }
   }
 
@@ -122,27 +155,28 @@ export const ButtonComponent = styled.button`
         color: rgb(255, 255, 255, 0.8);
       }
     }
-
-    &:disabled {
-      opacity: 0.5;
-    }
   }
 
   &.small {
     font-size: clamp(12px, 0.75rem, 16px);
-    padding: 0.564rem 0.75rem 0.564rem 0.75rem;
+    padding: 0.5rem 0.7rem 0.5rem 0.7rem;
 
     @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-      padding: 0.34rem 0.6rem 0.34rem 0.6rem;
+      padding: 0.3rem 0.5rem 0.3rem 0.5rem;
     }
   }
 
   &.large {
-    font-size: 1.125rem;
-    padding: 0.75rem 1.625rem 0.75rem 1.625rem;
+    font-size: ${TEXT_SIZE.L};
+    padding: 0.85rem 1.625rem 0.85rem 1.625rem;
+
+    & ${ChildrenContainer} {
+      font-weight: 400;
+    }
 
     @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-      padding: 0.6rem 1.3rem 0.6rem 1.3rem;
+      font-size: ${TEXT_SIZE.M};
+      padding: 0.65rem 1.3rem 0.65rem 1.3rem;
     }
   }
 
@@ -179,10 +213,6 @@ export const ButtonComponent = styled.button`
 
     &:active {
       filter: brightness(0.95);
-    }
-
-    &:disabled {
-      filter: grayscale(100%);
     }
   }
 

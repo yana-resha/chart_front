@@ -2,6 +2,8 @@ import { styled } from '@linaria/react'
 
 import LeftChevron from '@/shared/assets/icons/left-chevron.svg?react'
 import { TEXT_COLOR_VARIABLES } from '@/shared/assets/styles/colors'
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import { TEXT_SIZE } from '@/shared/assets/styles/text-size'
 
 export const HeaderBackButtonContainer = styled.button`
   all: unset;
@@ -10,6 +12,7 @@ export const HeaderBackButtonContainer = styled.button`
   gap: 0.75rem;
   cursor: pointer;
   transition: all 0.2s;
+  font-size: ${TEXT_SIZE.L};
 
   &:hover {
     filter: brightness(0.7);
@@ -22,17 +25,21 @@ export const HeaderBackButtonContainer = styled.button`
   &:disabled {
     filter: grayscale(100%);
   }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    gap: 0.5rem;
+    font-size: ${TEXT_SIZE.M};
+  }
 `
 
 export const HeaderBackIcon = styled(LeftChevron)`
   margin: 5px 0;
-  width: 0.75rem;
+  font-size: inherit;
   height: fit-content;
 `
 
 export const HeaderBackText = styled.span`
   color: ${TEXT_COLOR_VARIABLES.PRIMARY_TEXT};
-  font-size: 1rem;
   line-height: 100%;
   font-weight: 500;
 `

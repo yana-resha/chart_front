@@ -1,6 +1,7 @@
 import { styled } from '@linaria/react'
 
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import { CARD_TEXT_SIZE, CARD_TITLE_TEXT } from '@/shared/assets/styles/text-size'
 
 export const PlanetsContentLayout = styled.div`
   display: grid;
@@ -26,13 +27,13 @@ export const Card = styled.div`
   border-radius: 14px;
   padding: 1rem;
   padding-top: 0.8rem;
-  font-size: 0.85rem;
+  font-size: ${CARD_TEXT_SIZE.S};
   color: rgba(255, 255, 255, 0.8);
   min-width: 0;
   min-height: 120px;
 
   @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
-    font-size: 0.8rem;
+    font-size: ${CARD_TEXT_SIZE.XS};
     min-height: 100px;
   }
 `
@@ -68,12 +69,12 @@ export const Title = styled.div`
   color: rgba(255, 255, 255, 0.9);
   gap: 2px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: ${CARD_TITLE_TEXT.S};
   margin-bottom: 8px;
   position: relative;
 
   @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
-    font-size: 0.92rem;
+    font-size: ${CARD_TITLE_TEXT.XS};
   }
 
   &::after {
@@ -87,7 +88,7 @@ export const Title = styled.div`
 
 export const List = styled.ul`
   display: grid;
-  gap: 6px;
+  gap: 4px;
   list-style: none;
   margin: 0;
   padding: 0;

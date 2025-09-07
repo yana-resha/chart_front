@@ -3,23 +3,9 @@ import { styled } from '@linaria/react'
 import { TEXT_COLOR_VARIABLES } from '@/shared/assets/styles/colors'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { PageContentWrapper } from '@/shared/assets/styles/pages.linaria'
+import { CARD_TEXT_SIZE, CARD_TITLE_TEXT, TEXT_SIZE } from '@/shared/assets/styles/text-size'
 import { PageTitle } from '@/shared/assets/styles/titles.linaria'
 import { addAlpha } from '@/shared/helpers/addAlpha'
-
-const TEXT_SIZE = {
-  desktop: '0.92rem',
-  tablet: '0.875rem',
-}
-
-const CARD_TEXT_SIZE = {
-  desktop: '0.92rem',
-  tablet: '0.8rem',
-}
-
-const CARD_TITLE_TEXT = {
-  desktop: '1rem',
-  tablet: '0.92rem',
-}
 
 const LISTS_GAP = {
   desktop: '1.25rem',
@@ -40,12 +26,12 @@ export const PageWrapper = styled(PageContentWrapper)`
 export const MainTitle = styled(PageTitle)``
 
 export const DescText = styled.div`
-  font-size: ${CARD_TEXT_SIZE.desktop};
+  font-size: ${CARD_TEXT_SIZE.M};
   line-height: 1.45;
   opacity: 0.9;
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    font-size: ${CARD_TEXT_SIZE.tablet};
+    font-size: ${CARD_TEXT_SIZE.XS};
   }
 `
 
@@ -62,10 +48,10 @@ export const CardTitleRow = styled.div`
   font-weight: 500;
   line-height: 1.35;
 
-  font-size: ${CARD_TITLE_TEXT.desktop};
+  font-size: ${CARD_TITLE_TEXT.S};
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    font-size: ${CARD_TITLE_TEXT.tablet};
+    font-size: ${CARD_TITLE_TEXT.XS};
   }
 `
 
@@ -125,7 +111,7 @@ export const BenefitCard = styled.li<{ color: string }>`
 
   .title {
     font-weight: 500;
-    font-size: ${CARD_TITLE_TEXT.desktop};
+    font-size: ${CARD_TITLE_TEXT.S};
     line-height: 1.25;
     color: ${(p) => p.color};
   }
@@ -133,7 +119,7 @@ export const BenefitCard = styled.li<{ color: string }>`
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     padding: 0.5rem 1rem 1rem;
     .title {
-      font-size: ${CARD_TITLE_TEXT.tablet};
+      font-size: ${CARD_TITLE_TEXT.XS};
     }
   }
 `
@@ -236,21 +222,20 @@ export const SectionBlock = styled.div`
 `
 /* ======= page layout & text ======= */
 export const Layout = styled.section`
-  color: rgba(255, 255, 255, 1);
   height: 100%;
-  display: grid;
-  grid-template-rows: auto 1fr;
-  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
 `
 
 export const MarkdownText = styled.div`
   color: rgba(255, 255, 255, 0.95);
-  font-size: ${TEXT_SIZE.desktop};
+  font-size: ${TEXT_SIZE.M};
   line-height: 1.7;
   width: 100%;
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    font-size: ${TEXT_SIZE.tablet};
+    font-size: ${TEXT_SIZE.S};
   }
 
   p {
@@ -355,6 +340,7 @@ export const CardTitle = styled.h2`
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.2px;
+  color: rgba(255, 255, 255, 1);
 `
 
 export const CardHint = styled.div`
@@ -439,7 +425,7 @@ export const Tip = styled.div`
   background: rgba(255, 209, 102, 0.08);
   border-radius: 10px;
   padding: 0.75rem 0.9rem;
-  font-size: ${CARD_TEXT_SIZE.desktop};
+  font-size: ${CARD_TEXT_SIZE.M};
   line-height: 1.45;
   color: rgba(255, 255, 255, 0.95);
   box-shadow: 0 0 8px rgba(255, 209, 102, 0.15);
@@ -453,7 +439,7 @@ export const Tip = styled.div`
   }
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    font-size: ${CARD_TEXT_SIZE.tablet};
+    font-size: ${CARD_TEXT_SIZE.XS};
     padding: 0.65rem 0.8rem;
   }
 `

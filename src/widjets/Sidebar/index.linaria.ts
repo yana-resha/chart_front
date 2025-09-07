@@ -3,6 +3,7 @@ import { styled } from '@linaria/react'
 
 import { BACKGROUND_COLORS_VARIABLES, ICONS_STROKES } from '@/shared/assets/styles/colors'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import { SURFACE_TOKENS } from '@/shared/assets/styles/overlays/shared'
 import { addAlpha } from '@/shared/helpers/addAlpha'
 
 /** Константы */
@@ -53,8 +54,9 @@ export const Container = styled.aside`
     border-radius: 0;
     margin-bottom: 0;
     gap: ${SIDEBAR_UI.GAP_TABLET};
-    padding: 0.3rem;
+    padding: 0.5rem 0.5rem;
     border: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: ${SURFACE_TOKENS.MOBILE_SHARED.BACKGROUND};
     box-shadow: 0 6px 12px rgba(255, 255, 255, 0.045);
   }
 `
@@ -79,7 +81,6 @@ export const MobileTopBar = styled.div`
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
-    padding: ${SIDEBAR_UI.TOPBAR.PADDING};
   }
 `
 

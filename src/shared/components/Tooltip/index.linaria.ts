@@ -33,6 +33,7 @@ export const TooltipSurface = styled.div`
     display: flex;
     flex-direction: column;
     align-items: start;
+    background: ${SURFACE_TOKENS.MOBILE_SHARED.BACKGROUND};
 
     gap: ${SURFACE_TOKENS.MOBILE_SHARED.GAP};
     width: 100%;
@@ -65,7 +66,7 @@ export const tooltipTailIconCSS = css`
   height: 100%;
   display: block;
   transform-origin: center;
-  color: rgba(18, 20, 26, 0.92);
+  color: rgba(0, 0, 0, 1);
 `
 
 export const ClosedIcon = styled(SURFACE_TOKENS.CLOSED_ICON_COMPONENT)`

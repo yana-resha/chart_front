@@ -1,9 +1,11 @@
 import { styled } from '@linaria/react'
 
+import { TEXT_SIZE } from '@/shared/assets/styles/text-size'
+
 export const Card = styled.div`
   padding: 1rem;
   color: rgba(255, 255, 255, 1);
-  font-size: clamp(12px, 0.875rem, 16px);
+  font-size: ${TEXT_SIZE.S};
   line-height: 1.6;
   width: 100%;
   max-width: 100%;

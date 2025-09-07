@@ -1,6 +1,7 @@
 import { styled } from '@linaria/react'
 
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import { TEXT_SIZE } from '@/shared/assets/styles/text-size'
 import { addAlpha } from '@/shared/helpers/addAlpha'
 
 export const Layout = styled.div`
@@ -69,7 +70,7 @@ export const ImageOverlay = styled.img`
 
 export const ContentWrapper = styled.div`
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   flex-direction: column;
   padding-right: 1.25rem;
   padding-left: 1.25rem;
@@ -100,7 +101,7 @@ export const Header = styled.div`
 export const Icon = styled.span`
   line-height: 100%;
   color: rgba(255, 255, 255, 1);
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   filter: drop-shadow(0 0 6px #55cdfc88);
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
@@ -109,7 +110,7 @@ export const Icon = styled.span`
 `
 
 export const Title = styled.h3`
-  font-size: clamp(16px, 1.25rem, 22px);
+  font-size: clamp(16px, 1.15rem, 22px);
   font-weight: 500;
   color: rgba(255, 255, 255, 1);
   line-height: 1.2;
@@ -166,7 +167,7 @@ export const Subtitle = styled.span`
 `
 
 export const InterpritationBlock = styled.div`
-  font-size: clamp(14px, 1rem, 18px);
+  font-size: ${TEXT_SIZE.M};
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.85);
   display: flex;
@@ -221,7 +222,7 @@ export const EmptyCard = styled(Card)`
     inset 0 0 80px rgba(255, 255, 255, 0.02),
     0 0 12px rgba(0, 0, 0, 0.1);
   color: rgba(255, 255, 255, 0.7);
-  font-size: 16px;
+  font-size: ${TEXT_SIZE.M};
   font-style: italic;
   line-height: 1.7;
   text-align: center;
@@ -233,12 +234,7 @@ export const EmptyCard = styled(Card)`
   backdrop-filter: blur(1.5px) brightness(1.1);
   transition: all 0.3s ease;
 
-  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
-    font-size: clamp(12px, 0.92rem, 16px);
-    line-height: 1.5;
-  }
-
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    font-size: clamp(12px, 0.875rem, 16px);
+    font-size: ${TEXT_SIZE.S};
   }
 `

@@ -1,11 +1,13 @@
 import { styled } from '@linaria/react'
 
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import { CARD_TEXT_SIZE, CARD_TITLE_TEXT } from '@/shared/assets/styles/text-size'
 
 export const TableWrapper = styled.div`
-  width: 100%;
   overflow-x: auto;
   display: flex;
+  width: 100%;
+  min-width: 0;
 `
 
 export const Table = styled.table`
@@ -13,14 +15,14 @@ export const Table = styled.table`
   max-width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  font-size: clamp(12px, 0.85rem, 16px);
+  font-size: ${CARD_TEXT_SIZE.S};
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.8);
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.12);
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    font-size: clamp(12px, 0.8rem, 16px);
+    font-size: ${CARD_TEXT_SIZE.XS};
   }
 `
 
@@ -33,14 +35,14 @@ export const HeaderCell = styled.th`
   top: 0;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  font-size: 1rem;
+  font-size: ${CARD_TITLE_TEXT.S};
   font-weight: 500;
   text-align: left;
   color: rgba(255, 255, 255, 1);
   padding: 8px;
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    font-size: clamp(12px, 0.85rem, 16px);
+    font-size: ${CARD_TITLE_TEXT.XS};
   }
 `
 export const Row = styled.tr``

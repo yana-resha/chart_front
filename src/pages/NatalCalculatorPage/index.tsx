@@ -143,7 +143,9 @@ export const NatalCalculatorPage = () => (
             <NatalCalculatorForm />
           </CardBody>
           <CardFooter>
-            <FooterNote>Если ввели координаты вручную&nbsp;— не забудьте выбрать часовой пояс.</FooterNote>
+            <FooterNote>
+              Выберите временную зону вручную или оставьте Auto&nbsp;— мы определим её автоматически.
+            </FooterNote>
           </CardFooter>
         </CalculatorCard>
       </FormWrapper>
