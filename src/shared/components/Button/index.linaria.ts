@@ -38,6 +38,7 @@ export const ButtonComponent = styled.button`
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
+  corner-shape: squircle;
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     font-size: ${TEXT_SIZE.S};

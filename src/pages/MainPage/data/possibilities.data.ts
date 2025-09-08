@@ -1,10 +1,10 @@
-import CalcImage from '../assets/advantages/calc.png'
-import MapImage from '../assets/advantages/map.png'
-import TablesImage from '../assets/advantages/tables.png'
-import HousesImage from '../assets/advantages/houses.png'
-import LearnImage from '../assets/advantages/learn.png'
+import CalcImage from '../assets/possibilities/calc.png'
+import HousesImage from '../assets/possibilities/houses.png'
+import LearnImage from '../assets/possibilities/learn.png'
+import MapImage from '../assets/possibilities/map.png'
+import TablesImage from '../assets/possibilities/tables.png'
 
-export const advantagesListData = [
+export const PossibilitiesListData = [
   {
     id: 'calc',
     title: 'Мгновенные расчёты',
