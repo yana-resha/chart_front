@@ -3,6 +3,7 @@ export enum ROUTER_PATHES {
   DEFAULT_AUTH_PATH = '/auth',
   CALCULATOR_PATH = '/natal',
   NATAL_DECODING_PATH = '/natal/decoding',
+  POSTS_PATH = '/posts',
 }
 
 export const PATH_TITLE_MAP: Record<string, string> = {

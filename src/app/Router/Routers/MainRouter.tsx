@@ -2,11 +2,11 @@ import { Route, Routes } from 'react-router-dom'
 
 import { EmptyPage } from '../index.linaria'
 import DefaultLayout from '@/app/layout/DefaultLayout'
-import Components from '@/pages/Components'
+import { MainPage } from '@/pages/MainPage'
 import { NatalCalculatorPage } from '@/pages/NatalCalculatorPage'
 import { NatalDecodingPage } from '@/pages/NatalDecodingPage'
 import { ROUTER_PATHES } from '@/shared/constants/router-paths'
-import { MainPage } from '@/pages/MainPage'
+import PostPage from '@/pages/PostPage'
 
 export const MainRouter = () => (
   <Routes>
@@ -32,9 +32,10 @@ export const MainRouter = () => (
         path={ROUTER_PATHES.NATAL_DECODING_PATH}
         element={<NatalDecodingPage />}
       />
+
       <Route
-        path={'components'}
-        element={<Components />}
+        path={`${ROUTER_PATHES.POSTS_PATH}/:slag`}
+        element={<PostPage />}
       />
     </Route>
     {/*  */}

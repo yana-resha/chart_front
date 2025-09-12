@@ -35,9 +35,14 @@
     "react-resizable-panels": "^3.0.3",
     "react-router-dom": "^7.2.0",
     "react-v19-helmet-async": "^1.0.2",
+    "rehype-raw": "^7.0.0",
+    "remark-directive": "^4.0.0",
+    "remark-gfm": "^4.0.1",
     "sklonenie": "^1.0.4",
+    "unist-util-visit": "^5.0.0",
     "use-image": "^1.1.1",
     "uuid": "^11.1.0",
+    "yaml": "^2.8.1",
     "yup": "^1.6.1"
   },
   "devDependencies": {

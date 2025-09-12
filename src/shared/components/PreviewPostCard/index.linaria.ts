@@ -1,3 +1,4 @@
+import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
 
 export const Card = styled.div`
@@ -9,7 +10,7 @@ export const Card = styled.div`
   flex-direction: column;
 `
 
-export const ImageWrapper = styled.div`
+export const ImageWrapper = css`
   width: 100%;
   height: 143px;
 `

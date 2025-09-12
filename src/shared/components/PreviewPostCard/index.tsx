@@ -22,12 +22,15 @@ export const PreviewPostCard = ({
   ...props
 }: IPreviewPostCard) => (
   <Card {...props}>
-    <ImageWrapper>
+    <Link
+      to={link}
+      className={ImageWrapper}
+    >
       <PreviewImage
         src={imageSrc}
         alt={imageAlt}
       />
-    </ImageWrapper>
+    </Link>
     <Wrapper>
       <ContentWrapper>
         <CardTitle>{title}</CardTitle>
