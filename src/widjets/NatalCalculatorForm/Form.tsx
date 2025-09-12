@@ -223,6 +223,7 @@ export const Form = () => {
       />
       <Button
         type="submit"
+        size="large"
         roundedCorner
         isLoading={isSubmitting}
         onClick={submitForm}

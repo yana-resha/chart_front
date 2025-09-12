@@ -8,11 +8,10 @@ export const PossibilitiesSection = styled.section`
   overflow: hidden;
   background: rgba(240, 242, 245, 0.1);
   background: rgba(0, 0, 0, 0.3);
-/*     background:
+  /*     background:
     radial-gradient(1200px 600px at 50% 10%, rgba(160, 200, 255, 0.08), transparent 60%),
     radial-gradient(1000px 500px at 80% 0%, rgba(255, 255, 255, 0.08), transparent 60%),
     linear-gradient(180deg, #1a2127, #0e1114); */
-
 `
 
 // МОЗАИКА
@@ -58,6 +57,24 @@ export const PossibilitiesMosaic = styled.ul`
   }
 `
 
+export const PossibilityCardOverlay = styled.span`
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    /* лёгкая сетка */
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.03) 0 2px, transparent 2px),
+    radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px),
+    /* затемнение снизу для текста */
+      linear-gradient(180deg, rgba(255, 255, 255, 0) 55%, rgba(255, 255, 255, 0.2) 100%);
+  background-size:
+    120px 120px,
+    200px 200px,
+    auto;
+  background-repeat: repeat, repeat, no-repeat;
+  transition: opacity 0.4s;
+`
+
 // карточка
 export const PossibilityCard = styled.li<{ $area: string; $hue: number }>`
   position: relative;
@@ -66,24 +83,13 @@ export const PossibilityCard = styled.li<{ $area: string; $hue: number }>`
   overflow: hidden;
   isolation: isolate;
   outline: 1px solid rgba(255, 255, 255, 0.06);
-  background-color: #0e1216; /* фикс опечатки */
+  background-color: #0e1216;
 
-  transform: translateZ(0);
+  transform: translateY(0);
   transition:
     outline-color 300ms ease,
     box-shadow 300ms ease,
     transform 300ms ease;
-
-  @media (hover: hover) {
-    &:hover {
-      outline-color: rgba(255, 255, 255, 0.12);
-      box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.06) inset,
-        0 10px 24px rgba(0, 0, 0, 0.35),
-        0 0 36px hsl(${(p) => p.$hue} 80% 60% / 0.08);
-      transform: translateY(-2px);
-    }
-  }
 
   & > img {
     position: absolute;
@@ -95,26 +101,33 @@ export const PossibilityCard = styled.li<{ $area: string; $hue: number }>`
     filter: saturate(0.85) brightness(0.92) contrast(1.05);
     opacity: 0.88;
     z-index: -2;
+
+    transition:
+      filter 300ms ease,
+      opacity 300ms ease;
+  }
+
+  &:hover {
+    outline-color: rgba(255, 255, 255, 0.12);
+
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+      0 10px 24px rgba(255, 255, 255, 0.05),
+      0 0 36px hsl(${(p) => p.$hue} 80% 60% / 0.08);
+
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+      0 10px 24px rgba(0, 0, 0, 0.35),
+      0 0 36px hsl(${(p) => p.$hue} 80% 60% / 0.08);
+    transform: translateY(-2px);
+
+    & ${PossibilityCardOverlay} {
+      opacity: 0.5;
+    }
   }
 `
 
 // overlay поверх постера (улучшаем читаемость текста)
-export const PossibilityCardOverlay = styled.span`
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    /* лёгкая сетка */
-    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.03) 0 2px, transparent 2px),
-    radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px),
-    /* затемнение снизу для текста */
-      linear-gradient(180deg, rgba(255, 255, 255, 0) 55%, rgba(255, 255, 255, 0.4) 100%);
-  background-size:
-    120px 120px,
-    200px 200px,
-    auto;
-  background-repeat: repeat, repeat, no-repeat;
-`
 
 // текст
 export const PossibilityCardText = styled.div`
@@ -124,7 +137,6 @@ export const PossibilityCardText = styled.div`
   bottom: 14px;
   display: grid;
   gap: 6px;
-  pointer-events: none;
 
   @media (min-width: 1200px) {
     left: 18px;

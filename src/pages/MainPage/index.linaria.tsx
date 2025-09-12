@@ -98,6 +98,10 @@ export const CardTitle = styled.h3`
   color: rgba(255, 255, 255, 0.92);
   font-size: clamp(15px, 1.8vw, 18px);
   line-height: 1.2;
+
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.25),
+    0 6px 20px rgba(0, 0, 0, 0.25);
 `
 export const CardCaption = styled.p`
   color: rgba(255, 255, 255, 0.74);

@@ -22,6 +22,7 @@ export const Loader = styled.div`
 `
 
 export const ButtonComponent = styled.button`
+  all: unset; /* убивает нативные стили кнопки/ссылки */
   position: relative;
   cursor: pointer;
   color: ${BUTTON_COLOR_VARIABLES.DARK_COLOR};
@@ -42,7 +43,7 @@ export const ButtonComponent = styled.button`
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     font-size: ${TEXT_SIZE.S};
-    padding: 0.55rem 1rem 0.55rem 1rem;
+    padding: 0.65rem 1rem 0.65rem 1rem;
   }
 
   &:disabled,
@@ -173,12 +174,12 @@ export const ButtonComponent = styled.button`
     padding: 0.85rem 1.625rem 0.85rem 1.625rem;
 
     & ${ChildrenContainer} {
-      font-weight: 400;
+      /* font-weight: 400; */
     }
 
     @media (max-width: ${MEDIA_POINTS.TABLET}px) {
       font-size: ${TEXT_SIZE.M};
-      padding: 0.65rem 1.3rem 0.65rem 1.3rem;
+      padding: 0.75rem 1.3rem 0.75rem 1.3rem;
     }
   }
 

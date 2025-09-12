@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import HeroImage from './hero.png'
 import {
   HeroSection,
@@ -22,6 +24,8 @@ export const Hero = () => (
       <HeroLead>Точные расчёты астрологических карт и наглядные визуализации.</HeroLead>
       <HeroButtonsBlock>
         <Button
+          as={Link}
+          to={'/test'}
           kind="ghost"
           size="large"
         >
