@@ -5,8 +5,8 @@ import DefaultLayout from '@/app/layout/DefaultLayout'
 import { MainPage } from '@/pages/MainPage'
 import { NatalCalculatorPage } from '@/pages/NatalCalculatorPage'
 import { NatalDecodingPage } from '@/pages/NatalDecodingPage'
-import { ROUTER_PATHES } from '@/shared/constants/router-paths'
 import PostPage from '@/pages/PostPage'
+import { ROUTER_PATHES } from '@/shared/constants/router-paths'
 
 export const MainRouter = () => (
   <Routes>
@@ -33,10 +33,16 @@ export const MainRouter = () => (
         element={<NatalDecodingPage />}
       />
 
-      <Route
-        path={`${ROUTER_PATHES.POSTS_PATH}/:slag`}
-        element={<PostPage />}
-      />
+      <Route path={ROUTER_PATHES.POSTS_PATH}>
+        <Route
+          index
+          element={<div></div>}
+        />
+        <Route
+          path=":slug"
+          element={<PostPage />}
+        />
+      </Route>
     </Route>
     {/*  */}
   </Routes>

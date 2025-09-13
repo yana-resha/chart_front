@@ -1,16 +1,17 @@
 ---
+featured: true
+isDraft: false
 title: "Как интерпретировать планеты в знаке зодиака"
 createdAt: "2025-09-12T14:13:46Z"
 cover: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1600&auto=format&fit=crop"
+preview: "./preview.png"
 tags:
   - астрология
   - планеты
   - знаки зодиака
-  - самопознание
+  - натальная карта
 excerpt: "Планеты в знаках Зодиака задают базовый тон личности и судьбы. Узнайте, как правильно читать их энергетику и что можно открыть для себя с помощью ASTRODOC."
 ---
-
-# Как интерпретировать планеты в знаках Зодиака
 
 ::img{src="https://images.unsplash.com/photo-1584277261173-c72d3a1f1c98?q=80&w=1600&auto=format&fit=crop" align="right" width="44%" caption="Зодиакальный круг и планеты"}
 
