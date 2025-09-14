@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import ReactMarkdown from 'react-markdown'
 import { useParams } from 'react-router-dom'
@@ -8,27 +8,26 @@ import remarkGfm from 'remark-gfm'
 import { visit } from 'unist-util-visit'
 
 import {
+  Container,
   MetaRowWrap,
-  RelatedSection,
-  RelatedGrid,
-  Page,
   Article,
   Cover,
   Prose,
   Separator,
   TagCloud,
-  Layout,
-  TagPill,
+  ContentWrapper,
+  MetaRowTime,
 } from './index.linaria'
-import { PREVIEWS, getPostBySlug } from '@/entities/posts/data'
+import { getPostBySlug } from '@/entities/posts/data'
 import type { IPost } from '@/entities/posts/types/post.types'
-import { PreviewPostCard } from '@/entities/posts/ui/PreviewPostCard'
+import Tag from '@/entities/posts/ui/Tag'
+import RelatedPostsList from '@/entities/posts/widjets/RelatedPostsList'
 import { SharedButton } from '@/features/SharedButton'
 import { PageTitle, SectionTitle } from '@/shared/assets/styles/titles.linaria'
 import { HeaderBackButton } from '@/shared/components/HeaderBackButton'
 import { PageHeader } from '@/shared/components/PageHeader'
 
-// --- utils ---
+// utils
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
 
@@ -38,7 +37,7 @@ const estimateReadingTime = (markdown: string) => {
   return `${Math.max(1, Math.round(w / 220))} мин чтения`
 }
 
-// --- remark plugin: ::img{src="" align="right" width="44%" caption="..."} ---
+// remark ::img{...}
 function remarkImgDirective() {
   return (tree: any) => {
     visit(tree, (node: any) => {
@@ -58,47 +57,34 @@ function remarkImgDirective() {
   }
 }
 
-// --- UI blocks ---
+// UI bits
+
 function MetaRow({ post }: { post: IPost }) {
   const reading = estimateReadingTime(post.content)
+  const iso = post.createdAt
+  const human = formatDate(iso)
 
   return (
     <MetaRowWrap>
-      <span>{formatDate(post.createdAt)}</span>
+      <MetaRowTime dateTime={iso}>{human}</MetaRowTime>
       <span>•</span>
       <span>{reading}</span>
       {post.tags?.length ? (
         <>
           <span>•</span>
-          <span>
+          <TagCloud>
             {post.tags.map((t) => (
-              <TagPill key={t}>#{t}</TagPill>
+              <Tag
+                key={t}
+                size="md"
+              >
+                {t}
+              </Tag>
             ))}
-          </span>
+          </TagCloud>
         </>
       ) : null}
     </MetaRowWrap>
-  )
-}
-
-function RelatedPosts({ currentSlug }: { currentSlug: string }) {
-  const related = useMemo(() => PREVIEWS.filter((p) => p.slug !== currentSlug), [currentSlug])
-  if (!related.length) return null
-
-  return (
-    <RelatedSection>
-      <SectionTitle>Другие материалы</SectionTitle>
-      <RelatedGrid>
-        {related.map((p) => (
-          <PreviewPostCard
-            showTags
-            showDate
-            key={p.slug}
-            post={p}
-          />
-        ))}
-      </RelatedGrid>
-    </RelatedSection>
   )
 }
 
@@ -107,11 +93,13 @@ export default function PostPage() {
   const [post, setPost] = useState<IPost | null>(null)
   const [loading, setLoading] = useState(true)
 
-  // загрузка поста по slug
   useEffect(() => {
     let cancelled = false
     setLoading(true)
     setPost(null)
+
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+
     getPostBySlug(slug).then((p) => {
       if (!cancelled) {
         setPost(p)
@@ -124,90 +112,82 @@ export default function PostPage() {
     }
   }, [slug])
 
-  // document.title
   useEffect(() => {
     if (post) document.title = `${post.title} — ASTRODOC`
   }, [post?.title])
 
   const shareUrl = typeof window !== 'undefined' ? window.location.href : ''
 
-  if (loading) {
-    return (
-      <Layout>
-        <PageHeader>
-          <HeaderBackButton text="Смотреть все" />
-        </PageHeader>
-        <Page>
-          <div style={{ padding: 24, color: 'var(--text-muted)' }}>Загрузка…</div>
-        </Page>
-      </Layout>
-    )
-  }
-
-  if (!post) {
-    return (
-      <Layout>
-        <PageHeader>
-          <HeaderBackButton text="Смотреть все" />
-        </PageHeader>
-        <Page>
-          <div style={{ padding: 24 }}>
-            <PageTitle style={{ textAlign: 'left' }}>Пост не найден</PageTitle>
-            <p style={{ color: 'var(--text-muted)' }}>Возможно, он в черновиках или был перемещён.</p>
-            <Separator />
-            <RelatedPosts currentSlug="" />
-          </div>
-        </Page>
-      </Layout>
-    )
-  }
-
   return (
-    <Layout>
+    <Container>
       <PageHeader>
         <HeaderBackButton text="Смотреть все" />
-        <SharedButton
-          buttonText="Поделиться статьей"
-          shareUrl={shareUrl}
-          title={post.title}
-        />
+        {post && (
+          <SharedButton
+            buttonText="Поделиться статьей"
+            shareUrl={shareUrl}
+            title={post.title}
+          />
+        )}
       </PageHeader>
+      <ContentWrapper>
+        {loading && <div style={{ padding: 24, color: 'rgba(255,255,255,.56)' }}>Загрузка…</div>}
+        {!loading && !post && (
+          <>
+            <PageTitle style={{ textAlign: 'left' }}>Пост не найден</PageTitle>
+            <p style={{ color: 'rgba(255,255,255,.56)' }}>Возможно, он в черновиках или был перемещён.</p>
+            <Separator />
+            <RelatedPosts currentSlug="" />
+          </>
+        )}
+        {!loading && post && (
+          <>
+            <Article>
+              <header>
+                <PageTitle style={{ textAlign: 'left' }}>{post.title}</PageTitle>
+                <MetaRow post={post} />
+              </header>
 
-      <Page>
-        <Article>
-          <div>
-            <PageTitle style={{ textAlign: 'left' }}>{post.title}</PageTitle>
-            <MetaRow post={post} />
-          </div>
+              {post.cover && (
+                <Cover>
+                  <img
+                    src={post.cover}
+                    alt=""
+                  />
+                </Cover>
+              )}
 
-          {post.cover && (
-            <Cover>
-              <img
-                src={post.cover}
-                alt="cover"
-              />
-            </Cover>
-          )}
+              <Prose>
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm, remarkDirective, remarkImgDirective]}
+                  rehypePlugins={[rehypeRaw]}
+                >
+                  {post.content}
+                </ReactMarkdown>
+              </Prose>
 
-          <Prose>
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm, remarkDirective, remarkImgDirective]}
-              rehypePlugins={[rehypeRaw]}
-            >
-              {post.content}
-            </ReactMarkdown>
-          </Prose>
+              <footer>
+                <Separator />
+                <TagCloud>
+                  {post.tags?.map((t) => (
+                    <Tag
+                      key={t}
+                      size="md"
+                    >
+                      {t}
+                    </Tag>
+                  ))}
+                </TagCloud>
+              </footer>
+            </Article>
 
-          <Separator />
-          <TagCloud>
-            {post.tags?.map((t) => (
-              <TagPill key={t}>#{t}</TagPill>
-            ))}
-          </TagCloud>
-        </Article>
-
-        <RelatedPosts currentSlug={post.slug} />
-      </Page>
-    </Layout>
+            <section aria-labelledby="related-heading">
+              <SectionTitle id="related-heading">Другие материалы</SectionTitle>
+              <RelatedPostsList excludeSlug={post.slug} />
+            </section>
+          </>
+        )}
+      </ContentWrapper>
+    </Container>
   )
 }

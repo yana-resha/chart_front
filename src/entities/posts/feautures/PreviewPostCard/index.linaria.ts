@@ -104,12 +104,3 @@ export const CardTags = styled.div`
   gap: 6px;
   margin-top: 6px;
 `
-
-export const CardTag = styled.span`
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 999px;
-  padding: 2px 8px;
-  font-size: 0.6875rem;
-  line-height: 1rem;
-  color: rgba(255, 255, 255, 0.6);
-`

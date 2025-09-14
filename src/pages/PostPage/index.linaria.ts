@@ -1,53 +1,52 @@
 import { styled } from '@linaria/react'
 
-export const Layout = styled.section`
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import { PageContentWrapper } from '@/shared/assets/styles/pages.linaria'
+
+/** Центровщик внутри твоего PagesContainer (<main>) */
+export const Container = styled.div`
   height: 100%;
   width: 100%;
   max-width: 100%;
   position: relative;
 `
 
-export const Page = styled.div`
-  --text: #e8ecf1;
-  --text-muted: #a6b0c2;
-  --bg: #0d0f14;
-  --bg-soft: #141824;
-  --border: #262c3a;
-  --primary: #4b6bfb; /* добавил: используется в blockquote */
-  margin: 0 auto;
-  padding: 32px 16px 56px;
+export const ContentWrapper = styled(PageContentWrapper)`
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 `
 
-export const Article = styled.article``
+/** Пост */
+export const Article = styled.article`
+  margin-bottom: 32px;
+`
 
 export const MetaRowWrap = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 12px 16px;
   align-items: center;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.56);
   font-size: 14px;
   margin-bottom: 8px;
 `
 
-/* Старое имя для совместимости */
-export const Tag = styled.span`
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 4px 10px;
-  font-size: 12px;
-  color: var(--text-muted);
+export const MetaRowTime = styled.time`
+  font-variant-numeric: tabular-nums;
 `
 
-/* Новое имя, которое используем в компоненте */
-export const TagPill = styled(Tag)``
-
-export const Cover = styled.div`
-  margin-top: 12px;
-  border: 1px solid var(--border);
+export const Cover = styled.figure`
+  margin: 12px 0 0;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 24px;
   overflow: hidden;
-  background: var(--bg-soft);
+  background: #141824;
+
   > img {
     width: 100%;
     height: clamp(260px, 45vh, 440px);
@@ -58,7 +57,7 @@ export const Cover = styled.div`
 
 export const Prose = styled.div`
   margin-top: 24px;
-  color: var(--text);
+  color: #e8ecf1;
   font-size: 16px;
   line-height: 1.72;
 
@@ -84,10 +83,10 @@ export const Prose = styled.div`
   blockquote {
     margin: 16px 0;
     padding: 12px 16px;
-    border-left: 3px solid var(--primary);
-    background: var(--bg-soft);
+    border-left: 3px solid #6aa0ff;
+    background: #141824;
     border-radius: 8px;
-    color: var(--text);
+    color: #e8ecf1;
   }
   img {
     border-radius: 12px;
@@ -95,7 +94,7 @@ export const Prose = styled.div`
     height: auto;
   }
 
-  /* === Обтекание картинок внутри Markdown (для ::img директив и сырого HTML) === */
+  /* обтекание для ::img */
   .wrap-left,
   .wrap-right {
     border-radius: 12px;
@@ -111,8 +110,6 @@ export const Prose = styled.div`
 
   figure.wrap-left,
   figure.wrap-right {
-    /* ширина по умолчанию может задаваться директивой width="44%", но если её нет,
-       пусть будет разумный максимум */
     max-width: 44%;
   }
   figure img {
@@ -123,18 +120,59 @@ export const Prose = styled.div`
   }
   figcaption {
     font-size: 13px;
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.56);
     margin-top: 6px;
   }
 
-  /* Сброс обтекания, чтобы хвосты float не ломали низ страницы */
+  a {
+    color: #9ecbff;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+    font-size: 0.9em;
+    background: #0f1320;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 0.1em 0.4em;
+    border-radius: 6px;
+  }
+
+  pre code {
+    display: block;
+    padding: 12px 14px;
+    border-radius: 10px;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 0.95em;
+  }
+  th,
+  td {
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    padding: 8px 10px;
+    text-align: left;
+  }
+  th {
+    background: #141824;
+    font-weight: 600;
+  }
+
+  /* clearfix */
   &::after {
     content: '';
     display: block;
     clear: both;
   }
 
-  /* На мобильных — без обтекания, картинки на всю ширину */
   @media (max-width: 720px) {
     .wrap-left,
     .wrap-right,
@@ -149,21 +187,12 @@ export const Prose = styled.div`
 
 export const Separator = styled.hr`
   border: none;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
   margin: 28px 0;
 `
+
 export const TagCloud = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-`
-
-// Related
-export const RelatedSection = styled.section`
-  margin-top: 48px;
-`
-export const RelatedGrid = styled.div`
-  display: grid;
-  gap: 16px;
-  grid-template-columns: 1fr;
 `

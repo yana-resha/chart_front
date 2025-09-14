@@ -6,7 +6,6 @@ import {
   CardDescription,
   CardFooter,
   CardInner,
-  CardTag,
   CardTags,
   CardTitle,
   ContentWrapper,
@@ -15,6 +14,7 @@ import {
   Wrapper,
 } from './index.linaria'
 import { IPreviewPostCardProps } from './index.type'
+import Tag from '../../ui/Tag'
 import { Button } from '@/shared/components/Button'
 
 const formatDate = (iso: string) =>
@@ -54,7 +54,12 @@ export const PreviewPostCard = ({
             {showTags && post.tags?.length ? (
               <CardTags>
                 {post.tags?.map((t) => (
-                  <CardTag key={t}>{t}</CardTag>
+                  <Tag
+                    key={t}
+                    size="sm"
+                  >
+                    {t}
+                  </Tag>
                 ))}
               </CardTags>
             ) : null}

@@ -3,7 +3,7 @@ import { styled } from '@linaria/react'
 
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
-export const Layout = styled.section`
+export const Layout = styled.div`
   height: 100%;
   width: 100%;
   max-width: 100%;
@@ -24,8 +24,4 @@ export const WidjetsWrapper = styled.div`
   flex-direction: column;
   gap: 1.56rem;
   max-width: 100%;
-
-  // @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
-  //   gap: 1rem;
-  // }
 `
