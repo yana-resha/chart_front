@@ -3,7 +3,6 @@ import { useState } from 'react'
 import {
   dropdownContainer,
   Title,
-  Emoji,
   Description,
   LinkBlock,
   LinkText,
@@ -72,16 +71,14 @@ export const SharedButton = ({
         </Button>
       }
     >
-      <Title>
-        {title} <Emoji> 💫</Emoji>
-      </Title>
+      <Title>{title}</Title>
       <Description>{description}</Description>
 
       <LinkBlock onClick={handleCopy}>
         <LinkText>{shareUrl}</LinkText>
         <Button
-          theme="primary"
-          kind="outline"
+          theme="secondary"
+          kind="ghost"
           roundedCorner
           onClick={handleCopy}
           style={{ minWidth: '120px' }}

@@ -16,9 +16,7 @@ import {
 import { IPreviewPostCardProps } from './index.type'
 import Tag from '../../ui/Tag'
 import { Button } from '@/shared/components/Button'
-
-const formatDate = (iso: string) =>
-  new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
+import { formatePostDate } from '../../helpers/formatePostDate'
 
 export const PreviewPostCard = ({
   post,
@@ -47,7 +45,7 @@ export const PreviewPostCard = ({
           <ContentWrapper>
             <CardTitle to={href}>{post.title}</CardTitle>
 
-            {showDate && <CardDate>{formatDate(post.createdAt)}</CardDate>}
+            {showDate && <CardDate>{formatePostDate(post.createdAt)}</CardDate>}
 
             <CardDescription>{post.excerpt}</CardDescription>
 

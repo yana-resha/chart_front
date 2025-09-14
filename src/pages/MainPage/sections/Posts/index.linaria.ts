@@ -1,3 +1,4 @@
+import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
 
 export const PostsSection = styled.section`
@@ -17,18 +18,14 @@ export const PostsWrapper = styled.div`
   }
 `
 
-export const PostsGrid = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
+export const PostsGridStyles = css`
   gap: 20px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   @media (max-width: 1200px) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr) !important;
   }
   @media (max-width: 500px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
 `
 

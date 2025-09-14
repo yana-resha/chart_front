@@ -9,13 +9,13 @@ import {
   Icon,
 } from './index.linaria'
 import { AdvantagesListData } from '../../data/advantages.data'
-import { Inner, SectionHeadWrapper, SectionSubtitle, SectionTitle } from '../../index.linaria'
+import { Inner, SectionHeadWrapper, SectionSubtitle, H2 } from '../../index.linaria'
 
 export const Advantages = () => (
   <AdvantagesSection>
     <Inner>
       <SectionHeadWrapper>
-        <SectionTitle variant="light">Почему именно ASTRODOC?</SectionTitle>
+        <H2 variant="light">Почему именно ASTRODOC?</H2>
         <SectionSubtitle variant="light">
           Простой и честный сервис для тех, кто хочет быстро рассчитать натальную карту.
         </SectionSubtitle>

@@ -5,29 +5,11 @@ import ShareSvg from '@/shared/assets/icons/share.svg?react'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
 export const dropdownContainer = css`
-  background: rgba(19, 22, 25, 0.9);
-  border: 1px solid rgba(54, 58, 61, 0.6);
-  border-radius: 12px;
   padding: 20px;
   min-width: 0;
   width: 500px;
 `
 
-export const Emoji = styled.span`
-  animation: twinkle 1.6s infinite ease-in-out;
-  @keyframes twinkle {
-    0% {
-      transform: scale(0.8);
-    }
-    50% {
-      transform: scale(1.1);
-    }
-
-    100% {
-      transform: scale(0.8);
-    }
-  }
-`
 export const Title = styled.div`
   font-size: 1.06rem;
   font-weight: 600;

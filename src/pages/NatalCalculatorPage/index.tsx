@@ -36,7 +36,7 @@ import CalendarDay from '@/shared/assets/icons/calendar-day.svg?react'
 import Clock from '@/shared/assets/icons/clock.svg?react'
 import PinIcon from '@/shared/assets/icons/pin-3.svg?react'
 import { linkTextCss } from '@/shared/assets/styles/links.linaria'
-import { PageTitle, SectionTitle } from '@/shared/assets/styles/titles.linaria'
+import { H1, H2 } from '@/shared/assets/styles/titles.linaria'
 import { HeaderBackButton } from '@/shared/components/HeaderBackButton'
 import { PageHeader } from '@/shared/components/PageHeader'
 import { Tooltip } from '@/shared/components/Tooltip'
@@ -50,7 +50,7 @@ export const NatalCalculatorPage = () => (
     </PageHeader>
     <PageWrapper>
       <IntroductionBlock>
-        <PageTitle>Расчёт натальной&nbsp;карты онлайн&nbsp;💫</PageTitle>
+        <H1>Расчёт натальной&nbsp;карты онлайн&nbsp;💫</H1>
         <MarkdownText>
           {' '}
           <Divider />{' '}
@@ -84,7 +84,7 @@ export const NatalCalculatorPage = () => (
             скрытые ресурсы и понять, какие события и сценарии повторяются в жизни.{' '}
           </p>{' '}
           <Divider />
-          <SectionTitle>Что поможет узнать натальная карта</SectionTitle>
+          <H2>Что поможет узнать натальная карта</H2>
           <BenefitGrid>
             <BenefitCard color="#16eef6">
               <div className="title">Познать свой характер</div>
@@ -152,7 +152,7 @@ export const NatalCalculatorPage = () => (
       {/* Инструкция */}
       <DataInfoBlock id="data-info">
         <MarkdownText>
-          <SectionTitle>Какие данные нужны для расчёта</SectionTitle>
+          <H2>Какие данные нужны для расчёта</H2>
 
           <InstructionsGrid>
             <InstructionCard>
@@ -207,7 +207,7 @@ export const NatalCalculatorPage = () => (
       <Divider />
       <CalculatorInstructionBlock>
         <MarkdownText>
-          <SectionTitle>Как заполнить поля в калькуляторе</SectionTitle>
+          <H2>Как заполнить поля в калькуляторе</H2>
 
           <StepsGrid>
             <StepCard>
@@ -273,7 +273,7 @@ export const NatalCalculatorPage = () => (
       <Divider />
       <CalculationsInfoBlock>
         <MarkdownText>
-          <SectionTitle>Как мы рассчитываем вашу натальную карту</SectionTitle>
+          <H2>Как мы рассчитываем вашу натальную карту</H2>
 
           <CalculationStepsGrid>
             <CalculationCard>

@@ -169,20 +169,19 @@ export const Subtitle = styled.span`
 export const InterpritationBlock = styled.div`
   font-size: ${TEXT_SIZE.M};
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.8);
   display: flex;
   flex-direction: column;
   gap: 1rem;
   white-space: pre-wrap;
 
   @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
-    font-size: clamp(12px, 0.92rem, 16px);
     line-height: 1.5;
     gap: 0.7rem;
   }
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    font-size: clamp(12px, 0.875rem, 16px);
+    font-size: ${TEXT_SIZE.S};
     gap: 0.5rem;
   }
 

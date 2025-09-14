@@ -18,4 +18,10 @@ export const NAVIGATION_DATA = [
     name: 'Натальная карта',
     icon: <Star className={classNames([primaryIconCSS, iconFs])} />,
   },
+
+  {
+    path: ROUTER_PATHES.POSTS_PATH,
+    name: 'Посты',
+    icon: <Star className={classNames([primaryIconCSS, iconFs])} />,
+  },
 ]

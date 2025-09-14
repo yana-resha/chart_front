@@ -36,7 +36,6 @@ export const ModalWindow = styled.div`
   padding: 1.875rem;
   padding-top: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: ${OVERLAYS_BACKGROUND_COLORS.WINDOW_MOBILE_SHADOW};
 
   @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
     padding: 1.5rem;

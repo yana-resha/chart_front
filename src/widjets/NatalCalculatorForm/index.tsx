@@ -12,7 +12,7 @@ import { LoaderModal } from '@/shared/components/Modal'
 
 const NatalCalculatorForm = () => {
   const formRef = useRef<FormikProps<ChartFormFieldValues>>(null)
-  const { formSubmit, formIsLoading, isRedirecting } = useFormOutside()
+  const { formSubmit, isRedirecting, formIsLoading } = useFormOutside()
   const initialValues = useMemo(getInitialValues, [])
 
   return (
@@ -31,11 +31,9 @@ const NatalCalculatorForm = () => {
         open={isRedirecting || formIsLoading ? true : false}
         showExitCross={false}
         phase={isRedirecting ? 'success' : 'loading'}
-        content={isRedirecting ? 'Готово ✨' : 'Строим вашу карту 🪐'}
+        content={isRedirecting ? 'Готово' : 'Строим вашу карту 🪐'}
         subtitle={
-          isRedirecting
-            ? 'Перенаправляем на страницу с результатами...'
-            : 'Это займёт всего несколько секунд...'
+          isRedirecting ? 'Перенаправляем на страницу с результатами.' : 'Это займёт всего несколько секунд.'
         }
         onClose={() => {}}
       />

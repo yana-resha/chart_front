@@ -17,8 +17,8 @@ export const modalFlex = css`
   justify-content: center;
   align-items: center;
   width: 500px;
-  gap: 1rem;
-  min-height: 120px;
+  gap: 0.5rem;
+  min-height: 200px;
 
   @media (max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px) {
     width: 100%;
@@ -87,4 +87,5 @@ export const Subtitle = styled.div`
   font-size: clamp(12px, 0.92rem, 16px);
   line-height: 1.55;
   letter-spacing: 0.15px;
+  text-align: center;
 `

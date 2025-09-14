@@ -12,7 +12,7 @@ import { SharedButton } from '@/features/SharedButton'
 import InfoIcon from '@/shared/assets/icons/info-circle.svg?react'
 import { SHARED_COLORS_VARIABLES } from '@/shared/assets/styles/colors'
 import { PageContentWrapper } from '@/shared/assets/styles/pages.linaria'
-import { PageTitle, SectionTitle } from '@/shared/assets/styles/titles.linaria'
+import { H1, H2 } from '@/shared/assets/styles/titles.linaria'
 import { HeaderBackButton } from '@/shared/components/HeaderBackButton'
 import { AlertModal } from '@/shared/components/Modal'
 import { PageHeader } from '@/shared/components/PageHeader'
@@ -126,7 +126,7 @@ export const NatalDecodingPage = () => {
       </PageHeader>
 
       <PageContentWrapper>
-        <PageTitle>Расшифровка натальной&nbsp;карты&nbsp;💫</PageTitle>
+        <H1>Расшифровка натальной&nbsp;карты&nbsp;💫</H1>
         {/* Скелетон, пока грузимся или пока ещё не получили chartValue */}
         {(!chartValue || isLoading) && <PageSkeleton />}
 
@@ -134,22 +134,22 @@ export const NatalDecodingPage = () => {
         {!isLoading && !serverError && !dataError && chartValue && (
           <WidjetsWrapper>
             <section>
-              <SectionTitle>Исходные данные</SectionTitle>
+              <H2>Исходные данные</H2>
               <NatalChartSourceData chartId={chartId} />
             </section>
 
             <section>
-              <SectionTitle>Интерактивная натальная карта</SectionTitle>
+              <H2>Интерактивная натальная карта</H2>
               <NatalCanvasPanel chartId={chartId} />
             </section>
 
             <section>
-              <SectionTitle>Основные значения карты</SectionTitle>
+              <H2>Основные значения карты</H2>
               <NatalSummaryPanelTab chartId={chartId} />
             </section>
 
             <section>
-              <SectionTitle>Интерпретации</SectionTitle>
+              <H2>Интерпретации</H2>
               <NatalDictionaryPanelTab chartId={chartId} />
             </section>
           </WidjetsWrapper>

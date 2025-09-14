@@ -10,6 +10,7 @@ import {
   HeroButtonsBlock,
 } from './index.linaria'
 import { Button } from '@/shared/components/Button'
+import { ROUTER_PATHES } from '@/shared/constants/router-paths'
 
 export const Hero = () => (
   <HeroSection>
@@ -25,19 +26,11 @@ export const Hero = () => (
       <HeroButtonsBlock>
         <Button
           as={Link}
-          to={'/test'}
+          to={ROUTER_PATHES.CALCULATOR_PATH}
           kind="ghost"
           size="large"
         >
           Рассчитать карту
-        </Button>
-
-        <Button
-          kind="ghost"
-          theme="secondary"
-          size="large"
-        >
-          Как это работает
         </Button>
       </HeroButtonsBlock>
     </HeroContentWrapper>

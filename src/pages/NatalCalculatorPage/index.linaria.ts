@@ -4,7 +4,7 @@ import { TEXT_COLOR_VARIABLES } from '@/shared/assets/styles/colors'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { PageContentWrapper } from '@/shared/assets/styles/pages.linaria'
 import { CARD_TEXT_SIZE, CARD_TITLE_TEXT, TEXT_SIZE } from '@/shared/assets/styles/text-size'
-import { PageTitle } from '@/shared/assets/styles/titles.linaria'
+import { H1 } from '@/shared/assets/styles/titles.linaria'
 import { addAlpha } from '@/shared/helpers/addAlpha'
 
 const LISTS_GAP = {
@@ -23,7 +23,7 @@ export const PageWrapper = styled(PageContentWrapper)`
   }
 `
 
-export const MainTitle = styled(PageTitle)``
+export const MainTitle = styled(H1)``
 
 export const DescText = styled.div`
   font-size: ${CARD_TEXT_SIZE.M};

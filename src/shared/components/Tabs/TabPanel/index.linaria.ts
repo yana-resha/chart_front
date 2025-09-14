@@ -63,7 +63,7 @@ export const TabContainer = styled.div<TabContainerProps>`
   & ${Label} {
     color: ${({ $active }) => ($active ? 'rgb(22,238,246)' : '#fff')};
     font-size: 1rem;
-    text-shadow: ${({ $active }) => ($active ? '0 0 2px rgba(22,238,246,0.7)' : 'none')};
+    font-weight: 500;
     transition:
       color 0.3s,
       font-size 0.3s,
@@ -76,8 +76,6 @@ export const TabContainer = styled.div<TabContainerProps>`
 
   &:hover ${Label} {
     color: ${({ $active }) => ($active ? 'rgb(22,238,246)' : '#bffeff')};
-    text-shadow: ${({ $active }) =>
-      $active ? '0 0 6px rgba(22,238,246,0.7)' : '0 0 10px rgba(22,238,246,0.3)'};
   }
 `
 export const activeIndicatorStyle = css`

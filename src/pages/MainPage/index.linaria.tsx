@@ -72,7 +72,7 @@ interface SectionProps {
   variant?: 'light' | 'dark'
 }
 
-export const SectionTitle = styled.h2<SectionProps>`
+export const H2 = styled.h2<SectionProps>`
   margin: 0 0 6px;
   font-weight: 800;
   letter-spacing: 0.2px;
