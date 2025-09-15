@@ -41,7 +41,7 @@ export default function PostPage() {
   return (
     <Container>
       <PageHeader>
-        <HeaderBackButton text="Смотреть все" />
+        <HeaderBackButton />
         {post && (
           <SharedButton
             buttonText="Поделиться статьей"
@@ -51,11 +51,11 @@ export default function PostPage() {
         )}
       </PageHeader>
       <ContentWrapper>
-        {loading && <div style={{ padding: 24, color: 'rgba(255,255,255,.56)' }}>Загрузка…</div>}
+        {loading && <div style={{ padding: 24, color: 'rgba(255,255,255,.85)' }}>Загрузка…</div>}
         {!loading && !post && (
           <>
             <H1 style={{ textAlign: 'left' }}>Пост не найден</H1>
-            <p style={{ color: 'rgba(255,255,255,.56)' }}>Возможно, он в черновиках или был перемещён.</p>
+            <p style={{ color: 'rgba(255,255,255,.85)' }}>Возможно, он в черновиках или был перемещён.</p>
             <Separator />
             <section aria-labelledby="related-heading">
               <H2 id="related-heading">Другие материалы</H2>

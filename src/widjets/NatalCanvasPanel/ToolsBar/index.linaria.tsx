@@ -12,7 +12,6 @@ export const ToolsBarWrapper = styled.div`
   backdrop-filter: blur(0px);
   font-size: clamp(12px, 0.875rem, 16px);
   color: white;
-  background: rgba(255, 255, 255, 0.03);
   border-radius: 14px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   overflow: hidden;

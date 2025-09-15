@@ -6,6 +6,7 @@ import { MainPage } from '@/pages/MainPage'
 import { NatalCalculatorPage } from '@/pages/NatalCalculatorPage'
 import { NatalDecodingPage } from '@/pages/NatalDecodingPage'
 import PostPage from '@/pages/PostPage'
+import { PostsListPage } from '@/pages/PostsListPage'
 import { ROUTER_PATHES } from '@/shared/constants/router-paths'
 
 export const MainRouter = () => (
@@ -36,7 +37,7 @@ export const MainRouter = () => (
       <Route path={ROUTER_PATHES.POSTS_PATH}>
         <Route
           index
-          element={<div></div>}
+          element={<PostsListPage />}
         />
         <Route
           path=":slug"

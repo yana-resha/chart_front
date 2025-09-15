@@ -157,10 +157,6 @@ export const NavSheetScroll = styled.div`
   overscroll-behavior: contain;
 `
 
-export const iconFs = css`
-  font-size: 1.2rem;
-`
-
 export const navlinkCSS = css`
   padding: 0.85rem 1rem;
   background: transparent;
@@ -168,23 +164,28 @@ export const navlinkCSS = css`
 
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.8rem;
   text-decoration: none;
   width: 100%;
 
-  color: rgb(232, 233, 233);
+  color: rgb(255, 255, 255, 0.85);
   font-size: clamp(12px, 0.85rem, 16px);
   font-weight: 400;
   line-height: 1.3;
   letter-spacing: 0.15px;
   transition: color 0.2s ease;
 
-  &:hover {
-    color: rgb(155, 156, 158);
+  svg {
+    font-size: 130%;
+    color: ${ICONS_STROKES.PRIMARY_DEFAULT_COLOR};
+    transition: color 0.3s ease-in-out;
+  }
 
-    & svg,
-    & svg path {
-      stroke: ${addAlpha(ICONS_STROKES.PRIMARY_DEFAULT_COLOR, 1)};
+  &:hover {
+    color: rgba(255, 255, 255, 0.7);
+
+    svg {
+      color: ${addAlpha(ICONS_STROKES.PRIMARY_DEFAULT_COLOR, 0.7)};
     }
   }
 
@@ -196,7 +197,7 @@ export const navlinkCSS = css`
     opacity: 0;
     background: linear-gradient(145.32deg, rgba(215, 237, 237, 0.16) -30.47%, rgba(204, 235, 235, 0) 100%);
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    transition: opacity 0.2s ease;
+    transition: opacity 0.5s ease;
   }
 
   &.active:after {

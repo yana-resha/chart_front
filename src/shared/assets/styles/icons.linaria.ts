@@ -27,11 +27,13 @@ export const primaryIconCSS = css`
 
   &:hover,
   &:hover path {
+    color: var(--icon-hover-color);
     stroke: var(--icon-hover-color);
   }
 
   &:active,
   &:active path {
+    color: var(--icon-hover-color);
     stroke: var(--icon-active-color);
   }
 `

@@ -1,6 +1,5 @@
 import { styled } from '@linaria/react'
 
-import background from './background.png'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
 export const DefaultContainer = styled.div`
@@ -14,77 +13,6 @@ export const DefaultContainer = styled.div`
   max-width: 100%;
   position: relative;
   min-height: 100%;
-  background-image: url(${background});
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed; /* 🧠 ВАЖНО! */
-  animation: starsShift 120s linear infinite;
-
-  &::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    height: 100dvh;
-    background-image: url(${background});
-    background-size: contain;
-    background-repeat: repeat;
-    background-position: center bottom;
-    z-index: -1;
-    opacity: 0.3;
-    pointer-events: none;
-    animation: starsDrift2 600s linear infinite;
-  }
-
-  &::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    height: 100dvh;
-    background-image: url(${background});
-    background-size: contain;
-    background-repeat: repeat;
-    background-position: center top;
-    opacity: 0.5;
-    pointer-events: none;
-    animation: starsDrift1 500s linear infinite;
-    z-index: -1;
-  }
-
-  @keyframes starsShift {
-    0% {
-      background-position: center top;
-    }
-    50% {
-      background-position: center bottom;
-    }
-    100% {
-      background-position: center top;
-    }
-  }
-  @keyframes starsDrift1 {
-    0% {
-      transform: rotate(60deg);
-    }
-    50% {
-      transform: rotate(300deg);
-    }
-    100% {
-      transform: rotate(60deg);
-    }
-  }
-  @keyframes starsDrift2 {
-    0% {
-      transform: rotate(300deg);
-    }
-    50% {
-      transform: rotate(-300deg);
-    }
-    100% {
-      transform: rotate(300deg);
-    }
-  }
-
   /* планшет и ниже: сайдбар наверх, одна колонка */
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     gap: 0;

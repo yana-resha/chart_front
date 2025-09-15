@@ -9,8 +9,6 @@ import { HouseTooltipContent } from '../../tooltip-contents/HouseTooltipContent'
 import { getPlanetsByHouse, getVisualAngleFromAsc, polarToCartesian } from '../../utils/astro-helpers'
 import { ASTRO_HOUSE_SYMBOL } from '@/shared/configs/astro-houses.config'
 
-// 👇 общий хелпер (фабрика) — НЕ хук, можно вызывать в map
-
 export const HouseLines = () => {
   const {
     houseCusps = [],
@@ -186,7 +184,7 @@ export const HouseLines = () => {
             offsetX={fs * (isLeftOfCenter ? 1.2 : 0.8)}
             offsetY={fs / 2}
             fontSize={fs}
-            fill="rgba(255, 255, 255, 0.8)"
+            fill="rgba(255, 255, 255, 0.65)"
             fontStyle="italic"
           />
         )

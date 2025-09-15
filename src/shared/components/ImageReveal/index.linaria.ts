@@ -21,14 +21,17 @@ export const ZoomImg = styled.img`
 
   @keyframes zoomInOut {
     0% {
+      translate3d(0, 0, 0);
       transform: scale(1);
       opacity: 0.95;
     }
     40% {
+      translate3d(1%, -1%, 0);
       transform: scale(1.08);
       opacity: 1;
     }
     100% {
+      translate3d(0, 0, 0);
       transform: scale(1);
       opacity: 1;
     }

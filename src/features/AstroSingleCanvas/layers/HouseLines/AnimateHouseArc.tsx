@@ -47,7 +47,7 @@ export const AnimateHouseArc = ({
       outerRadius={outer_radius}
       rotation={rotation}
       angle={angle}
-      stroke="white"
+      stroke="rgba(255, 255, 255, 0.4)"
       strokeWidth={1}
       fill={defaultColor}
     />

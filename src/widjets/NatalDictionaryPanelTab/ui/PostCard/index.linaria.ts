@@ -172,7 +172,7 @@ export const InterpritationBlock = styled.div`
   color: rgba(255, 255, 255, 0.8);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
   white-space: pre-wrap;
 
   @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {

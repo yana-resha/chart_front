@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -6,35 +6,24 @@ import { HeaderBackButtonContainer, HeaderBackIcon, HeaderBackText } from './ind
 
 interface HeaderBackButtonProps {
   text?: string
-  onClick?: () => void
+  to?: string
   className?: string
 }
 
-export const HeaderBackButton = ({ text = 'Назад', onClick }: HeaderBackButtonProps) => {
+export const HeaderBackButton = ({ text = 'Назад', to }: HeaderBackButtonProps) => {
   const navigate = useNavigate()
-  const [canGoBack, setCanGoBack] = useState(true)
 
-  useEffect(() => {
-    // Простая проверка: если в истории нет предыдущих страниц — нельзя назад
-    setCanGoBack(window.history.length > 1)
-  }, [])
-
-  const handleClick = () => {
-    if (!canGoBack) return
-    if (onClick) {
-      onClick()
-    } else {
+  const handleClick = (e: React.MouseEvent) => {
+    if (!to) {
+      e.preventDefault() // не переходить по пустому href
       navigate(-1)
     }
   }
 
   return (
     <HeaderBackButtonContainer
-      kind="text"
-      size="large"
+      to={to ?? '#'}
       onClick={handleClick}
-      aria-label={text}
-      className={canGoBack && !onClick ? undefined : 'disabled'}
     >
       <HeaderBackIcon />
       <HeaderBackText>{text}</HeaderBackText>

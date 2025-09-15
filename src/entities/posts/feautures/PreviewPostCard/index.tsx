@@ -14,9 +14,9 @@ import {
   Wrapper,
 } from './index.linaria'
 import { IPreviewPostCardProps } from './index.type'
+import { formatePostDate } from '../../helpers/formatePostDate'
 import Tag from '../../ui/Tag'
 import { Button } from '@/shared/components/Button'
-import { formatePostDate } from '../../helpers/formatePostDate'
 
 export const PreviewPostCard = ({
   post,
@@ -38,6 +38,8 @@ export const PreviewPostCard = ({
             src={post.preview}
             alt={alt}
             loading="lazy"
+            decoding="async"
+            data-zoom
           />
         </ImageWrapper>
 

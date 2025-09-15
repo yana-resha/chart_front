@@ -1,29 +1,34 @@
 import { styled } from '@linaria/react'
 import { Link } from 'react-router-dom'
 
-// если у тебя нет константы — просто поставь '500px'
 export const MEDIA_HORIZONTAL_CARD = '500px'
 
-export const Card = styled.div`
-  border-radius: 20px;
-  overflow: hidden;
-  background: linear-gradient(135deg, rgba(215, 237, 237, 0.58) -121.355%, rgba(204, 235, 235, 0) 120%);
-
-  /* объявляем КОНТЕЙНЕР */
-  container-type: inline-size;
-`
-
-/* 👇 новая внутренняя обёртка: именно она управляет layout */
-export const CardInner = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 300px;
+/* Картинка: анимация есть, но по умолчанию на паузе */
+export const PreviewImage = styled.img`
+  width: 100%;
   height: 100%;
-  max-height: 100%;
+  object-fit: cover;
+  display: block;
 
-  @container (min-width: ${MEDIA_HORIZONTAL_CARD}) {
-    flex-direction: row;
-    min-height: 200px; /* опционально */
+  transform-origin: center;
+  will-change: transform, filter;
+  backface-visibility: hidden;
+
+  /* ⚠️ объявляем анимацию прямо здесь */
+  animation: previewZoomPan 5000ms ease-in-out infinite alternate;
+  animation-play-state: paused;
+
+  /* локальные кейфреймы */
+  @keyframes previewZoomPan {
+    0% {
+      transform: scale(1) translate3d(0, 0, 0);
+    }
+    50% {
+      transform: scale(1.08) translate3d(1%, -1%, 0);
+    }
+    100% {
+      transform: scale(1) translate3d(0, 0, 0);
+    }
   }
 `
 
@@ -41,11 +46,37 @@ export const ImageWrapper = styled.div`
   }
 `
 
-export const PreviewImage = styled.img`
-  width: 100%;
+/* Карточка включает анимацию для элементов с data-zoom только когда активна */
+export const Card = styled.div`
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(215, 237, 237, 0.58) -121.355%, rgba(204, 235, 235, 0) 120%);
+  container-type: inline-size;
+
+  &:hover [data-zoom],
+  &:focus-within [data-zoom] {
+    animation-play-state: running;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &:hover [data-zoom],
+    &:focus-within [data-zoom] {
+      animation: none !important;
+    }
+  }
+`
+
+export const CardInner = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
   height: 100%;
-  object-fit: cover;
-  display: block;
+  max-height: 100%;
+
+  @container (min-width: ${MEDIA_HORIZONTAL_CARD}) {
+    flex-direction: row;
+    min-height: 200px;
+  }
 `
 
 export const Wrapper = styled.div`
@@ -69,12 +100,10 @@ export const ContentWrapper = styled.div``
 
 export const CardTitle = styled(Link)`
   text-decoration: none;
-  margin: 0;
-  padding: 0;
+  margin: 0 0 4px 0;
   line-height: 1.25rem;
   font-size: 1rem;
   font-weight: 500;
-  margin-bottom: 4px;
   color: rgba(255, 255, 255, 0.92);
 `
 

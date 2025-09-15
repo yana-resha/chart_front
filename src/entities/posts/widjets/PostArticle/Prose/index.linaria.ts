@@ -17,6 +17,7 @@ export const ProseRoot = styled.div`
   }
 `
 
+/* опционально, чтобы заголовки не обтекались плавающими картинками сверху */
 export const PostH2 = styled(H2)`
   margin: 24px 0 8px;
   padding-left: 0;
@@ -106,6 +107,10 @@ export const Blockquote = styled.blockquote`
   border: 1px solid rgba(255, 255, 255, 0.18);
   color: rgba(255, 255, 255, 0.9);
 
+  /* 👇 не даём блоку «наезжать» на float-рисунки */
+  clear: both;
+  display: flow-root;
+
   p {
     margin: 0;
   }
@@ -117,6 +122,10 @@ export const ImgWrapper = styled.div`
   border-radius: 12px;
   width: 100%;
   height: auto;
+
+  /* 👇 полноширинные изображения ниже любых float */
+  clear: both;
+  display: flow-root;
 `
 
 export const Img = styled.img`
@@ -160,15 +169,23 @@ export const Figure = styled.figure`
   overflow: hidden;
   position: relative;
 
+  /* полноширинные figure */
+  clear: both;
+  display: flow-root;
+
   &.wrap-left {
     float: left;
     margin: 6px 16px 12px 0;
     max-width: 44%;
+    clear: none; /* для wrap-вариантов обтекание не чистим */
+    display: block; /* возвращаем обычный поток */
   }
   &.wrap-right {
     float: right;
     margin: 6px 0 12px 16px;
     max-width: 44%;
+    clear: none;
+    display: block;
   }
 
   @media (max-width: 720px) {
@@ -177,6 +194,8 @@ export const Figure = styled.figure`
       float: none;
       max-width: 100% !important;
       margin: 12px 0;
+      clear: both; /* на мобилках всё идёт столбиком */
+      display: flow-root;
     }
   }
 `
@@ -204,7 +223,11 @@ export const Pre = styled.pre`
   border-radius: 10px;
   overflow-x: auto;
   padding: 12px 14px;
+
+  clear: both;
+  display: flow-root;
 `
+
 export const BlockCode = styled.code`
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
   font-size: 0.9em;
@@ -221,6 +244,9 @@ export const TableScroll = styled.div`
   overflow-x: auto;
   overflow-y: visible;
   -webkit-overflow-scrolling: touch;
+
+  clear: both;
+  display: flow-root;
 `
 
 export const Table = styled.table`
