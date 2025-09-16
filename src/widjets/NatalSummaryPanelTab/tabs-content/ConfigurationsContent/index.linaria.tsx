@@ -7,9 +7,6 @@ export const Container = styled.div`
   border-radius: 20px;
   padding: 2rem;
   background: rgba(255, 255, 255, 0.025);
-  box-shadow:
-    inset 0 0 80px rgba(255, 255, 255, 0.02),
-    0 0 12px rgba(0, 0, 0, 0.1);
   color: rgba(255, 255, 255, 0.7);
   text-align: center;
   display: flex;
@@ -18,7 +15,12 @@ export const Container = styled.div`
   flex-direction: column;
   min-height: 300px;
   position: relative;
-  backdrop-filter: blur(1.5px) brightness(1.1);
+  backdrop-filter: blur(9.760000228881836px);
+  box-shadow:
+    inset 1px 1px 4px 0 rgba(255, 255, 255, 0.05),
+    inset 2px 2px 9px 0 rgba(255, 255, 255, 0.05),
+    -2px -2px 12px -8px rgba(0, 0, 0, 0.05),
+    -11px -10px 48px -12px rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
 
   @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {

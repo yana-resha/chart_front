@@ -2,21 +2,43 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import { NavLink, useLocation } from 'react-router-dom'
 
-import { NAVIGATION_DATA } from './data'
+import { CollapsibleNavGroup } from './CollapsibleNavGroup'
+import { NAVIGATION_DATA, NavItem } from './data'
 import {
+  Backdrop,
   Container,
   MobileTopBar,
-  TopBlock,
-  PublicAccountBlock,
   NavList,
   NavSheet,
   NavSheetScroll,
-  Backdrop,
-  navlinkCSS,
-} from './index.linaria'
+  PublicAccountBlock,
+  TopBlock,
+} from './index.layout.linaria'
+import { NavRow } from './index.nav.linaria'
 import { BurgerIcon } from '@/shared/components/Burger'
 import { Button } from '@/shared/components/Button'
 import { useScrollLock } from '@/shared/hooks/useScrollLock'
+
+function renderItem(item: NavItem) {
+  if (item.type === 'group')
+    return (
+      <CollapsibleNavGroup
+        key={item.id}
+        item={item}
+      />
+    )
+
+  return (
+    <NavRow
+      key={item.path}
+      as={NavLink}
+      to={item.path}
+    >
+      {item.icon}
+      {item.name}
+    </NavRow>
+  )
+}
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false)
@@ -64,7 +86,7 @@ const Sidebar = () => {
     >
       {/* Десктопный верхний блок */}
       <TopBlock>
-        <PublicAccountBlock />
+        <PublicAccountBlock>ASTRODOC</PublicAccountBlock>
       </TopBlock>
 
       {/* Планшетный топ-бар (логотип + бургер) */}
@@ -83,18 +105,7 @@ const Sidebar = () => {
       </MobileTopBar>
 
       {/* Десктопная навигация (в потоке) */}
-      <NavList id="sidebar-nav">
-        {NAVIGATION_DATA.map((item) => (
-          <NavLink
-            key={item.path}
-            className={navlinkCSS}
-            to={item.path}
-          >
-            {item.icon}
-            {item.name}
-          </NavLink>
-        ))}
-      </NavList>
+      <NavList id="sidebar-nav">{NAVIGATION_DATA.map(renderItem)}</NavList>
 
       {/* Мобильный шит поверх верстки */}
       <Backdrop
@@ -107,18 +118,7 @@ const Sidebar = () => {
         top={topBarH}
         aria-hidden={!open}
       >
-        <NavSheetScroll>
-          {NAVIGATION_DATA.map((item) => (
-            <NavLink
-              key={item.path}
-              className={navlinkCSS}
-              to={item.path}
-            >
-              {item.icon}
-              {item.name}
-            </NavLink>
-          ))}
-        </NavSheetScroll>
+        <NavSheetScroll>{NAVIGATION_DATA.map(renderItem)}</NavSheetScroll>
       </NavSheet>
     </Container>
   )

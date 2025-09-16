@@ -1,23 +1,43 @@
+import React from 'react'
+
+import Collect from '../assets/icons/collect.svg?react'
 import Home from '../assets/icons/home.svg?react'
-import Star from '../assets/icons/star.svg?react'
+import Calculator from '@/shared/assets/icons/calculator.svg?react'
 import { ROUTER_PATHES } from '@/shared/constants/router-paths'
 
-export const NAVIGATION_DATA = [
-  {
-    path: ROUTER_PATHES.DEFAULT_PATH,
-    name: 'Главная',
-    icon: <Home />,
-  },
+export type NavLinkItem = {
+  type: 'link'
+  path: string
+  name: string
+  icon?: React.ReactNode
+}
+
+export type NavGroupItem = {
+  type: 'group'
+  id: string
+  name: string
+  icon?: React.ReactNode
+  children: Array<{
+    path: string
+    name: string
+  }>
+}
+
+export type NavItem = NavLinkItem | NavGroupItem
+
+export const NAVIGATION_DATA: NavItem[] = [
+  { type: 'link', path: ROUTER_PATHES.DEFAULT_PATH, name: 'Главная', icon: <Home /> },
 
   {
-    path: ROUTER_PATHES.CALCULATOR_PATH,
-    name: 'Онлайн рассчеты',
-    icon: <Star />,
+    type: 'group',
+    id: 'calculations',
+    name: 'Онлайн расчёты',
+    icon: <Calculator />,
+    children: [
+      { path: ROUTER_PATHES.CALCULATOR_PATH, name: 'Натальная карта' },
+      { path: ROUTER_PATHES.CALCULATOR_PATH, name: 'Синастрия' },
+    ],
   },
 
-  {
-    path: ROUTER_PATHES.POSTS_PATH,
-    name: 'Каталог статей',
-    icon: <Star />,
-  },
+  { type: 'link', path: ROUTER_PATHES.POSTS_PATH, name: 'Каталог статей', icon: <Collect /> },
 ]

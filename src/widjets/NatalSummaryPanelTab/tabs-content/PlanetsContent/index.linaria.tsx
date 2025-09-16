@@ -23,14 +23,21 @@ export const PlanetInDegressGrid = styled.div`
 
 export const Card = styled.div`
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 14px;
+  border-radius: 20px;
+
   padding: 1rem;
   padding-top: 0.8rem;
   font-size: ${CARD_TEXT_SIZE.S};
   color: rgba(255, 255, 255, 0.8);
   min-width: 0;
   min-height: 120px;
+
+  backdrop-filter: blur(9.760000228881836px);
+  box-shadow:
+    inset 1px 1px 4px 0 rgba(255, 255, 255, 0.05),
+    inset 2px 2px 9px 0 rgba(255, 255, 255, 0.05),
+    -2px -2px 12px -8px rgba(0, 0, 0, 0.05),
+    -11px -10px 48px -12px rgba(255, 255, 255, 0.05);
 
   @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
     font-size: ${CARD_TEXT_SIZE.XS};
@@ -72,18 +79,21 @@ export const Title = styled.div`
   font-size: ${CARD_TITLE_TEXT.S};
   margin-bottom: 8px;
   position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding-bottom: 7px;
 
   @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
     font-size: ${CARD_TITLE_TEXT.XS};
   }
 
-  &::after {
+  /* &::after {
     content: '';
     flex: 1;
     height: 1px;
     background: rgba(255, 255, 255, 0.12);
     margin-left: 8px;
-  }
+    top: 100%;
+  } */
 `
 
 export const List = styled.ul`

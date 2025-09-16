@@ -34,7 +34,7 @@ export const Container = styled.div`
 export const Card = styled.div<{ color: string }>`
   flex: 1;
   border-radius: 8px;
-  border: 1px solid ${(props) => addAlpha(props.color, 0.25)};
+  padding: 0.8rem;
   background: linear-gradient(
     to bottom,
     ${(props) => addAlpha(props.color, 0.15)},
@@ -42,8 +42,13 @@ export const Card = styled.div<{ color: string }>`
     rgba(255, 255, 255, 0.02) 100%
   );
   color: rgba(255, 255, 255, 0.85);
-  padding: 0.8rem;
   transition: all 0.3s;
+  backdrop-filter: blur(9.760000228881836px);
+  box-shadow:
+    inset 1px 1px 4px 0 rgba(255, 255, 255, 0.05),
+    inset 2px 2px 9px 0 rgba(255, 255, 255, 0.05),
+    -2px -2px 12px -8px rgba(0, 0, 0, 0.05),
+    -11px -10px 48px -12px rgba(255, 255, 255, 0.05);
 
   &:hover {
     background: linear-gradient(
@@ -81,9 +86,15 @@ export const CardText = styled.p`
 export const Summary = styled.div`
   width: 100%;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
   padding: 0.8rem;
+
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  backdrop-filter: blur(4.760000228881836px);
+  box-shadow:
+    inset 1px 1px 4px 0 rgba(255, 255, 255, 0.05),
+    inset 2px 2px 9px 0 rgba(255, 255, 255, 0.05),
+    -2px -2px 12px -8px rgba(0, 0, 0, 0.05),
+    -11px -10px 48px -12px rgba(255, 255, 255, 0.05);
 `
 
 export const SummaryLine = styled.p`

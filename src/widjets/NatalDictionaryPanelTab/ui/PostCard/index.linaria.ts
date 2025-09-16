@@ -25,7 +25,6 @@ export const Card = styled.div<{ glowColor?: string }>`
   background: rgba(13, 15, 16, 0.5);
   transition: box-shadow 0.3s ease;
   backdrop-filter: blur(1px) contrast(1.1) brightness(1.1);
-
   &:hover {
     box-shadow:
       inset 0 0 120px ${({ glowColor }) => addAlpha(glowColor, 0.1) || 'rgba(19, 22, 25, 0.1)'},
