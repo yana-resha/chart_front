@@ -63,6 +63,8 @@ export const FormInputContainer = styled.div`
   flex-direction: row;
   column-gap: 0.75rem;
   align-items: center;
+  outline-offset: 3px;
+  outline: 2px solid transparent;
   transition: all 0.2s;
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
@@ -71,10 +73,12 @@ export const FormInputContainer = styled.div`
   }
 
   &:hover,
-  &:focus-visible,
   &:focus-within {
-    outline: none;
     box-shadow: 0px 0px 0px 4px rgba(54, 58, 61, 0.24);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(54, 58, 61, 0.5);
   }
 
   &.disabled {

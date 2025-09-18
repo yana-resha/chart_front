@@ -1,4 +1,3 @@
-import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
 
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
@@ -19,12 +18,13 @@ export const TabContainer = styled.div<TabContainerProps>`
   justify-content: center;
   cursor: pointer;
   padding: 0rem 1.25rem 0.625rem 1.25rem;
+  outline: none;
   transition:
     color 0.3s,
     box-shadow 0.3s,
     background 0.3s;
 
-  /* мягкое свечение прямо под табом */
+  /* мягкое свечение под активным табом */
   &::before {
     content: '';
     position: absolute;
@@ -34,34 +34,45 @@ export const TabContainer = styled.div<TabContainerProps>`
     width: 60%;
     height: 0.375rem;
     pointer-events: none;
-    background: radial-gradient(circle, rgba(22, 238, 246, 0.4) 0%, transparent 80%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 80%);
     opacity: ${({ $active }) => ($active ? 1 : 0)};
     transition:
       opacity 0.3s,
       transform 0.4s ease;
   }
 
+  /* одна линия — работает только для активной */
   &::after {
     content: '';
     position: absolute;
-    bottom: -5px;
     left: 50%;
-    width: 100%;
+    bottom: -5px;
     transform: translateX(-50%) scaleX(${({ $active }) => ($active ? 1 : 0.5)});
+    transform-origin: 0 50%;
+    width: 100%;
     height: 2px;
-    background: linear-gradient(to right, transparent, rgba(22, 238, 246, 1), transparent);
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 1), transparent);
     opacity: ${({ $active }) => ($active ? 1 : 0)};
+    pointer-events: none;
     transition:
       opacity 0.3s,
-      transform 0.4s ease;
+      transform 0.7s ease;
   }
 
+  &:focus-visible::after,
   &:hover::after {
-    opacity: ${({ $active }) => ($active ? 1 : 0.4)};
+    height: 8px; /* контейнер для 2 линий */
+    background:
+      linear-gradient(to right, transparent, rgba(255, 255, 255, 0.7), transparent) center bottom / 100% 2px
+        no-repeat,
+      linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent) center top / 100% 2px
+        no-repeat;
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1);
   }
 
   & ${Label} {
-    color: ${({ $active }) => ($active ? 'rgb(22,238,246)' : '#fff')};
+    color: ${({ $active }) => ($active ? 'rgba(255, 255, 255, 0.92)' : 'rgba(255, 255, 255, 0.85)')};
     font-size: 1rem;
     font-weight: 500;
     transition:
@@ -74,12 +85,14 @@ export const TabContainer = styled.div<TabContainerProps>`
     }
   }
 
-  &:hover ${Label} {
-    color: ${({ $active }) => ($active ? 'rgb(22,238,246)' : '#bffeff')};
+  &:hover ${Label}, &:focus-visible ${Label} {
+    color: ${({ $active }) => ($active ? 'rgba(255, 255, 255, 0.85)' : 'rgba(255, 255, 255, 0.95)')};
   }
-`
-export const activeIndicatorStyle = css`
-  background-repeat: no-repeat;
-  background-position: 50%;
-  background-image: radial-gradient(circle at center, green 0%, transparent 70%);
+
+  @media (prefers-reduced-motion: reduce) {
+    &::after,
+    &::before {
+      transition: none;
+    }
+  }
 `

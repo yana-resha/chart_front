@@ -1,9 +1,9 @@
-import { forwardRef } from 'react'
+import { forwardRef, HTMLAttributes } from 'react'
 
 import { Tab } from '../Tabs'
 import { Label, TabContainer } from './index.linaria'
 
-interface TabPanelProps {
+interface TabPanelProps extends HTMLAttributes<HTMLDivElement> {
   item: Tab
   active: boolean
   onClick: () => void
@@ -11,7 +11,7 @@ interface TabPanelProps {
 }
 
 export const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
-  ({ item, onClick, className, active }, ref) => {
+  ({ item, onClick, className, active, ...props }, ref) => {
     TabPanel.displayName = 'TabPanel'
 
     return (
@@ -21,7 +21,7 @@ export const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
         ref={ref}
         data-node-key={item.key}
         $active={active}
-        // tabIndex={0}
+        {...props}
       >
         <Label>{item.label}</Label>
       </TabContainer>

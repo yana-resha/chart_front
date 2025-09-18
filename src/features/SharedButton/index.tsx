@@ -58,6 +58,12 @@ export const SharedButton = ({
       trigger={
         <Button
           onClick={() => setOpen((prev) => !prev)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              setOpen((prev) => !prev)
+            }
+          }}
           theme="secondary"
           kind="ghost"
           size="small"

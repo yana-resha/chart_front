@@ -5,6 +5,17 @@ export const ScrollWrapper = styled.div<{ $fadeLeft?: boolean; $fadeRight?: bool
   position: relative;
   display: flex;
   align-items: center;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent);
+    border-radius: 10px;
+  }
 `
 
 export const FadeMask = styled.div<{ $fadeLeft?: boolean; $fadeRight?: boolean }>`
@@ -99,23 +110,13 @@ export const TabPanelContainer = styled.div`
   min-width: 0;
   padding: 6px 6px;
 
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent);
-    border-radius: 10px;
-  }
-
   &::-webkit-scrollbar {
     display: none;
   }
 `
 
 export const ContentContainer = styled.div`
+  outline: none;
   display: flex;
   flex-direction: column;
   min-width: 0;

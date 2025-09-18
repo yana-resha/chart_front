@@ -56,15 +56,19 @@ const ROW_BASE = `
   svg { font-size: 130%; color: ${NAV_TOKENS.ICON}; transition: color .3s ease-in-out; }
   &:hover { color: ${NAV_TOKENS.TEXT_HOVER}; svg { color: ${addAlpha(NAV_TOKENS.ICON, 0.7)}; } }
 
+  &:focus-visible { color: ${NAV_TOKENS.TEXT_HOVER}; svg { color: ${addAlpha(NAV_TOKENS.ICON, 0.7)};} }
+
   &:after {
     content:''; position:absolute; inset:0; border-radius:8px; opacity:0;
     background: ${NAV_TOKENS.ACTIVE_OVERLAY};
     border-top: ${NAV_TOKENS.ACTIVE_BORDER_TOP};
     transition: opacity .5s ease;
   }
-  &.active:after { opacity:1; }
 
-  &:focus-visible { outline:2px solid ${addAlpha(NAV_TOKENS.ICON, 0.9)}; outline-offset:2px; }
+  &:focus-visible:after {
+    opacity: 0.85;
+  }
+  &.active:after { opacity:1; }
 `
 
 /** Полиморфный ряд: as={NavLink} / as="button" */
@@ -134,14 +138,22 @@ export const childLinkPillCSS = css`
   width: 100%;
   min-height: ${ROW_H};
   padding: ${COLLAPSE_GEOM.CHILD_PY} 0;
-  border-radius: 14px;
   text-decoration: none;
   position: relative;
   ${ROW_TYPO}
   transition: color .5s ease;
   color: ${NAV_TOKENS.TEXT};
+  outline: none;
+
   &:hover {
     color: ${NAV_TOKENS.TEXT_HOVER};
+  }
+  &:focus-visible {
+    color: ${NAV_TOKENS.TEXT_HOVER};
+    border-bottom: 1px solid ${addAlpha(NAV_TOKENS.ICON, 0.5)};
+    svg {
+      color: ${addAlpha(NAV_TOKENS.ICON, 0.7)};
+    }
   }
   &.active {
     color: ${NAV_TOKENS.ICON};

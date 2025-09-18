@@ -1,6 +1,5 @@
 import { styled } from '@linaria/react'
 
-import { TEXT_COLOR_VARIABLES } from '@/shared/assets/styles/colors'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { PageContentWrapper } from '@/shared/assets/styles/pages.linaria'
 import { CARD_TEXT_SIZE, CARD_TITLE_TEXT, TEXT_SIZE } from '@/shared/assets/styles/text-size'
@@ -244,7 +243,8 @@ export const MarkdownText = styled.div`
     font-size: 0.95em;
   }
   strong {
-    color: ${TEXT_COLOR_VARIABLES.BRIGHT_TEXT};
+    font-weight: 600;
+    font-size: 110%;
   }
 `
 
@@ -377,6 +377,7 @@ export const IntroductionBlock = styled(SectionBlock)`
 export const DataInfoBlock = styled(SectionBlock)``
 export const CalculatorInstructionBlock = styled(SectionBlock)``
 export const CalculationsInfoBlock = styled(SectionBlock)``
+export const PostsBlock = styled(SectionBlock)``
 
 /* ======= lists & specific cards ======= */
 
@@ -406,21 +407,24 @@ export const CalculationStepsGrid = styled.div`
     gap: ${LISTS_GAP.sm_tablet};
   }
 `
-export const CalculationCard = styled(BaseCard)`
-  .term {
-    font-weight: 500;
-    font-style: italic;
-    color: rgb(4, 187, 209) !important;
-    cursor: pointer;
-  }
+export const CalculationCard = styled(BaseCard)``
+
+export const PostsList = styled.ul`
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 20px;
 `
 
 /* Плашка-подсказка */
 export const Tip = styled.div`
-  border: 1px solid rgba(255, 209, 102, 0.4);
-  background: rgba(255, 209, 102, 0.08);
-  border-radius: 10px;
-  padding: 0.75rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(242, 255, 253, 0.08);
+  border-radius: 6px;
+  font-weight: 500;
+  padding: 1rem 1.5rem;
+  padding-bottom: 0.2rem;
+  text-align: center;
   font-size: ${CARD_TEXT_SIZE.M};
   line-height: 1.45;
   color: rgba(255, 255, 255, 0.95);
@@ -428,14 +432,19 @@ export const Tip = styled.div`
   transition: all 0.25s ease;
 
   &:hover {
-    background: ${addAlpha('#ffd166', 0.12)};
-    border-color: ${addAlpha('#ffd166', 0.55)};
-    box-shadow: 0 0 10px ${addAlpha('#ffd166', 0.25)};
+    background: rgba(242, 255, 253, 0.12);
+    border-color: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 0 10px rgba(242, 255, 253, 0.25)};
     transform: translateY(-1px);
   }
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     font-size: ${CARD_TEXT_SIZE.XS};
     padding: 0.65rem 0.8rem;
+    padding-bottom: 0.2rem;
   }
+`
+
+export const TipSmile = styled.div`
+  font-size: 28px;
 `

@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 
-import InfoIcon from '@/shared/assets/icons/info-circle.svg?react'
+import { Info } from './index.linaria'
 import { prepareIconColors, primaryIconCSS } from '@/shared/assets/styles/icons.linaria'
 import { Tooltip } from '@/shared/components/Tooltip'
 
@@ -17,7 +17,9 @@ export const InfoTooltip: React.FC<InfoTooltipProps> = ({ content, color, mobile
     tooltipContent={content}
     style={{ display: 'inline' }}
   >
-    <InfoIcon
+    <Info
+      tabIndex={0}
+      role="button"
       className={primaryIconCSS}
       style={color ? (prepareIconColors(color) as React.CSSProperties) : {}}
     />

@@ -93,6 +93,7 @@ export const ButtonsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
+  padding-bottom: 8px;
   justify-content: center;
   width: fit-content;
   align-self: center;

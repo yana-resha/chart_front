@@ -14,7 +14,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 import { TooltipArrow } from './TooltipArrow'
 import { Button } from '../Button'
-import { ClosedIcon, TooltipSurface } from './index.linaria'
+import { ChildrenWrapper, ClosedIcon, TooltipSurface } from './index.linaria'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import {
   popoverVariants,
@@ -27,6 +27,7 @@ import {
   OverlayHeaderTitle,
   OverlayVeil,
 } from '@/shared/assets/styles/overlays/shared.linaria'
+import { getFocusableElements } from '@/shared/helpers/getFocusableElements'
 import { useMedia } from '@/shared/hooks/useMedia'
 import { useScrollLock } from '@/shared/hooks/useScrollLock'
 
@@ -59,7 +60,6 @@ export const Tooltip = ({
 }: TooltipProps) => {
   const isSheet = useMedia(`(max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px)`)
   const effectiveTrigger: 'click' | 'hover' | 'manual' = isSheet ? 'click' : trigger
-
   const isControlled = open !== undefined
   const [uncontrolledOpen, setUncontrolledOpen] = useState<boolean>(defaultOpen ?? false)
   const actualOpen = isControlled ? !!open : uncontrolledOpen
@@ -82,9 +82,26 @@ export const Tooltip = ({
     whileElementsMounted: autoUpdate,
   })
 
+  const lastInputWasKeyboard = useRef(false)
   useEffect(() => {
-    if (refs && wrapperRef.current) refs.setReference(wrapperRef.current)
-  }, [refs])
+    const onKey = (e: KeyboardEvent) => {
+      // любые навигационные клавиши считаем «клавиатурным вводом»
+      if (['Tab', 'ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'Enter', ' '].includes(e.key)) {
+        lastInputWasKeyboard.current = true
+      }
+    }
+    const onMouse = () => {
+      lastInputWasKeyboard.current = false
+    }
+
+    window.addEventListener('keydown', onKey, true)
+    window.addEventListener('mousedown', onMouse, true)
+
+    return () => {
+      window.removeEventListener('keydown', onKey, true)
+      window.removeEventListener('mousedown', onMouse, true)
+    }
+  }, [])
 
   // клик вне — desktop вариант (не работаем в manual)
   useEffect(() => {
@@ -133,12 +150,63 @@ export const Tooltip = ({
       style={{ display: 'inline', ...style }}
       {...props}
     >
-      <span
-        onClick={effectiveTrigger === 'click' ? handleClick : undefined}
-        style={{ cursor: effectiveTrigger === 'click' ? 'pointer' : 'default' }}
+      <ChildrenWrapper
+        tabIndex={0}
+        ref={refs.setReference}
+        role={effectiveTrigger === 'click' ? 'button' : 'link'}
+        aria-expanded={actualOpen || undefined}
+        onClick={handleClick}
+        // ❌ Больше НЕ погружаемся по клику (удалить onMouseDown/onClick-хитрости)
+
+        // ✅ Погружаемся по клавиатурному фокусу (Tab)
+        onFocus={(e: { currentTarget: HTMLElement }) => {
+          // определяем, что фокус именно клавиатурный
+          const el = e.currentTarget as HTMLElement
+          const keyboardFocus =
+            lastInputWasKeyboard.current || (typeof el.matches === 'function' && el.matches(':focus-visible'))
+
+          if (!keyboardFocus) return
+          // открыть тултип в hover-режиме (логика hover)
+          if (effectiveTrigger === 'hover') setOpen(true)
+          // в click-режиме можно не открывать на Tab, если не нужно. Если нужно — раскомментируй:
+          // if (effectiveTrigger === 'click') setOpen(true)
+
+          // перевести фокус внутрь (первый фокусируемый ребёнок, иначе — прокси)
+          const [first] = getFocusableElements(el)
+          const target = first /* ?? innerProxyRef.current */ // добавь прокси, если бывает «пусто»
+          if (target) {
+            // rAF — чтобы сохранить :focus-visible на ребёнке
+            requestAnimationFrame(() => target.focus())
+          }
+        }}
+        onBlur={(e: { relatedTarget: Node | null; currentTarget: Node }) => {
+          const next = e.relatedTarget as Node | null
+          const inFloating = !!refs.floating.current?.contains(next)
+          const inTrigger = !!(e.currentTarget as Node).contains(next ?? null)
+          if (!inFloating && !inTrigger) setOpen(false)
+        }}
+        // Клавиатура: Enter/Space (в click-режиме) и ArrowDown — открыть и сфокусироваться внутри
+        onKeyDown={(e: { key: string; preventDefault: () => void; currentTarget: HTMLElement }) => {
+          if (effectiveTrigger === 'click' && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault()
+            setOpen(true)
+            const [first] = getFocusableElements(e.currentTarget as HTMLElement)
+            if (first) requestAnimationFrame(() => first.focus())
+
+            return
+          }
+          if (e.key === 'ArrowDown') {
+            const [first] = getFocusableElements(e.currentTarget as HTMLElement)
+            if (first) {
+              e.preventDefault()
+              first.focus()
+            }
+          }
+          if (e.key === 'Escape') setOpen(false)
+        }}
       >
         {children}
-      </span>
+      </ChildrenWrapper>
 
       <FloatingPortal>
         <AnimatePresence>

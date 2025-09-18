@@ -11,34 +11,55 @@ export const prepareLinkTextColors = (color: string) => ({
   '--link-color': addAlpha(color, 1),
   '--link-hover-color': addAlpha(color, 0.75),
   '--link-active-color': addAlpha(color, 0.9),
+  '--link-focus-visible-color': addAlpha(color, 0.1),
 })
 
 export const linkTextCss = css`
   ${prepareLinkTextColors(LINK_COLORS.LINK_DEFAULT_COLOR)}
 
-  /* ожидаются переменные:
-     --link-hover-color, --link-active-color (полные цвета)
-     --link-hover-rgb,   --link-active-rgb   (триплеты R,G,B) */
-  display: inline-block; /* чтобы box-shadow был виден на inline-элементе */
+  display: inline-block;
+  position: relative;
+  white-space: nowrap;
   color: var(--link-color);
-  text-decoration: underline;
-  text-decoration-thickness: 0.06em;
-  text-underline-offset: 0.18em;
-  text-decoration-skip-ink: auto;
   cursor: pointer;
   outline: none;
-  transition:
-    color 0.2s,
-    text-shadow 0.2s,
-    box-shadow 0.2s,
-    text-decoration-thickness 0.2s,
-    text-underline-offset 0.2s;
+  text-decoration: none; /* базово убрали подчёркивание */
+
+  transition: color 0.2s;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.2em;
+    height: 2px;
+    background: var(--link-hover-color);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform 350ms ease;
+    will-change: transform;
+    pointer-events: none;
+    border-radius: 2px;
+  }
 
   &:hover,
   &:focus-visible {
     color: var(--link-hover-color);
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
+  }
 
   &:active {
     color: var(--link-active-color);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::after {
+      transition: none;
+    }
   }
 `

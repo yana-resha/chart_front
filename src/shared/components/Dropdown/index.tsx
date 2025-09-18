@@ -16,6 +16,7 @@ import {
   OverlayHeader,
   OverlayHeaderTitle,
 } from '@/shared/assets/styles/overlays/shared.linaria'
+import { getFocusableElements } from '@/shared/helpers/getFocusableElements'
 import { useMedia } from '@/shared/hooks/useMedia'
 import { useScrollLock } from '@/shared/hooks/useScrollLock'
 
@@ -26,6 +27,12 @@ interface DropdownProps extends HTMLAttributes<HTMLDivElement> {
   placement?: Placement
   open?: boolean
   onClose?: () => void
+  /** Замыкать фокус внутри дропдауна/шита (по умолчанию true) */
+  trapFocus?: boolean
+  /** Возвращать фокус на триггер при закрытии (по умолчанию true) */
+  returnFocus?: boolean
+  /** CSS-селектор для первоначального фокуса внутри */
+  initialFocusSelector?: string
 }
 
 const MotionBox = motion.div
@@ -39,6 +46,9 @@ export const Dropdown = ({
   placement = 'bottom-start',
   open: controlledOpen,
   onClose,
+  trapFocus = true,
+  returnFocus = true,
+  initialFocusSelector,
   ...props
 }: DropdownProps) => {
   const isControlled = controlledOpen !== undefined
@@ -49,11 +59,12 @@ export const Dropdown = ({
     () => (isControlled ? onClose?.() : setUncontrolledOpen(false)),
     [isControlled, onClose],
   )
-  const toggle = () =>
-    isControlled ? (open ? onClose?.() : setUncontrolledOpen(true)) : setUncontrolledOpen((v) => !v)
 
   const id = useId()
   const triggerWrapRef = useRef<HTMLDivElement | null>(null)
+  const popoverRef = useRef<HTMLDivElement | null>(null)
+  const sheetRef = useRef<HTMLDivElement | null>(null)
+  const lastFocusedRef = useRef<HTMLElement | null>(null)
 
   const { refs, floatingStyles } = useFloating({
     placement,
@@ -80,51 +91,103 @@ export const Dropdown = ({
     return () => document.removeEventListener('mousedown', onDoc)
   }, [open, isSheet, refs, close])
 
-  // Esc
+  // Esc — закрыть
   useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') close()
+      if (e.key === 'Escape') {
+        e.stopPropagation()
+        close()
+      }
     }
     document.addEventListener('keydown', onKey)
 
     return () => document.removeEventListener('keydown', onKey)
-  }, [open])
+  }, [open, close])
 
   // Лочим скролл только для мобильного шита
   useScrollLock(open && isSheet, 'overflow')
+
+  // ===== Фокус-менеджмент и фокус-трэп =====
+  useEffect(() => {
+    if (!open) return
+
+    const container = (isSheet ? sheetRef.current : popoverRef.current) as HTMLElement | null
+    if (!container) return
+
+    // запоминаем триггер для возврата фокуса
+    const active = document.activeElement as HTMLElement | null
+    if (active) lastFocusedRef.current = active
+
+    // первичный фокус
+    const focusables = getFocusableElements(container)
+    const initialTarget =
+      (initialFocusSelector ? (container.querySelector(initialFocusSelector) as HTMLElement | null) : null) ??
+      focusables[0] ??
+      container
+    initialTarget.focus()
+
+    if (!trapFocus) return
+
+    // циклим Tab/Shift+Tab внутри
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return
+      const items = getFocusableElements(container)
+      if (!items.length) {
+        container.focus()
+        e.preventDefault()
+
+        return
+      }
+      const first = items[0]
+      const last = items[items.length - 1]
+      const current = document.activeElement as HTMLElement | null
+
+      if (!e.shiftKey && current === last) {
+        e.preventDefault()
+        first.focus()
+      } else if (e.shiftKey && current === first) {
+        e.preventDefault()
+        last.focus()
+      }
+    }
+
+    container.addEventListener('keydown', onKeyDown)
+
+    return () => {
+      container.removeEventListener('keydown', onKeyDown)
+    }
+  }, [open, isSheet, trapFocus, initialFocusSelector])
+
+  // Возврат фокуса при закрытии
+  useEffect(() => {
+    if (open) return
+    if (returnFocus) {
+      lastFocusedRef.current?.focus?.()
+    }
+  }, [open, returnFocus])
 
   return (
     <div
       ref={triggerWrapRef}
       style={{ display: 'inline-block' }}
     >
-      <div
-        onClick={toggle}
-        role="button"
-        aria-haspopup={isSheet ? 'dialog' : 'menu'}
-        aria-expanded={open}
-        aria-controls={id}
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault()
-            toggle()
-          }
-        }}
-        style={{ display: 'inline-flex' }}
-      >
-        {trigger}
-      </div>
+      <div style={{ display: 'inline-flex' }}>{trigger}</div>
 
       <FloatingPortal>
         <AnimatePresence>
           {open && !isSheet && (
             <div
-              ref={refs.setFloating}
+              ref={(node) => {
+                refs.setFloating(node)
+                // сохраним ноду поповера для фокуса/трэпа
+                popoverRef.current = node
+              }}
               style={{ ...floatingStyles, position: 'absolute', zIndex: 1000 }}
               id={id}
               role="menu"
+              tabIndex={-1}
+              aria-label={typeof mobileTitle === 'string' ? mobileTitle : undefined}
             >
               <MotionBox
                 variants={popoverVariants}
@@ -148,12 +211,14 @@ export const Dropdown = ({
               aria-modal="true"
             >
               <MotionSheet
+                ref={sheetRef}
                 onClick={(e: React.MouseEvent) => e.stopPropagation()}
                 variants={sheetVariants}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
                 role="document"
+                tabIndex={-1}
               >
                 <OverlayHeader>
                   <OverlayHeaderTitle>{mobileTitle}</OverlayHeaderTitle>

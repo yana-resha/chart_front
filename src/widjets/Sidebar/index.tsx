@@ -86,7 +86,7 @@ const Sidebar = () => {
     >
       {/* Десктопный верхний блок */}
       <TopBlock>
-        <PublicAccountBlock>ASTRODOC</PublicAccountBlock>
+        <PublicAccountBlock>AstroDос</PublicAccountBlock>
       </TopBlock>
 
       {/* Планшетный топ-бар (логотип + бургер) */}

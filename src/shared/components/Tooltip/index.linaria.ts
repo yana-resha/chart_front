@@ -69,6 +69,14 @@ export const tooltipTailIconCSS = css`
   color: rgba(0, 0, 0, 1);
 `
 
+export const ChildrenWrapper = styled.span`
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: none;
+  }
+`
+
 export const ClosedIcon = styled(SURFACE_TOKENS.CLOSED_ICON_COMPONENT)`
   width: 12px;
   height: 12px;

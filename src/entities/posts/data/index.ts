@@ -105,7 +105,8 @@ export async function getPostBySlug(slug: string): Promise<IPost | null> {
 
 /* ========= Удобные селекторы (опционально) ========= */
 export const getFeaturedPreviews = () => PREVIEWS.filter((p) => p.featured)
-export const getPreviewsByTag = (tag: string) => PREVIEWS.filter((p) => p.tags?.includes(tag))
+export const getPreviewsByTags = (tags: string[]) =>
+  PREVIEWS.filter((p) => p.tags?.some((t) => tags.includes(t)))
 export const findNeighbors = (slug: string) => {
   const idx = PREVIEWS.findIndex((p) => p.slug === slug)
 

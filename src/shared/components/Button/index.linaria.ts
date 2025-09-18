@@ -8,7 +8,6 @@ import { addAlpha } from '@/shared/helpers/addAlpha'
 export const ChildrenContainer = styled.div`
   font-weight: 500;
 `
-
 export const Loader = styled.div`
   position: absolute;
   width: 1.125rem;
@@ -20,7 +19,6 @@ export const Loader = styled.div`
     color: white;
   }
 `
-
 export const ButtonComponent = styled.button`
   all: unset; /* убивает нативные стили кнопки/ссылки */
   position: relative;
@@ -33,13 +31,14 @@ export const ButtonComponent = styled.button`
   line-height: 1.1;
   letter-spacing: 0.15px;
   text-align: center;
-  outline: none;
+  outline: 2px solid transparent;
   border: 0px solid transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
   corner-shape: squircle;
+  outline-offset: 3px;
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     font-size: ${TEXT_SIZE.S};
@@ -60,9 +59,12 @@ export const ButtonComponent = styled.button`
       box-shadow: 0 0 5px 5px rgba(22, 238, 246, 0);
     }
 
-    &:hover,
-    &:focus-within {
+    &:hover {
       box-shadow: 0 0 5px 5px rgba(22, 238, 246, 0.15);
+    }
+
+    &:focus-visible {
+      outline: 2px solid rgba(22, 238, 246, 0.5);
     }
 
     &:active {
@@ -81,9 +83,12 @@ export const ButtonComponent = styled.button`
       color: ${BUTTON_COLOR_VARIABLES.LIGHT_COLOR};
       background: ${addAlpha(BTN_BACKGROUND_VARIABLES.NORM_PRIMARY, 0.2)};
 
-      &:hover,
-      &:focus-within {
+      &:hover {
         background: ${addAlpha(BTN_BACKGROUND_VARIABLES.NORM_PRIMARY, 0.3)};
+      }
+
+      &:focus-visible {
+        outline: 2px solid ${addAlpha(BTN_BACKGROUND_VARIABLES.NORM_PRIMARY, 0.5)};
       }
 
       &:active {
@@ -99,9 +104,12 @@ export const ButtonComponent = styled.button`
       color: ${BUTTON_COLOR_VARIABLES.LIGHT_COLOR};
       background: rgba(255, 255, 255, 0.1);
 
-      &:hover,
-      &:focus-within {
+      &:hover {
         background: rgba(255, 255, 255, 0.2);
+      }
+
+      &:focus-visible {
+        outline: 2px solid rgba(255, 255, 255, 0.5);
       }
 
       &:active {
@@ -125,8 +133,12 @@ export const ButtonComponent = styled.button`
       box-shadow: 0 0 5px 5px rgba(22, 238, 246, 0);
 
       &:hover,
-      &:focus-within {
+      &:focus-visible {
         box-shadow: 0 0 5px 5px rgba(22, 238, 246, 0.1);
+      }
+
+      &:focus-visible {
+        outline: 2px solid ${addAlpha(BTN_BACKGROUND_VARIABLES.BRIGHT_PRIMARY, 0.5)};
       }
 
       &:active {
@@ -144,9 +156,12 @@ export const ButtonComponent = styled.button`
       color: rgb(255, 255, 255, 0.8);
       box-shadow: 0 0 5px 5px rgba(255, 255, 255, 0);
 
-      &:hover,
-      &:focus-within {
+      &:hover {
         box-shadow: 0 0 5px 5px rgba(255, 255, 255, 0.07);
+      }
+
+      &:focus-visible {
+        outline: 2px solid rgba(255, 255, 255, 0.5);
       }
 
       &:active {
@@ -198,6 +213,10 @@ export const ButtonComponent = styled.button`
       -webkit-text-fill-color: transparent;
       background-clip: text;
       text-fill-color: transparent;
+
+      &:focus-visible {
+        outline: 2px solid ${addAlpha(BTN_BACKGROUND_VARIABLES.BRIGHT_PRIMARY, 0.5)};
+      }
     }
 
     &.secondary {
@@ -207,10 +226,13 @@ export const ButtonComponent = styled.button`
       -webkit-text-fill-color: transparent;
       background-clip: text;
       text-fill-color: transparent;
+
+      &:focus-visible {
+        outline: 2px solid rgba(255, 255, 255, 0.5);
+      }
     }
 
-    &:hover,
-    &:focus-within {
+    &:hover {
       filter: brightness(0.7);
     }
 

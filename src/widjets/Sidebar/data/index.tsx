@@ -33,10 +33,7 @@ export const NAVIGATION_DATA: NavItem[] = [
     id: 'calculations',
     name: 'Онлайн расчёты',
     icon: <Calculator />,
-    children: [
-      { path: ROUTER_PATHES.CALCULATOR_PATH, name: 'Натальная карта' },
-      { path: ROUTER_PATHES.CALCULATOR_PATH, name: 'Синастрия' },
-    ],
+    children: [{ path: ROUTER_PATHES.CALCULATOR_PATH, name: 'Натальная карта' }],
   },
 
   { type: 'link', path: ROUTER_PATHES.POSTS_PATH, name: 'Каталог статей', icon: <Collect /> },
