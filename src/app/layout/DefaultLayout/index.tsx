@@ -4,16 +4,18 @@ import { DefaultContainer, PagesContainer, SidebarContainer, SidebarStaticWrappe
 import Sidebar from '@/widjets/Sidebar'
 
 const DefaultLayout = () => (
-  <DefaultContainer>
-    <SidebarStaticWrapper>
-      <SidebarContainer>
-        <Sidebar />
-      </SidebarContainer>
-    </SidebarStaticWrapper>
-    <PagesContainer>
-      <Outlet />
-    </PagesContainer>
-  </DefaultContainer>
+  <>
+    <DefaultContainer>
+      <SidebarStaticWrapper>
+        <SidebarContainer>
+          <Sidebar />
+        </SidebarContainer>
+      </SidebarStaticWrapper>
+      <PagesContainer>
+        <Outlet />
+      </PagesContainer>
+    </DefaultContainer>
+  </>
 )
 
 export default DefaultLayout

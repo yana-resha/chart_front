@@ -3,8 +3,8 @@ featured: true
 isDraft: false
 title: "Как интерпретировать планеты в знаке зодиака"
 createdAt: "2025-09-12T14:13:46Z"
-cover: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1600&auto=format&fit=crop"
-preview: "./preview.png"
+cover: "./cover.jpeg"
+preview: "./cover.jpeg"
 tags:
   - астрология
   - планеты

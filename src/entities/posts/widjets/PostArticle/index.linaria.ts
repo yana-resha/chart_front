@@ -7,7 +7,7 @@ export const Cover = styled.figure`
   border-radius: 24px;
   overflow: hidden;
   background: #141824;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(0, 0, 0, 0.06);
 
   /* на всякий случай, если figcaption будет */
   figcaption {

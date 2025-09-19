@@ -5,8 +5,6 @@ import {
   PostH2,
   PostH3,
   P,
-  A,
-  Blockquote,
   Figure,
   Figcaption,
   Pre,
@@ -16,27 +14,36 @@ import {
   Th,
   Td,
   Caption,
+  Strong,
 } from './index.linaria'
 import { UlWithCtx, OlWithCtx, LiSwitch } from './ProseListCtx'
+import { linkTextCss } from '@/shared/assets/styles/links.linaria'
 import { ImageReveal } from '@/shared/components/ImageReveal'
+import { Tip } from '@/shared/components/Tip'
 
 export const markdownComponents: Components = {
   h2: ({ ...props }) => <PostH2 {...props} />,
   h3: ({ ...props }) => <PostH3 {...props} />,
   p: ({ ...props }) => <P {...props} />,
-  a: ({ ...props }) => <A {...props} />,
+  strong: ({ ...props }) => <Strong {...props} />,
 
   ul: ({ ...props }) => <UlWithCtx {...props} />,
   ol: ({ ...props }) => <OlWithCtx {...props} />,
   li: ({ ...props }) => <LiSwitch {...props} />,
 
-  blockquote: ({ ...props }) => <Blockquote {...props} />,
+  blockquote: ({ children, ...rest }) => <Tip {...rest}>{children}</Tip>,
 
   // картинки
   img: ({ ...props }) => (
     <ImageReveal
       imgProps={props} // сюда попадут правильные ImgHTMLAttributes
       frameProps={{ style: { borderRadius: 12 } }}
+    />
+  ),
+  a: ({ ...props }) => (
+    <a
+      {...props}
+      className={linkTextCss}
     />
   ),
   figure: ({ ...props }) => <Figure {...props} />,

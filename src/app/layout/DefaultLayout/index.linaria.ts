@@ -3,12 +3,10 @@ import { styled } from '@linaria/react'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
 export const DefaultContainer = styled.div`
-  /* базовая сетка: слева сайдбар, справа страница */
   display: grid;
   grid-template-columns: 312px 1fr;
   grid-template-areas: 'sidebar main';
   gap: 0.75rem;
-  padding: 0.75rem;
 
   max-width: 100%;
   position: relative;
@@ -29,7 +27,7 @@ export const SidebarStaticWrapper = styled.div`
   grid-area: sidebar;
   width: 100%;
   height: 100%;
-  position: relative;
+  /* position: relative; */
 
   /* планшет: обычный поток, авто-высота */
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
@@ -42,9 +40,9 @@ export const SidebarStaticWrapper = styled.div`
 
 export const SidebarContainer = styled.div`
   /* десктоп: фиксируем панель */
-  height: calc(100dvh - 1.5rem);
+  height: 100dvh;
   position: sticky;
-  top: 0.75rem;
+  top: 0;
 
   /* планшет: обычный поток, авто-высота */
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
@@ -59,7 +57,7 @@ export const PagesContainer = styled.main`
   height: 100%;
   min-width: 0;
   width: 100%;
-  position: relative;
+  /* position: relative; */
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     padding: 0.5rem;

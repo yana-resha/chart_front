@@ -3,8 +3,8 @@ featured: true
 isDraft: false
 title: "Пошаговый пример разбора натальной карты (на примере Леди Гаги)"
 createdAt: "2025-09-13T10:00:00Z"
-cover: "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=1600&auto=format&fit=crop"
-preview: "./preview.png"
+cover: "./cover.jpeg"
+preview: "./cover.jpeg"
 tags:
   - астрология
   - натальная карта

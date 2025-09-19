@@ -24,10 +24,9 @@ export enum BORDER_COLOR_VARIABLES {
   SECONDARY_BORDER = 'rgb(155, 156, 158)',
   PRIMARY_BORDER = 'rgb(255, 255, 255)',
 }
-
 export enum BACKGROUND_COLORS_VARIABLES {
-  SIDEBAR_BACK = 'rgb(13, 15, 16)',
-  GENERAL_BACK = 'rgb(19, 22, 25)',
+  GENERAL_BACK = 'rgb(13, 15, 16)',
+  SIDEBAR_BACK = 'rgb(19, 22, 25)',
   ITEMS_BACK = 'rgb(31, 34, 38)',
   ITEMS_GRADIENT_BACK = 'linear-gradient(117.24deg, rgb(86, 98, 104) -70.139%,rgba(13, 15, 16, 0) 126.787%)',
 }

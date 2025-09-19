@@ -108,7 +108,8 @@ div#root {
 
 body {
   position: relative;
-  background-color: rgb(19, 22, 25);
+  background-color: rgb(13, 15, 16);
+  /* background-color: rgb(19, 22, 25); */
   height: fit-content;
   display: flex;
   min-height: 100dvh;

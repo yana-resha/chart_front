@@ -1,10 +1,9 @@
-import { Tag } from 'react-konva'
-
+import { MetaRowWrap } from './index.linaria'
+import { TagCloud } from '../index.linaria'
 import { estimatePostReadingTime } from '@/entities/posts/helpers/estimatePostReadingTime'
 import { formatePostDate } from '@/entities/posts/helpers/formatePostDate'
 import { IPost } from '@/entities/posts/types/post.types'
-import { MetaRowWrap } from './index.linaria'
-import { TagCloud } from '../index.linaria'
+import Tag from '@/entities/posts/ui/Tag'
 
 export function MetaRow({ post }: { post: IPost }) {
   const reading = estimatePostReadingTime(post.content)

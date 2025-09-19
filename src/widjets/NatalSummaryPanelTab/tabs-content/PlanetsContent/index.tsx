@@ -224,7 +224,7 @@ export const PlanetsContent = ({ planets, houses }: Props) => {
           <RetroGrid>
             <Card>
               <Title>
-                Ретро{' '}
+                Ретроградность{' '}
                 <InfoTooltip
                   mobileTitle={`Ретроградность`}
                   content={

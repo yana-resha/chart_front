@@ -57,18 +57,7 @@ export const Ul = styled.ul`
 
 export const Li = styled.li`
   position: relative;
-  padding-left: 1.2em; /* место под кастомный маркер */
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0.55em;
-    left: 0;
-    width: 0.45em;
-    height: 0.45em;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.65);
-  }
+  padding-left: 0.5em; /* место под кастомный маркер */
 `
 
 export const Ol = styled.ol`
@@ -162,6 +151,11 @@ export const Img = styled.img`
   }
 `
 
+export const Strong = styled.strong`
+  font-weight: 700;
+  color: rgba(255, 255, 255, 1);
+`
+
 /** Для ::img директивы — такая же логика */
 export const Figure = styled.figure`
   margin: 12px 0;
@@ -186,6 +180,12 @@ export const Figure = styled.figure`
     max-width: 44%;
     clear: none;
     display: block;
+  }
+
+  figcaption {
+    margin: 0;
+    padding: 5px;
+    padding-bottom: 0;
   }
 
   @media (max-width: 720px) {

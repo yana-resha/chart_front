@@ -3,8 +3,8 @@ featured: true
 isDraft: false
 title: "Зачем нужны аспекты в натальной карте и как их правильно интерпретировать"
 createdAt: "2025-09-13T14:15:00Z"
-cover: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1600&auto=format&fit=crop"
-preview: "./preview.png"
+cover: "./cover.jpeg"
+preview: "./cover.jpeg"
 tags:
   - астрология
   - аспекты

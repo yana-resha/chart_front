@@ -6,7 +6,6 @@ import {
   IntroductionBlock,
   Divider,
   StepCard,
-  Tip,
   InstructionCard,
   CalculationCard,
   CalculationStepsGrid,
@@ -33,7 +32,6 @@ import {
   BaseCardHeader,
   PostsBlock,
   PostsList,
-  TipSmile,
 } from './index.linaria'
 import { CalculationCardTerm } from './ui/CalculationCardTerm'
 import { getPreviewsByTags } from '@/entities/posts/data'
@@ -45,6 +43,7 @@ import { linkTextCss } from '@/shared/assets/styles/links.linaria'
 import { H1, H2 } from '@/shared/assets/styles/titles.linaria'
 import { HeaderBackButton } from '@/shared/components/HeaderBackButton'
 import { PageHeader } from '@/shared/components/PageHeader'
+import { Tip } from '@/shared/components/Tip'
 import { Tooltip } from '@/shared/components/Tooltip'
 import { smoothScrollAnchor } from '@/shared/helpers/smoothScrollAnchor'
 import NatalCalculatorForm from '@/widjets/NatalCalculatorForm'
@@ -215,10 +214,9 @@ export const NatalCalculatorPage = () => {
                 </InstructionDesc>
               </InstructionCard>
             </InstructionsGrid>
-            <Tip>
+            <Tip smile="🌍">
               Если не нашли свой город в списке, можете ввести его вручную. Часовой пояс при этом будет
               определён автоматически по координатам, но при необходимости вы можете выбрать его вручную.
-              <TipSmile>🌍</TipSmile>
             </Tip>
           </MarkdownText>
         </DataInfoBlock>
@@ -303,10 +301,9 @@ export const NatalCalculatorPage = () => {
                 </StepDesc>
               </StepCard>
             </StepsGrid>
-            <Tip>
+            <Tip smile="🕒">
               Если точное время рождения неизвестно, можно указать примерное (например, 12:00). На положение
               планет в знаках это не повлияет, а вот дома и Асцендент могут отличаться.
-              <TipSmile>🕒</TipSmile>
             </Tip>
           </MarkdownText>
         </CalculatorInstructionBlock>

@@ -19,22 +19,31 @@ export const SIDEBAR_UI = {
 
 export const Container = styled.aside`
   height: 100%;
-  background-color: ${BACKGROUND_COLORS_VARIABLES.SIDEBAR_BACK};
-  border-radius: ${SIDEBAR_UI.RADIUS};
   padding: ${SIDEBAR_UI.GUTTER_Y} ${SIDEBAR_UI.GUTTER_X} calc(${SIDEBAR_UI.GUTTER_Y} * 1.5)
     ${SIDEBAR_UI.GUTTER_X};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  position: relative;
+  /* background: rgba(255, 255, 255, 0.04); */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+/*   backdrop-filter: blur(9.76px);
+  -webkit-backdrop-filter: blur(9.76px); */
+/*   box-shadow:
+    inset 1px 1px 4px 0 rgba(255, 255, 255, 0.05),
+    inset 2px 2px 9px 0 rgba(255, 255, 255, 0.05),
+    -2px -2px 12px -8px rgba(0, 0, 0, 0.05),
+    -11px -10px 48px -12px rgba(255, 255, 255, 0.05); */
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     border-radius: 0;
     margin-bottom: 0;
     gap: ${SIDEBAR_UI.GAP_TABLET};
     padding: 0.5rem 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    
     background-color: ${SURFACE_TOKENS.MOBILE_SHARED.BACKGROUND};
     box-shadow: 0 6px 12px rgba(255, 255, 255, 0.045);
+    backdrop-filter: none;
   }
 `
 
@@ -72,12 +81,12 @@ export const NavList = styled.nav`
     display: none;
   }
 `
-
 export const Backdrop = styled.button<{ open: boolean }>`
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0);
+    height: 100dvh;
+    background: rgba(0, 0, 0, 0.55); /* было 1 */
     opacity: ${({ open }) => (open ? 1 : 0)};
     pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
     transition: opacity 0.2s ease;
@@ -89,28 +98,32 @@ export const Backdrop = styled.button<{ open: boolean }>`
     display: none;
   }
 `
-
 export const NavSheet = styled.nav<{ open: boolean; top: number }>`
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     position: fixed;
-    right: 0;
-    min-width: 60%;
-    top: ${({ top }) => `calc(${top}px)`};
-    bottom: 0;
+    inset: ${({ top }) => `${top}px 0 0 auto`}; /* top right bottom left */
+    width: 60%; /* можно вернуть min-width:60%, если нужно */
+    max-width: 100%;
+    height: calc(100dvh - ${({ top }) => `${top}px`}); /* не вылезаем за экран */
+
     display: flex;
     flex-direction: column;
     background: ${BACKGROUND_COLORS_VARIABLES.SIDEBAR_BACK};
     z-index: ${SIDEBAR_UI.SHEET.Z_MENU};
-    transform: translateX(${({ open }) => (open ? 0 : `100%`)});
+
+    transform: translate3d(${({ open }) => (open ? '0%' : '100%')}, 0, 0);
     opacity: ${({ open }) => (open ? 1 : 0)};
     pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
+
     transition:
       transform ${SIDEBAR_UI.SHEET.DURATION_IN_MS}ms ease,
       opacity ${SIDEBAR_UI.SHEET.OPACITY_IN_MS}ms ease;
+    will-change: transform, opacity;
+    -webkit-overflow-scrolling: touch;
   }
 
   @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
-    min-width: 100%;
+    width: 100%;
   }
   @media (min-width: ${MEDIA_POINTS.TABLET + 1}px) {
     display: none;

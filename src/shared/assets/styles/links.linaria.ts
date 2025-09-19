@@ -22,6 +22,7 @@ export const linkTextCss = css`
   white-space: nowrap;
   color: var(--link-color);
   cursor: pointer;
+  font-weight: inherit;
   outline: none;
   text-decoration: none; /* базово убрали подчёркивание */
 
@@ -32,8 +33,8 @@ export const linkTextCss = css`
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -0.2em;
-    height: 2px;
+    bottom: -0em;
+    height: 1px;
     background: var(--link-hover-color);
     transform: scaleX(0);
     transform-origin: 0 50%;
