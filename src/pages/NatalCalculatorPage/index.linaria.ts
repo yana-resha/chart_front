@@ -412,6 +412,7 @@ export const CalculationCard = styled(BaseCard)``
 export const PostsList = styled.ul`
   list-style: none;
   padding: 0;
+  margin: 0;
   display: grid;
   gap: 20px;
 `

@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { useFormikContext } from 'formik'
 
-import { ChartFormFieldValues, IInputLocality } from '../types'
+import { ChartFormFieldValues } from '../types'
 import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator-request.types'
+import { formatCoord, toInputLocality } from '@/entities/locality/helpers/search-input-mappers.helpers'
+import { IInputLocality } from '@/entities/locality/types/input-locality.types'
 import { useLazyGetLocalitiesByNameQuery } from '@/store/api/locality.api'
 
 export const useFormInside = () => {
@@ -27,6 +29,11 @@ export const useFormInside = () => {
     { currentData: localitiesList, isError: isLocalitiesError, isFetching: isLocalitiesLoading },
   ] = useLazyGetLocalitiesByNameQuery()
 
+  const mapedLocalitiesList = useMemo(
+    () => (localitiesList ?? []).map((x) => toInputLocality(x)),
+    [localitiesList],
+  )
+
   const timezoneHadleChange = (value: { default?: boolean; value: number }) => {
     if (value.default) {
       setFieldValue('is_timezone_auto', true)
@@ -48,19 +55,20 @@ export const useFormInside = () => {
   const localitiesClickHandler = (e: MouseEvent | undefined, item: IInputLocality | null) => {
     if (!item) return
 
-    const newValues = {
+    const newValues: ChartFormFieldValues = {
       ...values,
       locality: item,
       searchLocality: item.content?.toString() ?? '',
-      latitude: item.latitude.toString(),
-      longitude: item.longitude.toString(),
+      latitude: formatCoord(item.latitude), // ← строка
+      longitude: formatCoord(item.longitude), // ← строка
     }
+
     setValues(newValues)
     validateForm(newValues)
   }
 
   const resetLocality = () => {
-    const newValues = {
+    const newValues: ChartFormFieldValues = {
       ...values,
       locality: null,
       latitude: '',
@@ -74,7 +82,7 @@ export const useFormInside = () => {
   return {
     values,
     isSubmitting,
-    localitiesList,
+    mapedLocalitiesList,
     isLocalitiesError,
     isLocalitiesLoading,
     submitForm,

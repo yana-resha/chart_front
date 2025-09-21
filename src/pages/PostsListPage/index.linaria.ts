@@ -14,6 +14,7 @@ export const Container = styled.div`
 export const ContentWrapper = styled(PageContentWrapper)`
   padding-left: 1rem;
   padding-right: 1rem;
+  padding-bottom: 1.875rem;
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     padding-left: 0.5rem;

@@ -4,6 +4,7 @@ import { useFormInside } from './hooks/useFormInside'
 import { TimeGridRow, FormContainer, CoordsGridRow, LocalityTooltipContent } from './index.linaria'
 import { HOUSE_SYSTEM_LIST, TIMEZONE_LIST } from '@/entities/astro-charts/data/calculator'
 import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator-request.types'
+import { IInputLocality } from '@/entities/locality/types/input-locality.types'
 import InfoIcon from '@/shared/assets/icons/info-circle.svg?react'
 import Pin3 from '@/shared/assets/icons/pin-3.svg?react'
 import { SHARED_COLORS_VARIABLES } from '@/shared/assets/styles/colors'
@@ -23,7 +24,7 @@ export const Form = () => {
     submitForm,
     timezoneHadleChange,
     values,
-    localitiesList,
+    mapedLocalitiesList,
     isLocalitiesError,
     isLocalitiesLoading,
     localitiesClickHandler,
@@ -98,7 +99,7 @@ export const Form = () => {
         name: 'Russia',
         name_ru: 'Россия',
       },
-    }
+    } as unknown as IInputLocality
 
     localitiesClickHandler(undefined, obj)
   }, [])
@@ -133,18 +134,7 @@ export const Form = () => {
         leftIcon={<Pin3 className={FormIconCSS} />}
         label={'Населенный пункт'}
         placeholder="Укажите населенный пункт"
-        dropdownList={(localitiesList ?? []).map((obj) => ({
-          ...obj,
-          content: [
-            obj.asciiname_ru,
-            obj.admin2_data?.asciiname_ru,
-            obj.admin1_data?.asciiname_ru,
-            obj.country_data?.name_ru,
-          ]
-            .filter((el) => el)
-            .join(', '),
-          id: obj.geonameid,
-        }))}
+        dropdownList={mapedLocalitiesList}
         onClickItem={localitiesClickHandler}
         clearValueFunc={resetLocality}
         listIsLoading={isLocalitiesLoading}

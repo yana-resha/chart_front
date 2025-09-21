@@ -1,9 +1,6 @@
 import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator-request.types'
-import { IFullLocality } from '@/entities/locality/types'
-import { IDropdownItem } from '@/shared/components/SearchInput/types'
+import { IInputLocality } from '@/entities/locality/types/input-locality.types'
 import { HOUSE_SYSTEM } from '@/shared/types/astro/astro-houses.types'
-
-export type IInputLocality = IFullLocality & IDropdownItem
 
 type NatalChartValues = {
   [CalculatorRequestKeys.date]: string
