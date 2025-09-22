@@ -14,6 +14,7 @@ import {
   DropdownItemContent,
   DropdownItemIconContainer,
   DropdownList,
+  SkeletonDropdownList,
   SkeletonItem,
   UpsetIconSVG,
 } from '@/shared/assets/styles/form'
@@ -72,15 +73,14 @@ export const DropdownComponent = <IValue extends IDropdownItem>({
             <AlertDescription>{emptyList?.description}</AlertDescription>
           </DropdownAlertBlock>
         )}
-
         {listIsLoading && (
-          <DropdownList>
+          <SkeletonDropdownList style={{ paddingTop: '10px', paddingBottom: '10px' }}>
             {Array.from({ length: 5 }).map((_, i) => (
               <SkeletonItem key={i}>
                 <Skeleton height={20} />
               </SkeletonItem>
             ))}
-          </DropdownList>
+          </SkeletonDropdownList>
         )}
 
         {isError && (

@@ -12,40 +12,38 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   disabled?: boolean
   invalid?: boolean
   invalidText?: string | ReactNode
-  openDropdownFunc: () => void
-}
-
-export interface IDropdownProps<VALUE extends IDropdownItem> {
-  dropdownRef: RefObject<HTMLDivElement | null>
-  inputRef: RefObject<HTMLDivElement | null>
-  dropdownList?: VALUE[]
-  onClickItem: (e: MouseEvent, item: VALUE) => void
-  closeDropdown: () => void
-  listIsLoading?: boolean
-  emptyList?: {
-    title: string | ReactNode
-    description: string | ReactNode
-  }
-  isError?: boolean
-  error?: {
-    title: string | ReactNode
-    description: string | ReactNode
-  }
 }
 
 export interface IDropdownItem {
-  content: string | number | ReactNode
-  rightIcon?: ReactNode
   id: string | number
+  content?: ReactNode | string
+  rightIcon?: ReactNode
+}
+
+export interface IDropdownProps<VAL extends IDropdownItem> {
+  dropdownRef: RefObject<HTMLDivElement | null>
+  inputRef: RefObject<HTMLInputElement | null>
+  onClickItem: (e: MouseEvent | undefined, item: VAL | null) => void
+  closeDropdown: () => void
+  listIsLoading?: boolean
+  isError?: boolean
+  error?: { title?: ReactNode; description?: ReactNode }
+  emptyList?: { title?: ReactNode; description?: ReactNode } // <-- показывай пустое состояние, если нужно
+  dropdownList?: VAL[]
 }
 
 type TInputOutsideProps = Omit<TextInputProps, 'ref' | 'openDropdownFunc'>
-
 type TDropdownOutsideProps<VAL extends IDropdownItem> = Omit<
   IDropdownProps<VAL>,
   'dropdownRef' | 'inputRef' | 'closeDropdown'
 >
 
+/** Полностью контролируемые пропсы */
 export interface SearchInputProps<VALUE extends IDropdownItem>
   extends TInputOutsideProps,
-    TDropdownOutsideProps<VALUE> {}
+    TDropdownOutsideProps<VALUE> {
+  /** Текущее состояние открытия — управляется только родителем */
+  open: boolean
+  /** Сигнал об изменении открытия (родитель обязан синхронизировать open) */
+  onOpenChange: (open: boolean) => void
+}

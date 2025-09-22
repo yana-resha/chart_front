@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 
 import { createPortal } from 'react-dom'
 
@@ -8,55 +8,108 @@ import { TextInput } from './TextInput'
 import { IDropdownItem, SearchInputProps } from './types'
 
 export const SearchInput = <IValue extends IDropdownItem>({
-  dropdownList,
+  // dropdown (всё рисуем как дали)
+  dropdownList = [],
   onClickItem,
   listIsLoading,
-  error,
   isError,
-  emptyList = { title: 'Не нашлось...', description: 'Попробуй короче или по-другому написать.' },
-  ...inputProps
+  error,
+  emptyList,
+
+  // input (просто прокидываем наружу)
+  value,
+  onChange,
+  onFocus,
+  isClearOnFocus,
+  leftIcon,
+  label,
+  placeholder,
+  clearValueFunc,
+  showClearIcon,
+  disabled,
+  invalid,
+  invalidText,
+  tooltip,
+  mobileTooltipTitle,
+  name,
+
+  // контролируемое открытие
+  open,
+  onOpenChange,
 }: SearchInputProps<IValue>) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const inputRef = useRef<HTMLInputElement | null>(null)
+  const dropdownRef = useRef<HTMLDivElement | null>(null)
 
-  const containerRef = useRef<HTMLDivElement>(null)
-  const dropdownRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLDivElement>(null)
-
-  const handlerDocument = useCallback((event: MouseEvent) => {
-    if (!(event.target instanceof HTMLElement)) return
-
-    if (
-      !event.target.closest(`.${dropdownRef.current?.className}`) &&
-      !event.target.closest(`.${containerRef.current?.className}`)
-    ) {
-      setIsOpen(false)
-    }
-  }, [])
-
+  // Закрытие по клику вне / Escape
   useEffect(() => {
-    if (isOpen) {
-      document.addEventListener('click', handlerDocument)
+    const onDocMouseDown = (e: MouseEvent) => {
+      if (!open) return
+      const t = e.target as Node
+      if (inputRef.current?.contains(t)) return
+      if (dropdownRef.current?.contains(t)) return
+      onOpenChange(false)
     }
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (!open) {
+        if (e.key === 'ArrowDown') onOpenChange(true) // запрос на открытие стрелкой вниз
 
-    return () => document.removeEventListener('click', handlerDocument)
-  }, [handlerDocument, isOpen])
+        return
+      }
+      if (e.key === 'Escape') {
+        onOpenChange(false)
+        inputRef.current?.focus()
+      }
+    }
+    document.addEventListener('mousedown', onDocMouseDown)
+    document.addEventListener('keydown', onKeyDown)
+
+    return () => {
+      document.removeEventListener('mousedown', onDocMouseDown)
+      document.removeEventListener('keydown', onKeyDown)
+    }
+  }, [open, onOpenChange])
+
+  // onFocus/onChange ничего не открывают сами — полностью контролируется родителем
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
+    (e) => {
+      onChange?.(e)
+    },
+    [onChange],
+  )
 
   return (
-    <Container ref={containerRef}>
+    <Container>
       <TextInput
         ref={inputRef}
-        {...inputProps}
-        openDropdownFunc={() => setIsOpen(true)}
+        name={name}
+        value={value}
+        onChange={handleChange}
+        onFocus={onFocus}
+        isClearOnFocus={isClearOnFocus}
+        leftIcon={leftIcon}
+        label={label}
+        placeholder={placeholder}
+        clearValueFunc={clearValueFunc}
+        showClearIcon={showClearIcon}
+        disabled={disabled}
+        invalid={invalid}
+        invalidText={invalidText}
+        tooltip={tooltip}
+        mobileTooltipTitle={mobileTooltipTitle}
       />
-      {isOpen &&
+
+      {open &&
         createPortal(
-          <DropdownComponent
-            error={error}
+          <DropdownComponent<IValue>
             isError={isError}
+            error={error}
             dropdownRef={dropdownRef}
             inputRef={inputRef}
-            onClickItem={onClickItem}
-            closeDropdown={() => setIsOpen(false)}
+            onClickItem={(e, item) => {
+              onClickItem?.(e, item)
+              onOpenChange(false)
+            }}
+            closeDropdown={() => onOpenChange(false)}
             listIsLoading={listIsLoading}
             emptyList={emptyList}
             dropdownList={dropdownList}

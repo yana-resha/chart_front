@@ -15,6 +15,7 @@ import {
   DropdownItemContent,
   DropdownItemIconContainer,
   Dropdown,
+  SkeletonDropdownList,
 } from '@/shared/assets/styles/form'
 import { composeRefs } from '@/shared/helpers/composeRefs'
 
@@ -119,13 +120,13 @@ export const DropdownComponent = <IValue extends IOption>({
       )}
 
       {listIsLoading && (
-        <DropdownList>
+        <SkeletonDropdownList>
           {Array.from({ length: 5 }).map((_, i) => (
             <SkeletonItem key={i}>
               <Skeleton height={20} />
             </SkeletonItem>
           ))}
-        </DropdownList>
+        </SkeletonDropdownList>
       )}
 
       {isError && (

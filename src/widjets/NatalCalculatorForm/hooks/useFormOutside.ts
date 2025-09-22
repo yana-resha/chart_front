@@ -27,7 +27,9 @@ export const useFormOutside = () => {
     setFormIsLoading(true)
     try {
       const request = natalChartRequestMapper(values)
-      saveRequest(LocalStorageKeys.NATAL_LAST_REQUEST, request)
+      saveRequest(LocalStorageKeys.NATAL_LAST_REQUEST, {
+        ...request,
+      })
 
       // 2) кодируем в URL
       const r = encodeRequestToQuery(request)

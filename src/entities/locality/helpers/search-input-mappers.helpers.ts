@@ -2,8 +2,16 @@ import { IInputLocality } from '../types/input-locality.types'
 import { IFullLocality } from '@/entities/locality/types'
 import { LANGUAGE } from '@/shared/types/appLanguage'
 
-export const formatCoord = (n: number | null, digits = 6): string =>
-  n == null || !Number.isFinite(n) ? '' : n.toFixed(digits)
+export const formatCoord = (v: number | string | null | undefined, digits = 6): string => {
+  if (v === null || v === undefined) return ''
+
+  // нормализуем строку: trim + запятая → точка
+  const num = typeof v === 'number' ? v : Number(String(v).trim().replace(',', '.'))
+
+  if (!Number.isFinite(num)) return ''
+
+  return num.toFixed(digits)
+}
 
 export const composeLocalityLabel = (x: IFullLocality, lang: LANGUAGE): string => {
   const pick = (ru?: string | null, en?: string | null) => (lang === 'ru' ? ru || en : en || ru) ?? ''

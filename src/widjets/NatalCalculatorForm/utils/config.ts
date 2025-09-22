@@ -20,9 +20,11 @@ export const formInitialValues: ChartFormFieldValues = {
   [CalculatorRequestKeys.name]: undefined,
 }
 
+type RawType = IBasicCalculatorRequest
+
 export function getInitialValues(): ChartFormFieldValues {
   try {
-    const raw = loadRequest(LocalStorageKeys.NATAL_LAST_REQUEST) as IBasicCalculatorRequest
+    const raw = loadRequest(LocalStorageKeys.NATAL_LAST_REQUEST) as RawType
     if (!raw) return formInitialValues
 
     return {

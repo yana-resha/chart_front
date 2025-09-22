@@ -1,10 +1,7 @@
-import { useEffect } from 'react'
-
 import { useFormInside } from './hooks/useFormInside'
 import { TimeGridRow, FormContainer, CoordsGridRow, LocalityTooltipContent } from './index.linaria'
 import { HOUSE_SYSTEM_LIST, TIMEZONE_LIST } from '@/entities/astro-charts/data/calculator'
 import { CalculatorRequestKeys } from '@/entities/astro-charts/types/calculator-request.types'
-import { IInputLocality } from '@/entities/locality/types/input-locality.types'
 import InfoIcon from '@/shared/assets/icons/info-circle.svg?react'
 import Pin3 from '@/shared/assets/icons/pin-3.svg?react'
 import { SHARED_COLORS_VARIABLES } from '@/shared/assets/styles/colors'
@@ -24,13 +21,18 @@ export const Form = () => {
     submitForm,
     timezoneHadleChange,
     values,
-    mapedLocalitiesList,
+    searchDropdownItems,
     isLocalitiesError,
     isLocalitiesLoading,
     localitiesClickHandler,
-    resetLocality,
     showErrorToast,
     closeErrorToast,
+
+    isDropdownOpen,
+    setIsDropdownOpen,
+    onSearchInputFocus,
+    onSearchLocalityChange,
+    showEmptyState,
   } = useFormInside()
 
   const {
@@ -54,10 +56,6 @@ export const Form = () => {
   } = useFormikWrapper(CalculatorRequestKeys.time)
   const { value: enterCoordValue, handleChange: enterCoordHandleChange } =
     useFormikWrapper('enter_coordinates')
-  const { value: searchLocalityValue, handleChange: searchLocalityHadleChange } =
-    useFormikWrapper('searchLocality')
-
-  const { value: localityValue } = useFormikWrapper('locality')
   const {
     handleChange: latitudeHadleChange,
     isError: isLatitudeError,
@@ -73,37 +71,6 @@ export const Form = () => {
     CalculatorRequestKeys.hsys,
   )
 
-  useEffect(() => {
-    const obj = {
-      id: '539283',
-      geonameid: '539283',
-      asciiname: 'Kumertau',
-      asciiname_ru: 'Кумертау',
-      latitude: '52.76493000',
-      longitude: '55.78785000',
-      elevation: null,
-      country: 'RU',
-      admin1_id: 'RU.08',
-      admin2_id: null,
-      time_zone: 'Asia/Yekaterinburg',
-      admin2_data: null,
-      content: 'Кумертay, Республика Башкортостан, Россия',
-      admin1_data: {
-        geonameid: 'RU.08',
-        asciiname: 'Bashkortostan Republic',
-        asciiname_ru: 'Республика Башкортостан',
-        country: 'RU',
-      },
-      country_data: {
-        iso: 'RU',
-        name: 'Russia',
-        name_ru: 'Россия',
-      },
-    } as unknown as IInputLocality
-
-    localitiesClickHandler(undefined, obj)
-  }, [])
-
   return (
     <FormContainer>
       <Input
@@ -116,33 +83,42 @@ export const Form = () => {
         invalidText={isNameError ? nameError : ''}
       />
       <SearchInput
-        mobileTooltipTitle={'Населенный пункт'}
-        tooltip={
-          localityValue ? (
-            <LocalityTooltipContent>
-              <div>{localityValue?.content}</div>
-              <div>Широта: {localityValue.latitude}</div>
-              <div>Долгота: {localityValue.longitude}</div>
-              <div>Часовой пояс: {localityValue.time_zone}</div>
-            </LocalityTooltipContent>
-          ) : undefined
-        }
-        name={'locality'}
-        value={searchLocalityValue}
-        onChange={(e) => searchLocalityHadleChange(e.target.value)}
-        isClearOnFocus={localityValue ? true : false}
-        leftIcon={<Pin3 className={FormIconCSS} />}
-        label={'Населенный пункт'}
+        label="Населенный пункт"
+        name="locality"
         placeholder="Укажите населенный пункт"
-        dropdownList={mapedLocalitiesList}
-        onClickItem={localitiesClickHandler}
-        clearValueFunc={resetLocality}
+        leftIcon={<Pin3 className={FormIconCSS} />}
+        // контролируемое открытие
+        open={isDropdownOpen}
+        onOpenChange={setIsDropdownOpen}
+        // ввод и фокус
+        value={values.searchLocality}
+        onChange={onSearchLocalityChange}
+        onFocus={onSearchInputFocus}
+        // список и состояния
+        dropdownList={searchDropdownItems}
         listIsLoading={isLocalitiesLoading}
         isError={isLocalitiesError}
         error={{
-          title: <>Упс...</>,
-          description: 'Похоже что то сломалось. Попробуйте повторить загрузку.',
+          title: <>Упс…</>,
+          description: 'Похоже что-то сломалось. Попробуйте повторить загрузку.',
         }}
+        emptyList={
+          showEmptyState
+            ? { title: 'Ничего не найдено', description: 'Попробуйте изменить запрос' }
+            : undefined
+        }
+        onClickItem={localitiesClickHandler}
+        tooltip={
+          values.locality ? (
+            <LocalityTooltipContent>
+              <div>{values.searchLocality}</div>
+              <div>Широта: {values.locality.latitude}</div>
+              <div>Долгота: {values.locality.longitude}</div>
+              <div>Часовой пояс: {values.locality.time_zone}</div>
+            </LocalityTooltipContent>
+          ) : undefined
+        }
+        mobileTooltipTitle="Населенный пункт"
       />
       <CoordsGridRow>
         <LatitudeInput

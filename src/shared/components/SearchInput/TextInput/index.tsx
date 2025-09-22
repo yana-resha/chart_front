@@ -21,9 +21,8 @@ export const TextInput = ({
   invalid,
   invalidText,
   disabled,
-  openDropdownFunc,
   clearValueFunc,
-  isClearOnFocus,
+  onFocus,
   mobileTooltipTitle,
   tooltip,
   ref = React.createRef(),
@@ -59,10 +58,7 @@ export const TextInput = ({
         {leftIcon && <IconContainer>{leftIcon}</IconContainer>}
         <Input
           id={id}
-          onFocus={(e: MouseEvent) => {
-            if (isClearOnFocus) clearIconHandler(e)
-          }}
-          onClick={openDropdownFunc}
+          onFocus={onFocus}
           ref={inputRef}
           className={classNames([FormInputCSS, className])}
           {...otherProps}

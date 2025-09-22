@@ -13,8 +13,8 @@ export const natalChartRequestMapper = (values: ChartFormFieldValues) => {
   const place = values.searchLocality
 
   return {
-    [CalculatorRequestKeys.latitude]: toNum(values.latitude),
-    [CalculatorRequestKeys.longitude]: toNum(values.longitude),
+    [CalculatorRequestKeys.latitude]: toNum(values.latitude) ?? 0,
+    [CalculatorRequestKeys.longitude]: toNum(values.longitude) ?? 0,
     [CalculatorRequestKeys.date]: values.date,
     [CalculatorRequestKeys.hsys]: values.hsys,
     [CalculatorRequestKeys.time]: time,

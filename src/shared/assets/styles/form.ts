@@ -159,6 +159,8 @@ export const DropdownList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  max-width: 100%;
+  overflow-x: hidden;
 `
 
 export const DropdownItem = styled.div`
@@ -217,6 +219,11 @@ export const DropdownItemIconContainer = styled.div`
     width: 1.2rem;
     height: 1.2rem;
   }
+`
+
+export const SkeletonDropdownList = styled(DropdownList)`
+  padding-top: 10px;
+  padding-bottom: 10px;
 `
 
 export const SkeletonItem = styled.div`
