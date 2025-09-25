@@ -3,6 +3,7 @@ import { styled } from '@linaria/react'
 
 import ShareSvg from '@/shared/assets/icons/share.svg?react'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import { glassBackground, glassBorder, glassBorderSide, glassShadow } from '@/shared/assets/styles/glass'
 
 export const dropdownContainer = css`
   padding: 20px;
@@ -32,23 +33,21 @@ export const LinkBlock = styled.div`
   gap: 10px;
   align-items: center;
   word-break: break-word;
-
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 18px;
+
+  ${glassShadow()};
+  ${glassBackground()};
+  ${glassBorder()};
 
   padding: 0.5rem 0.75rem;
   cursor: pointer;
 
   transition: all 0.2s ease;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 0 4px rgba(22, 238, 246, 0.05);
 
   margin-bottom: 1.25rem;
 
   &:hover {
     background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 8px rgba(22, 238, 246, 0.12);
   }
 `
 export const LinkText = styled.span`
@@ -96,7 +95,8 @@ export const IconLink = styled.a`
 
 export const ShareFooter = styled.div`
   padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  ${glassBorderSide('top')};
   text-align: center;
 `
 

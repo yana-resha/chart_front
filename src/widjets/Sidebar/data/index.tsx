@@ -6,6 +6,7 @@ import Calculator from '@/shared/assets/icons/calculator.svg?react'
 import { ROUTER_PATHES } from '@/shared/constants/router-paths'
 
 export type NavLinkItem = {
+  id: string
   type: 'link'
   path: string
   name: string
@@ -23,10 +24,10 @@ export type NavGroupItem = {
   }>
 }
 
-export type NavItem = NavLinkItem | NavGroupItem
+export type TNavItem = NavLinkItem | NavGroupItem
 
-export const NAVIGATION_DATA: NavItem[] = [
-  { type: 'link', path: ROUTER_PATHES.DEFAULT_PATH, name: 'Главная', icon: <Home /> },
+export const NAVIGATION_DATA: TNavItem[] = [
+  { id: 'main', type: 'link', path: ROUTER_PATHES.DEFAULT_PATH, name: 'Главная', icon: <Home /> },
 
   {
     type: 'group',
@@ -36,5 +37,5 @@ export const NAVIGATION_DATA: NavItem[] = [
     children: [{ path: ROUTER_PATHES.CALCULATOR_PATH, name: 'Натальная карта' }],
   },
 
-  { type: 'link', path: ROUTER_PATHES.POSTS_PATH, name: 'Каталог статей', icon: <Collect /> },
+  { id: 'blog', type: 'link', path: ROUTER_PATHES.POSTS_PATH, name: 'Каталог статей', icon: <Collect /> },
 ]

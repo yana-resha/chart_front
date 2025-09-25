@@ -1,19 +1,16 @@
 import { styled } from '@linaria/react'
 
+import { cardBorderVar, GlassCardRoot } from '@/shared/assets/styles/glass'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
-export const Card = styled.div`
+export const Card = styled(GlassCardRoot)`
   border-radius: 20px;
   padding: 1.25rem;
-  box-shadow:
-    inset 0 0 60px rgba(19, 22, 25, 0.1),
-    0 0 10px rgba(0, 0, 0, 0.1);
-  background: rgba(13, 15, 16, 0.5);
   transition: box-shadow 0.3s ease;
-  backdrop-filter: blur(1px) contrast(1.1) brightness(1.1);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  ${cardBorderVar(false)};
 
   @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
     padding: 1rem;

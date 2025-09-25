@@ -1,8 +1,8 @@
 import { styled } from '@linaria/react'
 
+import { GlassCardRoot } from '@/shared/assets/styles/glass'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { CARD_TEXT_SIZE, CARD_TITLE_TEXT } from '@/shared/assets/styles/text-size'
-import { addAlpha } from '@/shared/helpers/addAlpha'
 
 export const Wrapper = styled.div`
   container-type: inline-size;
@@ -31,34 +31,11 @@ export const Container = styled.div`
   }
 `
 
-export const Card = styled.div<{ color: string }>`
+export const Card = styled(GlassCardRoot)`
   flex: 1;
   border-radius: 8px;
   padding: 0.8rem;
-  background: linear-gradient(
-    to bottom,
-    ${(props) => addAlpha(props.color, 0.15)},
-    ${(props) => addAlpha(props.color, 0.1)} 70%,
-    rgba(255, 255, 255, 0.02) 100%
-  );
   color: rgba(255, 255, 255, 0.85);
-  transition: all 0.3s;
-  backdrop-filter: blur(9.760000228881836px);
-  box-shadow:
-    inset 1px 1px 4px 0 rgba(255, 255, 255, 0.05),
-    inset 2px 2px 9px 0 rgba(255, 255, 255, 0.05),
-    -2px -2px 12px -8px rgba(0, 0, 0, 0.05),
-    -11px -10px 48px -12px rgba(255, 255, 255, 0.05);
-
-  &:hover {
-    background: linear-gradient(
-      to bottom,
-      ${(props) => addAlpha(props.color, 0.25)},
-      ${(props) => addAlpha(props.color, 0.15)} 70%,
-      rgba(255, 255, 255, 0.04) 100%
-    );
-    border-color: ${(props) => addAlpha(props.color, 0.4)};
-  }
 `
 
 export const CardTitle = styled.h3`
@@ -83,18 +60,10 @@ export const CardText = styled.p`
   }
 `
 
-export const Summary = styled.div`
+export const Summary = styled(GlassCardRoot)`
   width: 100%;
   border-radius: 8px;
   padding: 0.8rem;
-
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
-  backdrop-filter: blur(4.760000228881836px);
-  box-shadow:
-    inset 1px 1px 4px 0 rgba(255, 255, 255, 0.05),
-    inset 2px 2px 9px 0 rgba(255, 255, 255, 0.05),
-    -2px -2px 12px -8px rgba(0, 0, 0, 0.05),
-    -11px -10px 48px -12px rgba(255, 255, 255, 0.05);
 `
 
 export const SummaryLine = styled.p`

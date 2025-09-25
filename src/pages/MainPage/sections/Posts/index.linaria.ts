@@ -1,11 +1,11 @@
 import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
+import { Section } from '../../index.linaria'
 
-export const PostsSection = styled.section`
+export const PostsSection = styled(Section)`
   position: relative;
   width: 100%;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.3);
 `
 
 export const PostsWrapper = styled.div`

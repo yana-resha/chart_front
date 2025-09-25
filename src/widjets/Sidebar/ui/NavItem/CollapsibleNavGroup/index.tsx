@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react'
 import classNames from 'classnames'
 import { NavLink, useLocation } from 'react-router-dom'
 
-import type { NavGroupItem } from '../data'
+import type { NavGroupItem } from '../../../data'
 import {
   NavRow,
   GroupChevron,
@@ -11,9 +11,9 @@ import {
   GroupPanel,
   GroupInner,
   GroupList,
-  childLinkPillCSS,
   ChildItem,
-} from '../index.nav.linaria'
+  childLinkPillCSS,
+} from '../index.linaria'
 
 type Props = { item: NavGroupItem }
 

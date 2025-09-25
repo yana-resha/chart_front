@@ -1,13 +1,14 @@
-import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
-import { TEXT_SIZE } from '@/shared/assets/styles/text-size'
 import { styled } from '@linaria/react'
 
-export const Container = styled.div`
+import { GlassCardRoot } from '@/shared/assets/styles/glass'
+import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
+import { TEXT_SIZE } from '@/shared/assets/styles/text-size'
+
+export const Container = styled(GlassCardRoot)`
   width: 100%;
   border-radius: 20px;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.025);
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.8);
   text-align: center;
   display: flex;
   align-items: center;
@@ -15,13 +16,6 @@ export const Container = styled.div`
   flex-direction: column;
   min-height: 300px;
   position: relative;
-  backdrop-filter: blur(9.760000228881836px);
-  box-shadow:
-    inset 1px 1px 4px 0 rgba(255, 255, 255, 0.05),
-    inset 2px 2px 9px 0 rgba(255, 255, 255, 0.05),
-    -2px -2px 12px -8px rgba(0, 0, 0, 0.05),
-    -11px -10px 48px -12px rgba(255, 255, 255, 0.05);
-  transition: all 0.3s ease;
 
   @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
     padding: 1.8rem;

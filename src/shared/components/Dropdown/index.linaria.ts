@@ -63,7 +63,6 @@ export const DropdownSheet = styled.div`
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
   padding: ${SURFACE_TOKENS.MOBILE_SHARED.PADDING};
-  box-shadow: ${SURFACE_TOKENS.MOBILE_SHARED.SHADOW};
   display: none;
 
   @media (max-width: ${MEDIA_POINTS.MOBILE_ALERTS}px) {

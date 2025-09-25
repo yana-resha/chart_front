@@ -1,5 +1,6 @@
 import { styled } from '@linaria/react'
 
+import { glassBackground, glassShadow } from '@/shared/assets/styles/glass'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
 export const ToolsBarWrapper = styled.div`
@@ -7,13 +8,12 @@ export const ToolsBarWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0.625rem 1rem;
-  background: rgba(255, 255, 255, 0.03);
+  ${glassBackground()}
+  ${glassShadow()}
   border: none;
-  backdrop-filter: blur(0px);
   font-size: clamp(12px, 0.875rem, 16px);
   color: white;
-  border-radius: 14px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
   overflow: hidden;
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {

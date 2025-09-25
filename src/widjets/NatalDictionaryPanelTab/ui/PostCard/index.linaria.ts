@@ -1,8 +1,8 @@
 import { styled } from '@linaria/react'
 
+import { cardBorderVar, GlassCardRoot } from '@/shared/assets/styles/glass'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { TEXT_SIZE } from '@/shared/assets/styles/text-size'
-import { addAlpha } from '@/shared/helpers/addAlpha'
 
 export const Layout = styled.div`
   padding: 1.1rem 10px 0px 10px;
@@ -15,21 +15,11 @@ export const Layout = styled.div`
   contain: layout paint;
 `
 
-export const Card = styled.div<{ glowColor?: string }>`
+export const Card = styled(GlassCardRoot)`
   position: relative;
   border-radius: 20px;
   padding: 1.25rem;
-  box-shadow:
-    inset 0 0 60px rgba(19, 22, 25, 0.1),
-    0 0 10px rgba(0, 0, 0, 0.1);
-  background: rgba(13, 15, 16, 0.5);
-  transition: box-shadow 0.3s ease;
-  backdrop-filter: blur(1px) contrast(1.1) brightness(1.1);
-  &:hover {
-    box-shadow:
-      inset 0 0 120px ${({ glowColor }) => addAlpha(glowColor, 0.1) || 'rgba(19, 22, 25, 0.1)'},
-      0 0 10px ${({ glowColor }) => addAlpha(glowColor, 0.1) || 'rgba(255, 255, 255, 0.1)'};
-  }
+  ${cardBorderVar(false)};
 
   @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
     padding: 1rem;
@@ -215,10 +205,6 @@ export const InterpritationBlock = styled.div`
 export const EmptyCard = styled(Card)`
   border-radius: 20px;
   padding: 32px;
-  background: rgba(255, 255, 255, 0.025);
-  box-shadow:
-    inset 0 0 80px rgba(255, 255, 255, 0.02),
-    0 0 12px rgba(0, 0, 0, 0.1);
   color: rgba(255, 255, 255, 0.7);
   font-size: ${TEXT_SIZE.M};
   font-style: italic;
@@ -229,7 +215,6 @@ export const EmptyCard = styled(Card)`
   justify-content: center;
   min-height: 300px;
   position: relative;
-  backdrop-filter: blur(1.5px) brightness(1.1);
   transition: all 0.3s ease;
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {

@@ -8,11 +8,10 @@ import {
   PossibilityCardCaption,
 } from './index.linaria'
 import { PossibilitiesListData } from '../../data/possibilities.data'
-import { Inner, SectionHeadWrapper, H2, SectionSubtitle } from '../../index.linaria'
+import { SectionHeadWrapper, H2, SectionSubtitle } from '../../index.linaria'
 
 export const Possibilities = () => (
   <PossibilitiesSection>
-    <Inner>
       <SectionHeadWrapper>
         <H2 variant="light">Возможности сервиса</H2>
         <SectionSubtitle variant="light">
@@ -39,6 +38,5 @@ export const Possibilities = () => (
           </PossibilityCard>
         ))}
       </PossibilitiesMosaic>
-    </Inner>
   </PossibilitiesSection>
 )

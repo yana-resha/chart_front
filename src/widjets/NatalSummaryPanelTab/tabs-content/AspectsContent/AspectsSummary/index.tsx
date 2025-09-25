@@ -1,3 +1,4 @@
+import { toRgbString } from '@/shared/assets/styles/helpers/toRgbString'
 import {
   Wrapper,
   Container,
@@ -45,7 +46,7 @@ export const AspectsSummary = ({ chartAspectStatistics }: Props) => {
           return (
             <Card
               key={category}
-              color={color}
+              color={toRgbString(color)}
             >
               <CardTitle>
                 {title}&nbsp;

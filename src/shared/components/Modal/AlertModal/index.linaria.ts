@@ -71,9 +71,9 @@ export const ModalTitle = styled.div`
 
 export const ModalSubtitle = styled.div`
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.15px;
-  color: rgb(155, 156, 158);
+  color: rgb(255, 255, 255, 0.75);
   margin-top: 1rem;
   text-align: center;
 

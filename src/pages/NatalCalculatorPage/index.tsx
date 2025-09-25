@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import {
   Layout,
   FormWrapper,
@@ -34,6 +36,7 @@ import {
   PostsList,
 } from './index.linaria'
 import { CalculationCardTerm } from './ui/CalculationCardTerm'
+import { AdvantagesListData } from '../MainPage/data/advantages.data'
 import { getPreviewsByTags } from '@/entities/posts/data'
 import { PreviewPostCard } from '@/entities/posts/feautures/PreviewPostCard'
 import CalendarDay from '@/shared/assets/icons/calendar-day.svg?react'
@@ -43,11 +46,12 @@ import { linkTextCss } from '@/shared/assets/styles/links.linaria'
 import { H1, H2 } from '@/shared/assets/styles/titles.linaria'
 import { HeaderBackButton } from '@/shared/components/HeaderBackButton'
 import { PageHeader } from '@/shared/components/PageHeader'
+import { ShowcaseList } from '@/shared/components/ShowcaseList'
 import { Tip } from '@/shared/components/Tip'
 import { Tooltip } from '@/shared/components/Tooltip'
 import { smoothScrollAnchor } from '@/shared/helpers/smoothScrollAnchor'
 import NatalCalculatorForm from '@/widjets/NatalCalculatorForm'
-import { Link } from 'react-router-dom'
+import { BENEFIT_LIST_DATA } from './data/benefit.data'
 
 export const NatalCalculatorPage = () => {
   const POSTS = getPreviewsByTags(['натальная карта'])
@@ -62,7 +66,6 @@ export const NatalCalculatorPage = () => {
           <H1>Расчёт натальной&nbsp;карты онлайн&nbsp;💫</H1>
           <MarkdownText>
             {' '}
-            <Divider />{' '}
             <p>
               {' '}
               🆓 На нашем астросервисе вы можете{' '}
@@ -92,37 +95,11 @@ export const NatalCalculatorPage = () => {
               анализ их взаимодействий через аспекты 🔍. На основе этих данных можно глубже разобраться в
               себе, увидеть скрытые ресурсы и понять, какие события и сценарии повторяются в жизни.{' '}
             </p>{' '}
-            <Divider />
             <H2>Что поможет узнать натальная карта</H2>
-            <BenefitGrid>
-              <BenefitCard color="#16eef6">
-                <div className="title">Характер и потенциал</div>
-                <DescText>
-                  Помогает понять сильные и слабые стороны, внутренние мотивы и качества, которые
-                  поддерживают/оставнавливают на пути к целям.
-                </DescText>
-              </BenefitCard>
-              <BenefitCard color="#ff6b8b">
-                <div className="title">Эмоции и чувства</div>
-                <DescText>
-                  Показывает, откуда берутся реакции и переживания, и как они влияют на отношения с людьми.
-                </DescText>
-              </BenefitCard>
-              <BenefitCard color="#ffd166">
-                <div className="title">Точки роста</div>
-                <DescText>
-                  Помогает определить сферы жизни, где есть возможности для развития и новые шаги, ведущие к
-                  результатам.
-                </DescText>
-              </BenefitCard>
-              <BenefitCard color="#8ea6ff">
-                <div className="title">Жизненные сценарии</div>
-                <DescText>
-                  Раскрывает повторяющиеся ситуации и даёт ключи к тому, как изменить их в свою пользу.
-                </DescText>
-              </BenefitCard>
-            </BenefitGrid>
-            <Divider />
+            <ShowcaseList
+              items={BENEFIT_LIST_DATA}
+              style={{ marginBottom: '30px' }}
+            />
             <p>
               {' '}
               <strong>Натальная карта не определяет вашу судьбу раз и навсегда.</strong> Но, зная её ключи, вы

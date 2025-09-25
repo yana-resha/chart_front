@@ -1,10 +1,17 @@
 import { styled } from '@linaria/react'
 
+import {
+  cardBorderVar,
+  cardColorVar,
+  glassBorder,
+  glassBorderSide,
+  GlassCardRoot,
+} from '@/shared/assets/styles/glass'
+import { addAlpha } from '@/shared/assets/styles/helpers/addAlpha'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { PageContentWrapper } from '@/shared/assets/styles/pages.linaria'
 import { CARD_TEXT_SIZE, CARD_TITLE_TEXT, TEXT_SIZE } from '@/shared/assets/styles/text-size'
 import { H1 } from '@/shared/assets/styles/titles.linaria'
-import { addAlpha } from '@/shared/helpers/addAlpha'
 
 const LISTS_GAP = {
   desktop: '1.25rem',
@@ -37,7 +44,7 @@ export const DescText = styled.div`
 export const BaseCardHeader = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.4rem;
 `
 /** Горизонтальная строка заголовка карточки */
 export const CardTitleRow = styled.div`
@@ -76,16 +83,18 @@ export const CardIcon = styled.div`
 /** Тонкая линия внутри карточек */
 export const CardDivider = styled.div`
   height: 1px;
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 4px rgba(255, 255, 255, 0.15);
+  position: relative;
+  ${glassBorderSide('bottom')};
 `
 
 export const BenefitCard = styled.li<{ color: string }>`
+  ${cardColorVar('255, 255, 0')};
+  ${glassBorder()};
   position: relative;
   border-radius: 12px;
   border-radius: 0px;
   padding: 0.75rem 1.25rem 1.25rem;
-  border: 1px solid ${(p) => addAlpha(p.color, 0.25)};
+
   background: linear-gradient(135deg, ${(p) => addAlpha(p.color, 0.5)}, rgba(0, 0, 0, 0));
   color: rgba(255, 255, 255, 0.95);
   transition:
@@ -100,7 +109,6 @@ export const BenefitCard = styled.li<{ color: string }>`
 
   &:hover {
     background: linear-gradient(135deg, ${(p) => addAlpha(p.color, 0.22)}, rgba(255, 255, 255, 0.04));
-    border-color: ${(p) => addAlpha(p.color, 0.4)};
     box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
     transform: translateY(-1px);
   }
@@ -196,14 +204,9 @@ export const Badge = styled.span`
 /* ======= common blocks ======= */
 export const Divider = styled.div`
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.07) 0%,
-    rgba(255, 255, 255, 0.35) 50%,
-    rgba(255, 255, 255, 0.07) 100%
-  );
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.15);
+  position: relative;
   width: 100%;
+  ${glassBorderSide('bottom')};
 `
 
 export const SectionBlock = styled.div`
@@ -262,54 +265,24 @@ export const FormWrapper = styled.div`
 `
 
 /* ======= cards ======= */
-export const BaseCard = styled.div`
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01) 70%);
+export const BaseCard = styled(GlassCardRoot)`
   border-radius: 14px;
   color: rgba(255, 255, 255, 0.95);
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
-
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02) 70%);
-      border-color: rgba(255, 255, 255, 0.18);
-      box-shadow: 0 8px 22px rgba(255, 255, 255, 0.02);
-      transform: translateY(-1px);
-    }
-  }
   padding: 1rem;
   padding-top: 0.7rem;
 `
 /* — Специальная карточка калькулятора — */
-export const CalculatorCard = styled.div`
+export const CalculatorCard = styled(GlassCardRoot)`
   position: relative;
   width: clamp(340px, 75cqw, 560px);
   border-radius: 16px;
   padding: 18px 18px 14px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)), rgba(16, 18, 22, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  transition:
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
-
-  &:hover {
-    box-shadow:
-      0 14px 40px rgba(255, 255, 255, 0.05),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  }
+  ${cardBorderVar(false)}
+  backdrop-filter: blur(60px);
+  -webkit-backdrop-filter: blur(60px);
 
   @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
     width: 100%;

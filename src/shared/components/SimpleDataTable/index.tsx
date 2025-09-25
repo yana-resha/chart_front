@@ -10,6 +10,7 @@ import {
   Tbody,
   Caption,
   TableWrapper,
+  SeparateBlock,
 } from './index.linaria'
 
 interface SimpleDataTableProps extends React.HTMLAttributes<HTMLTableElement> {
@@ -55,13 +56,10 @@ export const SimpleDataTable = Object.assign(
     ),
     SeparatorRow: ({ colSpan, style, ...rest }: { colSpan: number; style?: React.CSSProperties }) => (
       <Row {...rest}>
-        <Cell
-          style={{
-            background: 'rgba(255, 255, 255, 0.08)',
-            ...style,
-          }}
+        <SeparateBlock
+          style={{ ...style }}
           colSpan={colSpan}
-        ></Cell>
+        ></SeparateBlock>
       </Row>
     ),
     Caption: ({ children, ...rest }: React.HTMLAttributes<HTMLTableCaptionElement>) => (

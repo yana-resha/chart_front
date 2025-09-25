@@ -3,7 +3,7 @@ import { styled } from '@linaria/react'
 
 import ChevronIcon from '@/shared/assets/icons/chevron-down.svg?react'
 import { ICONS_STROKES } from '@/shared/assets/styles/colors'
-import { addAlpha } from '@/shared/helpers/addAlpha'
+import { addAlpha } from '@/shared/assets/styles/helpers/addAlpha'
 
 /* ── NAV TOKENS: одна точка правды ───────────────────────────────────── */
 export const NAV_TOKENS = {
@@ -71,7 +71,6 @@ const ROW_BASE = `
   &.active:after { opacity:1; }
 `
 
-/** Полиморфный ряд: as={NavLink} / as="button" */
 export const NavRow = styled.a`
   ${ROW_BASE}
 `

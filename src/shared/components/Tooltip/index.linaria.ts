@@ -2,7 +2,7 @@ import { css } from '@linaria/core'
 import { styled } from '@linaria/react'
 
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
-import { OVERLAYS_BACKGROUND_COLORS, OVERLAYS_TEXT_COLORS } from '@/shared/assets/styles/overlays/colors'
+import { OVERLAYS_TEXT_COLORS } from '@/shared/assets/styles/overlays/colors'
 import { SURFACE_TOKENS } from '@/shared/assets/styles/overlays/shared'
 
 export const TooltipSurface = styled.div`
@@ -18,7 +18,6 @@ export const TooltipSurface = styled.div`
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   background: rgba(0, 0, 0, 1);
-  /* background: ${OVERLAYS_BACKGROUND_COLORS.WINDOW_BACK}; */
 
   font-size: 0.8rem;
   font-weight: 500;
@@ -43,24 +42,18 @@ export const TooltipSurface = styled.div`
     overflow-y: hidden;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
-
     border: ${SURFACE_TOKENS.MOBILE_SHARED.BORDER};
     border-bottom: none;
     border-radius: ${SURFACE_TOKENS.MOBILE_SHARED.RADIUS};
-
     padding: ${SURFACE_TOKENS.MOBILE_SHARED.PADDING};
-    box-shadow: ${SURFACE_TOKENS.MOBILE_SHARED.SHADOW};
-
     line-height: 1.5;
   }
 `
-
 export const TooltipTailContainer = styled.div`
   width: 16px;
   height: 8px;
   pointer-events: none;
 `
-
 export const tooltipTailIconCSS = css`
   width: 100%;
   height: 100%;
@@ -68,7 +61,6 @@ export const tooltipTailIconCSS = css`
   transform-origin: center;
   color: rgba(0, 0, 0, 1);
 `
-
 export const ChildrenWrapper = styled.span`
   cursor: pointer;
 
@@ -76,7 +68,6 @@ export const ChildrenWrapper = styled.span`
     outline: none;
   }
 `
-
 export const ClosedIcon = styled(SURFACE_TOKENS.CLOSED_ICON_COMPONENT)`
   width: 12px;
   height: 12px;

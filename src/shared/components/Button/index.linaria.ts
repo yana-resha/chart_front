@@ -3,7 +3,7 @@ import { styled } from '@linaria/react'
 import { BTN_BACKGROUND_VARIABLES, BUTTON_COLOR_VARIABLES } from '@/shared/assets/styles/colors'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { TEXT_SIZE } from '@/shared/assets/styles/text-size'
-import { addAlpha } from '@/shared/helpers/addAlpha'
+import { addAlpha } from '@/shared/assets/styles/helpers/addAlpha'
 
 export const ChildrenContainer = styled.div`
   font-weight: 500;

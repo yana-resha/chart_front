@@ -1,34 +1,24 @@
 import { styled } from '@linaria/react'
 
+import { glassBorderSide, GlassCardRoot } from '@/shared/assets/styles/glass'
 import { TEXT_SIZE } from '@/shared/assets/styles/text-size'
 
-export const Card = styled.div`
+export const Card = styled(GlassCardRoot)`
   padding: 1rem;
   color: rgba(255, 255, 255, 1);
+  border-radius: 12px;
   font-size: ${TEXT_SIZE.S};
   line-height: 1.6;
   width: 100%;
   max-width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.02);
-  transition:
-    background 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
-  }
 `
 
 export const Divider = styled.div`
+  position: relative;
   height: 1px;
-  background: rgba(255, 255, 255, 0.05);
-  margin: 0.725rem 0;
   width: 100%;
+  margin: 0.725rem 0;
+  ${glassBorderSide('bottom')};
 `
 
 export const Row = styled.div`

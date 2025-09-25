@@ -27,12 +27,12 @@ export const CheckboxContainer = styled.label`
     display: inline-block;
     width: 1.5rem;
     height: 1.5rem;
-    outline: 1px solid rgb(54, 58, 61);
+    outline: 1px solid rgba(84, 90, 94, 1);
     border-radius: 4px;
     box-shadow:
       0px 1px 3px 0px rgba(0, 0, 0, 0.05),
       0px 1px 2px -1px rgba(0, 0, 0, 0.05);
-    background: rgb(26, 29, 33);
+    background-color: rgb(35, 37, 38);
     transition:
       outline 0.2s,
       opacity 0.2s;

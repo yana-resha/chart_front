@@ -1,7 +1,7 @@
 import { css } from '@linaria/core'
 
 import { ICONS_STROKES } from './colors'
-import { addAlpha } from '@/shared/helpers/addAlpha'
+import { addAlpha } from '@/shared/assets/styles/helpers/addAlpha'
 
 export const prepareIconColors = (color: string) => ({
   '--icon-color': addAlpha(color, 1),

@@ -1,6 +1,6 @@
 import { css } from '@linaria/core'
 
-import { addAlpha } from '@/shared/helpers/addAlpha'
+import { addAlpha } from '@/shared/assets/styles/helpers/addAlpha'
 
 export enum LINK_COLORS {
   LINK_DEFAULT_COLOR = 'rgb(22,238,246)',

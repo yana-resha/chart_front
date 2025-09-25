@@ -52,8 +52,8 @@ export const FormElementError = styled.div`
 `
 
 export const FormInputContainer = styled.div`
-  background-color: rgb(26, 29, 33);
-  border: 1px solid rgb(54, 58, 61);
+  border: 1px solid rgba(84, 90, 94, 1);
+  background-color: rgb(35, 37, 38);
   border-radius: 8px;
   color: white;
   position: relative;
@@ -141,8 +141,8 @@ export const FormIconCSS = css`
 /* Дропдауны */
 
 export const Dropdown = styled.div`
-  background-color: rgba(19, 22, 25, 1);
-  border-radius: 5px;
+  background-color: rgb(35, 37, 38);
+  border-radius: 8px;
   border: 1px solid rgba(54, 58, 61);
   z-index: 1;
   width: 100%;
@@ -216,6 +216,7 @@ export const DropdownItemIconContainer = styled.div`
   height: 1.2rem;
   transition: opacity 0.2s;
   & svg {
+    color: white;
     width: 1.2rem;
     height: 1.2rem;
   }

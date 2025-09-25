@@ -1,17 +1,11 @@
 import { styled } from '@linaria/react'
 
-import { CardCaption, CardTitle, TEXT_COLORS } from '../../index.linaria'
+import { CardCaption, CardTitle, Section, TEXT_COLORS } from '../../index.linaria'
 
-export const PossibilitiesSection = styled.section`
+export const PossibilitiesSection = styled(Section)`
   width: 100%;
   min-height: 400px;
   overflow: hidden;
-  background: rgba(240, 242, 245, 0.1);
-  background: rgba(0, 0, 0, 0.3);
-  /*     background:
-    radial-gradient(1200px 600px at 50% 10%, rgba(160, 200, 255, 0.08), transparent 60%),
-    radial-gradient(1000px 500px at 80% 0%, rgba(255, 255, 255, 0.08), transparent 60%),
-    linear-gradient(180deg, #1a2127, #0e1114); */
 `
 
 // МОЗАИКА

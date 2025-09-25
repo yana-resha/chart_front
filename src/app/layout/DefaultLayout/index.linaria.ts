@@ -42,6 +42,8 @@ export const SidebarContainer = styled.div`
   /* десктоп: фиксируем панель */
   height: 100dvh;
   position: sticky;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   top: 0;
 
   /* планшет: обычный поток, авто-высота */

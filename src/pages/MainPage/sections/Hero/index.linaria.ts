@@ -5,12 +5,14 @@ import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
 export const HeroSection = styled.article`
   width: 100%;
-  height: calc(100dvh - 25px);
+  min-height: 600px;
+  border-radius: 20px;
   max-height: 1080px;
   position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  background: rgba(23, 25, 26, 0.5);
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     height: calc(100dvh - 15px - 50px);
@@ -23,8 +25,7 @@ export const HeroSection = styled.article`
     height: 100%;
     object-fit: cover;
     object-position: 50% 50%;
-    filter: saturate(0.85) brightness(0.9) contrast(1.05);
-    opacity: 1;
+    opacity: 0.2;
     z-index: -2;
   }
 `
@@ -33,6 +34,7 @@ export const HeroContentWrapper = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  align-items: start;
   justify-content: center;
   color: rgba(255, 255, 255, 0.85);
   padding-left: ${SECTION_CONTENT_PADDINGS.padding_x.large};
@@ -54,6 +56,8 @@ export const HeroContentWrapper = styled.div`
     padding-bottom: ${SECTION_CONTENT_PADDINGS.padding_bottom.small};
   }
 `
+
+export const ContentWrapper = styled.div``
 
 export const HeroTitle = styled.h1`
   margin: 0;

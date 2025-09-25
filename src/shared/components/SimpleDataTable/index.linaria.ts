@@ -1,7 +1,10 @@
 import { styled } from '@linaria/react'
 
+import { glassBackground } from '@/shared/assets/styles/glass'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { CARD_TEXT_SIZE, CARD_TITLE_TEXT } from '@/shared/assets/styles/text-size'
+
+const SHARED_COLOR = '255, 255, 255'
 
 export const TableWrapper = styled.div`
   overflow-x: auto;
@@ -19,7 +22,7 @@ export const Table = styled.table`
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.8);
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(${SHARED_COLOR}, 0.12);
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     font-size: ${CARD_TEXT_SIZE.XS};
@@ -33,8 +36,8 @@ export const HeadRow = styled.tr``
 export const HeaderCell = styled.th`
   position: sticky;
   top: 0;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  ${glassBackground(SHARED_COLOR)};
+  border-bottom: 1px solid rgba(${SHARED_COLOR}, 0.12);
   font-size: ${CARD_TITLE_TEXT.S};
   font-weight: 500;
   text-align: left;
@@ -80,6 +83,11 @@ export const Cell = styled.td`
     font-weight: 600;
   }
 `
+
+export const SeparateBlock = styled(Cell)`
+  ${glassBackground(SHARED_COLOR)};
+`
+
 export const Tbody = styled.tbody`
   tr:last-child td {
     border-bottom: none;

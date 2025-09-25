@@ -1,43 +1,20 @@
 import { styled } from '@linaria/react'
 
+import { cardHoverVar, GlassCardRoot } from '@/shared/assets/styles/glass'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
-export const Container = styled.div`
+export const Container = styled(GlassCardRoot)`
   width: 100%;
   height: fit-content;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
   position: relative;
   padding: 10px;
   overflow: hidden;
-  transition:
-    background 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+
+  ${cardHoverVar(false)};
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     padding: 5px;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background: rgba(255, 255, 255, 0.02);
-    backdrop-filter: blur(1px);
-    pointer-events: none;
-    border-radius: 14px;
-    transition: background 0.3s ease;
-  }
-
-  &:hover {
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
-  }
-
-  &:hover::before {
-    background: rgba(255, 255, 255, 0.04);
   }
 `
 export const ChartContainer = styled.div`

@@ -50,7 +50,6 @@ export const ModalWindow = styled.div`
     max-width: 100%;
     border-radius: ${SURFACE_TOKENS.MOBILE_SHARED.RADIUS};
     border-bottom: none;
-    box-shadow: ${SURFACE_TOKENS.MOBILE_SHARED.SHADOW};
     padding: ${SURFACE_TOKENS.MOBILE_SHARED.PADDING};
     max-height: ${SURFACE_TOKENS.MOBILE_SHARED.MAXH};
     min-height: ${SURFACE_TOKENS.MOBILE_SHARED.MINH};

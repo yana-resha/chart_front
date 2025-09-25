@@ -1,10 +1,9 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
-import { createPortal } from 'react-dom' // ⬅️ добавили
-import { NavLink, useLocation } from 'react-router-dom'
+import { createPortal } from 'react-dom'
+import { useLocation } from 'react-router-dom'
 
-import { CollapsibleNavGroup } from './CollapsibleNavGroup'
-import { NAVIGATION_DATA, NavItem } from './data'
+import { NAVIGATION_DATA } from './data'
 import {
   Backdrop,
   Container,
@@ -15,32 +14,10 @@ import {
   PublicAccountBlock,
   TopBlock,
 } from './index.layout.linaria'
-import { NavRow } from './index.nav.linaria'
+import { NavItem } from './ui/NavItem'
 import { BurgerIcon } from '@/shared/components/Burger'
 import { Button } from '@/shared/components/Button'
 import { useScrollLock } from '@/shared/hooks/useScrollLock'
-
-function renderItem(item: NavItem) {
-  if (item.type === 'group') {
-    return (
-      <CollapsibleNavGroup
-        key={item.id}
-        item={item}
-      />
-    )
-  }
-
-  return (
-    <NavRow
-      key={item.path}
-      as={NavLink}
-      to={item.path}
-    >
-      {item.icon}
-      {item.name}
-    </NavRow>
-  )
-}
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false)
@@ -90,7 +67,14 @@ const Sidebar = () => {
               top={topBarH}
               aria-hidden={!open}
             >
-              <NavSheetScroll>{NAVIGATION_DATA.map(renderItem)}</NavSheetScroll>
+              <NavSheetScroll>
+                {NAVIGATION_DATA.map((item) => (
+                  <NavItem
+                    key={item.id}
+                    {...item}
+                  />
+                ))}
+              </NavSheetScroll>
             </NavSheet>
           </>,
           document.body,
@@ -104,7 +88,7 @@ const Sidebar = () => {
         ref={topBarRef}
       >
         <TopBlock>
-          <PublicAccountBlock>AstroDос</PublicAccountBlock>
+          <PublicAccountBlock>ASTRODOC</PublicAccountBlock>
         </TopBlock>
 
         <MobileTopBar>
@@ -121,7 +105,14 @@ const Sidebar = () => {
           </Button>
         </MobileTopBar>
 
-        <NavList id="sidebar-nav">{NAVIGATION_DATA.map(renderItem)}</NavList>
+        <NavList id="sidebar-nav">
+          {NAVIGATION_DATA.map((item) => (
+            <NavItem
+              key={item.id}
+              {...item}
+            />
+          ))}
+        </NavList>
       </Container>
 
       {portalLayer}

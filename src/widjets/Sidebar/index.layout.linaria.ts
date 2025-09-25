@@ -3,6 +3,7 @@ import { styled } from '@linaria/react'
 import { BACKGROUND_COLORS_VARIABLES } from '@/shared/assets/styles/colors'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { SURFACE_TOKENS } from '@/shared/assets/styles/overlays/shared'
+import { glassBackground, glassBorder, glassShadow } from '@/shared/assets/styles/glass'
 
 /** Константы */
 export const SIDEBAR_UI = {
@@ -25,22 +26,17 @@ export const Container = styled.aside`
   flex-direction: column;
   justify-content: flex-start;
   position: relative;
-  /* background: rgba(255, 255, 255, 0.04); */
-  border: 1px solid rgba(255, 255, 255, 0.08);
-/*   backdrop-filter: blur(9.76px);
-  -webkit-backdrop-filter: blur(9.76px); */
-/*   box-shadow:
-    inset 1px 1px 4px 0 rgba(255, 255, 255, 0.05),
-    inset 2px 2px 9px 0 rgba(255, 255, 255, 0.05),
-    -2px -2px 12px -8px rgba(0, 0, 0, 0.05),
-    -11px -10px 48px -12px rgba(255, 255, 255, 0.05); */
+  border-radius: ${SIDEBAR_UI.RADIUS};
+  ${glassBackground()};
+  /* ${glassBorder()}; */
+  ${glassShadow()};
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     border-radius: 0;
     margin-bottom: 0;
     gap: ${SIDEBAR_UI.GAP_TABLET};
     padding: 0.5rem 0.5rem;
-    
+
     background-color: ${SURFACE_TOKENS.MOBILE_SHARED.BACKGROUND};
     box-shadow: 0 6px 12px rgba(255, 255, 255, 0.045);
     backdrop-filter: none;
