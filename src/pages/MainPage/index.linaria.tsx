@@ -3,16 +3,6 @@ import { styled } from '@linaria/react'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { PageContentWrapper } from '@/shared/assets/styles/pages.linaria'
 
-export const Layout = styled(PageContentWrapper)`
-  height: 100%;
-  width: 100%;
-  max-width: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-`
-
 export const SECTION_CONTENT_PADDINGS = {
   padding_x: {
     large: '28px',
@@ -27,7 +17,7 @@ export const SECTION_CONTENT_PADDINGS = {
   },
 
   padding_bottom: {
-    large: '0.5rem',
+    large: '1.5rem',
     medium: '32px',
     small: '32px',
   },
@@ -41,9 +31,21 @@ export const TEXT_COLORS = {
   DARK_SUBTITLE_COLOR: 'rgba(17, 17, 17, 0.85)',
 }
 
+export const Layout = styled(PageContentWrapper)`
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+`
+
 export const Section = styled.section`
   padding-top: ${SECTION_CONTENT_PADDINGS.padding_top.large};
   padding-bottom: ${SECTION_CONTENT_PADDINGS.padding_bottom.large};
+  padding-left: 10px;
+  padding-right: 10px;
 `
 
 export const SectionHeadWrapper = styled.div`

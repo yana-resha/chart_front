@@ -8,14 +8,20 @@ export interface ShowcaseItem {
   text: string
 }
 
+type Variant = 'light' | 'dark'
+
 interface ShowcaseListProps extends HTMLAttributes<HTMLDivElement> {
   items: ShowcaseItem[]
+  variant?: Variant
 }
 
-export const ShowcaseList = ({ items, ...props }: ShowcaseListProps) => (
+export const ShowcaseList = ({ items, variant = 'light', ...props }: ShowcaseListProps) => (
   <List {...props}>
     {items.map((item, idx) => (
-      <Item key={idx}>
+      <Item
+        key={idx}
+        variant={variant}
+      >
         <ImageWrapper>
           <img
             src={item.img}
@@ -23,8 +29,8 @@ export const ShowcaseList = ({ items, ...props }: ShowcaseListProps) => (
           />
         </ImageWrapper>
         <Content>
-          <Title>{item.title}</Title>
-          <Text>{item.text}</Text>
+          <Title variant={variant}>{item.title}</Title>
+          <Text variant={variant}>{item.text}</Text>
         </Content>
       </Item>
     ))}

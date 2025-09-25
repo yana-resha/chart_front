@@ -51,6 +51,8 @@ export const SidebarContainer = styled.div`
     position: static;
     top: 0;
     height: fit-content;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
   }
 `
 
@@ -60,8 +62,4 @@ export const PagesContainer = styled.main`
   min-width: 0;
   width: 100%;
   /* position: relative; */
-
-  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    padding: 0.5rem;
-  }
 `

@@ -10,6 +10,6 @@ export const PageHeaderWrapper = styled.div`
   align-items: start;
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    padding: 0.5rem;
+    padding: 1.5rem 0.5rem;
   }
 `

@@ -38,6 +38,7 @@ export const Container = styled.aside`
     padding: 0.5rem 0.5rem;
 
     background-color: ${SURFACE_TOKENS.MOBILE_SHARED.BACKGROUND};
+    background-color: rgba(255, 255, 255, 0.4);
     box-shadow: 0 6px 12px rgba(255, 255, 255, 0.045);
     backdrop-filter: none;
   }

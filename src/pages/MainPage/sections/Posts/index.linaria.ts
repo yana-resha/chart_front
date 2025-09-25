@@ -6,6 +6,7 @@ export const PostsSection = styled(Section)`
   position: relative;
   width: 100%;
   overflow: hidden;
+  background: rgba(23, 25, 26, 1);
 `
 
 export const PostsWrapper = styled.div`

@@ -30,12 +30,12 @@ export const Posts = () => (
       <ListFooter>
         <Button
           as={Link}
-          theme="primary"
+          theme="secondary"
+          kind="ghost"
           size="large"
           to={ROUTER_PATHES.POSTS_PATH}
-          roundedCorner
         >
-          Смотреть еще
+          Смотреть все
         </Button>
       </ListFooter>
     </PostsWrapper>

@@ -1,17 +1,24 @@
+import { ReactNode } from 'react'
+
 import { styled } from '@linaria/react'
 
-import {
-  cardBorderVar,
-  cardColorVar,
-  glassBorder,
-  glassBorderSide,
-  GlassCardRoot,
-} from '@/shared/assets/styles/glass'
-import { addAlpha } from '@/shared/assets/styles/helpers/addAlpha'
+import { cardBorderVar, glassBorderSide, GlassCardRoot } from '@/shared/assets/styles/glass'
 import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 import { PageContentWrapper } from '@/shared/assets/styles/pages.linaria'
 import { CARD_TEXT_SIZE, CARD_TITLE_TEXT, TEXT_SIZE } from '@/shared/assets/styles/text-size'
 import { H1 } from '@/shared/assets/styles/titles.linaria'
+
+export const TEXT_COLORS = {
+  LIGHT_TITLE_COLOR: 'rgba(255, 255, 255, 0.92)',
+  LIGHT_SUBTITLE_COLOR: 'rgba(255, 255, 255, 0.65)',
+
+  DARK_TITLE_COLOR: 'rgba(17, 17, 17, 0.92)',
+  DARK_SUBTITLE_COLOR: 'rgba(17, 17, 17, 0.85)',
+
+  LIGHT_CARD_COLOR: 'rgba(255, 255, 255, 0.92)',
+  DARK_CARD_COLOR: 'rgba(17, 17, 17, 0.92)',
+}
+type Variant = 'light' | 'dark'
 
 const LISTS_GAP = {
   desktop: '1.25rem',
@@ -19,17 +26,23 @@ const LISTS_GAP = {
   sm_tablet: '1.25rem',
 }
 
-export const PageWrapper = styled(PageContentWrapper)`
-  padding-left: 1rem;
-  padding-right: 1rem;
-
-  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
+export const PageWrapper = styled(PageContentWrapper)``
+export const MainTitle = styled(H1)`
+  margin-bottom: 0px;
 `
 
-export const MainTitle = styled(H1)``
+export const MainDescription = styled.div`
+  font-size: ${TEXT_SIZE.M};
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.45;
+  text-align: center;
+  margin-bottom: 1.875rem;
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    font-size: ${TEXT_SIZE.S};
+    margin-bottom: 1.25rem;
+  }
+`
 
 export const DescText = styled.div`
   font-size: ${CARD_TEXT_SIZE.M};
@@ -53,115 +66,13 @@ export const CardTitleRow = styled.div`
   gap: 0.5rem;
   font-weight: 500;
   line-height: 1.35;
-
   font-size: ${CARD_TITLE_TEXT.S};
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     font-size: ${CARD_TITLE_TEXT.XS};
   }
 `
-
-/** Обёртка под иконку слева в заголовке */
-export const CardIcon = styled.div`
-  flex-shrink: 0;
-  width: clamp(20px, 2.2vw, 24px);
-  height: clamp(20px, 2.2vw, 24px);
-
-  svg,
-  img {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    width: clamp(18px, 2vw, 22px);
-    height: clamp(18px, 2vw, 22px);
-  }
-`
-
 /** Тонкая линия внутри карточек */
-export const CardDivider = styled.div`
-  height: 1px;
-  position: relative;
-  ${glassBorderSide('bottom')};
-`
-
-export const BenefitCard = styled.li<{ color: string }>`
-  ${cardColorVar('255, 255, 0')};
-  ${glassBorder()};
-  position: relative;
-  border-radius: 12px;
-  border-radius: 0px;
-  padding: 0.75rem 1.25rem 1.25rem;
-
-  background: linear-gradient(135deg, ${(p) => addAlpha(p.color, 0.5)}, rgba(0, 0, 0, 0));
-  color: rgba(255, 255, 255, 0.95);
-  transition:
-    all 0.25s ease,
-    transform 0.25s ease;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.4rem;
-  text-align: left;
-
-  &:hover {
-    background: linear-gradient(135deg, ${(p) => addAlpha(p.color, 0.22)}, rgba(255, 255, 255, 0.04));
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
-    transform: translateY(-1px);
-  }
-
-  .title {
-    font-weight: 500;
-    font-size: ${CARD_TITLE_TEXT.S};
-    line-height: 1.25;
-    color: ${(p) => p.color};
-  }
-
-  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    padding: 0.5rem 1rem 1rem;
-    .title {
-      font-size: ${CARD_TITLE_TEXT.XS};
-    }
-  }
-`
-export const BenefitGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: ${LISTS_GAP.desktop};
-  margin: 1.25rem 0 1.75rem;
-
-  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
-    gap: ${LISTS_GAP.tablet};
-  }
-`
-export const InstructionsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: ${LISTS_GAP.desktop};
-  margin: 1.25rem 0 1.75rem;
-
-  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: ${LISTS_GAP.tablet};
-  }
-
-  @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
-    grid-template-columns: 1fr;
-    gap: ${LISTS_GAP.sm_tablet};
-  }
-`
-
-export const InstructionDesc = styled(DescText)`
-  min-height: 60px;
-`
-
 /* Шаги заполнения: 2 → 1 (как у тебя по смыслу) */
 export const StepsGrid = styled.div`
   display: grid;
@@ -175,32 +86,6 @@ export const StepsGrid = styled.div`
 `
 export const StepDesc = styled(DescText)``
 
-/** Кружок-номер для шагов/этапов */
-export const Badge = styled.span`
-  flex-shrink: 0;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 0.85rem;
-  line-height: 0;
-  font-weight: 600;
-  color: #fff;
-
-  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
-    width: 22px;
-    height: 22px;
-    font-size: 0.75rem;
-    font-weight: 500;
-  }
-`
-
 /* ======= common blocks ======= */
 export const Divider = styled.div`
   height: 1px;
@@ -212,6 +97,13 @@ export const Divider = styled.div`
 export const SectionBlock = styled.div`
   padding-top: 1.875rem;
   padding-bottom: 1.875rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     padding-top: 1rem;
@@ -219,15 +111,20 @@ export const SectionBlock = styled.div`
   }
 `
 /* ======= page layout & text ======= */
-export const Layout = styled.section`
+export const Layout = styled(PageContentWrapper)`
   height: 100%;
   width: 100%;
   max-width: 100%;
   position: relative;
 `
 
-export const MarkdownText = styled.div`
-  color: rgba(255, 255, 255, 0.95);
+export const BenefitialBlock = styled.div`
+  padding: 1rem 0 0 0;
+`
+
+export const MarkdownText = styled.div<{ variant?: Variant }>`
+  color: ${({ variant }) =>
+    variant === 'dark' ? TEXT_COLORS.DARK_TITLE_COLOR : TEXT_COLORS.LIGHT_TITLE_COLOR};
   font-size: ${TEXT_SIZE.M};
   line-height: 1.7;
   width: 100%;
@@ -236,44 +133,118 @@ export const MarkdownText = styled.div`
     font-size: ${TEXT_SIZE.S};
   }
 
-  p {
-    margin-bottom: 0.5rem;
+  p:not(:last-child) {
+    margin-bottom: 0.8rem;
   }
+
   code {
-    background: rgba(255, 255, 255, 0.08);
+    background: ${({ variant }) =>
+      variant === 'dark' ? 'rgba(17, 17, 17, 0.08)' : 'rgba(255, 255, 255, 0.08)'};
     padding: 0.15em 0.35em;
     border-radius: 4px;
     font-size: 0.95em;
   }
+
   strong {
     font-weight: 600;
     font-size: 110%;
+  }
+
+  em {
+    font-style: italic;
+    opacity: 0.75;
   }
 `
 
 export const FormWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 25px;
-  padding-bottom: 30px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   container-type: inline-size;
+  background: rgba(23, 25, 26, 1);
 
   @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
-    padding-top: 10px;
-    padding-bottom: 20px;
+    /*     padding-top: 10px;
+    padding-bottom: 20px; */
   }
 `
-
 /* ======= cards ======= */
-export const BaseCard = styled(GlassCardRoot)`
+
+export const CardDivider = styled.div`
+  height: 1px;
+  position: relative;
+`
+export const BaseCard = styled(GlassCardRoot)<{ variant?: Variant; children: ReactNode }>`
   border-radius: 14px;
-  color: rgba(255, 255, 255, 0.95);
+  color: ${({ variant }) =>
+    variant === 'dark' ? TEXT_COLORS.DARK_CARD_COLOR : TEXT_COLORS.LIGHT_CARD_COLOR};
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   padding: 1rem;
   padding-top: 0.7rem;
+
+  & ${CardDivider} {
+    background: ${({ variant }) =>
+      variant === 'dark' ? TEXT_COLORS.DARK_CARD_COLOR : TEXT_COLORS.LIGHT_CARD_COLOR};
+  }
 `
+/* ======= sections ======= */
+export const IntroductionBlock = styled(SectionBlock)`
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background: rgba(23, 25, 26, 1);
+`
+export const DataInfoBlock = styled(SectionBlock)`
+  background: rgba(23, 25, 26, 1);
+  background: rgba(159, 166, 167, 1);
+`
+export const CalculatorInstructionBlock = styled(SectionBlock)`
+  background: rgba(23, 25, 26, 1);
+`
+export const CalculationsInfoBlock = styled(SectionBlock)`
+  background: rgba(159, 166, 167, 1);
+`
+export const PostsBlock = styled(SectionBlock)`
+  background: rgba(23, 25, 26, 1);
+`
+
+/* ======= lists & specific cards ======= */
+
+/* Шаги заполнения */
+export const StepCard = styled(BaseCard)``
+
+/* Как считаем */
+export const CalculationStepsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: ${LISTS_GAP.desktop};
+  margin: 1.25rem 0 2rem;
+  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: ${LISTS_GAP.tablet};
+  }
+
+  @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
+    grid-template-columns: 1fr;
+    gap: ${LISTS_GAP.sm_tablet};
+  }
+`
+export const CalculationCard = styled(BaseCard)``
+
+export const PostsList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 20px;
+`
+
 /* — Специальная карточка калькулятора — */
 export const CalculatorCard = styled(GlassCardRoot)`
   position: relative;
@@ -334,58 +305,4 @@ export const CardFooter = styled.div`
 export const FooterNote = styled.div`
   font-size: 12px;
   color: rgba(255, 255, 255, 0.55);
-`
-
-/* ======= sections ======= */
-export const IntroductionBlock = styled(SectionBlock)`
-  padding-top: 0px;
-  & ${Divider} {
-    margin: 1rem 0;
-
-    @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-      margin: 0.7rem 0;
-    }
-  }
-`
-export const DataInfoBlock = styled(SectionBlock)``
-export const CalculatorInstructionBlock = styled(SectionBlock)``
-export const CalculationsInfoBlock = styled(SectionBlock)``
-export const PostsBlock = styled(SectionBlock)``
-
-/* ======= lists & specific cards ======= */
-
-/* Инструкция */
-export const InstructionCard = styled(BaseCard)``
-
-/* Шаги заполнения */
-export const StepCard = styled(BaseCard)``
-
-/* Как считаем */
-export const CalculationStepsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: ${LISTS_GAP.desktop};
-  margin: 1.25rem 0 2rem;
-  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
-    grid-template-columns: 1fr;
-  }
-
-  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: ${LISTS_GAP.tablet};
-  }
-
-  @media (max-width: ${MEDIA_POINTS.TABLET_SMALL}px) {
-    grid-template-columns: 1fr;
-    gap: ${LISTS_GAP.sm_tablet};
-  }
-`
-export const CalculationCard = styled(BaseCard)``
-
-export const PostsList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 20px;
 `

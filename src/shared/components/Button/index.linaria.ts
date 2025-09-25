@@ -180,7 +180,7 @@ export const ButtonComponent = styled.button`
     padding: 0.5rem 0.7rem 0.5rem 0.7rem;
 
     @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-      padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+      padding: 0.4rem 0.5rem 0.4rem 0.5rem;
     }
   }
 

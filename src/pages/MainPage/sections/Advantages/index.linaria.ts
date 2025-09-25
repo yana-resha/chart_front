@@ -8,6 +8,8 @@ export const AdvantagesSection = styled(Section)`
   overflow: hidden;
   padding-left: 0;
   padding-right: 0;
+  background: rgba(165, 165, 165, 1);
+  background: rgb(159, 166, 167);
 `
 
 export const SectionHead = styled.div`

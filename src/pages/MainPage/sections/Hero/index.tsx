@@ -47,7 +47,8 @@ export function Hero() {
     <section
       style={{
         position: 'relative',
-        borderRadius: 24,
+        borderRadius: 0,
+        marginBottom: '20px',
         overflow: 'hidden',
         height: 'calc(100vh - 30px)', // <-- высота есть
       }}
@@ -57,8 +58,8 @@ export function Hero() {
         count={500}
         strandWidth={5.0}
         trail={10.0}
-        color1="#9FD7FF"
-        color2="#FFFFFF"
+        color1="#43a3e7ff"
+        color2="#970808ff"
         speeds={[0.22, 0.0018, 1.4, 0.4, 2.2, 5.8]}
         gain={1}
       />

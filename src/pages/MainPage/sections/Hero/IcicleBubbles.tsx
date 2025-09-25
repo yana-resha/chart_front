@@ -47,28 +47,34 @@ export default function IcicleBubbles({
     camera.position.z = 1000
 
     // geometry: два треугольника = полоска
-    const corners = new Float32Array([-1,0, 1,0, 1,1,  -1,0, 1,1, -1,1])
+    const corners = new Float32Array([-1, 0, 1, 0, 1, 1, -1, 0, 1, 1, -1, 1])
     const verts = new Float32Array(count * 6 * 2)
     const seeds = new Float32Array(count * 6 * 3)
-    const pos   = new Float32Array(count * 6 * 3)
+    const pos = new Float32Array(count * 6 * 3)
 
-    let vi = 0, si = 0, pi = 0
+    let vi = 0,
+      si = 0,
+      pi = 0
     for (let i = 0; i < count; i++) {
-      const sx = Math.random(), sy = Math.random(), sz = Math.random()
+      const sx = Math.random(),
+        sy = Math.random(),
+        sz = Math.random()
       for (let k = 0; k < 6; k++) {
-        verts[vi++] = corners[k*2+0]
-        verts[vi++] = corners[k*2+1]
+        verts[vi++] = corners[k * 2 + 0]
+        verts[vi++] = corners[k * 2 + 1]
         seeds[si++] = sx
         seeds[si++] = sy
         seeds[si++] = sz
-        pos[pi++] = 0; pos[pi++] = 0; pos[pi++] = 0
+        pos[pi++] = 0
+        pos[pi++] = 0
+        pos[pi++] = 0
       }
     }
 
     const geom = new THREE.BufferGeometry()
     geom.setAttribute('position', new THREE.BufferAttribute(pos, 3))
-    geom.setAttribute('corner',   new THREE.BufferAttribute(verts, 2))
-    geom.setAttribute('seed',     new THREE.BufferAttribute(seeds, 3))
+    geom.setAttribute('corner', new THREE.BufferAttribute(verts, 2))
+    geom.setAttribute('seed', new THREE.BufferAttribute(seeds, 3))
     geom.computeBoundingSphere()
 
     // shaders
@@ -232,7 +238,7 @@ void main(){
       uDt: { value: 1 / 60 },
       uTrail: { value: trail },
       uWidth: { value: strandWidth },
-      uForward: { value: speeds[0] },      // к камере
+      uForward: { value: speeds[0] }, // к камере
       uCurlSize: { value: speeds[1] },
       uOuter: { value: speeds[2] },
       uRadial: { value: speeds[3] },
@@ -288,7 +294,7 @@ void main(){
       cancelAnimationFrame(raf)
       window.removeEventListener('resize', applySize)
       geom.dispose()
-      ;(mat as any).dispose?.()
+      mat.dispose?.()
       renderer.dispose()
       wrap.removeChild(renderer.domElement)
     }

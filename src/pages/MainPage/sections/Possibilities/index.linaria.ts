@@ -6,6 +6,7 @@ export const PossibilitiesSection = styled(Section)`
   width: 100%;
   min-height: 400px;
   overflow: hidden;
+  background: rgba(23, 25, 26, 1);
 `
 
 // МОЗАИКА

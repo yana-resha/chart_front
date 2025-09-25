@@ -129,14 +129,14 @@ type Props = {
 }
 
 export default function HeroIcicleBubbles({
-  count = 70000, // больше частиц = мягче узоры
-  spread = 8.5,
-  depth = 40,
+  count = 10000, // больше частиц = мягче узоры
+  spread = 100.5,
+  depth = 100,
   flow = 4.2,
-  size = 2.2, // МАЛЕНЬКИЕ точки — это критично
+  size = 10.2, // МАЛЕНЬКИЕ точки — это критично
   twist = 1.15,
-  radial = 4,
-  jitter = 0.9,
+  radial = 100,
+  jitter = 1.9,
   background = '#17191A',
 }: Props) {
   const ref = useRef<HTMLDivElement>(null)
