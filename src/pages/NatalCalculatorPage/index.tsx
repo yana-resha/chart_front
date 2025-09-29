@@ -32,6 +32,8 @@ import {
   BenefitialBlock,
   MainTitle,
   MainDescription,
+  ContentWithoutXPaddings,
+  ContentWithXPaddings,
 } from './index.linaria'
 import { CalculationCardTerm } from './ui/CalculationCardTerm'
 import { getPreviewsByTags } from '@/entities/posts/data'
@@ -40,6 +42,7 @@ import { linkTextCss } from '@/shared/assets/styles/links.linaria'
 import { H2 } from '@/shared/assets/styles/titles.linaria'
 import { HeaderBackButton } from '@/shared/components/HeaderBackButton'
 import { PageHeader } from '@/shared/components/PageHeader'
+import { SeoHelmet } from '@/shared/components/SeoHelmet'
 import { ShowcaseList } from '@/shared/components/ShowcaseList'
 import { Tooltip } from '@/shared/components/Tooltip'
 import { smoothScrollAnchor } from '@/shared/helpers/smoothScrollAnchor'
@@ -50,10 +53,16 @@ export const NatalCalculatorPage = () => {
 
   return (
     <Layout>
+      <SeoHelmet
+        title="Рассчитать натальную карту онлайн бесплатно"
+        description="Калькулятор натальной карты ASTRODOC: постройте гороскоп онлайн абсолютно бесплатно. Все функции и интерпретации доступны без ограничений — для начинающих и профессионалов. Подробная расшифровка планет, домов, аспектов и конфигураций вашей астрологической карты."
+      />
       <IntroductionBlock>
-        <PageHeader>
-          <HeaderBackButton />
-        </PageHeader>
+        <ContentWithoutXPaddings>
+          <PageHeader>
+            <HeaderBackButton />
+          </PageHeader>
+        </ContentWithoutXPaddings>
         <MainTitle>Расчёт натальной&nbsp;карты онлайн&nbsp;</MainTitle>
         <MainDescription>
           На нашем астросервисе вы можете{' '}
@@ -83,30 +92,36 @@ export const NatalCalculatorPage = () => {
         </MarkdownText>
         <BenefitialBlock>
           <H2>Что поможет узнать натальная карта</H2>
-          <ShowcaseList items={BENEFIT_LIST_DATA} />
+          <ContentWithoutXPaddings>
+            <ShowcaseList items={BENEFIT_LIST_DATA} />
+          </ContentWithoutXPaddings>
         </BenefitialBlock>
         <MarkdownText>
-          <div style={{ textAlign: 'center', borderBottom: '1px solid white', padding: '0.7rem 0rem' }}>
-            <p>
-              {' '}
-              <strong>Натальная карта не определяет вашу судьбу раз и навсегда.</strong>
-            </p>
-            <p>
-              Но, зная её ключи, вы сможете осознанно влиять на события, использовать благоприятные периоды,
-              смягчать сложные ситуации и направлять свою жизнь в сторону, которая откликается именно вам.
-              <span style={{ display: 'block' }}>
-                Чтобы построить карту, потребуется несколько простых данных&nbsp;—{' '}
-                <a
-                  href="#data-info"
-                  className={linkTextCss}
-                  onClick={(e) => smoothScrollAnchor(e, 'data-info')}
-                >
-                  посмотрите, что нужно для расчёта
-                </a>
-                .
-              </span>
-            </p>
-          </div>
+          <ContentWithoutXPaddings
+            style={{ textAlign: 'center', borderBottom: '1px solid white', padding: '0.7rem 0rem' }}
+          >
+            <ContentWithXPaddings>
+              <p>
+                {' '}
+                <strong>Натальная карта не определяет вашу судьбу раз и навсегда.</strong>
+              </p>
+              <p>
+                Но, зная её ключи, вы сможете осознанно влиять на события, использовать благоприятные периоды,
+                смягчать сложные ситуации и направлять свою жизнь в сторону, которая откликается именно вам.
+                <span style={{ display: 'block' }}>
+                  Чтобы построить карту, потребуется несколько простых данных&nbsp;—{' '}
+                  <a
+                    href="#data-info"
+                    className={linkTextCss}
+                    onClick={(e) => smoothScrollAnchor(e, 'data-info')}
+                  >
+                    посмотрите, что нужно для расчёта
+                  </a>
+                  .
+                </span>
+              </p>
+            </ContentWithXPaddings>
+          </ContentWithoutXPaddings>
         </MarkdownText>
       </IntroductionBlock>
 
@@ -130,12 +145,14 @@ export const NatalCalculatorPage = () => {
       {/* Инструкция */}
       <DataInfoBlock id="data-info">
         <H2 variant="dark">Какие данные нужны для расчёта</H2>
-        <ShowcaseList
-          items={INFO_LIST_DATA}
-          variant="dark"
-        />
+        <ContentWithoutXPaddings>
+          <ShowcaseList
+            items={INFO_LIST_DATA}
+            variant="dark"
+          />
+        </ContentWithoutXPaddings>
         <MarkdownText variant="dark">
-          <div style={{ textAlign: 'center', padding: '1.5rem 0rem 0rem 0rem' }}>
+          <div style={{ textAlign: 'center', padding: '1.5rem 0rem 1rem 0rem' }}>
             Если не нашли свой город в списке, можете ввести его вручную. Часовой пояс при этом будет
             определён автоматически по координатам, но при необходимости вы можете выбрать его вручную 🌍
           </div>

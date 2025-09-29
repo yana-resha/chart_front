@@ -11,6 +11,7 @@ import { SharedButton } from '@/features/SharedButton'
 import { H1, H2 } from '@/shared/assets/styles/titles.linaria'
 import { HeaderBackButton } from '@/shared/components/HeaderBackButton'
 import { PageHeader } from '@/shared/components/PageHeader'
+import { SeoHelmet } from '@/shared/components/SeoHelmet'
 
 export default function PostPage() {
   const { slug = '' } = useParams<{ slug: string }>()
@@ -40,6 +41,11 @@ export default function PostPage() {
 
   return (
     <Container>
+      <SeoHelmet
+        title={post?.title ?? ''}
+        description={post?.excerpt}
+      />
+
       <PageHeader>
         <HeaderBackButton />
         {post && (

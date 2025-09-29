@@ -1,24 +1,20 @@
-import { Helmet } from 'react-v19-helmet-async'
-
 import { Container, ContentWrapper, Hairline, Lead, List, PostsBlock } from './index.linaria'
 import { PREVIEWS } from '@/entities/posts/data'
 import { PreviewPostCard } from '@/entities/posts/feautures/PreviewPostCard'
 import { H1 } from '@/shared/assets/styles/titles.linaria'
 import { HeaderBackButton } from '@/shared/components/HeaderBackButton'
 import { PageHeader } from '@/shared/components/PageHeader'
+import { SeoHelmet } from '@/shared/components/SeoHelmet'
 
 export const PostsListPage = () => {
   const items = PREVIEWS.filter((p) => !p.isDraft)
 
   return (
     <Container>
-      <Helmet>
-        <title>Все статьи — ASTRODOC</title>
-        <meta
-          name="description"
-          content="Каталог статей ASTRODOC: разборы натальных карт, планеты, дома и аспекты. Короткие руководства и примеры."
-        />
-      </Helmet>
+      <SeoHelmet
+        title="Все статьи"
+        description="Каталог статей по астрологии: разборы натальных карт, планеты в знаках, дома, аспекты и конфигурации. Подробные руководства и примеры для начинающих и профессионалов."
+      />
 
       <PageHeader>
         <HeaderBackButton />

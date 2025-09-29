@@ -3,16 +3,22 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useLocation } from 'react-router-dom'
 
+import Logo from './assets/icons/logo.svg?react'
 import { NAVIGATION_DATA } from './data'
 import {
   Backdrop,
   Container,
+  LogoLink,
+  LogoRow,
+  MobileSidebarHeader,
   MobileTopBar,
   NavList,
   NavSheet,
   NavSheetScroll,
-  PublicAccountBlock,
-  TopBlock,
+  SidebarHeader,
+  Tagline,
+  WordLeft,
+  WordRight,
 } from './index.layout.linaria'
 import { NavItem } from './ui/NavItem'
 import { BurgerIcon } from '@/shared/components/Burger'
@@ -21,16 +27,12 @@ import { useScrollLock } from '@/shared/hooks/useScrollLock'
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false)
-  const { pathname } = useLocation()
 
   const topBarRef = useRef<HTMLDivElement | null>(null)
   const [topBarH, setTopBarH] = useState(64)
+  const { pathname } = useLocation()
 
   useScrollLock(open)
-
-  useEffect(() => {
-    setOpen(false)
-  }, [pathname])
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -40,6 +42,10 @@ const Sidebar = () => {
 
     return () => window.removeEventListener('keydown', onKey)
   }, [])
+
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname])
 
   useLayoutEffect(() => {
     const measure = () => {
@@ -65,13 +71,24 @@ const Sidebar = () => {
             <NavSheet
               open={open}
               top={topBarH}
-              aria-hidden={!open}
             >
+              <MobileSidebarHeader>
+                <LogoLink to="/">
+                  <LogoRow>
+                    ASTR
+                    <Logo />
+                    DOC
+                  </LogoRow>
+                  <Tagline>астрологический сервис</Tagline>
+                </LogoLink>
+              </MobileSidebarHeader>
+
               <NavSheetScroll>
                 {NAVIGATION_DATA.map((item) => (
                   <NavItem
                     key={item.id}
-                    {...item}
+                    item={item}
+                    onNavigate={() => setOpen(false)}
                   />
                 ))}
               </NavSheetScroll>
@@ -87,12 +104,35 @@ const Sidebar = () => {
         aria-label="Навигация по сайту"
         ref={topBarRef}
       >
-        <TopBlock>
-          <PublicAccountBlock>ASTRODOC</PublicAccountBlock>
-        </TopBlock>
+        <SidebarHeader>
+          <LogoLink to="/">
+            <LogoRow>
+              ASTR
+              <Logo />
+              DOC
+            </LogoRow>
+            <Tagline>астрологический сервис</Tagline>
+          </LogoLink>
+        </SidebarHeader>
 
         <MobileTopBar>
-          <PublicAccountBlock />
+          <LogoLink to={''}>
+            <LogoRow $collapsed={open}>
+              <WordLeft
+                $collapsed={open}
+                aria-hidden={open}
+              >
+                ASTR
+              </WordLeft>
+              <Logo aria-label="ASTRODOC" />
+              <WordRight
+                $collapsed={open}
+                aria-hidden={open}
+              >
+                DOC
+              </WordRight>
+            </LogoRow>
+          </LogoLink>
           <Button
             aria-label={open ? 'Закрыть меню' : 'Открыть меню'}
             aria-controls="sidebar-nav"
@@ -104,12 +144,12 @@ const Sidebar = () => {
             <BurgerIcon open={open} />
           </Button>
         </MobileTopBar>
-
         <NavList id="sidebar-nav">
           {NAVIGATION_DATA.map((item) => (
             <NavItem
               key={item.id}
-              {...item}
+              item={item}
+              onNavigate={() => setOpen(false)}
             />
           ))}
         </NavList>

@@ -27,13 +27,12 @@ export const SidebarStaticWrapper = styled.div`
   grid-area: sidebar;
   width: 100%;
   height: 100%;
-  /* position: relative; */
 
   /* планшет: обычный поток, авто-высота */
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    // position: sticky;
-    // z-index: 1;
-    // top: max(0px, env(safe-area-inset-top)); /* iOS вырезы */
+    position: sticky;
+    z-index: 1;
+    top: max(0px, env(safe-area-inset-top));
     height: fit-content;
   }
 `
@@ -58,7 +57,8 @@ export const SidebarContainer = styled.div`
 
 export const PagesContainer = styled.main`
   grid-area: main;
-  height: 100%;
+  min-height: 100%;
+  max-height: fit-content;
   min-width: 0;
   width: 100%;
   /* position: relative; */

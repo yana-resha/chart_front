@@ -16,6 +16,7 @@ import { H1, H2 } from '@/shared/assets/styles/titles.linaria'
 import { HeaderBackButton } from '@/shared/components/HeaderBackButton'
 import { AlertModal } from '@/shared/components/Modal'
 import { PageHeader } from '@/shared/components/PageHeader'
+import { SeoHelmet } from '@/shared/components/SeoHelmet'
 import { ROUTER_PATHES } from '@/shared/constants/router-paths'
 import { decodeRequestFromQuery, encodeRequestToQuery } from '@/shared/helpers/shareRequest'
 import { useAppSelector } from '@/store'
@@ -112,6 +113,10 @@ export const NatalDecodingPage = () => {
 
   return (
     <Layout className={isLoading || serverError ? layoutLoading : ''}>
+      <SeoHelmet
+        title="Ваша натальная карта и гороскоп онлайн — подробная расшифровка"
+        description="Ваша натальная карта и гороскоп онлайн в ASTRODOC. Все функции абсолютно бесплатны: полная расшифровка планет, домов, аспектов и конфигураций. Получите персональный анализ вашей астрологической карты."
+      />
       <PageHeader>
         <>
           <HeaderBackButton />

@@ -25,8 +25,6 @@ const LISTS_GAP = {
   tablet: '0.8rem',
   sm_tablet: '1.25rem',
 }
-
-export const PageWrapper = styled(PageContentWrapper)``
 export const MainTitle = styled(H1)`
   margin-bottom: 0px;
 `
@@ -92,23 +90,6 @@ export const Divider = styled.div`
   position: relative;
   width: 100%;
   ${glassBorderSide('bottom')};
-`
-
-export const SectionBlock = styled.div`
-  padding-top: 1.875rem;
-  padding-bottom: 1.875rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-
-  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-
-  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
 `
 /* ======= page layout & text ======= */
 export const Layout = styled(PageContentWrapper)`
@@ -191,10 +172,54 @@ export const BaseCard = styled(GlassCardRoot)<{ variant?: Variant; children: Rea
   }
 `
 /* ======= sections ======= */
+
+const SECTION_PADDINGS = {
+  padding_x_desktop: '1.875rem',
+  padding_y_desktop: '1rem',
+
+  padding_x_tablet: '0.5rem',
+  padding_y_tablet: '1rem',
+}
+
+export const SectionBlock = styled.div`
+  padding-top: ${SECTION_PADDINGS.padding_y_desktop};
+  padding-bottom: ${SECTION_PADDINGS.padding_y_desktop};
+  padding-left: ${SECTION_PADDINGS.padding_x_desktop};
+  padding-right: ${SECTION_PADDINGS.padding_x_desktop};
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    padding-top: ${SECTION_PADDINGS.padding_y_tablet};
+    padding-bottom: ${SECTION_PADDINGS.padding_y_tablet};
+    padding-left: ${SECTION_PADDINGS.padding_x_tablet};
+    padding-right: ${SECTION_PADDINGS.padding_x_tablet};
+  }
+`
 export const IntroductionBlock = styled(SectionBlock)`
-  padding-top: 0px;
   padding-bottom: 0px;
+  padding-top: 0;
   background: rgba(23, 25, 26, 1);
+`
+export const ContentWithoutXPaddings = styled.div`
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-left: -${SECTION_PADDINGS.padding_x_desktop};
+  margin-right: -${SECTION_PADDINGS.padding_x_desktop};
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    margin-left: -${SECTION_PADDINGS.padding_x_tablet};
+    margin-right: -${SECTION_PADDINGS.padding_x_tablet};
+  }
+`
+export const ContentWithXPaddings = styled.div`
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-left: ${SECTION_PADDINGS.padding_x_desktop};
+  margin-right: ${SECTION_PADDINGS.padding_x_desktop};
+
+  @media (max-width: ${MEDIA_POINTS.TABLET}px) {
+    padding-left: ${SECTION_PADDINGS.padding_x_tablet};
+    padding-right: ${SECTION_PADDINGS.padding_x_tablet};
+  }
 `
 export const DataInfoBlock = styled(SectionBlock)`
   background: rgba(23, 25, 26, 1);

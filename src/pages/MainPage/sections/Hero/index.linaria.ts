@@ -5,28 +5,18 @@ import { MEDIA_POINTS } from '@/shared/assets/styles/media-points'
 
 export const HeroSection = styled.article`
   width: 100%;
-  min-height: 600px;
-  border-radius: 20px;
+  height: calc(100dvh - 32px);
+  border-radius: 0px;
   max-height: 1080px;
   position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: rgba(23, 25, 26, 0.5);
+  background: rgba(23, 25, 26, 1);
+  margin-bottom: 20px;
 
   @media (max-width: ${MEDIA_POINTS.TABLET}px) {
     height: calc(100dvh - 15px - 50px);
-  }
-
-  & > img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 50% 50%;
-    opacity: 0.2;
-    z-index: -2;
   }
 `
 
@@ -34,7 +24,7 @@ export const HeroContentWrapper = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
   justify-content: center;
   color: rgba(255, 255, 255, 0.85);
   padding-left: ${SECTION_CONTENT_PADDINGS.padding_x.large};
@@ -57,13 +47,17 @@ export const HeroContentWrapper = styled.div`
   }
 `
 
-export const ContentWrapper = styled.div``
+export const ContentWrapper = styled.div`
+  /* border-radius: 40px;
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px); */
+`
 
 export const HeroTitle = styled.h1`
   margin: 0;
   color: rgba(255, 255, 255, 0.92);
   font-size: clamp(40px, 7vw, 80px);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.05;
 `
 
@@ -72,7 +66,7 @@ export const HeroSubtitle = styled.h2`
   font-weight: 500;
   line-height: 1.15;
   color: rgba(255, 255, 255, 0.92);
-  font-size: clamp(16px, 2.4vw, 28px);
+  font-size: clamp(16px, 2vw, 24px);
   letter-spacing: 1.2px;
 
   @media (max-width: 850px) {
@@ -110,6 +104,6 @@ export const HeroButtonsBlock = styled.div`
 
   @media (max-width: 400px) {
     width: 100%;
-    grid-template-columns: 1fr;
+    grid-template-columns: auto 1fr;
   }
 `

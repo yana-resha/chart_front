@@ -88,10 +88,8 @@ export const H2 = styled.h2<SectionProps>`
 
 export const SectionSubtitle = styled.div<SectionProps>`
   margin: 0;
-
   color: ${({ variant }) =>
     variant === 'light' ? TEXT_COLORS.LIGHT_TITLE_COLOR : TEXT_COLORS.DARK_TITLE_COLOR};
-
   font-size: clamp(12px, 1.4vw, 14px);
 `
 

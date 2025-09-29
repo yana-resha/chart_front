@@ -86,7 +86,7 @@ export const PlanetInSign = ({ chartId, items }: IPlanetsInSignProps) => {
 
   return (
     <Layout>
-      {!isLoading && <PostSkeleton count={items.length} />}
+      {isLoading && <PostSkeleton count={items.length} />}
       {renderItems.length > 0 &&
         !isLoading &&
         !isError &&

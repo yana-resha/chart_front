@@ -12,7 +12,6 @@ export const BurgerIcon = ({ open, size = 28, strokeWidth = 2.4, className }: Bu
     viewBox="0 0 24 24"
     width={size}
     height={size}
-    aria-hidden="true"
   >
     <style>{`
       .burger line{

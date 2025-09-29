@@ -1,5 +1,5 @@
+// CollapsibleNavGroup.tsx
 import { useEffect, useMemo, useState } from 'react'
-
 import classNames from 'classnames'
 import { NavLink, useLocation } from 'react-router-dom'
 
@@ -15,9 +15,12 @@ import {
   childLinkPillCSS,
 } from '../index.linaria'
 
-type Props = { item: NavGroupItem }
+type Props = {
+  item: NavGroupItem
+  onNavigate?: () => void
+}
 
-export const CollapsibleNavGroup = ({ item }: Props) => {
+export const CollapsibleNavGroup = ({ item, onNavigate }: Props) => {
   const { pathname } = useLocation()
 
   const hasActiveChild = useMemo(
@@ -37,7 +40,7 @@ export const CollapsibleNavGroup = ({ item }: Props) => {
     <div>
       <NavRow
         type="button"
-        as={'button'}
+        as="button"
         className={classNames({ active: hasActiveChild })}
         aria-expanded={open}
         aria-controls={`group-${item.id}`}
@@ -66,6 +69,7 @@ export const CollapsibleNavGroup = ({ item }: Props) => {
                 <NavLink
                   to={child.path}
                   className={childLinkPillCSS}
+                  onClick={onNavigate}
                 >
                   {child.name}
                 </NavLink>
