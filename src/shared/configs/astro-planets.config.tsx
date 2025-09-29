@@ -31,6 +31,8 @@ import selenaPng from '@/shared/assets/images/planets/selena.png'
 import sunPng from '@/shared/assets/images/planets/sun.png'
 import uranusPng from '@/shared/assets/images/planets/uranus.png'
 import venusPng from '@/shared/assets/images/planets/venus.png'
+import fortunaPng from '@/shared/assets/images/planets/fortuna.png'
+import proserpinaPng from '@/shared/assets/images/planets/proserpina.png'
 
 export const ASTRO_PLANET_NAME: Record<ASTRO_PLANET, string> = {
   [ASTRO_PLANET.SUN]: 'Солнце',
@@ -141,10 +143,10 @@ export const ASTRO_PLANET_IMAGE: Record<ASTRO_PLANET, string> = {
   [ASTRO_PLANET.PLUTO]: plutoPng,
 
   [ASTRO_PLANET.CHIRON]: chironPng,
-  [ASTRO_PLANET.FORTUNA]: moonPng,
+  [ASTRO_PLANET.FORTUNA]: fortunaPng,
   [ASTRO_PLANET.KETU]: moonPng,
   [ASTRO_PLANET.RAHU]: moonPng,
-  [ASTRO_PLANET.PROSERPINA]: moonPng,
+  [ASTRO_PLANET.PROSERPINA]: proserpinaPng,
   [ASTRO_PLANET.LILITH]: lilithPng,
 
   [ASTRO_PLANET.SELENA]: selenaPng,

@@ -10,6 +10,8 @@ import { formatCoord, toInputLocality } from '@/entities/locality/helpers/search
 import { IInputLocality } from '@/entities/locality/types/input-locality.types'
 import { useLazyGetLocalitiesByNameQuery } from '@/store/api/locality.api'
 
+const norm = (s?: string) => (s ?? '').trim()
+
 export const useFormInside = () => {
   const { values, submitForm, isSubmitting, setFieldValue, setValues, validateForm, status } =
     useFormikContext<ChartFormFieldValues>()
@@ -19,6 +21,10 @@ export const useFormInside = () => {
   const [showErrorToast, setShowErrorToast] = useState(false)
   useEffect(() => setShowErrorToast(!!status?.submitError), [status?.submitError])
   const closeErrorToast = () => setShowErrorToast(false)
+  const isInitialSearch = useMemo(
+    () => norm(values.searchLocality) === norm(searchMeta.initialValue),
+    [searchMeta.initialValue, values.searchLocality],
+  )
 
   const [
     fetchFromAPI,
@@ -152,12 +158,12 @@ export const useFormInside = () => {
 
   // (опционально) автоподгрузка по текущему значению
   useEffect(() => {
-    if (values.searchLocality.length >= 3 && !values.locality) {
+    if (norm(values.searchLocality).length >= 3 && !values.locality && !isInitialSearch) {
       const { abort } = fetchFromAPI({ name: values.searchLocality }, true)
 
       return () => abort()
     }
-  }, [values.locality, fetchFromAPI, values.searchLocality])
+  }, [values.locality, fetchFromAPI, values.searchLocality, isInitialSearch])
 
   const localitiesClickHandler = (e: MouseEvent | undefined, item: IInputLocality | null) => {
     if (!item) return
