@@ -19,20 +19,22 @@ import Sun from '@/shared/assets/icons/planet-icons/Sun.svg?react'
 import Uranus from '@/shared/assets/icons/planet-icons/Uranus.svg?react'
 import Venus from '@/shared/assets/icons/planet-icons/Venus.svg?react'
 import chironPng from '@/shared/assets/images/planets/chiron.png'
+import fortunaPng from '@/shared/assets/images/planets/fortuna.png'
 import jupiterPng from '@/shared/assets/images/planets/jupiter.png'
+import ketuPng from '@/shared/assets/images/planets/ketu.png'
 import lilithPng from '@/shared/assets/images/planets/lilith.png'
 import marsPng from '@/shared/assets/images/planets/mars.png'
 import mercuryPng from '@/shared/assets/images/planets/mercury.png'
 import moonPng from '@/shared/assets/images/planets/moon.png'
 import neptunePng from '@/shared/assets/images/planets/neptune.png'
 import plutoPng from '@/shared/assets/images/planets/pluto.png'
+import proserpinaPng from '@/shared/assets/images/planets/proserpina.png'
+import rahuPng from '@/shared/assets/images/planets/rahu.png'
 import saturnPng from '@/shared/assets/images/planets/saturn.png'
 import selenaPng from '@/shared/assets/images/planets/selena.png'
 import sunPng from '@/shared/assets/images/planets/sun.png'
 import uranusPng from '@/shared/assets/images/planets/uranus.png'
 import venusPng from '@/shared/assets/images/planets/venus.png'
-import fortunaPng from '@/shared/assets/images/planets/fortuna.png'
-import proserpinaPng from '@/shared/assets/images/planets/proserpina.png'
 
 export const ASTRO_PLANET_NAME: Record<ASTRO_PLANET, string> = {
   [ASTRO_PLANET.SUN]: 'Солнце',
@@ -144,8 +146,8 @@ export const ASTRO_PLANET_IMAGE: Record<ASTRO_PLANET, string> = {
 
   [ASTRO_PLANET.CHIRON]: chironPng,
   [ASTRO_PLANET.FORTUNA]: fortunaPng,
-  [ASTRO_PLANET.KETU]: moonPng,
-  [ASTRO_PLANET.RAHU]: moonPng,
+  [ASTRO_PLANET.KETU]: ketuPng,
+  [ASTRO_PLANET.RAHU]: rahuPng,
   [ASTRO_PLANET.PROSERPINA]: proserpinaPng,
   [ASTRO_PLANET.LILITH]: lilithPng,
 
