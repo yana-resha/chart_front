@@ -11,14 +11,6 @@ import { ROUTER_PATHES } from '@/shared/constants/router-paths'
 
 export const MainRouter = () => (
   <Routes>
-    {/* Если неизвестная страница, показываем ошибку 404 */}
-    <Route
-      path="*"
-      element={<EmptyPage>Страница не найдена</EmptyPage>}
-    />
-    {/* Пока что дефолтную страницу авторизации тут тоже делаю без переадресаций,
-    для удобной демонстрации
-     */}
     {/* Дефолтная разметка авторизованного пользователя, слева Sidebar справа контент */}
     <Route element={<DefaultLayout />}>
       <Route
@@ -44,6 +36,10 @@ export const MainRouter = () => (
           element={<PostPage />}
         />
       </Route>
+      <Route
+        path="*"
+        element={<EmptyPage>Страница не найдена</EmptyPage>}
+      />
     </Route>
     {/*  */}
   </Routes>

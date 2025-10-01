@@ -19,6 +19,7 @@ import { PageHeader } from '@/shared/components/PageHeader'
 import { SeoHelmet } from '@/shared/components/SeoHelmet'
 import { ROUTER_PATHES } from '@/shared/constants/router-paths'
 import { decodeRequestFromQuery, encodeRequestToQuery } from '@/shared/helpers/shareRequest'
+import { smoothScrollAnchor } from '@/shared/helpers/smoothScrollAnchor'
 import { useAppSelector } from '@/store'
 import { usePostCalculateNatalMutation } from '@/store/api/astro-calculate.api'
 import { addNatalChart } from '@/store/slices/natal-decoding'
@@ -44,6 +45,10 @@ export const NatalDecodingPage = () => {
   const chartId = rawChartId ?? DEFAULT_NATAL_CHART_ID
 
   const chartValue = useAppSelector((store) => store.natalDecoding.chartsById[chartId])
+  const contentIsReady = useMemo(
+    () => (!isLoading && !serverError && !dataError && chartValue ? true : false),
+    [chartValue, dataError, isLoading, serverError],
+  )
 
   /** единый вызов расчёта + запись в стор + навигация */
   const postNatal = useCallback(
@@ -111,6 +116,12 @@ export const NatalDecodingPage = () => {
     void postNatal(fromUrl)
   }, [chartValue, paramsChart, postNatal])
 
+  useEffect(() => {
+    if (contentIsReady) {
+      smoothScrollAnchor('interactive-card', 80)
+    }
+  }, [contentIsReady])
+
   return (
     <Layout className={isLoading || serverError ? layoutLoading : ''}>
       <SeoHelmet
@@ -136,14 +147,14 @@ export const NatalDecodingPage = () => {
         {(!chartValue || isLoading) && <PageSkeleton />}
 
         {/* Основное содержимое — только когда нет загрузки/ошибок и есть данные */}
-        {!isLoading && !serverError && !dataError && chartValue && (
+        {contentIsReady && (
           <WidjetsWrapper>
             <section>
               <H2>Исходные данные</H2>
               <NatalChartSourceData chartId={chartId} />
             </section>
 
-            <section>
+            <section id="interactive-card">
               <H2>Интерактивная натальная карта</H2>
               <NatalCanvasPanel chartId={chartId} />
             </section>

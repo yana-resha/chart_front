@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { Link } from 'react-router-dom'
 
 import { BENEFIT_LIST_DATA } from './data/benefit.data'
@@ -50,6 +52,10 @@ import NatalCalculatorForm from '@/widjets/NatalCalculatorForm'
 
 export const NatalCalculatorPage = () => {
   const POSTS = getPreviewsByTags(['натальная карта'])
+
+  useEffect(() => {
+    smoothScrollAnchor('calculator', 80)
+  }, [])
 
   return (
     <Layout>

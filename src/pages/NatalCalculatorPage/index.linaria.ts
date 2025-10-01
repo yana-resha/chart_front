@@ -140,15 +140,9 @@ export const MarkdownText = styled.div<{ variant?: Variant }>`
 export const FormWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding: 50px 10px;
   container-type: inline-size;
   background: rgba(23, 25, 26, 1);
-
-  @media (max-width: ${MEDIA_POINTS.DESKTOP_SMALL}px) {
-    /*     padding-top: 10px;
-    padding-bottom: 20px; */
-  }
 `
 /* ======= cards ======= */
 
